@@ -1,0 +1,3004 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="css/app.css">
+      <link rel="stylesheet" href="css/bootstrap.css">
+      <link rel="stylesheet" href="css/icons.css">
+      <link rel="stylesheet" href="libs/sweetalert/sweetalert.css">
+      <title>Document</title>
+      <script type="text/javascript"
+         src="https://js.zohostatic.com/creator/widgets/version/1.0/widgetsdk-min.js"></script>
+      <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <style>
+         .modal:nth-of-type(even) {
+         z-index: 1052 !important;
+         }
+         .modal-backdrop.show:nth-of-type(even) {
+         z-index: 1051 !important;
+         }
+      </style>
+   </head>
+   <body>
+      <div class="container-fluid ">
+      <div class="row px-4 pt-5">
+         <div class="col-xl-12">
+            <input type="hidden" value="" id="logado_usuario_id" />
+            <input type="hidden" value="" id="dadosurlzoho" />
+            <input type="hidden" value="" id="useremailzoho" />
+            <div class="card">
+               <div class="card-body">
+                  <div class="row">
+                     <div class="col-lg-8">
+                        <div class="d-flex">
+                           <div class="flex-shrink-0 me-3">
+                              <img src="images/users/avatar-1.png" alt=""
+                                 class="avatar-md rounded-circle img-thumbnail">
+                           </div>
+                           <div class="flex-grow-1 align-self-center">
+                              <div class="text-muted">
+                                 <p class="mb-2">Bem Vindo</p>
+                                 <h5 class="mb-1" id="logado_usuario">Usuário</h5>
+                                 <p class="mb-0" id="logado_funcao">Função</p>
+                              </div>
+                              <div class="flex-grow-1 align-self-center px-0 mr-5 pt-4">
+                                 <ul class="nav nav-pills  pb-lg-1" role="tablist">
+                                    <li class="nav-item waves-effect waves-light">
+                                       <a id="btn_sites" class="nav-link active" data-bs-toggle="tab"
+                                          href="#faturas" role="tab">
+                                       <span class=" p-1"> Sites </span>
+                                       </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                       <a id="btn_candidatos" class="nav-link" data-bs-toggle="tab"
+                                          href="#subscricao" role="tab">
+                                       <span class=" p-1"> Candidatos </span>
+                                       </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                       <a id="btn_atividades" class="nav-link " data-bs-toggle="tab"
+                                          href="#home-1" role="tab">
+                                       <span class=" p-1"> Tarefas </span>
+                                       </a>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-lg-2 col-md-12">
+                        <img class="pt-2" src="images/LogotipoMobilize.png" alt="">
+                     </div>
+                  </div>
+                  <!-- end row -->
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="tab-content p-4 text-muted">
+         <div class="tab-pane" id="home-1" role="tabpanel">
+            <div class="row">
+               <div class="col-xl-12">
+                  <div class="row">
+                     <div class="col-sm-3">
+                        <div class="card">
+                           <div class="card-body">
+                              <div class="d-flex align-items-center mb-3">
+                                 <div class="avatar-xs me-3">
+                                    <span
+                                       class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
+                                    <i class="bx bx-copy-alt"></i>
+                                    </span>
+                                 </div>
+                                 <h5 class="font-size-14 mb-0">Tarefas Não Iniciadas</h5>
+                              </div>
+                              <div class="text-muted mt-4">
+                                 <h4 id="tarefasNaoIniciadas"><i
+                                    class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
+                                 <div class="d-flex">
+                                    <span class="badge badge-soft-success font-size-12"></span>
+                                    <span class="ms-2 text-truncate">Tarefas Não Iniciadas</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-sm-3">
+                        <div class="card">
+                           <div class="card-body">
+                              <div class="d-flex align-items-center mb-3">
+                                 <div class="avatar-xs me-3">
+                                    <span
+                                       class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
+                                    <i class="bx bx-copy-alt"></i>
+                                    </span>
+                                 </div>
+                                 <h5 class="font-size-14 mb-0">Tarefas Em Andamento</h5>
+                              </div>
+                              <div class="text-muted mt-4">
+                                 <h4 id="tarefasEmAndamento"> <i
+                                    class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
+                                 <div class="d-flex">
+                                    <span class="badge badge-soft-success font-size-12"></span>
+                                    <span class="ms-2 text-truncate">Total de Tarefas Em Andamento</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-sm-3">
+                        <div class="card">
+                           <div class="card-body">
+                              <div class="d-flex align-items-center mb-3">
+                                 <div class="avatar-xs me-3">
+                                    <span
+                                       class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
+                                    <i class="bx bx-copy-alt"></i>
+                                    </span>
+                                 </div>
+                                 <h5 class="font-size-14 mb-0">Tarefas Vencidas</h5>
+                              </div>
+                              <div class="text-muted mt-4">
+                                 <h4 id="tarefasVencidas"> <i
+                                    class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
+                                 <div class="d-flex">
+                                    <span class="badge badge-soft-success font-size-12"></span>
+                                    <span class="ms-2 text-truncate">Total de Tarefas Vencidas</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-sm-3">
+                        <div class="card">
+                           <div class="card-body">
+                              <div class="d-flex align-items-center mb-3">
+                                 <div class="avatar-xs me-3">
+                                    <span
+                                       class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
+                                    <i class="bx bx-archive-in"></i>
+                                    </span>
+                                 </div>
+                                 <h5 class="font-size-14 mb-0">Tarefas Finalizadas</h5>
+                              </div>
+                              <div class="text-muted mt-4">
+                                 <h4 id="tarefasFinalizadas"> <i
+                                    class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
+                                 <div class="d-flex">
+                                    <span class="badge badge-soft-success font-size-12"></span>
+                                    <span class="ms-2 text-truncate">Total de tarefas Finalizadas</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="row" id="sectionAtividades">
+               <div class="col-12">
+                  <div class="card">
+                     <div class="card-body">
+                        <div class="row">
+                           <div class="col-12 text-left d-flex justify-content-left titulo-emitir-nota"
+                              style="justify-content: space-between;">
+                              <h2 class="card-title">Lista de Tarefas</h2>
+                           </div>
+                        </div>
+                        <div class="pt-2">
+                           <table id="datatable-Tarefas"
+                              class="table-striped table table-bordered dt-responsive nowrap w-100">
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- end col -->
+            </div>
+         </div>
+         <!-- Candidatos -->
+         <div class="tab-pane" id="subscricao" role="tabpanel">
+            <div class="row">
+               <div class="col-xl-12">
+                  <div class="row">
+                     <div class="col-sm-4">
+                        <div class="card">
+                           <div class="card-body">
+                              <div class="d-flex align-items-center mb-3">
+                                 <div class="avatar-xs me-3">
+                                    <span
+                                       class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
+                                    <i class="bx bx-copy-alt"></i>
+                                    </span>
+                                 </div>
+                                 <h5  class="font-size-14 mb-0">Em Análise</h5>
+                              </div>
+                              <div class="text-muted mt-4">
+                                 <h4 id="cuosEmAnalise"><i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
+                                 <div class="d-flex">
+                                    <span class="badge badge-soft-success font-size-12"></span>
+                                    <span class="ms-2 text-truncate">CUOS em Análise</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-sm-4">
+                        <div class="card">
+                           <div class="card-body">
+                              <div class="d-flex align-items-center mb-3">
+                                 <div class="avatar-xs me-3">
+                                    <span
+                                       class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
+                                    <i class="bx bx-copy-alt"></i>
+                                    </span>
+                                 </div>
+                                 <h5 class="font-size-14 mb-0">Indeferido</h5>
+                              </div>
+                              <div class="text-muted mt-4">
+                                 <h4 id="cuosIndeferido"><i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
+                                 <div class="d-flex">
+                                    <span class="badge badge-soft-success font-size-12"></span>
+                                    <span class="ms-2 text-truncate">CUOS Indeferido</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-sm-4">
+                        <div class="card">
+                           <div class="card-body">
+                              <div class="d-flex align-items-center mb-3">
+                                 <div class="avatar-xs me-3">
+                                    <span
+                                       class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
+                                    <i class="bx bx-archive-in"></i>
+                                    </span>
+                                 </div>
+                                 <h5 id="" class="font-size-14 mb-0">Deferido</h5>
+                              </div>
+                              <div class="text-muted mt-4">
+                                 <h4 id="cuosDeferido"><i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
+                                 <div class="d-flex">
+                                    <span class="badge badge-soft-success font-size-12"></span>
+                                    <span class="ms-2 text-truncate">CUOS Deferido</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <!--  end row -->
+                  </div>
+               </div>
+            </div>
+            <div class="row" id="sectionCandidatos">
+               <div class="col-12">
+                  <div class="card">
+                     <div class="card-body">
+                        <div class="row">
+                           <div class="col-12 text-left d-flex justify-content-left titulo-emitir-nota"
+                              style="justify-content: space-between;">
+                              <h2 class="card-title">Lista de Candidatos</h2>
+                           </div>
+                        </div>
+                        <div class="pt-2">
+                           <table id="datatable-buttons"
+                              class="table-striped table table-bordered dt-responsive nowrap w-100">
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- end col -->
+            </div>
+         </div>
+         <div class="tab-pane active" id="faturas" role="tabpanel">
+            <div class="row">
+               <div class="col-xl-12">
+                  <div class="row">
+                     <div class="col-sm-4">
+                        <div class="card">
+                           <div class="card-body">
+                              <div class="d-flex align-items-center mb-3">
+                                 <div class="avatar-xs me-3">
+                                    <span
+                                       class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
+                                    <i class="bx bx-copy-alt"></i>
+                                    </span>
+                                 </div>
+                                 <h5 class="font-size-14 mb-0">Total de Sites</h5>
+                              </div>
+                              <div class="text-muted mt-4">
+                                 <h4 id="totalSites"><i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
+                                 <!--div class="d-flex">
+                                    <span class="ms-2 text-truncate">Total de Sites</span>
+                                    </div-->
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="avatar-xs me-3">
+                                        <span
+                                            class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
+                                            <i class="bx bx-copy-alt"></i>
+                                        </span>
+                                    </div>
+                                    <h5 class="font-size-14 mb-0">Candidatos</h5>
+                                </div>
+                                <div class="text-muted mt-4">
+                                    <h4> 00<i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
+                                    <div class="d-flex">
+                        
+                                        <span class="ms-2 text-truncate">Total de Candidatos</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div> -->
+                     <!-- <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="avatar-xs me-3">
+                                        <span
+                                            class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
+                                            <i class="bx bx-archive-in"></i>
+                                        </span>
+                                    </div>
+                                    <h5 class="font-size-14 mb-0">Tarefas</h5>
+                                </div>
+                                <div class="text-muted mt-4">
+                                    <h4>00 <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
+                                    <div class="d-flex">
+                        
+                                        <span class="ms-2 text-truncate">Total de Tarefas</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div> -->
+                  </div>
+               </div>
+               <div class="row" id="sectionSites">
+                  <div class="col-12">
+                     <div class="card">
+                        <div class="card-body">
+                           <div class="row">
+                              <div class="col-12 text-left d-flex justify-content-left titulo-emitir-nota"
+                                 style="justify-content: space-between;">
+                                 <h2 class="card-title">Lista de Sites</h2>
+                              </div>
+                           </div>
+                           <div class="pt-2">
+                              <table id="datatable-sites"
+                                 class="table-striped table table-bordered dt-responsive nowrap w-100">
+                              </table>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- end col -->
+               </div>
+               <style>
+                  /* .dataTables_filter {
+                  float: left !important;
+                  }*/
+                  .dt-buttons{
+                  float: right !important;
+                  }
+               </style>
+            </div>
+         </div>
+      </div>
+      <div id="modalCandidatoDados1" class="modal fade bs-example-modal-lg modalCandidatoDados1" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title add-task-title">&nbsp;</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <!-- <iframe src="" style="width: 100%; height: 500px;" frameborder="0" allowTransparency="true" scrolling="auto" id="iframecandidatodados1"></iframe> -->
+               </div>
+            </div>
+         </div>
+      </div>
+
+   <!-- MODAL VISUALIZAÇÃO CANDIDATOS POR SITE -->
+      <div id="modalCandidatosPorSite" data-bs-keyboard="false" data-bs-backdrop="static" class="modal fade modalAdicionarContato" tabindex="-1" role="dialog"
+      aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog" style="max-width: 1200px;">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title add-task-title">Lista dos candidatos</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <div class="tab-pane" id="subscricao" role="tabpanel">
+               <div class="col-12">
+                  <div class="card">
+                     <div class="card-body">
+                        <div class="pt-2">
+                           <table id="datatable-buttons-candidatos" class="table-striped table table-bordered dt-responsive nowrap w-100"> </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            </div>
+         </div>
+         <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+   </div>
+
+      <!-- MODAL ATIVIDADES POR SITE -->
+      <div id="modalAtividadesPorSite" data-bs-keyboard="false" data-bs-backdrop="static" class="modal fade modalAdicionarContato" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel" aria-hidden="true">
+         <div class="modal-dialog" style="max-width: 1200px;">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title add-task-title">Atividades</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+               <div class="tab-pane" id="subscricao" role="tabpanel">
+                  <div class="col-12">
+                     <div class="card">
+                        <div class="card-body">
+                           <div class="pt-2">
+                              <table id="datatable-buttons-atividades" class="table-striped table table-bordered dt-responsive nowrap w-100"> </table>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               </div>
+            </div>
+            <!-- /.modal-content -->
+         </div>
+         <!-- /.modal-dialog -->
+      </div>
+
+      <!-- MODAL TAREFAS -->
+      <div id="modalForm" data-bs-keyboard="false" data-bs-backdrop="static" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title add-task-title">Adicionar Nova Atividade</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <form id="NewtaskForm" role="form">
+                     <div class="form-group mb-4">
+                        <label class="col-form-label">Site<span class="text-danger">*</span></label>
+                        <div class="col-lg-12">
+                           <select class="form-select validate" id="AtividadeSites" required>
+                              <option value="" selected>Selecione..</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="form-group mb-4">
+                        <label class="col-form-label">Status<span class="text-danger">*</span></label>
+                        <div class="col-lg-12">
+                           <select class="form-select validate" id="statusSelect" required>
+                              <option value="" selected>Selecione..</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="form-group mb-4">
+                        <label class="col-form-label">Tarefa<span class="text-danger">*</span></label>
+                        <div class="col-lg-12">
+                           <select class="form-select validate" id="tarefaSelect" required>
+                              <option value="" selected>Selecione..</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="form-group mb-4">
+                        <label class="col-form-label">Resonsável<span class="text-danger">*</span></label>
+                        <div class="col-lg-12">
+                           <select class="form-select validate" id="selectResponsavel" required>
+                              <option value="" selected>Selecione..</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="form-group mb-4">
+                        <label for="taskbudget" class="col-form-label">Data de Início<span
+                           class="text-danger">*</span></label>
+                        <div class="col-lg-12">
+                           <input id="dataInicio" name="taskbudget" type="date"
+                              placeholder="Enter Task Budget..." class="form-control" required>
+                        </div>
+                     </div>
+                     <div class="form-group mb-4">
+                        <label for="taskbudget" class="col-form-label">Data de Conclusão<span
+                           class="text-danger">*</span></label>
+                        <div class="col-lg-12">
+                           <input id="dataConclusao" name="taskbudget" type="date"
+                              placeholder="Enter Task Budget..." class="form-control" required>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-10">
+                           <button type="button" class="btn btn-primary" id="addtask">Criar Atividade</button>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+            <!-- /.modal-content -->
+         </div>
+         <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+      <!-- MODAL CANDIDATOS-->
+      <div id="modalAdicionarCandidato" data-bs-keyboard="false" data-bs-backdrop="static" class="modal fade modalAdicionarCandidato" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title add-task-title">Adicionar Novo Candidato</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <form id="form_candidato" role="form">
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Sigla do Candidato<span
+                              class="text-danger">*</span></label>
+                           <input id="form_candidato_sigla" name="taskbudget" type="text"
+                              placeholder="Informe a Sigla do Candidato" class="form-control" required>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Site<span class="text-danger">*</span></label>
+                           <select class="form-select " id="form_candidato_site"  required>
+                              <option value="" selected>Selecione..</option>
+                           </select>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Tipo de Site<span class="text-danger">*</span></label>
+                           <select class="form-select validate" id="form_candidato_tipo_site" onchange="habilitarAlturaCand(this.id,1)" required>
+                              <option value="" selected>Selecione..</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Valor do Aluguel<span
+                              class="text-danger">*</span></label>
+                           <input id="form_candidato_aluguel" onInput="mascaraMoeda(event)" name="taskbudget"
+                              type="text" placeholder="Informe a Sigla do Candidato" class="form-control"
+                              required="" maxlength="15">
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label" id="tipo_propriedade">Tipo de Propriedade<span
+                              class="text-danger">*</span></label>
+                           <br>
+                           <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="form_tipo_propriedade"
+                                 id="inlineRadio1" value="Compra">
+                              <label class="form-check-label" for="form_tipo_propriedade">Compra</label>
+                           </div>
+                           <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="form_tipo_propriedade"
+                                 id="inlineRadio2" value="Aluguel">
+                              <label class="form-check-label" for="form_tipo_propriedade">Aluguel</label>
+                           </div>
+                           <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="form_tipo_propriedade"
+                                 id="inlineRadio3" value="Outros">
+                              <label class="form-check-label" for="form_tipo_propriedade">Outros</label>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- <div class="row">
+                        <div class="col-lg-6">
+                        
+                            <label class="col-form-label">CUOS<span class="text-danger">*</span></label>
+                        
+                            <select class="form-select validate" id="form_candidato_cuos"  required>
+                                <option value="" selected>Selecione..</option>
+                                <option value="A Protocolar">A Protocolar</option>
+                                <option value="Deferido">Deferido</option>
+                                <option value="Indeferido">Indeferido</option>
+                                <option value="Em Análise">Em Análise</option>
+                                <option value="N/A">N/A</option>
+                                <option value="Sem Informação">Sem Informação</option>
+                            </select>
+                        
+                        </div>
+                        
+                        <div class="col-lg-6">
+                            <label class="col-form-label">Status do Candidato<span class="text-danger">*</span></label>
+                            <select class="form-select validate" id="form_candidato_status" required>
+                                <option value="Qualificação Interna" selected>Qualificação Interna</option>
+                            </select>
+                        </div>
+                        </div> -->
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Proprietario<span class="text-danger">*</span></label>
+                           <select class="form-select validate" id="form_candidato_proprietario"  required>
+                              <option value="" selected>Selecione..</option>
+                           </select>
+                           <button type="button" class="btn btn-primary" id="novo_proprietario" onclick=" exibirModalProprietarioResponsavel('modalAdicionarProprietario')" style="margin-top: 16px; float: right;">Novo proprietário</button>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Responsável<span class="text-danger">*</span></label>
+                           <select class="form-select validate" id="form_candidato_responsavel"  required>
+                              <option value="" selected>Selecione..</option>
+                           </select>
+                           <button type="button" class="btn btn-primary" id="novo_responsavel" onclick="exibirModalProprietarioResponsavel('modalAdicionarContato')" style="margin-top: 16px; float: right;">Novo responsável</button>
+                        </div>
+                     </div>
+                     <div class="row pt-4">
+                        <div class="col-lg-12">
+                           <h6> Caracteristicas do Candidato:</h6>
+                           <hr>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-4">
+                           <label class="col-form-label">CEP<span class="text-danger">*</span></label>
+                           <input id="form_candidato_cep" name="taskbudget" type="text"
+                              placeholder="Informe o CEP" class="form-control" maxlength="8">
+                           <a href="https://buscacepinter.correios.com.br/app/endereco/index.php"
+                              target="_blank"><small id="emailHelp" class="form-text text-muted">Não localizou o CEP. Clique aqui!</small></a>
+                           <input id="form_candidato_cep_antigo"  name="taskbudget" type="hidden"
+                              class="form-control">
+                        </div>
+                        <div class="col-lg-4">
+                           <label class="col-form-label">Endereço<span class="text-danger">*</span></label>
+                           <input id="form_candidato_endereco" name="taskbudget" type="text"
+                              placeholder="Informe o Endereço" class="form-control" >
+                        </div>
+                        <div class="col-lg-4">
+                           <label class="col-form-label">Complemento<span class="text-danger">*</span></label>
+                           <input id="form_candidato_complemento" name="taskbudget" type="text"
+                              placeholder="Informe Complemento"  class="form-control" >
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-4">
+                           <label class="col-form-label">Bairro<span class="text-danger">*</span></label>
+                           <input id="form_candidato_bairro" name="taskbudget" type="text"
+                              placeholder="Informe o Bairro" class="form-control"  required>
+                        </div>
+                        <div class="col-lg-4">
+                           <label class="col-form-label">Município<span class="text-danger">*</span></label>
+                           <input id="form_candidato_municipio" disabled name="taskbudget" type="text"
+                              placeholder="Informe o Município" class="form-control">
+                        </div>
+                        <div class="col-lg-4">
+                           <label class="col-form-label">UF<span class="text-danger">*</span></label>
+                           <input id="form_candidato_uf" disabled name="taskbudget" type="text" placeholder="Informe a UF" class="form-control">
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Distancia PN<span class="text-danger">*</span></label>
+                           <input id="form_candidato_distancia_pn" name="taskbudget" type="text"
+                              placeholder="Informe a Distancia PN"  class="form-control" required="">
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Pré-Comar(m)<span class="text-danger">*</span></label>
+                           <input id="form_candidato_pre_comar" name="taskbudget" type="text"
+                              placeholder="Informe o Pré-Comar(m)" class="form-control"  required="">
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-4 ">
+                           <label class="col-form-label">Largura Área Locada<span
+                              class="text-danger">*</span></label>
+                           <input id="form_candidato_largura_area_normal"  onblur="calculoarea()" name="taskbudget" type="text"
+                              placeholder="Informe a Largura Área Locada" class="form-control" required="">
+                        </div>
+                        <div class="col-lg-4 ">
+                           <label class="col-form-label">Profundidade Área Locada<span class="text-danger">*</span></label>
+                           <input id="form_candidato_profundidade_normal"  onblur="calculoarea()" name="taskbudget" type="text"
+                              placeholder="Informe a Profundidade" class="form-control" required="">
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-4">
+                           <label class="col-form-label">Corredor de Acesso?<span
+                              class="text-danger">*</span></label>
+                           <select class="form-select validate" id="form_candidato_corredor" onchange="corredorAcessoCand(this.value,'1'),calculoarea(),onChanged(this.id)" required>
+                              <option value="" selected>Selecione..</option>
+                              <option value="Sim">Sim</option>
+                              <option value="Não">Não</option>
+                           </select>
+                        </div>
+                        <div class="col-lg-4 corredoracesso">
+                           <label class="col-form-label">Largura Área Locada<span
+                              class="text-danger"></span></label>
+                           <input id="form_candidato_largura_area" onblur="calculoarea()" name="taskbudget" type="text"
+                              placeholder="Informe a Largura Área Locada" class="form-control">
+                        </div>
+                        <div class="col-lg-4 corredoracesso">
+                           <label class="col-form-label">Profundidade<span class="text-danger"></span></label>
+                           <input id="form_candidato_profundidade" onblur="calculoarea()" name="taskbudget" type="text"
+                              placeholder="Informe a Profundidade" class="form-control">
+                        </div>
+                     </div>
+                     <div class="row pt-4">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Área Locada Total<span class="text-danger"></span></label>
+                           <input id="form_candidato_area_locada" disabled name="taskbudget" type="text"
+                              placeholder="Informe Área Locada" class="form-control">
+                        </div>
+                        <div class="col-lg-6 alturaedificioadd">
+                           <label class="col-form-label">Altura do Edifício<span
+                              class="text-danger"></span></label>
+                           <input id="form_candidato_altura_edificio" name="taskbudget" type="text"
+                              placeholder="Informe a Altura do Edifício" class="form-control">
+                        </div>
+                     </div>
+                     <div class="row pt-4">
+                        <div class="col-lg-12">
+                           <h6> Latitude & Longitude </h6>
+                           <hr>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">OPÇÃO<span class="text-danger">*</span></label>
+                           <br>
+                           <select class="form-select validate" id="form_tipo_opcao" onchange="escolhalatlongCand(this.value,'1'),onChanged(this.id)" required>
+                              <option value="" selected>Selecione..</option>
+                              <option value="Decimal">Decimal</option>
+                              <option  value="UTM">UTM</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="row latitudecand" style="display: none;">
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Latitude <span
+                                 class="text-danger">*</span></label>
+                              <input id="form_candidato_latitude" name="taskbudget" type="text"
+                                 placeholder="Informe a Largura Área Locada" class="form-control" onchange="formatPontoCardinal(this.id)" required >
+                              <small id="emailHelp" class="form-text text-muted">Ex.: -23.1234</small>
+                           </div>
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Longitude <span
+                                 class="text-danger">*</span></label>
+                              <input id="form_candidato_longitude" name="taskbudget" type="text"
+                                 placeholder="Informe a Largura Área Locada" class="form-control" onchange="formatPontoCardinal(this.id)" required>>
+                              <small id="emailHelp" class="form-text text-muted">Ex.: -46.1234</small>
+                           </div>
+                        </div>
+                        <div class="row utmcand">
+                           <div class="row">
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">Grau LAT<span class="text-danger">*</span></label>
+                                 <input
+                                    id="form_candidato_grauLat" name="taskbudget" type="text"
+                                    placeholder="Informe a Largura o Grau Latitudinal" class="form-control"
+                                    tabindex="1001"
+                                    >
+                              </div>
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">
+                                 Grau LONG<span class="text-danger">*</span>
+                                 </label>
+                                 <input
+                                    id="form_candidato_grauLong" name="taskbudget" type="text"
+                                    placeholder="Informe o Grau Longitudinal" class="form-control"
+                                    tabindex="1005"
+                                    >
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">
+                                 Minuto LAT<span class="text-danger">*</span>
+                                 </label>
+                                 <input
+                                    id="form_candidato_minutoLat" name="taskbudget" type="text"
+                                    placeholder="Informe o  minuto Latitudinal" class="form-control"
+                                    tabindex="1002"
+                                    >
+                              </div>
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">
+                                 Minuto LONG <span class="text-danger">*</span>
+                                 </label>
+                                 <input
+                                    id="form_candidato_minutLong" name="taskbudget" type="text"
+                                    placeholder="Informe o minuto Longitudinal" class="form-control"
+                                    tabindex="1006"
+                                    >
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">
+                                 Segundo LAT <span class="text-danger">*</span>
+                                 </label>
+                                 <input
+                                    id="form_candidato_segundoLat" name="taskbudget" type="text"
+                                    placeholder="Informe o segundo Longitudinal" class="form-control"
+                                    tabindex="1003"
+                                    >
+                              </div>
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">
+                                 Segundo LONG<span class="text-danger">*</span>
+                                 </label>
+                                 <input
+                                    id="form_candidato_segundoLong" name="taskbudget" type="text"
+                                    placeholder="Informe o segundo Longitudinal" class="form-control"
+                                    tabindex="1007"
+                                    >
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">
+                                 Ponto Cardeal LAT<span class="text-danger">*</span>
+                                 </label>
+                                 <select
+                                    class="form-select validate" id="form_candidato_pontoCardealLat"
+                                    tabindex="1004"
+                                    required>
+                                    <option value="" selected>Selecione..</option>
+                                    <option value="N">N</option>
+                                    <option value="S">S</option>
+                                 </select>
+                              </div>
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">
+                                 Ponto Cardeal LONG<span class="text-danger">*</span>
+                                 </label>
+                                 <select
+                                    class="form-select validate" id="form_candidato_pontoCardealLong"
+                                    tabindex="1008"
+                                    required>
+                                    <option value="" selected>Selecione..</option>
+                                    <option value="E">E</option>
+                                    <option value="W">W</option>
+                                 </select>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-4">
+                              <label class="col-form-label">Altitude<span class="text-danger">*</span></label>
+                              <input id="form_candidato_altitude" name="taskbudget" type="text"
+                                 placeholder="Informe a Altitude" class="form-control">
+                           </div>
+                        </div>
+                        <div class="row pt-4">
+                           <div class="col-lg-12">
+                              <h6> Itens Obrigatórios:</h6>
+                              <hr>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-6">
+                              <label class="col-form-label font-size-12">O candidato está localizado dentro do anel de busca?<span
+                                 class="text-danger"></span>*</label>
+                              <br>
+                              <div class="form-check">
+                                 <input value="Sim" class="form-check-input" type="radio" name="anelBusca" id="flexRadioDefault1">
+                                 <label class="form-check-label" for="flexRadioDefault1">
+                                 SIM
+                                 </label>
+                              </div>
+                              <div class="form-check">
+                                 <input value="Não" class="form-check-input" type="radio" name="anelBusca" id="flexRadioDefault2" >
+                                 <label class="form-check-label" for="flexRadioDefault2">
+                                 NÃO
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Justifique:<span class="text-danger"></span></label>
+                              <textarea id="form_candidato_candidatolocalizado" style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-6">
+                              <label class="col-form-label font-size-12">O proprietário está interessado no uso proposto?<span
+                                 class="text-danger">*</span></label>
+                              <br>
+                              <div class="form-check">
+                                 <input  value="Sim" class="form-check-input" type="radio" name="usoProposto" id="flexRadioDefault1">
+                                 <label class="form-check-label" for="flexRadioDefault1">
+                                 SIM
+                                 </label>
+                              </div>
+                              <div class="form-check">
+                                 <input value="Não" class="form-check-input" type="radio" name="usoProposto" id="flexRadioDefault2" >
+                                 <label class="form-check-label" for="flexRadioDefault2">
+                                 NÃO
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Justifique:<span class="text-danger"></span></label>
+                              <textarea id="form_candidato_proprietariointeressado" style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-6">
+                              <label class="col-form-label font-size-12">A área locada atende os requisitos mínimos exigidos pela legislação local?<span
+                                 class="text-danger">*</span></label>
+                              <br>
+                              <div class="form-check">
+                                 <input value="Sim" class="form-check-input" type="radio" name="legislacaoLocal" id="flexRadioDefault1">
+                                 <label class="form-check-label" for="flexRadioDefault1">
+                                 SIM
+                                 </label>
+                              </div>
+                              <div class="form-check">
+                                 <input value="Não" class="form-check-input" type="radio" name="legislacaoLocal" id="flexRadioDefault2" >
+                                 <label class="form-check-label" for="flexRadioDefault2">
+                                 NÃO
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Justifique:<span class="text-danger"></span></label>
+                              <textarea id="form_candidato_arealocadaatende" style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-6">
+                              <label class="col-form-label font-size-12">A documentação necessária está disponível?<span class="text-danger">*</span></label>
+                              <br>
+                              <div class="form-check">
+                                 <input value="Sim" class="form-check-input" type="radio" name="documentacao" id="flexRadioDefault1">
+                                 <label class="form-check-label" for="flexRadioDefault1">
+                                 SIM
+                                 </label>
+                              </div>
+                              <div class="form-check">
+                                 <input value="Não" class="form-check-input" type="radio" name="documentacao" id="flexRadioDefault2">
+                                 <label class="form-check-label" for="flexRadioDefault2">
+                                 NÃO
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Justifique:<span class="text-danger"></span></label>
+                              <textarea id="form_candidato_justifique_documentacaonecessaria" style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-6">
+                              <label class="col-form-label font-size-12">O acesso ao site está disponível 24horas/dia 7dias/semana?<span
+                                 class="text-danger">*</span></label>
+                              <br>
+                              <div class="form-check">
+                                 <input value="Sim" class="form-check-input" type="radio" name="acesso" id="flexRadioDefault1">
+                                 <label class="form-check-label" for="flexRadioDefault1">
+                                 SIM
+                                 </label>
+                              </div>
+                              <div class="form-check">
+                                 <input value="Não" class="form-check-input" type="radio" name="acesso" id="flexRadioDefault2" >
+                                 <label class="form-check-label" for="flexRadioDefault2">
+                                 NÃO
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Justifique:<span class="text-danger"></span></label>
+                              <textarea id="form_candidato_justifique_acessodisponivel" style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-6">
+                              <label class="col-form-label font-size-12">Existe energia disponível no site?<span class="text-danger">*</span></label>
+                              <br>
+                              <div class="form-check">
+                                 <input value="Sim" class="form-check-input" type="radio" name="energia" id="flexRadioDefault1">
+                                 <label class="form-check-label" for="flexRadioDefault1">
+                                 SIM
+                                 </label>
+                              </div>
+                              <div class="form-check">
+                                 <input value="Não" class="form-check-input" type="radio" name="energia" id="flexRadioDefault2" >
+                                 <label class="form-check-label" for="flexRadioDefault2">
+                                 NÃO
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Justifique:<span class="text-danger"></span></label>
+                              <textarea id="form_candidato_justifique_energiadisponivel" style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-6">
+                              <label class="col-form-label font-size-12">Existe alguma obstrução ou interferência visível?<span
+                                 class="text-danger">*</span></label>
+                              <br>
+                              <div class="form-check">
+                                 <input value="Sim" class="form-check-input" type="radio" name="obstrucao" id="flexRadioDefault1">
+                                 <label class="form-check-label" for="flexRadioDefault1">
+                                 SIM
+                                 </label>
+                              </div>
+                              <div class="form-check">
+                                 <input value="Não" class="form-check-input" type="radio" name="obstrucao" id="flexRadioDefault2" >
+                                 <label class="form-check-label" for="flexRadioDefault2">
+                                 NÃO
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Justifique:<span class="text-danger"></span></label>
+                              <textarea id="form_candidato_justifique_obstrucao" style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-12">
+                           <label class="col-form-label">Observação<span class="text-danger">*</span></label>
+                           <textarea id="form_candidato_observacao" style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
+                        </div>
+                     </div>
+                     <div class="col-lg-6">
+                        <div class="mt-3">
+                           <label for="formFile" class="form-label">Anexo</label>
+                           <input id="form_candidato_anexo" name="form_cliente_anexo" value="4194304"
+                              accept=".gif,.png, .pdf, .doc , .csv, .xlsx, .xls, .jpg, .jpeg, .docx"
+                              class="form-control" type="file">
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-10 pt-3">
+                           <button type="button" class="btn btn-primary" id="addCandidato">Criar Candidato</button>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+            <!-- /.modal-content -->
+         </div>
+         <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
+      <!-- MODAL VIEW CANDIDATO-->
+      <div id="modalViewCandidato" data-bs-keyboard="false" data-bs-backdrop="static" class="modal fade modalViewCandidato" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title add-task-title">Editar Candidato</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <form id="form_candidato_view" role="form">
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Sigla do Candidato<span
+                              class="text-danger">*</span></label>
+                           <input id="form_candidato_sigla_view" name="taskbudget" type="text"
+                              placeholder="Informe a Sigla do Candidato" class="form-control" required>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Site<span class="text-danger">*</span></label>
+                           <select class="form-select " id="form_candidato_site_view"  required>
+                              <option value="" selected>Selecione..</option>
+                           </select>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Tipo de Site<span class="text-danger">*</span></label>
+                           <select class="form-select validate" id="form_candidato_tipo_site_view" onchange="habilitarAlturaCand(this.id,1)" required>
+                              <option value="" selected>Selecione..</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Valor do Aluguel<span
+                              class="text-danger">*</span></label>
+                           <input id="form_candidato_aluguel_view" onInput="mascaraMoeda(event)" name="taskbudget"
+                              type="text" placeholder="Informe a Sigla do Candidato" class="form-control"
+                              required="" maxlength="15">
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label" id="tipo_propriedade">Tipo de Propriedade<span
+                              class="text-danger">*</span></label>
+                           <br>
+                           <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="form_tipo_propriedade"
+                                 id="inlineRadio1" value="Compra">
+                              <label class="form-check-label" for="form_tipo_propriedade">Compra</label>
+                           </div>
+                           <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="form_tipo_propriedade"
+                                 id="inlineRadio2" value="Aluguel">
+                              <label class="form-check-label" for="form_tipo_propriedade">Aluguel</label>
+                           </div>
+                           <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="form_tipo_propriedade"
+                                 id="inlineRadio3" value="Outros">
+                              <label class="form-check-label" for="form_tipo_propriedade">Outros</label>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- <div class="row">
+                        <div class="col-lg-6">
+                        
+                            <label class="col-form-label">CUOS<span class="text-danger">*</span></label>
+                        
+                            <select class="form-select validate" id="form_candidato_cuos"  required>
+                                <option value="" selected>Selecione..</option>
+                                <option value="A Protocolar">A Protocolar</option>
+                                <option value="Deferido">Deferido</option>
+                                <option value="Indeferido">Indeferido</option>
+                                <option value="Em Análise">Em Análise</option>
+                                <option value="N/A">N/A</option>
+                                <option value="Sem Informação">Sem Informação</option>
+                            </select>
+                        
+                        </div>
+                        
+                        <div class="col-lg-6">
+                            <label class="col-form-label">Status do Candidato<span class="text-danger">*</span></label>
+                            <select class="form-select validate" id="form_candidato_status" required>
+                                <option value="Qualificação Interna" selected>Qualificação Interna</option>
+                            </select>
+                        </div>
+                        </div> -->
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Proprietario<span class="text-danger">*</span></label>
+                           <select class="form-select validate" id="form_candidato_proprietario_view"  required>
+                              <option value="" selected>Selecione..</option>
+                           </select>
+                           <button type="button" class="btn btn-primary" id="novo_proprietario_view" onclick=" exibirModalProprietarioResponsavel('modalAdicionarProprietario')" style="margin-top: 16px; float: right;">Novo proprietário</button>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Responsável<span class="text-danger">*</span></label>
+                           <select class="form-select validate" id="form_candidato_responsavel"  required>
+                              <option value="" selected>Selecione..</option>
+                           </select>
+                           <button type="button" class="btn btn-primary" id="novo_responsavel_view" onclick="exibirModalProprietarioResponsavel('modalAdicionarContato')" style="margin-top: 16px; float: right;">Novo responsável</button>
+                        </div>
+                     </div>
+                     <div class="row pt-4">
+                        <div class="col-lg-12">
+                           <h6> Caracteristicas do Candidato:</h6>
+                           <hr>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-4">
+                           <label class="col-form-label">CEP<span class="text-danger">*</span></label>
+                           <input id="form_candidato_cep_view" name="taskbudget" type="text"
+                              placeholder="Informe o CEP" class="form-control" maxlength="8">
+                           <a href="https://buscacepinter.correios.com.br/app/endereco/index.php"
+                              target="_blank"><small id="emailHelp" class="form-text text-muted">Não localizou o CEP. Clique aqui!</small></a>
+                           <input id="form_candidato_cep_antigo_view"  name="taskbudget" type="hidden"
+                              class="form-control">
+                        </div>
+                        <div class="col-lg-4">
+                           <label class="col-form-label">Endereço<span class="text-danger">*</span></label>
+                           <input id="form_candidato_endereco" name="taskbudget" type="text"
+                              placeholder="Informe o Endereço" class="form-control" >
+                        </div>
+                        <div class="col-lg-4">
+                           <label class="col-form-label">Complemento<span class="text-danger">*</span></label>
+                           <input id="form_candidato_complemento" name="taskbudget" type="text"
+                              placeholder="Informe Complemento"  class="form-control" >
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-4">
+                           <label class="col-form-label">Bairro<span class="text-danger">*</span></label>
+                           <input id="form_candidato_bairro_view" name="taskbudget" type="text"
+                              placeholder="Informe o Bairro" class="form-control"  required>
+                        </div>
+                        <div class="col-lg-4">
+                           <label class="col-form-label">Município<span class="text-danger">*</span></label>
+                           <input id="form_candidato_municipio_view" disabled name="taskbudget" type="text"
+                              placeholder="Informe o Município" class="form-control">
+                        </div>
+                        <div class="col-lg-4">
+                           <label class="col-form-label">UF<span class="text-danger">*</span></label>
+                           <input id="form_candidato_uf_view" disabled name="taskbudget" type="text" placeholder="Informe a UF" class="form-control">
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Distancia PN<span class="text-danger">*</span></label>
+                           <input id="form_candidato_distancia_pn_view" name="taskbudget" type="text"
+                              placeholder="Informe a Distancia PN"  class="form-control" required="">
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Pré-Comar(m)<span class="text-danger">*</span></label>
+                           <input id="form_candidato_pre_comar_view" name="taskbudget" type="text"
+                              placeholder="Informe o Pré-Comar(m)" class="form-control"  required="">
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-4 ">
+                           <label class="col-form-label">Largura Área Locada<span
+                              class="text-danger">*</span></label>
+                           <input id="form_candidato_largura_area_normal_view"  onblur="calculoarea()" name="taskbudget" type="text"
+                              placeholder="Informe a Largura Área Locada" class="form-control" required="">
+                        </div>
+                        <div class="col-lg-4 ">
+                           <label class="col-form-label">Profundidade Área Locada<span class="text-danger">*</span></label>
+                           <input id="form_candidato_profundidade_normal_view"  onblur="calculoarea()" name="taskbudget" type="text"
+                              placeholder="Informe a Profundidade" class="form-control" required="">
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-4">
+                           <label class="col-form-label">Corredor de Acesso?<span
+                              class="text-danger">*</span></label>
+                           <select class="form-select validate" id="form_candidato_corredor_view" onchange="corredorAcessoCand(this.value,'1'),calculoarea(),onChanged(this.id)" required>
+                              <option value="" selected>Selecione..</option>
+                              <option value="Sim">Sim</option>
+                              <option value="Não">Não</option>
+                           </select>
+                        </div>
+                        <div class="col-lg-4 corredoracesso">
+                           <label class="col-form-label">Largura Área Locada<span
+                              class="text-danger"></span></label>
+                           <input id="form_candidato_largura_area_view" onblur="calculoarea()" name="taskbudget" type="text"
+                              placeholder="Informe a Largura Área Locada" class="form-control">
+                        </div>
+                        <div class="col-lg-4 corredoracesso">
+                           <label class="col-form-label">Profundidade<span class="text-danger"></span></label>
+                           <input id="form_candidato_profundidade_view" onblur="calculoarea()" name="taskbudget" type="text"
+                              placeholder="Informe a Profundidade" class="form-control">
+                        </div>
+                     </div>
+                     <div class="row pt-4">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Área Locada Total<span class="text-danger"></span></label>
+                           <input id="form_candidato_area_locada_view" disabled name="taskbudget" type="text"
+                              placeholder="Informe Área Locada" class="form-control">
+                        </div>
+                        <div class="col-lg-6 alturaedificioadd">
+                           <label class="col-form-label">Altura do Edifício<span
+                              class="text-danger"></span></label>
+                           <input id="form_candidato_altura_edificio_view" name="taskbudget" type="text"
+                              placeholder="Informe a Altura do Edifício" class="form-control">
+                        </div>
+                     </div>
+                     <div class="row pt-4">
+                        <div class="col-lg-12">
+                           <h6> Latitude & Longitude </h6>
+                           <hr>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">OPÇÃO<span class="text-danger">*</span></label>
+                           <br>
+                           <select class="form-select validate" id="form_tipo_opcao_view" onchange="escolhalatlongCand(this.value,'1'),onChanged(this.id)" required>
+                              <option value="" selected>Selecione..</option>
+                              <option value="Decimal">Decimal</option>
+                              <option  value="UTM">UTM</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="row latitudecand" style="display: none;">
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Latitude <span
+                                 class="text-danger">*</span></label>
+                              <input id="form_candidato_latitude_view" name="taskbudget" type="text"
+                                 placeholder="Informe a Largura Área Locada" class="form-control" onchange="formatPontoCardinal(this.id)" required >
+                              <small id="emailHelp" class="form-text text-muted">Ex.: -23.1234</small>
+                           </div>
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Longitude <span
+                                 class="text-danger">*</span></label>
+                              <input id="form_candidato_longitude_view" name="taskbudget" type="text"
+                                 placeholder="Informe a Largura Área Locada" class="form-control" onchange="formatPontoCardinal(this.id)" required>>
+                              <small id="emailHelp" class="form-text text-muted">Ex.: -46.1234</small>
+                           </div>
+                        </div>
+                        <div class="row utmcand">
+                           <div class="row">
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">Grau LAT<span class="text-danger">*</span></label>
+                                 <input
+                                    id="form_candidato_grauLat_view" name="taskbudget" type="text"
+                                    placeholder="Informe a Largura o Grau Latitudinal" class="form-control"
+                                    tabindex="1001"
+                                    >
+                              </div>
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">
+                                 Grau LONG<span class="text-danger">*</span>
+                                 </label>
+                                 <input
+                                    id="form_candidato_grauLong_view" name="taskbudget" type="text"
+                                    placeholder="Informe o Grau Longitudinal" class="form-control"
+                                    tabindex="1005"
+                                    >
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">
+                                 Minuto LAT<span class="text-danger">*</span>
+                                 </label>
+                                 <input
+                                    id="form_candidato_minutoLat_view" name="taskbudget" type="text"
+                                    placeholder="Informe o  minuto Latitudinal" class="form-control"
+                                    tabindex="1002"
+                                    >
+                              </div>
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">
+                                 Minuto LONG <span class="text-danger">*</span>
+                                 </label>
+                                 <input
+                                    id="form_candidato_minutLong_view" name="taskbudget" type="text"
+                                    placeholder="Informe o minuto Longitudinal" class="form-control"
+                                    tabindex="1006"
+                                    >
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">
+                                 Segundo LAT <span class="text-danger">*</span>
+                                 </label>
+                                 <input
+                                    id="form_candidato_segundoLat_view" name="taskbudget" type="text"
+                                    placeholder="Informe o segundo Longitudinal" class="form-control"
+                                    tabindex="1003"
+                                    >
+                              </div>
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">
+                                 Segundo LONG<span class="text-danger">*</span>
+                                 </label>
+                                 <input
+                                    id="form_candidato_segundoLong_view" name="taskbudget" type="text"
+                                    placeholder="Informe o segundo Longitudinal" class="form-control"
+                                    tabindex="1007"
+                                    >
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">
+                                 Ponto Cardeal LAT<span class="text-danger">*</span>
+                                 </label>
+                                 <select
+                                    class="form-select validate" id="form_candidato_pontoCardealLat_view"
+                                    tabindex="1004"
+                                    required>
+                                    <option value="" selected>Selecione..</option>
+                                    <option value="N">N</option>
+                                    <option value="S">S</option>
+                                 </select>
+                              </div>
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">
+                                 Ponto Cardeal LONG<span class="text-danger">*</span>
+                                 </label>
+                                 <select
+                                    class="form-select validate" id="form_candidato_pontoCardealLong_view"
+                                    tabindex="1008"
+                                    required>
+                                    <option value="" selected>Selecione..</option>
+                                    <option value="E">E</option>
+                                    <option value="W">W</option>
+                                 </select>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-4">
+                              <label class="col-form-label">Altitude<span class="text-danger">*</span></label>
+                              <input id="form_candidato_altitude_view" name="taskbudget" type="text"
+                                 placeholder="Informe a Altitude" class="form-control">
+                           </div>
+                        </div>
+                        <div class="row pt-4">
+                           <div class="col-lg-12">
+                              <h6> Itens Obrigatórios:</h6>
+                              <hr>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-6">
+                              <label class="col-form-label font-size-12">O candidato está localizado dentro do anel de busca?<span
+                                 class="text-danger"></span>*</label>
+                              <br>
+                              <div class="form-check">
+                                 <input value="Sim" class="form-check-input" type="radio" name="anelBusca1" id="flexRadioDefault1">
+                                 <label class="form-check-label" for="flexRadioDefault1">
+                                 SIM
+                                 </label>
+                              </div>
+                              <div class="form-check">
+                                 <input value="Não" class="form-check-input" type="radio" name="anelBusca1" id="flexRadioDefault2" >
+                                 <label class="form-check-label" for="flexRadioDefault2">
+                                 NÃO
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Justifique:<span class="text-danger"></span></label>
+                              <textarea id="form_candidato_candidatolocalizado_view" style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-6">
+                              <label class="col-form-label font-size-12">O proprietário está interessado no uso proposto?<span
+                                 class="text-danger">*</span></label>
+                              <br>
+                              <div class="form-check">
+                                 <input  value="Sim" class="form-check-input" type="radio" name="usoProposto_view" id="flexRadioDefault1">
+                                 <label class="form-check-label" for="flexRadioDefault1">
+                                 SIM
+                                 </label>
+                              </div>
+                              <div class="form-check">
+                                 <input value="Não" class="form-check-input" type="radio" name="usoProposto_view" id="flexRadioDefault2" >
+                                 <label class="form-check-label" for="flexRadioDefault2">
+                                 NÃO
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Justifique:<span class="text-danger"></span></label>
+                              <textarea id="form_candidato_proprietariointeressado_view" style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-6">
+                              <label class="col-form-label font-size-12">A área locada atende os requisitos mínimos exigidos pela legislação local?<span
+                                 class="text-danger">*</span></label>
+                              <br>
+                              <div class="form-check">
+                                 <input value="Sim" class="form-check-input" type="radio" name="legislacaoLocal_view" id="flexRadioDefault1">
+                                 <label class="form-check-label" for="flexRadioDefault1">
+                                 SIM
+                                 </label>
+                              </div>
+                              <div class="form-check">
+                                 <input value="Não" class="form-check-input" type="radio" name="legislacaoLocal_view" id="flexRadioDefault2" >
+                                 <label class="form-check-label" for="flexRadioDefault2">
+                                 NÃO
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Justifique:<span class="text-danger"></span></label>
+                              <textarea id="form_candidato_arealocadaatende_view" style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-6">
+                              <label class="col-form-label font-size-12">A documentação necessária está disponível?<span class="text-danger">*</span></label>
+                              <br>
+                              <div class="form-check">
+                                 <input value="Sim" class="form-check-input" type="radio" name="documentacao_view" id="flexRadioDefault1">
+                                 <label class="form-check-label" for="flexRadioDefault1">
+                                 SIM
+                                 </label>
+                              </div>
+                              <div class="form-check">
+                                 <input value="Não" class="form-check-input" type="radio" name="documentacao_view" id="flexRadioDefault2">
+                                 <label class="form-check-label" for="flexRadioDefault2">
+                                 NÃO
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Justifique:<span class="text-danger"></span></label>
+                              <textarea id="form_candidato_justifique_documentacaonecessaria_view" style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-6">
+                              <label class="col-form-label font-size-12">O acesso ao site está disponível 24horas/dia 7dias/semana?<span
+                                 class="text-danger">*</span></label>
+                              <br>
+                              <div class="form-check">
+                                 <input value="Sim" class="form-check-input" type="radio" name="acesso_view" id="flexRadioDefault1">
+                                 <label class="form-check-label" for="flexRadioDefault1">
+                                 SIM
+                                 </label>
+                              </div>
+                              <div class="form-check">
+                                 <input value="Não" class="form-check-input" type="radio" name="acesso_view" id="flexRadioDefault2" >
+                                 <label class="form-check-label" for="flexRadioDefault2">
+                                 NÃO
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Justifique:<span class="text-danger"></span></label>
+                              <textarea id="form_candidato_justifique_acessodisponivel_view" style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-6">
+                              <label class="col-form-label font-size-12">Existe energia disponível no site?<span class="text-danger">*</span></label>
+                              <br>
+                              <div class="form-check">
+                                 <input value="Sim" class="form-check-input" type="radio" name="energia_view" id="flexRadioDefault1">
+                                 <label class="form-check-label" for="flexRadioDefault1">
+                                 SIM
+                                 </label>
+                              </div>
+                              <div class="form-check">
+                                 <input value="Não" class="form-check-input" type="radio" name="energia_view" id="flexRadioDefault2" >
+                                 <label class="form-check-label" for="flexRadioDefault2">
+                                 NÃO
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Justifique:<span class="text-danger"></span></label>
+                              <textarea id="form_candidato_justifique_energiadisponivel_view" style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-6">
+                              <label class="col-form-label font-size-12">Existe alguma obstrução ou interferência visível?<span
+                                 class="text-danger">*</span></label>
+                              <br>
+                              <div class="form-check">
+                                 <input value="Sim" class="form-check-input" type="radio" name="obstrucao_view" id="flexRadioDefault1">
+                                 <label class="form-check-label" for="flexRadioDefault1">
+                                 SIM
+                                 </label>
+                              </div>
+                              <div class="form-check">
+                                 <input value="Não" class="form-check-input" type="radio" name="obstrucao_view" id="flexRadioDefault2" >
+                                 <label class="form-check-label" for="flexRadioDefault2">
+                                 NÃO
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Justifique:<span class="text-danger"></span></label>
+                              <textarea id="form_candidato_justifique_obstrucao_view" style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-12">
+                           <label class="col-form-label">Observação<span class="text-danger">*</span></label>
+                           <textarea id="form_candidato_observacao_view" style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
+                        </div>
+                     </div>
+                     <div class="col-lg-6">
+                        <div class="mt-3">
+                           <label for="formFile" class="form-label">Anexo</label>
+                           <input id="form_candidato_anexo" name="form_cliente_anexo" value="4194304"
+                              accept=".gif,.png, .pdf, .doc , .csv, .xlsx, .xls, .jpg, .jpeg, .docx"
+                              class="form-control" type="file">
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-10 pt-3">
+                           <button type="button" class="btn btn-primary" id="addCandidato">Criar Candidato</button>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+            <!-- /.modal-content -->
+         </div>
+         <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
+
+      <!-- MODAL SITES-->
+      <div id="modalAdicionarSite" data-bs-keyboard="false" data-bs-backdrop="static" class="modal fade modalAdicionarSite" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title add-task-title">Adicionar Novo Site</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <form id="NewtaskForm" role="form">
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Cliente<span class="text-danger">*</span></label>
+                           <select class="form-select validate" id="form_cliente_site" required>
+                              <option value="" selected>Selecione..</option>
+                           </select>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">ID Site Mobilize/Centro de custo<span class="text-danger">*</span></label>
+                           <input id="form_cliente_IdsiteMobilize" name="taskbudget" type="text"
+                              placeholder="Informe o ID Site Mobilize" class="form-control" >
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Operadora<span class="text-danger">*</span></label>
+                           <select class="form-select validate" id="form_cliente_operadora" required>
+                              <option value="" selected>Selecione..</option>
+                           </select>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">ID Site Sharing<span class="text-danger">*</span></label>
+                           <input id="form_cliente_Idsharing" name="taskbudget" type="text"
+                              placeholder="Informe a Sigla o ID Site Sharing" class="form-control" required>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Etapa<span class="text-danger"></span></label>
+                           <select class="form-select validate" id="form_cliente_etapa" required disabled>
+                           </select>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">ID Site Operadora<span
+                              class="text-danger">*</span></label>
+                           <input id="form_cliente_idSiteOperadora" name="taskbudget" type="text"
+                              placeholder="Informe a Sigla o ID Site Operadora" class="form-control" required>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Tipo Site<span class="text-danger"></span></label>
+                           <select class="form-select" id="form_cliente_tipoSite" onchange="habilitarAlturaSite(this.id,1)">
+                              <option value="" selected>Selecione...</option>
+                           </select>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Data de Acionamento<span
+                              class="text-danger">*</span></label>
+                           <input id="form_cliente_dataAcionamento" name="taskbudget" type="date" placeholder="Informe a Data de Acionamento" class="form-control" required>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Projeto<span class="text-danger">*</span></label>
+                           <input id="form_cliente_projeto" name="taskbudget" type="text"
+                              placeholder="Informe o Nome do Projeto" class="form-control" required>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">
+                           Sub Projeto<span class="text-danger"></span>
+                           </label>
+                           <input id="form_cliente_subProjeto" name="taskbudget" type="text"
+                              placeholder="Informe o Sub Projeto" class="form-control">
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Target do Aluguel<span class="text-danger"></span></label>
+                           <input id="form_cliente_targetAluguel" onInput="mascaraMoeda(event)" name="taskbudget"
+                              type="text" placeholder="Informe o Target do Aluguel" class="form-control"
+                              required="" maxlength="15">
+                        </div>
+                     </div>
+                     <div class="row pt-4">
+                        <div class="col-lg-12">
+                           <h6> Localização do Site</h6>
+                           <hr>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">UF<span class="text-danger">*</span></label>
+                           <select class="form-select validate" id="form_site_uf" required>
+                              <option value="" selected>Selecione...</option>
+                           </select>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Município<span class="text-danger">*</span></label>
+                           <div class="col-lg-12">
+                              <select class="form-select validate" id="form_site_municipio" required>
+                                 <option value="" selected>Selecione...</option>
+                              </select>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Regional<span class="text-danger">*</span></label>
+                           <select class="form-select" id="form_cliente_regional" disabled>
+                              <option value="" selected>Selecione..</option>
+                              <option value="Norte">Norte</option>
+                              <option value="Nordeste">Nordeste</option>
+                              <option value="Centro Oeste">Centro Oeste</option>
+                              <option value="Sudeste">Sudeste</option>
+                              <option value="Sul">Sul</option>
+                           </select>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Raio de Busca (M)<span class="text-danger">*</span></label>
+                           <select class="form-select validate" id="form_cliente_raioBusca" required>
+                              <option value="" selected>Selecione..</option>
+                              <option value="50">50</option>
+                              <option value="100">100</option>
+                              <option value="150">150</option>
+                              <option value="190">190</option>
+                              <option value="200">200</option>
+                              <option value="300">300</option>
+                              <option value="400">400</option>
+                              <option value="500">500</option>
+                              <option value="600">600</option>
+                              <option value="700">700</option>
+                              <option value="Polígono">Polígono</option>
+                              <option value="Sem Raio">Sem Raio</option>
+                              <option value="N/A">N/A</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="row alturaprevistaadd">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Altura Prevista (M)<span
+                              class="text-danger">*</span></label>
+                           <select class="form-select validate" id="form_cliente_alturaPrevista" required>
+                              <option value="" selected>Selecione..</option>
+                              <option value="0">0</option>
+                              <option value="10">10</option>
+                              <option value="12">12</option>
+                              <option value="18">18</option>
+                              <option value="20">20</option>
+                              <option value="25">25</option>
+                              <option value="30">30</option>
+                              <option value="35">35</option>
+                              <option value="40">40</option>
+                              <option value="50">50</option>
+                              <option value="51">51</option>
+                              <option value="60">60</option>
+                              <option value="Definir">Definir</option>
+                              <option value="N/A">N/A</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="row pt-4">
+                        <div class="col-lg-12">
+                           <h6 id="lat"> Latitude & Longitude </h6>
+                           <hr>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Opção<span class="text-danger"></span></label>
+                           <select class="form-select validate" id="form_cliente_opcao" onchange="escolhalatlong(this.value,1);">
+                              <option value="" selected>Selecione..</option>
+                              <option value="Decimal">Decimal</option>
+                              <option  value="UTM">UTM</option>
+                           </select>
+                        </div>
+                        <div id="container" class="latlongsessaocriar">
+                           <div class="row" id="lat_long">
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">Latitude <span class="text-danger">*</span></label>
+                                 <input id="form_cliente_latitude" maxlength="11" name="taskbudget" type="text"
+                                    placeholder="Informe a Latitude" class="form-control" onchange="formatPontoCardinal(this.id)">
+                                 <small id="emailHelp" class="form-text text-muted">Ex.: -23.1234</small>
+                              </div>
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">Longitude <span class="text-danger">*</span></label>
+                                 <input id="form_cliente_longitude" maxlength="11" name="taskbudget" type="text"
+                                    placeholder="Informe a Longitude" class="form-control" onchange="formatPontoCardinal(this.id)">
+                                 <small id="emailHelp" class="form-text text-muted">Ex.: -46.1234</small>
+                              </div>
+                           </div>
+                        </div>
+                        <div id="utm_element" class="utmsessaocriar">
+                           <div class="row">
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">Grau LAT <span class="text-danger">*</span></label>
+                                 <input id="form_cliente_grauLat" name="taskbudget" type="text"
+                                    placeholder="Informe a Largura o Grau Latitudinal" class="form-control"
+                                    tabindex="2001">
+                              </div>
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">Grau LONG <span class="text-danger">*</span></label>
+                                 <input id="form_cliente_grauLong" name="taskbudget" type="text"
+                                    placeholder="Informe o Grau Longitudinal" class="form-control"
+                                    tabindex="2005">
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">Minuto LAT <span class="text-danger">*</span></label>
+                                 <input id="form_cliente_minLat" name="taskbudget" type="text"
+                                    placeholder="Informe o  minuto Latitudinal" class="form-control"
+                                    tabindex="2002">
+                              </div>
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">Minuto LONG <span class="text-danger">*</span></label>
+                                 <input id="form_cliente_minLong" name="taskbudget" type="text"
+                                    placeholder="Informe o minuto Longitudinal" class="form-control"
+                                    tabindex="2006">
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">Segundo LAT <span class="text-danger">*</span></label>
+                                 <input id="form_cliente_segLat" name="taskbudget" type="text"
+                                    placeholder="Informe o segundo Longitudinal" class="form-control"
+                                    tabindex="2003">
+                              </div>
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">Segundo LONG<span class="text-danger">*</span></label>
+                                 <input id="form_cliente_segLong" name="taskbudget" type="text"
+                                    placeholder="Informe o segundo Longitudinal" class="form-control"
+                                    tabindex="2007">
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">Ponto Cardeal LAT<span class="text-danger">*</span></label>
+                                 <select class="form-select validate" id="form_cliente_pontoCardealLat" tabindex="2004">
+                                    <option value="" selected>Selecione..</option>
+                                    <option value="N">N</option>
+                                    <option value="S">S</option>
+                                 </select>
+                              </div>
+                              <div class="col-lg-6">
+                                 <label class="col-form-label">Ponto Cardeal LONG<span
+                                    class="text-danger">*</span></label>
+                                 <select class="form-select validate" id="form_cliente_pontoCardealLong" tabindex="2008">
+                                    <option value="" selected>Selecione..</option>
+                                    <option value="E">E</option>
+                                    <option value="W">W</option>
+                                 </select>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row pt-4">
+                           <div class="col-lg-12">
+                              <h6> Coordenadores </h6>
+                              <hr>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Coordenador Cliente<span
+                                 class="text-danger"></span></label>
+                              <select class="form-select validate" id="form_cliente_coordenadorCliente">
+                                 <option value="" selected>Selecione..</option>
+                              </select>
+                           </div>
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Coordenador Mobilize<span
+                                 class="text-danger"></span></label>
+                              <select class="form-select validate" id="form_cliente_coordenadorMobilize"  >
+                                 <option value="" selected>Selecione..</option>
+                              </select>
+                           </div>
+                        </div>
+                        <div class="row"></div>
+                        <div class="col-lg-6">
+                           <div class="mt-3">
+                              <label for="formFile" class="form-label">Anexo</label>
+                              <input id="form_cliente_anexo" name="form_cliente_anexo" value="4194304"
+                                 accept=".gif,.png, .pdf, .doc , .csv, .xlsx, .xls, .jpg, .jpeg, .docx"
+                                 class="form-control" type="file">
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-lg-10 pt-3">
+                        <button type="button" class="btn btn-primary" id="addSite">Criar Site</button>
+                     </div>
+                  </form>
+               </div>
+            </div>
+            <!-- /.modal-content -->
+         </div>
+         <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+      <!-- MODAL EDITAR SITES-->
+      <div id="modalEditarSite" data-bs-keyboard="false" data-bs-backdrop="static" class="modal fade modalEditarSite" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title add-task-title">Editar Site</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <form id="NewtaskForm" role="form">
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <input id="idUpdate" hidden name="taskbudget" type="text">
+                           <label class="col-form-label">Cliente<span class="text-danger">*</span></label>
+                           <select class="form-select validate" id="editar_cliente_site" required>
+                              <option value="" selected>Selecione..</option>
+                           </select>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">ID Site Mobilize/Centro de custo<span class="text-danger">*</span></label>
+                           <input id="editar_cliente_IdsiteMobilize" name="taskbudget" type="text"
+                              placeholder="Informe o ID Site Mobilize" class="form-control">
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Operadora<span class="text-danger">*</span></label>
+                           <select class="form-select validate" id="editar_cliente_operadora" required>
+                              <option value="" selected>Selecione..</option>
+                           </select>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">ID Site Sharing<span class="text-danger">*</span></label>
+                           <input id="editar_cliente_Idsharing" name="taskbudget" type="text"
+                              placeholder="Informe a Sigla o ID Site Sharing" class="form-control" required>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Etapa<span class="text-danger"></span></label>
+                           <select class="form-select validate" id="editar_cliente_etapa" required>
+                              <option value="" selected>Selecione..</option>
+                              <!--
+                                 <option value="0 - ACIONAMENTO">0 - ACIONAMENTO</option>
+                                 <option value="1 - PRE-ANÁLISE AMBIENTAL">1 - PRE-ANÁLISE AMBIENTAL</option>
+                                 <option value="2 - BUSCA">2 - BUSCA</option>
+                                 <option value="3 - ELABORAÇÃO DE SAR">3 - ELABORAÇÃO DE SAR</option>
+                                 <option value="4 - QUALIFICAÇÃO INTERNA">4 - QUALIFICAÇÃO INTERNA</option>
+                                 <option value="5 – QUALIFICAÇÃO CLIENTE">5 – QUALIFICAÇÃO CLIENTE</option>
+                                 <option value="6 – FORMALIZAÇÃO CONTRATUAL">6 – FORMALIZAÇÃO CONTRATUAL</option>
+                                 <option value="7 – APROVAÇÃO DE VALOR">7 – APROVAÇÃO DE VALOR</option>
+                                 <option value="8 - ASSINATURA DE CONTRATO LOCADOR">8 - ASSINATURA DE CONTRATO LOCADOR</option>
+                                 <option value="9 - CONTRATO ASSINADO COM PENDÊNCIA">9 - CONTRATO ASSINADO COM PENDÊNCIA</option>
+                                 <option value="10 - CONTRATO ASSINADO EM CHANCELA">10 - CONTRATO ASSINADO EM CHANCELA</option>
+                                 <option value="11 - CONTRATO APROVADO CLIENTE">11 - CONTRATO APROVADO CLIENTE</option>
+                                 <option value="12 – AGUARDANDO VIAS FISICAS ASSINADAS">12 – AGUARDANDO VIAS FISICAS ASSINADAS</option>
+                                 <option value="13 – AGUARDANDO ENVIO DAS VIAS FÍSICAS">13 – AGUARDANDO ENVIO DAS VIAS FÍSICAS</option>
+                                 <option value="14 - CRÍTICO">14 - CRÍTICO</option>
+                                 <option value="15 - ON HOLD">15 - ON HOLD</option>
+                                 <option value="16 - CANCELADO">16 - CANCELADO</option>
+                                 <option value="17 - FINALIZADO">17 - FINALIZADO</option>
+                                 -->
+                           </select>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">ID Site Operadora<span
+                              class="text-danger">*</span></label>
+                           <input id="editar_cliente_idSiteOperadora" name="taskbudget" type="text"
+                              placeholder="Informe a Sigla o ID Site Operadora" class="form-control" required>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Tipo Site<span class="text-danger"></span></label>
+                           <select class="form-select" onchange="habilitarAlturaSite(this.id,2)" id="editar_cliente_tipoSite" >
+                              <option value="" selected>Selecione..</option>
+                           </select>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Data de Acionamento<span
+                              class="text-danger">*</span></label>
+                           <input id="editar_cliente_dataAcionamento" name="taskbudget" type="date"
+                              placeholder="Informe a Data de Acionamento" class="form-control" required>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Projeto<span class="text-danger">*</span></label>
+                           <input id="editar_cliente_projeto" name="taskbudget" type="text"
+                              placeholder="Informe o Nome do Projeto" class="form-control" required>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Sub Projeto<span class="text-danger"></span></label>
+                           <input id="editar_cliente_subProjeto" name="taskbudget" type="text"
+                              placeholder="Informe o Sub Projeto" class="form-control">
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Target do Aluguel<span class="text-danger"></span></label>
+                           <input id="editar_cliente_targetAluguel" onInput="mascaraMoeda(event)" name="taskbudget"
+                              type="text" placeholder="Informe o Target do Aluguel" class="form-control" maxlength="15">
+                        </div>
+                     </div>
+                     <div class="row pt-4">
+                        <div class="col-lg-12">
+                           <h6> Localização do Site</h6>
+                           <hr>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">UF<span class="text-danger"></span></label>
+                           <select class="form-select validate" id="form_editar_site_uf" required>
+                              <option value="" selected>Selecione...</option>
+                           </select>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Município<span class="text-danger"></span></label>
+                           <div class="col-lg-12">
+                              <select class="form-select validate" id="form_editar_site_municipio" required>
+                                 <option value="" selected>Selecione...</option>
+                              </select>
+                              <input type="hidden" id="form_editar_site_municipio_old" value="" />
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Regional<span class="text-danger"></span></label>
+                           <select class="form-select validate" id="editar_cliente_regional" disabled>
+                              <option value="" selected>Selecione..</option>
+                              <option value="Norte">Norte</option>
+                              <option value="Nordeste">Nordeste</option>
+                              <option value="Centro Oeste">Centro Oeste</option>
+                              <option value="Sudeste">Sudeste</option>
+                              <option value="Sul">Sul</option>
+                           </select>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Raio de Busca (M)<span class="text-danger"></span></label>
+                           <select class="form-select validate" id="editar_cliente_raioBusca" required>
+                              <option value="" selected>Selecione..</option>
+                              <option value="50">50</option>
+                              <option value="100">100</option>
+                              <option value="150">150</option>
+                              <option value="190">190</option>
+                              <option value="200">200</option>
+                              <option value="300">300</option>
+                              <option value="400">400</option>
+                              <option value="500">500</option>
+                              <option value="600">600</option>
+                              <option value="700">700</option>
+                              <option value="Polígono">Polígono</option>
+                              <option value="Sem Raio">Sem Raio</option>
+                              <option value="N/A">N/A</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="row alturaprevistaedt">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Altura Prevista (M)<span
+                              class="text-danger"></span></label>
+                           <select class="form-select validate" id="editar_cliente_alturaPrevista" required>
+                              <option value="" selected>Selecione..</option>
+                              <option value="0">0</option>
+                              <option value="10">10</option>
+                              <option value="12">12</option>
+                              <option value="18">18</option>
+                              <option value="20">20</option>
+                              <option value="25">25</option>
+                              <option value="30">30</option>
+                              <option value="35">35</option>
+                              <option value="40">40</option>
+                              <option value="50">50</option>
+                              <option value="51">51</option>
+                              <option value="60">60</option>
+                              <option value="Definir">Definir</option>
+                              <option value="N/A">N/A</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="row pt-4">
+                        <div class="col-lg-12">
+                           <h6> Latitude & Longitude </h6>
+                           <hr>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Opção<span class="text-danger"></span></label>
+                           <select class="form-select validate" id="editar_clienteopcao_" onchange="escolhalatlong(this.value,2)">
+                              <option value="" selected>Selecione..</option>
+                              <option value="Decimal">Decimal</option>
+                              <option value="UTM">UTM</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="row latlongsessaovisualizar">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Latitude <span class="text-danger">*</span></label>
+                           <input id="editar_cliente_latitude" maxlength="11" name="taskbudget" type="text"
+                              placeholder="Informe a Latitude" class="form-control">
+                           <small id="emailHelp" class="form-text text-muted">Ex.: -23.1234</small>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Longitude <span class="text-danger">*</span></label>
+                           <input id="editar_cliente_longitude" maxlength="11" name="taskbudget" type="text"
+                              placeholder="Informe a Longitude" class="form-control">
+                           <small id="emailHelp" class="form-text text-muted">Ex.: -46.1234</small>
+                        </div>
+                     </div>
+                     <div class="utmsessaovisualizar">
+                        <div class="row">
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Grau LAT<span class="text-danger">*</span></label>
+                              <input id="editar_cliente_grauLat" name="taskbudget" type="text"
+                                 placeholder="Informe a Largura o Grau Latitudinal" class="form-control"
+                                 tabindex="3001"
+                                 >
+                           </div>
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Grau LONG<span class="text-danger">*</span></label>
+                              <input id="editar_cliente_grauLong" name="taskbudget" type="text"
+                                 placeholder="Informe o Grau Longitudinal" class="form-control"
+                                 tabindex="3005"
+                                 >
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Minuto LAT<span class="text-danger">*</span></label>
+                              <input id="editar_cliente_minLat" name="taskbudget" type="text"
+                                 placeholder="Informe o  minuto Latitudinal" class="form-control"
+                                 tabindex="3002"
+                                 >
+                           </div>
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Minut LONG <span class="text-danger">*</span></label>
+                              <input id="editar_cliente_minLong" name="taskbudget" type="text"
+                                 placeholder="Informe o minuto Longitudinal" class="form-control"
+                                 tabindex="3006"
+                                 >
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Segundo LAT <span class="text-danger">*</span></label>
+                              <input id="editar_cliente_segLat" name="taskbudget" type="text"
+                                 placeholder="Informe o segundo Longitudinal" class="form-control"
+                                 tabindex="3003"
+                                 >
+                           </div>
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Segundo LONG<span class="text-danger">*</span></label>
+                              <input id="editar_cliente_segLong" name="taskbudget" type="text"
+                                 placeholder="Informe o segundo Longitudinal" class="form-control"
+                                 tabindex="3007"
+                                 >
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Ponto Cardeal LAT<span class="text-danger">*</span></label>
+                              <select class="form-select validate" id="editar_cliente_pontoCardealLat" tabindex="3004"  required >
+                                 <option value="" selected>Selecione..</option>
+                                 <option value="N">N</option>
+                                 <option value="S">S</option>
+                              </select>
+                           </div>
+                           <div class="col-lg-6">
+                              <label class="col-form-label">PONTO Cardeal LONG<span
+                                 class="text-danger">*</span></label>
+                              <select class="form-select validate" id="editar_cliente_pontoCardealLong" tabindex="3008" required>
+                                 <option value="" selected>Selecione..</option>
+                                 <option value="E">E</option>
+                                 <option value="W">W</option>
+                              </select>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row pt-4">
+                        <div class="col-lg-12">
+                           <h6> Coordenadores </h6>
+                           <hr>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Coordenador Cliente<span
+                              class="text-danger"></span></label>
+                           <select class="form-select validate" id="editar_cliente_coordenadorCliente">
+                              <option value="" selected>Selecione..</option>
+                           </select>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Coordenador Mobilize<span
+                              class="text-danger"></span></label>
+                           <select class="form-select validate" id="editar_cliente_coordenadorMobilize">
+                              <option value="" selected>Selecione..</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="mt-3">
+                        <label for="formFile" class="form-label">Anexo</label>
+                        <input id="form_site_anexo_editar" name="form_cliente_anexo" value="4194304" accept=".gif,.png, .pdf, .doc , .csv, .xlsx, .xls, .jpg, .jpeg, .docx" class="form-control" type="file">
+                     </div>
+                     <div class="col-lg-10 pt-3">
+                        <button type="button" onclick="editSite()" class="btn btn-primary">Editar Site</button>
+                     </div>
+                  </form>
+               </div>
+            </div>
+            <!-- /.modal-content -->
+         </div>
+         <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+      <!-- MODAL VISUALIZAR SITE FILTRADO-->
+      <div id="modalvisualizarSite" data-bs-keyboard="false" data-bs-backdrop="static" class="modal fade modalvisualizarSite" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title add-task-title">Visualizar Site</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <form id="NewtaskForm" role="form">
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Cliente<span class="text-danger"></span></label>
+                           <input class="form-select validate" id="form_cliente_edit_site" disabled>
+                           </input>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">ID Site Mobilize/Centro de custo<span class="text-danger"></span></label>
+                           <input id="form_cliente_edit_IdsiteMobilize" name="taskbudget" type="text"
+                              class="form-control" disabled>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Operadora<span class="text-danger"></span></label>
+                           <input class="form-select validate" id="form_cliente_edit_operadora" disabled> </input>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">ID Site Sharing<span class="text-danger"></span></label>
+                           <input id="form_cliente_edit_Idsharing" name="taskbudget" type="text"
+                              class="form-control" disabled>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Etapa<span class="text-danger"></span></label>
+                           <input class="form-select validate" id="form_cliente_edit_etapa" disabled>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">ID Site Operadora<span
+                              class="text-danger"></span></label>
+                           <input id="form_cliente_edit_idSiteOperadora" name="taskbudget" type="text"
+                              class="form-control" disabled>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Tipo Site<span class="text-danger"></span></label>
+                           <input class="form-select validate" id="form_cliente_edit_tipoSite" disabled>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Data de Acionamento<span
+                              class="text-danger">*</span></label>
+                           <input id="form_cliente_edit_id_dataAcionamento" name="taskbudget" type="text"
+                              class="form-control" disabled>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Projeto<span class="text-danger"></span></label>
+                           <input id="form_cliente_edit_projeto" name="taskbudget" type="text"
+                              class="form-control" disabled>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Sub Projeto<span class="text-danger"></span></label>
+                           <input id="form_cliente_edit_Subprojeto" name="taskbudget" type="text"
+                              class="form-control" disabled>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Target do Aluguel<span class="text-danger"></span></label>
+                           <input id="form_cliente_edit_targetAluguel" name="taskbudget" type="text"
+                              class="form-control"  maxlength="15" disabled>
+                        </div>
+                     </div>
+                     <div class="row pt-4">
+                        <div class="col-lg-12">
+                           <h6> Localização do Site</h6>
+                           <hr>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">UF<span class="text-danger"></span></label>
+                           <input id="form_cliente_edit_UF" name="taskbudget" type="text"
+                              class="form-control" disabled>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Município<span class="text-danger"></span></label>
+                           <input id="form_cliente_edit_municipio" name="taskbudget" type="text"
+                              class="form-control" disabled>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Regional<span class="text-danger"></span></label>
+                           <input class="form-control" id="form_cliente_edit_regional" disabled>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Raio de Busca (M)<span class="text-danger"></span></label>
+                           <input class="form-select validate" id="form_cliente_edit_raioBusca" disabled>
+                        </div>
+                     </div>
+                     <div class="row alturaprevistaview">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Altura Prevista (M)<span
+                              class="text-danger"></span></label>
+                           <input class="form-select validate" id="form_cliente_edit_alturaPrevista" disabled>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Opção<span class="text-danger"></span></label>
+                           <input class="form-select validate" id="form_cliente_edit_opcao" disabled>
+                        </div>
+                     </div>
+                     <div class="row pt-4">
+                        <div class="col-lg-12">
+                           <h6> Latitude & Longitude </h6>
+                           <hr>
+                        </div>
+                     </div>
+                     <div class="row latlongsessaoeditar">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Latitude <span class="text-danger"></span></label>
+                           <input id="form_cliente_edit_latitude" name="taskbudget" type="text"
+                              class="form-control" disabled>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Longitude <span class="text-danger"></span></label>
+                           <input id="form_cliente_edit_longitude" name="taskbudget" type="text"
+                              class="form-control" disabled>
+                        </div>
+                     </div>
+                     <div class="utmsessaoeditar">
+                        <div class="row">
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Grau LAT<span class="text-danger"></span></label>
+                              <input id="form_cliente_edit_grauLat" name="taskbudget" type="text"
+                                 class="form-control" disabled>
+                           </div>
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Grau LONG<span class="text-danger"></span></label>
+                              <input id="form_cliente_edit_grauLong" name="taskbudget" type="text"
+                                 class="form-control" disabled>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Minuto LAT<span class="text-danger"></span></label>
+                              <input id="form_cliente_edit_minLat" name="taskbudget" type="text"
+                                 class="form-control" disabled>
+                           </div>
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Minut LONG <span class="text-danger"></span></label>
+                              <input id="form_cliente_edit_minLong" name="taskbudget" type="text"
+                                 class="form-control" disabled>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Segundo LAT <span class="text-danger"></span></label>
+                              <input id="form_cliente_edit_segLat" name="taskbudget" type="text"
+                                 class="form-control" disabled>
+                           </div>
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Segundo LONG<span class="text-danger"></span></label>
+                              <input id="form_cliente_edit_segLong" name="taskbudget" type="text"
+                                 class="form-control" disabled>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-6">
+                              <label class="col-form-label">Ponto Cardeal LAT<span class="text-danger"></span></label>
+                              <input class="form-select validate" id="form_cliente_edit_pontoCardealLat" disabled>
+                           </div>
+                           <div class="col-lg-6">
+                              <label class="col-form-label">PONTO Cardeal LONG<span
+                                 class="text-danger"></span></label>
+                              <input class="form-select validate" id="form_cliente_edit_pontoCardealLong" disabled>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row pt-4">
+                        <div class="col-lg-12">
+                           <h6> Coordenadores </h6>
+                           <hr>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Coordenador Cliente<span
+                              class="text-danger"></span></label>
+                           <input class="form-select validate" id="form_cliente_edit_coordenadorCliente" disabled>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Coordenador Mobilize<span
+                              class="text-danger"></span></label>
+                           <input class="form-select validate" id="form_cliente_edit_coordenadorMobilize" disabled>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+            <!-- /.modal-content -->
+         </div>
+         <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+      <!-- MODAL ADICIOANR PROPRIETARIO -->
+      <div id="modalAdicionarProprietario" data-bs-keyboard="false" data-bs-backdrop="static" class="modal fade modalAdicionarCandidato" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title add-task-title">Novo proprietário</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="resetForm('form_proprietario')"></button>
+               </div>
+               <div class="modal-body">
+                  <form id="form_proprietario" role="form">
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Nome<span class="text-danger">*</span></label>
+                           <input id="form_proprietario_nome" name="taskbudget" type="text"
+                              placeholder="Informe o nome do proprietário" class="form-control" required>
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">CPF/CNPJ<span class="text-danger">*</span></label>
+                           <input id="form_proprietario_cpf_cnpj" name="taskbudget" type="text" oninput="formatCnpjCpf(event, 'form_proprietario_razao_social')"
+                              placeholder="Informe o CPF/CNPJ" class="form-control"  maxlength="18" required>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-4">
+                           <label class="col-form-label">Razão Social<span class="text-danger"></span></label>
+                           <input id="form_proprietario_razao_social" name="taskbudget" type="text"
+                              placeholder="Informe a Razão Social" class="form-control" required>
+                        </div>
+                        <div class="col-lg-4">
+                           <label class="col-form-label">E-mail<span class="text-danger">*</span></label>
+                           <input id="form_proprietario_email" name="taskbudget" type="text"
+                              placeholder="Informe o E-mail" class="form-control" required>
+                        </div>
+                        <div class="col-lg-4">
+                           <label class="col-form-label">Telefone<span class="text-danger">*</span></label>
+                           <input id="form_proprietario_telefone" name="taskbudget" type="text" onkeydown="phoneMaskBrazil()"
+                              maxlength="15" placeholder="Informe o Telefone" class="form-control" required>
+                        </div>
+                     </div>
+                     <div class="row pt-4">
+                        <div class="col-lg-12">
+                           <h6> Endereço:</h6>
+                           <hr>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-4">
+                           <label class="col-form-label">CEP<span class="text-danger">*</span></label>
+                           <input id="form_proprietario_cep" name="taskbudget" type="text"
+                              placeholder="Informe o CEP" class="form-control"  maxlength="8">
+                           <a href="https://buscacepinter.correios.com.br/app/endereco/index.php"
+                              target="_blank"><small id="emailHelp" class="form-text text-muted">Não localizou o CEP. Clique aqui!</small></a>
+                           <input id="form_proprietario_cep_antigo"  name="taskbudget" type="hidden"
+                              class="form-control">
+                        </div>
+                        <div class="col-lg-4">
+                           <label class="col-form-label">Endereço<span class="text-danger">*</span></label>
+                           <input id="form_proprietario_endereco" name="taskbudget" type="text"
+                              placeholder="Informe o Endereço" class="form-control" >
+                        </div>
+                        <div class="col-lg-4">
+                           <label class="col-form-label">Numero<span class="text-danger">*</span></label>
+                           <input id="form_proprietario_numero" name="taskbudget" type="text"
+                              placeholder="Informe o Numero"  class="form-control" >
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Complemento<span class="text-danger">*</span></label>
+                           <input id="form_proprietario_complemento" name="taskbudget" type="text"
+                              placeholder="Informe Complemento"  class="form-control" >
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Bairro<span class="text-danger">*</span></label>
+                           <input id="form_proprietario_bairro" name="taskbudget" type="text"
+                              placeholder="Informe o Bairro" class="form-control"  required>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Município<span class="text-danger">*</span></label>
+                           <input id="form_proprietario_municipio" disabled name="taskbudget" type="text"
+                              placeholder="Informe o Município" class="form-control">
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">UF<span class="text-danger">*</span></label>
+                           <input id="form_proprietario_uf" disabled name="taskbudget" type="text" placeholder="Informe a UF" class="form-control">
+                        </div>
+                     </div>
+                     <div style="margin-top: 16px; display: flex; justify-content: center">
+                        <button type="button" class="btn btn-primary" id="btnAddProprietario">Criar proprietário</button>
+                     </div>
+                  </form>
+               </div>
+            </div>
+            <!-- /.modal-content -->
+         </div>
+         <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+      <!-- MODAL ADICIOANAR CONTATO -->
+      <div id="modalAdicionarContato" data-bs-keyboard="false" data-bs-backdrop="static" class="modal fade modalAdicionarContato" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-lg"  style="width: max-content; ">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title add-task-title">Novo contato</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="resetForm('form_responsavel')"></button>
+               </div>
+               <div class="modal-body">
+                  <form id="form_responsavel" role="form">
+                     <div class="row">
+                        <div class="col-lg">
+                           <label class="col-form-label">Nome<span class="text-danger">*</span></label>
+                           <input id="form_responsavel_nome" name="taskbudget" type="text"
+                              placeholder="Informe o nome do responsável" class="form-control" required>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg">
+                           <label class="col-form-label">E-mail<span class="text-danger">*</span></label>
+                           <input id="form_responsavel_email" name="taskbudget" type="text" 
+                              placeholder="Informe o E-mail" class="form-control" required>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg">
+                           <label class="col-form-label">Telefone<span class="text-danger">*</span></label>
+                           <input id="form_responsavel_telefone" name="taskbudget" type="text" onkeydown="phoneMaskBrazil()"
+                              maxlength="15" placeholder="Informe o Telefone" class="form-control" required>
+                        </div>
+                     </div>
+                     <div style="margin-top: 16px; display: flex; justify-content: center">
+                        <button type="button" class="btn btn-primary" id="btnAddResposanvel">Criar responsável</button>
+                     </div>
+                  </form>
+               </div>
+            </div>
+            <!-- /.modal-content -->
+         </div>
+         <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+      <script src="libs/sweetalert/sweetalert.min.js"></script>
+      <script type="module" src="js/index.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+         crossorigin="anonymous"></script>
+      <!-- Required datatable js -->
+      <script src="libs/datatables.net/js/jquery.dataTables.min.js"></script>
+      <script src="libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+      <!-- Buttons examples -->
+      <script src="libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+      <script src="libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+      <script src="libs/jszip/jszip.min.js"></script>
+      <script src="libs/pdfmake/build/pdfmake.min.js"></script>
+      <script src="libs/pdfmake/build/vfs_fonts.js"></script>
+      <script src="libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+      <script src="libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+      <script src="libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+      <!-- Responsive examples -->
+      <script src="libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+      <script src="libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+      <!-- Datatable init js -->
+      <script src="js/datatables.init.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"
+         crossorigin="anonymous"></script>
+      <script>
+         function abrirSAR(candidatoID) {
+             window.open('https://creatorapp.zoho.com'+$('#dadosurlzoho').val()+'#Page:SAR_Candidato?candidatoID=' + candidatoID, '_blank');
+         }
+         
+         function alterarQualificacao(candidato, qualificacao) {
+             if(qualificacao.length > 0){
+                 window.open('https://creatorapp.zoho.com'+$('#dadosurlzoho').val()+'Qualifica_o_do_Candadito/record-edit/Qualifica_o_do_Candadito_Report/'+qualificacao, '_blank');
+             }else{
+                 window.open('https://creatorapp.zoho.com'+$('#dadosurlzoho').val()+'#Form:Qualifica_o_do_Candadito?candidato='+candidato, '_blank');
+             }
+         }
+         
+         function alterarProprietario(candidato, proprietario) {
+             console.log("Url atual: " + $('#dadosurlzoho').val());
+         
+             if(proprietario.length > 0){
+                 window.open('https://creatorapp.zoho.com'+$('#dadosurlzoho').val()+'Propriet_rio/record-edit/Propriet_rio_Report/'+proprietario, '_blank');
+             }else{
+                 window.open('https://creatorapp.zoho.com'+$('#dadosurlzoho').val()+'#Form:Propriet_rio?Candidato1='+candidato, '_blank');
+             }
+         }
+         
+         function alterarDocseLic(candidatoID, docsLicenciamentoID){
+             if(docsLicenciamentoID.length > 0){
+                 window.open('https://creatorapp.zoho.com'+$('#dadosurlzoho').val()+'Docs_e_Licenciamento/record-edit/Docs_e_Licenciamento_Report/'+docsLicenciamentoID, '_blank');
+             } else{
+                 window.open('https://creatorapp.zoho.com'+$('#dadosurlzoho').val()+'#Form:Docs_e_Licenciamento?Candidato='+candidatoID, '_blank');
+             }
+         };
+         
+         function alterarCroquiLoc(valor){
+         
+             window.open('https://creatorapp.zoho.com'+$('#dadosurlzoho').val()+'Croqui_Localizacao/record-edit/Croqui_Localiza_o_Report/'+valor, '_blank');
+         };
+         
+         function alterarCroquiSit(valor){
+         
+             window.open('https://creatorapp.zoho.com'+$('#dadosurlzoho').val()+'Croqui_de_Situacao/record-edit/Croqui_Situa_o_Report/'+valor,'_blank');
+         };
+         
+         function alterarMapaLoc(valor){
+         
+             window.open('https://creatorapp.zoho.com'+$('#dadosurlzoho').val()+'Mapa_Localiza_o/record-edit/Mapa_Localiza_o_Report/'+valor, '_blank');
+         };
+         
+         function alterarObst(valor){
+         
+             window.open('https://creatorapp.zoho.com'+$('#dadosurlzoho').val()+'Obstru_es2/record-edit/Obstru_es1_Report/'+valor, '_blank');
+         };
+         
+         function alterarFotosInfra(valor){
+         
+             window.open('https://creatorapp.zoho.com'+$('#dadosurlzoho').val()+'Fotos_Infra/record-edit/Fotos_Infra_Report/'+valor, '_blank');
+         };
+         
+         function alterarFotosPano(valor){
+         
+             window.open('https://creatorapp.zoho.com'+$('#dadosurlzoho').val()+'Fotos_Panor_micas_TX/record-edit/Fotos_Panor_micas_TX_Report/'+valor, '_blank');
+         };
+         
+         function alterarFotosTx(valor){
+         
+             window.open('https://creatorapp.zoho.com'+$('#dadosurlzoho').val()+'Fotos_0_a_330_TX/record-edit/Fotos_0_a_330_TX_Report/'+valor, '_blank');
+         };
+         
+         function alterarInfra(candidatoId, infraId){
+             if(infraId.length > 0){
+                 window.open('https://creatorapp.zoho.com'+$('#dadosurlzoho').val()+'Infraestrutura/record-edit/Infraestrutura_Report/'+infraId, '_blank');
+             } else{
+                 window.open('https://creatorapp.zoho.com'+$('#dadosurlzoho').val()+'#Form:Infraestrutura?Candidato='+candidatoId, '_blank');
+             }
+         };
+         
+         function alterarTransRf(valor){
+         
+             window.open('https://creatorapp.zoho.com'+$('#dadosurlzoho').val()+'INFORMA_ES_DE_TRANSMISS_O_E_RF/record-edit/INFORMA_ES_DE_TRANSMISS_O_E_RF_Report/'+valor, '_blank');
+         };
+         
+         function alterarProtCuos(candidatoId, protocoloCuosID){
+             if(protocoloCuosID.length > 0){
+                 window.open('https://creatorapp.zoho.com'+$('#dadosurlzoho').val()+'Protocolo_ou_CUOS/record-edit/Protocolo_ou_CUOS_Report/'+protocoloCuosID, '_blank');
+             }else{
+                 window.open('https://creatorapp.zoho.com'+$('#dadosurlzoho').val()+'#Form:Protocolo_ou_CUOS?Candidato='+candidatoId, '_blank');
+             }
+         };
+         
+         function addRelatorioCritico(siteId, candidatoId) {
+         
+             console.log("IS clicked")
+             Swal.fire({
+                     title: 'Deseja incluir um relatório crítico?',
+                     // text: "content",
+                     icon: 'question',
+                     showCancelButton: true,
+                     confirmButtonColor: '#3085d6',
+                     cancelButtonColor: '#d33',
+                     confirmButtonText: 'Sim',
+                     cancelButtonText: 'Não',
+                     reverseButtons: true
+                 }).then((result) => {
+                     if (result.isConfirmed) {            
+                         window.open('https://creatorapp.zoho.com'+$('#dadosurlzoho').val()+'#Form:Relatorio_critico?Candidato='+candidatoId + '&Site=' + siteId, '_blank');
+                     }
+             })
+         };
+         
+         function escolhalatlong(des, local){
+             if(local == 1){
+                 if(des == 'UTM'){
+                     $('.utmsessaocriar').css("display", "block");
+                     $('.latlongsessaocriar').css("display", "none");
+                 }else if(des == 'Decimal'){
+                     $('.utmsessaocriar').css("display", "none");
+                     $('.latlongsessaocriar').css("display", "block");
+                 }else{
+                     $('.utmsessaocriar').css("display", "none");
+                     $('.latlongsessaocriar').css("display", "none");
+                 }
+             }else if(local == 3){
+                 if(des == 'UTM'){
+                     $('.utmsessaoeditar').css("display", "block");
+                     $('.latlongsessaoeditar').css("display", "none");
+                 }else if(des == 'Decimal'){
+                     $('.utmsessaoeditar').css("display", "none");
+                     $('.latlongsessaoeditar').css("display", "block");
+                 }else{
+                     $('.utmsessaoeditar').css("display", "none");
+                     $('.latlongsessaoeditar').css("display", "none");
+                 }
+             }else if(local == 2){
+                 if(des == 'UTM'){
+                     $('.utmsessaovisualizar').css("display", "block");
+                     $('.latlongsessaovisualizar').css("display", "none");
+                 }else if(des == 'Decimal'){
+                     $('.utmsessaovisualizar').css("display", "none");
+                     $('.latlongsessaovisualizar').css("display", "block");
+                 }else{
+                     $('.utmsessaovisualizar').css("display", "none");
+                     $('.latlongsessaovisualizar').css("display", "none");
+                 }
+             }
+         };
+         
+         function escolhalatlongCand(des, local){
+             console.log('des: ',des);
+             console.log('local: ',local);
+             if(local == 1){
+                 if(des == 'UTM'){
+                     $('.utmcand').css("display", "block");
+                     $('.latitudecand').css("display", "none");
+                 }else if(des == 'Decimal'){
+                     $('.latitudecand').css("display", "block");
+                     $('.utmcand').css("display", "none");
+                 }else{
+                     $('.latitudecand').css("display", "none");
+                     $('.utmcand').css("display", "none");
+                 }
+             }else if(local == 2){
+                 if(des == 'UTM'){
+                     $('.utmcand').css("display", "block");
+                     $('.latitudecand').css("display", "none");
+                 }else if(des == 'Decimal'){
+                     $('.utmcand').css("display", "none");
+                     $('.latitudecand').css("display", "block");
+                 }else{
+                     $('.utmcand').css("display", "none");
+                     $('.latitudecand').css("display", "none");
+                 }
+             }else if(local == 3){
+                 if(des == 'UTM'){
+                     $('.utmcand').css("display", "block");
+                     $('.latitudecand').css("display", "none");
+                 }else if(des == 'Decimal'){
+                     $('.utmcand').css("display", "none");
+                     $('.latitudecand').css("display", "block");
+                 }else{
+                     $('.utmcand').css("display", "none");
+                     $('.latitudecand').css("display", "none");
+                 }
+             }
+         };
+         
+         function habilitarAlturaSite(id, local){
+             valor = $('#'+id+' option:selected').html();
+             console.log("Valor::"+valor+"::");
+             if(local == '1'){
+                 if(valor == "RT"){
+                     $('.alturaprevistaadd').css("display", "block");
+                 }else{
+                     $('.alturaprevistaadd').css("display", "none");
+                 }
+             }else if(local == '2'){
+                 if(valor == "RT"){
+                     $('.alturaprevistaedt').css("display", "block");
+                 }else{
+                     $('.alturaprevistaedt').css("display", "none");
+                 }
+             }else if(local == '3'){
+                 if(valor == "RT"){
+                     $('.alturaprevistaview').css("display", "block");
+                 }else{
+                     $('.alturaprevistaview').css("display", "none");
+                 }
+             }else{
+                 $('.alturaprevistaview').css("display", "none");
+                 $('.alturaprevistaedt').css("display", "none");
+                 $('.alturaprevistaadd').css("display", "none");
+             }
+         };
+         
+         function habilitarAlturaCand(id, local){
+             onChanged(id)
+             valor = $('#'+id+' option:selected').html();
+             console.log("Valor::"+valor+"::");
+             if(local == '1'){
+                 if(valor == "RT"){
+                     $('.alturaedificioadd').css("display", "block");
+                 }else{
+                     $('.alturaedificioadd').css("display", "none");
+                 }
+             }else{
+                 $('.alturaedificioadd').css("display", "none");
+             }
+         };
+         
+         function corredorAcessoCand(valor, local){
+             if(local == '1'){
+                 if(valor == 'Sim'){
+                     $('.corredoracesso').css("display", "block");
+                 }else{
+                     $('.corredoracesso').css("display", "none");
+                 }
+             }else{
+                 $('.corredoracesso').css("display", "none");
+             }
+         };
+         
+         
+         
+         function calculoarea(){
+             var v_largura_area_normal = $('#form_candidato_largura_area_normal').val();
+             var v_profundidade_normal = $('#form_candidato_profundidade_normal').val();
+             var v_corredor = $('#form_candidato_corredor').val();
+             var v_profundidade = $('#form_candidato_profundidade').val();
+             var v_area_locada = $('#form_candidato_largura_area').val();
+         
+             if(v_largura_area_normal != null ){
+                 v_largura_area_normal = v_largura_area_normal.replace(/[^0-9]/g,'');
+                 if(isNaN(v_largura_area_normal)){
+                     v_largura_area_normal = 0;
+                 }
+             }else{
+                 v_largura_area_normal = 0;
+             }
+             if(v_profundidade_normal != null ){
+                 v_profundidade_normal = v_profundidade_normal.replace(/[^0-9]/g,'');
+                 if(isNaN(v_profundidade_normal)){
+                     v_profundidade_normal = 0;
+                 }
+             }else{
+                 v_profundidade_normal = 0;
+             }
+             if(v_corredor == "Sim"){
+                 if(v_profundidade != null ){
+                     v_profundidade = v_profundidade.replace(/[^0-9]/g,'');
+                     if(isNaN(v_profundidade)){
+                         v_profundidade = 0;
+                     }
+                 }else{
+                     v_profundidade = 0;
+                 }
+                 if(v_area_locada != null ){
+                     v_area_locada = v_area_locada.replace(/[^0-9]/g,'');
+                     if(isNaN(v_area_locada)){
+                         v_area_locada = 0;
+                     }
+                 }else{
+                     v_area_locada = 0;
+                 }
+             }else{
+                 v_profundidade = 0;
+                 v_area_locada = 0;
+             }
+             v_area_total = ((v_profundidade * v_area_locada) + (v_profundidade_normal * v_largura_area_normal));
+             $('#form_candidato_area_locada').val(v_area_total);
+         }
+         
+             function formatPontoCardinal(campo_id) {
+                 const field = document.getElementById(campo_id);
+                 if(field.contains(',')) {
+                     field.value = field.value.replace(',', '.')
+                 }
+             }
+         
+             
+      </script>
+      <script src="js/functions/getSite.js"></script>
+      <script src="js/functions/getusuario.js"></script>
+      <script src="js/functions/getAtividades.js"></script>
+      <script src="js/functions/validations.js"></script>
+      <script>
+         $('input[type=radio][name=anelBusca]').change(function() {
+             if (this.value == "Não") {
+                 continuarComCandidato()
+                 return
+             }
+             var field = document.querySelector("#form_candidato_candidatolocalizado");
+             field.disabled = true;
+         });
+         $('input[type=radio][name=usoProposto]').change(function() {
+             if (this.value == "Não") {
+                 continuarComCandidato()
+                 return
+             }
+             var field = document.querySelector("#form_candidato_proprietariointeressado");
+             field.disabled = true;
+         });
+         $('input[type=radio][name=legislacaoLocal]').change(function() {
+             if (this.value == "Não") {
+                 continuarComCandidato()
+                 return
+             }
+             var field = document.querySelector("#form_candidato_arealocadaatende");
+             field.disabled = true;
+         });
+         $('input[type=radio][name=documentacao]').change(function() {
+             if (this.value == "Não") {
+                 continuarComCandidato()
+                 return
+             }
+             var field = document.querySelector("#form_candidato_justifique_documentacaonecessaria");
+             field.disabled = true;
+         });
+         $('input[type=radio][name=acesso]').change(function() {
+             if (this.value == "Não") {
+                 continuarComCandidato()
+                 return
+             }
+             var field = document.querySelector("#form_candidato_justifique_acessodisponivel");
+             field.disabled = true;
+         });
+         $('input[type=radio][name=energia]').change(function() {
+             if (this.value == "Não") {
+                 continuarComCandidato()
+                 return
+             }
+             var field = document.querySelector("#form_candidato_justifique_energiadisponivel");
+             field.disabled = true;
+         });
+         $('input[type=radio][name=obstrucao]').change(function() {
+             if (this.value == "Sim") {
+                 continuarComCandidato()
+                 return
+             }   
+             var field = document.querySelector("#form_candidato_justifique_obstrucao");
+             field.disabled = true;
+         });
+         
+         function continuarComCandidato() {
+             Swal.fire({
+                 title: 'Deseja continuar com este Candidato?',
+                 text: "Se SIM, informar a justificativa no campo a seguir.",
+                 icon: 'question',
+                 showCancelButton: true,
+                 confirmButtonColor: '#3085d6',
+                 cancelButtonColor: '#d33',
+                 confirmButtonText: 'Sim',
+                 cancelButtonText: 'Não',
+                 reverseButtons: true
+             }).then((result) => {
+                 if (result.dismiss === Swal.DismissReason.cancel) {
+                     $('#modalAdicionarCandidato').modal('hide');
+                     $('#form_candidato').each (function(){
+                          this.reset();
+                     });
+                 }
+             })
+         }
+         
+         function exibirModalProprietarioResponsavel(modalID) {
+             const siglaCandidato = $('#form_candidato_sigla').val()
+             if(siglaCandidato == "") {
+                 Swal.fire({
+                     icon: 'error',
+                     title: 'Oops...',
+                     text: 'Necessário informar a Sigla do Candidato primeiro!',
+                 })
+                 return
+             }
+             $('#' + modalID).modal('show')
+             $('#modalAdicionarCandidato').css('z-index', 1051)
+         }
+      </script>
+   </body>
+</html>

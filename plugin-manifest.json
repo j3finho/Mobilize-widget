@@ -1,0 +1,10 @@
+{
+  "service": "CREATOR",
+  "cspDomains": {
+    "connect-src": [
+      "https://viacep.com.br",
+      "https://app.zohocreator.com",
+      "https://creator.zohopublic.com"
+    ]
+  }
+}
