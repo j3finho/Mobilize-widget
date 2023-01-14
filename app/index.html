@@ -2560,7 +2560,6 @@
                   <h4 class="modal-title add-task-title">Novo contato</h4>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="resetForm('form_contato')"></button>
                </div>
-               <hr>
                <div class="modal-body" style="padding: 0rem">
                   <form id="form_contato" role="form">
                      <div class="row">
@@ -2570,12 +2569,21 @@
                               placeholder="Informe o nome do contato" class="form-control" required>
                         </div>
                         <div class="col-lg-6">
+                           <label class="col-form-label">Qualificação<span class="text-danger">*</span></label>
+                           <select class="form-select validate" id="form_contato_qualificacao" required="">
+                              <option value="">Selecione...</option>
+                              <option value="">Administrador</option>
+                              <option value="">Representante</option>
+                              <option value="">Filho</option>                              
+                           </select>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
                            <label class="col-form-label">E-mail<span class="text-danger">*</span></label>
                            <input id="form_contato_email" name="taskbudget" type="text" 
                               placeholder="Informe o E-mail" class="form-control" required>
                         </div>
-                     </div>
-                     <div class="row">
                         <div class="col-lg-6">
                            <label class="col-form-label">Telefone<span class="text-danger">*</span></label>
                            <input id="form_contato_telefone" name="taskbudget" type="text" onkeydown="phoneMaskBrazil()"
@@ -3078,6 +3086,7 @@
                   return
                }
                $('#modalAdicionarContato').modal('show')
+               $('#modalAdicionarCandidato').css('z-index', 1051)
          }
 
          function adicionarProprietario() {
@@ -3195,12 +3204,21 @@
                const municipio = document.getElementById("form_contato_municipio").value
                const uf = document.getElementById("form_contato_uf").value
 
+
+               const qualificacoes = document.getElementById("form_contato_qualificacao")
+               const qualificacaoSelecionada = qualificacoes.options[qualificacoes.selectedIndex].text
+
                var emailValid = validateEmail(email)
 
                if(nome == "") {
                      mostrarErro("form_contato_nome", "O Nome não pode ficar em branco.")
                      return
-               } else if(!emailValid) {
+               }
+               else if(qualificacaoSelecionada == "Selecione...") {
+                     mostrarErro("form_contato_qualificacao", "Qualificação do contato inválida.")
+                     return
+               }
+               else if(!emailValid) {
                      mostrarErro("form_contato_email", "E-mail inválido.")
                      return
                } else if(telefone.length < 10) {
@@ -3227,7 +3245,8 @@
                                  "state_province" : municipio,
                                  "postal_code" : uf,
                                  "country" : cep
-                           }
+                           },
+                           "Qualificacao": qualificacaoSelecionada
                         }
                      }
                }
