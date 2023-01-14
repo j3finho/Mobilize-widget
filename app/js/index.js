@@ -17,7 +17,7 @@ import {
 } from "./functions/forms/getSelects.js";
 import addSite from "./functions/forms/addSites.js";
 import adicionaZero from "./functions/ultilitys.js";
-import addCandidato, { addContato, adicionarProprietario } from "./functions/forms/addCandidatos.js";
+import createCandidato from "./functions/forms/addCandidatos.js";
 
 function runSelects(){
     getSelectResponsavel();
@@ -170,8 +170,10 @@ btnAddAtividade.addEventListener('click', () => addTask());
 const btnAddSite = document.getElementById('addSite');
 btnAddSite.addEventListener('click', () => addSite());
 
+/*
 const btnAddCandidato = document.getElementById('addCandidato');
-btnAddCandidato.addEventListener('click', () => addCandidato());
+btnAddCandidato.addEventListener('click', () => createCandidato());
+*/
 
 const campoAddSiteEstado = document.getElementById('form_site_uf');
 campoAddSiteEstado.addEventListener('change', () => escolhaEstado(1));
