@@ -236,7 +236,7 @@ function getApizohoSites() {
           .appendTo("#datatable-sites_wrapper .col-md-6:eq(0)");
 
         $("div.toolbarsite").html(
-          '<button class="btn btn-primary  p-2" data-bs-toggle="modal" data-bs-target=".modalAdicionarSite" onclick="escolhalatlong(``, 1),habilitarAlturaSite(`form_cliente_tipoSite`,1)" >Criar Sites</button>&nbsp;&nbsp;&nbsp;<button class="btn btn-primary  p-2" data-bs-toggle="modal" data-bs-target=".modalAdicionarCandidato" onclick="escolhalatlongCand(``, 1),corredorAcessoCand(``, 1),habilitarAlturaCand(`form_candidato_tipo_site`,1)">Criar Candidato</button>'
+          '<button class="btn btn-primary  p-2" data-bs-toggle="modal" data-bs-target=".modalAdicionarSite" onclick="escolhalatlong(``, 1),habilitarAlturaSite(`form_cliente_tipoSite`,1)" >Criar Sites</button>&nbsp;&nbsp;&nbsp;<button class="btn btn-primary p-2" data-bs-toggle="modal" data-bs-target=".modalAdicionarCandidato" onclick="escolhalatlongCand(``, 1),corredorAcessoCand(``, 1),habilitarAlturaCand(`form_candidato_tipo_site`,1)">Criar Candidato</button>'
         );
       });
     });

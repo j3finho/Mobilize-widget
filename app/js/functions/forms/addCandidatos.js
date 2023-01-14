@@ -397,6 +397,7 @@ function addCandidato() {
         });
 }
 
+/*
 $(document).ready(function () {
     $("#form_candidato_cep").focusout(function () {
         var valornovo = $(this).val();
@@ -415,42 +416,10 @@ $(document).ready(function () {
             });
         }
     });
-    $("#form_proprietario_cep").focusout(function () {
-        var valornovo = $(this).val();
-        var valorantigo = $('#form_proprietario_cep_antigo').val();
-        if (valornovo != valorantigo && valornovo.length > 7) {
-            $.ajax({
-                url: 'https://viacep.com.br/ws/' + $(this).val() + '/json/',
-                dataType: 'json',
-                success: function (resposta) {
-                    $('#form_proprietario_cep_antigo').val(valornovo);
-                    $("#form_proprietario_endereco").val(resposta.logradouro);
-                    $("#form_proprietario_bairro").val(resposta.bairro);
-                    $("#form_proprietario_municipio").val(resposta.localidade);
-                    $("#form_proprietario_uf").val(resposta.uf);
-                }
-            });
-        }
-    });
-    $("#form_contato_cep").focusout(function () {
-        var valornovo = $(this).val();
-        var valorantigo = $('#form_contato_cep_antigo').val();
-        if (valornovo != valorantigo && valornovo.length > 7) {
-            $.ajax({
-                url: 'https://viacep.com.br/ws/' + $(this).val() + '/json/',
-                dataType: 'json',
-                success: function (resposta) {
-                    $('#form_contato_cep_antigo').val(valornovo);
-                    $("#form_contato_endereco").val(resposta.logradouro);
-                    $("#form_contato_bairro").val(resposta.bairro);
-                    $("#form_contato_municipio").val(resposta.localidade);
-                    $("#form_contato_uf").val(resposta.uf);
-                }
-            });
-        }
-    });
 });
+*/
 
+/*
 export function adicionarProprietario() {
     console.log("Tentando adicionar o proprietário")
     ZOHO.CREATOR.init().then(function (data) {
@@ -486,28 +455,12 @@ export function adicionarProprietario() {
             mostrarErro("form_responsavel_email", "E-mail inválido.")
             return
         } 
-        else if(telefone.length < 11) {
+        else if(telefone.length < 10) {
             mostrarErro("form_responsavel_telefone", "Telefone inválido.")
             return
         }
         else if(cep.length == 0) {
             mostrarErro("form_proprietario_cep", "CEP inválido.")
-            return
-        }
-        else if(endereco.length == 0) {
-            mostrarErro("form_proprietario_endereco", "Endereco inválido.")
-            return
-        }
-        else if(numero.length == 0) {
-            mostrarErro("form_proprietario_numero", "Numero inválido.")
-            return
-        }
-        else if(complemento.length == 0) {
-            mostrarErro("form_proprietario_complemento", "Complemento inválido.")
-            return
-        }
-        else if(bairro.length == 0) {
-            mostrarErro("form_proprietario_bairro", "Bairro inválido.")
             return
         }
 
@@ -563,7 +516,9 @@ export function adicionarProprietario() {
         })
     });
 }
+*/
 
+/*
 export function addContato() {
     ZOHO.CREATOR.init()
     .then(function (data) {
@@ -647,5 +602,6 @@ export function addContato() {
         })
     })
 }
+*/
 
 export default addCandidato;

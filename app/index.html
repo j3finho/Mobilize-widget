@@ -629,17 +629,17 @@
                      <div class="row">
                         <div class="col-lg-6">
                            <label class="col-form-label">Proprietario<span class="text-danger">*</span></label>
-                           <select class="form-select validate" id="form_candidato_proprietario"  required>
+                           <select class="form-select validate" id="form_candidato_proprietario" onchange="getContacts()"  required>
                               <option value="" selected>Selecione..</option>
                            </select>
-                           <button type="button" class="btn btn-primary"  onclick=" exibirModalProprietarioResponsavel('modalAdicionarProprietario')" style="margin-top: 16px; float: right;">Novo proprietário</button>
+                           <button type="button" class="btn btn-primary" id="btnNovoProprietario" style="margin-top: 16px; float: right;">Novo proprietário</button>
                         </div>
                         <div class="col-lg-6">
                            <label class="col-form-label">Contato<span class="text-danger">*</span></label>
-                           <select class="form-select validate" id="form_candidato_contato"  required>
+                           <select class="form-select validate" id="form_candidato_contato"  required disabled>
                               <option value="" selected>Selecione..</option>
                            </select>
-                           <button type="button" class="btn btn-primary"  onclick="exibirModalProprietarioResponsavel('modalAdicionarContato')" style="margin-top: 16px; float: right;">Novo contato</button>
+                           <button type="button" id="btnAddNewContact" class="btn btn-primary" style="margin-top: 16px; float: right;">Novo contato</button>
                         </div>
                      </div>
                      <div class="row pt-4">
@@ -913,7 +913,7 @@
                            </div>
                            <div class="col-lg-6">
                               <label class="col-form-label">Justifique:<span class="text-danger"></span></label>
-                              <textarea id="form_candidato_candidatolocalizado" style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
+                              <textarea id="form_candidato_candidatolocalizado" disabled style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
                            </div>
                         </div>
                         <div class="row">
@@ -936,7 +936,7 @@
                            </div>
                            <div class="col-lg-6">
                               <label class="col-form-label">Justifique:<span class="text-danger"></span></label>
-                              <textarea id="form_candidato_proprietariointeressado" style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
+                              <textarea id="form_candidato_proprietariointeressado" disabled style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
                            </div>
                         </div>
                         <div class="row">
@@ -959,7 +959,7 @@
                            </div>
                            <div class="col-lg-6">
                               <label class="col-form-label">Justifique:<span class="text-danger"></span></label>
-                              <textarea id="form_candidato_arealocadaatende" style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
+                              <textarea id="form_candidato_arealocadaatende" disabled style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
                            </div>
                         </div>
                         <div class="row">
@@ -981,7 +981,7 @@
                            </div>
                            <div class="col-lg-6">
                               <label class="col-form-label">Justifique:<span class="text-danger"></span></label>
-                              <textarea id="form_candidato_justifique_documentacaonecessaria" style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
+                              <textarea id="form_candidato_justifique_documentacaonecessaria" disabled style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
                            </div>
                         </div>
                         <div class="row">
@@ -1004,7 +1004,7 @@
                            </div>
                            <div class="col-lg-6">
                               <label class="col-form-label">Justifique:<span class="text-danger"></span></label>
-                              <textarea id="form_candidato_justifique_acessodisponivel" style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
+                              <textarea id="form_candidato_justifique_acessodisponivel" disabled style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
                            </div>
                         </div>
                         <div class="row">
@@ -1026,7 +1026,7 @@
                            </div>
                            <div class="col-lg-6">
                               <label class="col-form-label">Justifique:<span class="text-danger"></span></label>
-                              <textarea id="form_candidato_justifique_energiadisponivel" style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
+                              <textarea id="form_candidato_justifique_energiadisponivel" disabled style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
                            </div>
                         </div>
                         <div class="row">
@@ -1049,7 +1049,7 @@
                            </div>
                            <div class="col-lg-6">
                               <label class="col-form-label">Justifique:<span class="text-danger"></span></label>
-                              <textarea id="form_candidato_justifique_obstrucao" style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
+                              <textarea id="form_candidato_justifique_obstrucao" disabled style="width: 100%; height: 150px; resize: none;" name="taskbudget"></textarea>
                            </div>
                         </div>
                      </div>
@@ -1173,14 +1173,14 @@
                            <select class="form-select validate" id="form_candidato_proprietario_view"  required>
                               <option value="" selected>Selecione..</option>
                            </select>
-                           <button type="button" class="btn btn-primary" onclick=" exibirModalProprietarioResponsavel('modalAdicionarProprietario')" style="margin-top: 16px; float: right;">Novo proprietário</button>
+                           <button type="button" class="btn btn-primary"  style="margin-top: 16px; float: right;">Novo proprietário</button>
                         </div>
                         <div class="col-lg-6">
                            <label class="col-form-label">Responsável<span class="text-danger">*</span></label>
                            <select class="form-select validate" id="form_candidato_responsavel"  required>
                               <option value="" selected>Selecione..</option>
                            </select>
-                           <button type="button" class="btn btn-primary" onclick="exibirModalProprietarioResponsavel('modalAdicionarContato')" style="margin-top: 16px; float: right;">Novo contato</button>
+                           <button type="button" class="btn btn-primary" style="margin-top: 16px; float: right;">Novo contato</button>
                         </div>
                      </div>
                      <div class="row pt-4">
@@ -2451,7 +2451,7 @@
       </div>
       <!-- /.modal -->
       <!-- MODAL ADICIOANR PROPRIETARIO -->
-      <div id="modalAdicionarProprietario" data-bs-keyboard="false" data-bs-backdrop="static" class="modal fade modalAdicionarCandidato" tabindex="-1" role="dialog"
+      <div id="modalAdicionarProprietario" data-bs-keyboard="false" data-bs-backdrop="static" class="modal fade modalAdicionarProprietario" tabindex="-1" role="dialog"
          aria-labelledby="myLargeModalLabel" aria-hidden="true">
          <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -2541,7 +2541,7 @@
                         </div>
                      </div>
                      <div style="margin-top: 16px; display: flex; justify-content: center">
-                        <button type="button" class="btn btn-primary" id="btnAddProprietario">Criar proprietário</button>
+                        <button type="button" class="btn btn-primary" id="btnAddProprietario" onclick="adicionarProprietario()">Criar proprietário</button>
                      </div>
                   </form>
                </div>
@@ -2633,7 +2633,7 @@
                         </div>
                      </div>
                      <div style="margin-top: 16px; display: flex; justify-content: center">
-                        <button type="button" class="btn btn-primary" id="btnAddContato">Adicionar contato</button>
+                        <button type="button" class="btn btn-primary" id="btnAddContato" onclick="addContato()">Adicionar contato</button>
                      </div>
                   </form>
                </div>
@@ -2965,10 +2965,7 @@
          
              
       </script>
-      <script src="js/functions/getSite.js"></script>
-      <script src="js/functions/getusuario.js"></script>
-      <script src="js/functions/getAtividades.js"></script>
-      <script src="js/functions/validations.js"></script>
+      
       <script>
          $('input[type=radio][name=anelBusca]').change(function() {
              if (this.value == "Não") {
@@ -3047,24 +3044,231 @@
                  }
              })
          }
-         
-         function exibirModalProprietarioResponsavel(modalID) {
-             const siglaCandidato = $('#form_candidato_sigla').val()
-             if(siglaCandidato == "") {
-                 Swal.fire({
-                     icon: 'error',
-                     title: 'Oops...',
-                     text: 'Necessário informar a Sigla do Candidato primeiro!',
-                 })
-                 return
-             }
-             $('#' + modalID).modal('show')
-             $('#modalAdicionarCandidato').css('z-index', 1051)
-         }
 
          function clearDataTable(table) {
             $('#' + table).DataTable().clear().draw().destroy();;
          }
+
+             $('#btnNovoProprietario').click(function() {
+               const siglaCandidato = $('#form_candidato_sigla').val()
+               if(siglaCandidato == "") {
+                  Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Necessário informar a Sigla do Candidato primeiro!',
+                  })
+                  return
+               }
+               $('#modalAdicionarProprietario').modal('show')
+               $('#modalAdicionarCandidato').css('z-index', 1051)
+            })
+
+
+            $('#btnAddNewContact').click(function() {
+               const todosProprietarios = document.getElementById("form_candidato_proprietario");
+               const proprietarioSelecionado = todosProprietarios.options[todosProprietarios.selectedIndex].value;
+
+               if(proprietarioSelecionado == '') {
+                  Swal.fire({
+                        icon: 'warning',
+                        title: 'Oops...',
+                        text: 'Necessário selecionar o proprietário antes.'
+                     })
+                  return
+               }
+               ('#modalAdicionarContato').modal('show')
+            })
+
       </script>
+      <script>
+         function adicionarProprietario() {
+            console.log("Tentando adicionar o proprietário")
+            ZOHO.CREATOR.init().then(function (data) {
+               const siglaCandidato = document.getElementById("form_candidato_sigla").value;
+               const nome = document.getElementById("form_proprietario_nome").value
+               const cpfCNPJ = document.getElementById("form_proprietario_cpf_cnpj").value
+               const razaoSocial = document.getElementById("form_proprietario_razao_social").value
+               const email = document.getElementById("form_proprietario_email").value
+               const telefone = document.getElementById("form_proprietario_telefone").value
+               const cep = document.getElementById("form_proprietario_cep").value
+               const endereco = document.getElementById("form_proprietario_endereco").value
+               const numero = document.getElementById("form_proprietario_numero").value
+               const complemento = document.getElementById("form_proprietario_complemento").value
+               const bairro = document.getElementById("form_proprietario_bairro").value
+               const mucinicipio = document.getElementById("form_proprietario_municipio").value
+               const uf = document.getElementById("form_proprietario_uf").value
+            
+               const emailValid = validateEmail(email)
+
+               if(nome == "") {
+                     mostrarErro("form_responsavel_nome", "O Nome não pode ficar em branco.")
+                     return
+               } 
+               else if(cpfCNPJ.length != 18 && cpfCNPJ.length != 14) {
+                     mostrarErro("form_proprietario_cpf_cnpj", "CPF/CNPJ inválido.")
+                     return
+               }
+               else if(cpfCNPJ.length == 18 && razaoSocial == '') {
+                     mostrarErro("form_proprietario_razao_social", "Razao social inválida.")
+                     return
+               }
+               else if(!emailValid) {
+                     mostrarErro("form_responsavel_email", "E-mail inválido.")
+                     return
+               } 
+               else if(telefone.length < 10) {
+                     mostrarErro("form_responsavel_telefone", "Telefone inválido.")
+                     return
+               }
+               else if(cep.length == 0) {
+                     mostrarErro("form_proprietario_cep", "CEP inválido.")
+                     return
+               }
+
+               var configProprietario = {
+                     appName: "mobilize",
+                     formName: "Propriet_rio",
+                     data: {
+                        "data": {
+                           "Nome": {
+                                 "first_name1": nome
+                           }, 
+                           "CPF_CNPJ": cpfCNPJ,
+                           "Razao_Social": razaoSocial,
+                           "CEP": cep,
+                           "Endereco": endereco,
+                           "Numero": numero,
+                           "Bairro": bairro,
+                           "Complemento": complemento,
+                           "UF": uf,
+                           "Municipio": mucinicipio,
+                           "Email": email, 
+                           "Phone_Number": telefone,
+                           "Sigla_do_Candidato": siglaCandidato
+                        }
+                     }
+               }
+
+               ZOHO.CREATOR.API.addRecord(configProprietario).then((response) => {
+                     if(response.code == 3001) {
+                        $.each(responseCandidato.error, function(key,val) {             
+                           v_erro = v_erro + val + ". ";
+                        });
+                        swal({
+                           title: "Erro ao cadastrar proprietario. Tente mais tarde! ("+v_erro+")",
+                           type: "error",
+                           showConfirmButton: true
+                        });
+                        return
+                     }
+                     var proprietarios = document.getElementById("form_candidato_proprietario")
+                     var option = document.createElement("option")
+                     option.value = response.data.ID
+                     option.text = nome
+                     proprietarios.add(option)
+
+                     swal({
+                        title: "Proprietario adicionado com sucesso!",
+                        type: "success",
+                        showConfirmButton: true
+                     });
+                     $("#modalAdicionarProprietario").modal('hide')
+                     $("#modalAdicionarCandidato").css('z-index', '');
+               })
+            });
+         }
+
+         function addContato() {
+            ZOHO.CREATOR.init()
+            .then(function (data) {
+               const proprietarios = document.getElementById('form_candidato_proprietario')
+               const proprietarioSelecionado = proprietarios.options[proprietarios.selectedIndex].value;
+
+               const nome = document.getElementById("form_contato_nome").value
+               const email = document.getElementById("form_contato_email").value
+               const telefone = document.getElementById("form_contato_telefone").value.replace(/\D/g, '')
+
+               const cep = document.getElementById("form_contato_cep").value
+               const endereco = document.getElementById("form_contato_endereco").value
+               const numero = document.getElementById("form_contato_numero").value
+               const complemento = document.getElementById("form_contato_complemento").value
+               const bairro = document.getElementById("form_contato_bairro").value
+               const municipio = document.getElementById("form_contato_municipio").value
+               const uf = document.getElementById("form_contato_uf").value
+
+               var emailValid = validateEmail(email)
+
+               if(nome == "") {
+                     mostrarErro("form_responsavel_nome", "O Nome não pode ficar em branco.")
+                     return
+               } else if(!emailValid) {
+                     mostrarErro("form_responsavel_email", "E-mail inválido.")
+                     return
+               } else if(telefone.length < 10) {
+                     mostrarErro("form_responsavel_telefone", "Telefone inválido.")
+                     return
+               } else if(cep.length == 0) {
+                     mostrarErro("form_contato_cep", "CEP inválido.")
+                     return
+               }
+            
+               var configContato = {
+                     appName: "mobilize",
+                     formName: "Contato_Cliente",
+                     data: {
+                        "data": {
+                           "Proprietario": proprietarioSelecionado,
+                           "Nome": nome, 
+                           "Telefone": telefone,
+                           "E_mail": email,
+                           "Address": {
+                                 "address_line_1": endereco + " " + numero,
+                                 "address_line_2": complemento,
+                                 "district_city" : bairro,
+                                 "state_province" : municipio,
+                                 "postal_code" : uf,
+                                 "country" : cep
+                           }
+                        }
+                     }
+               }
+            
+               ZOHO.CREATOR.API.addRecord(configContato).then((response) => {
+                     if(response.code == 3001) {
+                        $.each(response.error, function(key,val) {             
+                           v_erro = v_erro + val + ". ";
+                        });
+                        swal({
+                           title: "Erro ao cadastrar o contato. Tente mais tarde! ("+v_erro+")",
+                           type: "error",
+                           showConfirmButton: true
+                        });
+                        return
+                     }
+                     var contatos = document.getElementById("form_candidato_contato")
+                     var option = document.createElement("option")
+                     option.value = response.data.ID
+                     option.text = nome
+                     contatos.add(option)
+            
+                     swal({
+                        title: "Contato adicionado com sucesso!",
+                        type: "success",
+                        showConfirmButton: true
+                     });
+                     $("#modalAdicionarContato").modal('hide')
+                     $("#modalAdicionarCandidato").css('z-index', '');
+               })
+            })
+         }
+
+      </script>
+      <script src="js/functions/getSite.js"></script>
+      <script src="js/functions/getusuario.js"></script>
+      <script src="js/functions/getAtividades.js"></script>
+      <script src="js/functions/validations.js"></script>
+      <script src="js/functions/buscaCep.js"></script>
+      <script src="js/functions/getProprietarios.js"></script>
+      <script src="js/functions/getContatos.js"></script>
    </body>
 </html>

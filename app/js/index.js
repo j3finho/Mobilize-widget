@@ -179,12 +179,15 @@ campoAddSiteEstado.addEventListener('change', () => escolhaEstado(1));
 const campoEdtSiteEstado = document.getElementById('form_editar_site_uf');
 campoEdtSiteEstado.addEventListener('change', () => escolhaEstado(2));
 
-
+/*
 const btnAddProprietario = document.getElementById('btnAddProprietario')
 btnAddProprietario.addEventListener('click', () => adicionarProprietario())
+*/
 
+/*
 const btnAddContato = document.getElementById('btnAddContato');
 btnAddContato.addEventListener('click', () => addContato());
+*/
 
 // Colocando a data de hoje
 let dataDeHoje = new Date()
