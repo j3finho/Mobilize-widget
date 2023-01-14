@@ -433,6 +433,23 @@ $(document).ready(function () {
             });
         }
     });
+    $("#form_contato_cep").focusout(function () {
+        var valornovo = $(this).val();
+        var valorantigo = $('#form_contato_cep_antigo').val();
+        if (valornovo != valorantigo && valornovo.length > 7) {
+            $.ajax({
+                url: 'https://viacep.com.br/ws/' + $(this).val() + '/json/',
+                dataType: 'json',
+                success: function (resposta) {
+                    $('#form_contato_cep_antigo').val(valornovo);
+                    $("#form_contato_endereco").val(resposta.logradouro);
+                    $("#form_contato_bairro").val(resposta.bairro);
+                    $("#form_contato_municipio").val(resposta.localidade);
+                    $("#form_contato_uf").val(resposta.uf);
+                }
+            });
+        }
+    });
 });
 
 export function adicionarProprietario() {
@@ -548,16 +565,24 @@ export function adicionarProprietario() {
     });
 }
 
-export function addResponsavel() {
+export function addContato() {
     ZOHO.CREATOR.init()
     .then(function (data) {
-        const siglaCandidato = document.getElementById("form_candidato_sigla").value;
+        const proprietarios = document.getElementById('form_candidato_proprietario')
+        const proprietarioSelecionado = proprietarios.options[proprietarios.selectedIndex].value;
 
+        const nome = document.getElementById("form_contato_nome").value
+        const email = document.getElementById("form_contato_email").value
+        const telefone = document.getElementById("form_contato_telefone").value.replace(/\D/g, '')
 
-        const nome = document.getElementById("form_responsavel_nome").value
-        const email = document.getElementById("form_responsavel_email").value
-        const telefone = document.getElementById("form_responsavel_telefone").value.replace(/\D/g, '')
-        
+        const cep = document.getElementById("form_contato_cep").value
+        const endereco = document.getElementById("form_contato_endereco").value
+        const numero = document.getElementById("form_contato_numero").value
+        const complemento = document.getElementById("form_contato_complemento").value
+        const bairro = document.getElementById("form_contato_bairro").value
+        const municipio = document.getElementById("form_contato_municipio").value
+        const uf = document.getElementById("form_contato_uf").value
+
         var emailValid = validateEmail(email)
 
         if(nome == "") {
@@ -566,48 +591,59 @@ export function addResponsavel() {
         } else if(!emailValid) {
             mostrarErro("form_responsavel_email", "E-mail inválido.")
             return
-        } else if(telefone.length < 11) {
+        } else if(telefone.length < 10) {
             mostrarErro("form_responsavel_telefone", "Telefone inválido.")
+            return
+        } else if(cep.length == 0) {
+            mostrarErro("form_contato_cep", "CEP inválido.")
             return
         }
     
-        var configResponsavel = {
+        var configContato = {
             appName: "mobilize",
-            formName: "Responsavel_do_Candidato",
+            formName: "Contato_Cliente",
             data: {
                 "data": {
+                    "Proprietario": proprietarioSelecionado,
                     "Nome": nome, 
                     "Telefone": telefone,
-                    "Email": email, 
-                    "Sigla_do_Candidato": siglaCandidato
+                    "E_mail": email,
+                    "Address": {
+                        "address_line_1": endereco,
+                        "address_line_2": numero,
+                        "district_city" : complemento,
+                        "state_province" : municipio,
+                        "postal_code" : uf,
+                        "country" : cep
+                    }
                 }
             }
         }
     
-        ZOHO.CREATOR.API.addRecord(configResponsavel).then((response) => {
+        ZOHO.CREATOR.API.addRecord(configContato).then((response) => {
             if(response.code == 3001) {
-                $.each(responseCandidato.error, function(key,val) {             
+                $.each(response.error, function(key,val) {             
                     v_erro = v_erro + val + ". ";
                 });
                 swal({
-                    title: "Erro ao cadastrar responsavel. Tente mais tarde! ("+v_erro+")",
+                    title: "Erro ao cadastrar o contato. Tente mais tarde! ("+v_erro+")",
                     type: "error",
                     showConfirmButton: true
                 });
                 return
             }
-            var responsaveis = document.getElementById("form_candidato_responsavel")
+            var contatos = document.getElementById("form_candidato_contato")
             var option = document.createElement("option")
             option.value = response.data.ID
             option.text = nome
-            responsaveis.add(option)
+            contatos.add(option)
     
             swal({
-                title: "Responsavel adicionado com sucesso!",
+                title: "Contato adicionado com sucesso!",
                 type: "success",
                 showConfirmButton: true
             });
-            $("#modalAdicionarResponsavel").modal('hide')
+            $("#modalAdicionarContato").modal('hide')
             $("#modalAdicionarCandidato").css('z-index', '');
         })
     })

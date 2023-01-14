@@ -631,14 +631,14 @@
                            <select class="form-select validate" id="form_candidato_proprietario"  required>
                               <option value="" selected>Selecione..</option>
                            </select>
-                           <button type="button" class="btn btn-primary" id="novo_proprietario" onclick=" exibirModalProprietarioResponsavel('modalAdicionarProprietario')" style="margin-top: 16px; float: right;">Novo proprietário</button>
+                           <button type="button" class="btn btn-primary"  onclick=" exibirModalProprietarioResponsavel('modalAdicionarProprietario')" style="margin-top: 16px; float: right;">Novo proprietário</button>
                         </div>
                         <div class="col-lg-6">
-                           <label class="col-form-label">Responsável<span class="text-danger">*</span></label>
-                           <select class="form-select validate" id="form_candidato_responsavel"  required>
+                           <label class="col-form-label">Contato<span class="text-danger">*</span></label>
+                           <select class="form-select validate" id="form_candidato_contato"  required>
                               <option value="" selected>Selecione..</option>
                            </select>
-                           <button type="button" class="btn btn-primary" id="novo_responsavel" onclick="exibirModalProprietarioResponsavel('modalAdicionarContato')" style="margin-top: 16px; float: right;">Novo responsável</button>
+                           <button type="button" class="btn btn-primary"  onclick="exibirModalProprietarioResponsavel('modalAdicionarContato')" style="margin-top: 16px; float: right;">Novo contato</button>
                         </div>
                      </div>
                      <div class="row pt-4">
@@ -1165,14 +1165,14 @@
                            <select class="form-select validate" id="form_candidato_proprietario_view"  required>
                               <option value="" selected>Selecione..</option>
                            </select>
-                           <button type="button" class="btn btn-primary" id="novo_proprietario_view" onclick=" exibirModalProprietarioResponsavel('modalAdicionarProprietario')" style="margin-top: 16px; float: right;">Novo proprietário</button>
+                           <button type="button" class="btn btn-primary" onclick=" exibirModalProprietarioResponsavel('modalAdicionarProprietario')" style="margin-top: 16px; float: right;">Novo proprietário</button>
                         </div>
                         <div class="col-lg-6">
                            <label class="col-form-label">Responsável<span class="text-danger">*</span></label>
                            <select class="form-select validate" id="form_candidato_responsavel"  required>
                               <option value="" selected>Selecione..</option>
                            </select>
-                           <button type="button" class="btn btn-primary" id="novo_responsavel_view" onclick="exibirModalProprietarioResponsavel('modalAdicionarContato')" style="margin-top: 16px; float: right;">Novo responsável</button>
+                           <button type="button" class="btn btn-primary" onclick="exibirModalProprietarioResponsavel('modalAdicionarContato')" style="margin-top: 16px; float: right;">Novo contato</button>
                         </div>
                      </div>
                      <div class="row pt-4">
@@ -2542,36 +2542,85 @@
       <div id="modalAdicionarContato" data-bs-keyboard="false" data-bs-backdrop="static" class="modal fade modalAdicionarContato" tabindex="-1" role="dialog"
          aria-labelledby="myLargeModalLabel" aria-hidden="true">
          <div class="modal-dialog modal-lg"  style="width: max-content; ">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title add-task-title">Novo contato</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="resetForm('form_responsavel')"></button>
+            <div class="modal-content" style="padding: 1rem">
+               <div class="modal-header" style="padding: 0rem">
+                  <h4 class="modal-title add-task-title">Novo contato</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="resetForm('form_contato')"></button>
                </div>
-               <div class="modal-body">
-                  <form id="form_responsavel" role="form">
+               <hr>
+               <div class="modal-body" style="padding: 0rem">
+                  <form id="form_contato" role="form">
                      <div class="row">
-                        <div class="col-lg">
+                        <div class="col-lg-6">
                            <label class="col-form-label">Nome<span class="text-danger">*</span></label>
-                           <input id="form_responsavel_nome" name="taskbudget" type="text"
-                              placeholder="Informe o nome do responsável" class="form-control" required>
+                           <input id="form_contato_nome" name="taskbudget" type="text"
+                              placeholder="Informe o nome do contato" class="form-control" required>
                         </div>
-                     </div>
-                     <div class="row">
-                        <div class="col-lg">
+                        <div class="col-lg-6">
                            <label class="col-form-label">E-mail<span class="text-danger">*</span></label>
-                           <input id="form_responsavel_email" name="taskbudget" type="text" 
+                           <input id="form_contato_email" name="taskbudget" type="text" 
                               placeholder="Informe o E-mail" class="form-control" required>
                         </div>
                      </div>
                      <div class="row">
-                        <div class="col-lg">
+                        <div class="col-lg-6">
                            <label class="col-form-label">Telefone<span class="text-danger">*</span></label>
-                           <input id="form_responsavel_telefone" name="taskbudget" type="text" onkeydown="phoneMaskBrazil()"
+                           <input id="form_contato_telefone" name="taskbudget" type="text" onkeydown="phoneMaskBrazil()"
                               maxlength="15" placeholder="Informe o Telefone" class="form-control" required>
                         </div>
                      </div>
+                     <div class="row pt-4">
+                        <div class="col-lg-12">
+                           <h6> Endereço:</h6>
+                           <hr>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-4">
+                           <label class="col-form-label">CEP<span class="text-danger">*</span></label>
+                           <input id="form_contato_cep" name="taskbudget" type="text"
+                              placeholder="Informe o CEP" class="form-control"  maxlength="8">
+                           <a href="https://buscacepinter.correios.com.br/app/endereco/index.php"
+                              target="_blank"><small id="emailHelp" class="form-text text-muted">Não localizou o CEP. Clique aqui!</small></a>
+                           <input id="form_proprietario_cep_antigo"  name="taskbudget" type="hidden"
+                              class="form-control">
+                        </div>
+                        <div class="col-lg-4">
+                           <label class="col-form-label">Endereço</label>
+                           <input id="form_contato_endereco" name="taskbudget" type="text"
+                              placeholder="Informe o Endereço" class="form-control" >
+                        </div>
+                        <div class="col-lg-4">
+                           <label class="col-form-label">Numero</label>
+                           <input id="form_contato_numero" name="taskbudget" type="text"
+                              placeholder="Informe o Numero"  class="form-control" >
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Complemento</label>
+                           <input id="form_contato_complemento" name="taskbudget" type="text"
+                              placeholder="Informe Complemento"  class="form-control" >
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Bairro</label>
+                           <input id="form_contato_bairro" name="taskbudget" type="text"
+                              placeholder="Informe o Bairro" class="form-control"  required>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Município</label>
+                           <input id="form_contato_municipio"  name="taskbudget" type="text"
+                              placeholder="Informe o Município" class="form-control">
+                        </div>
+                        <div class="col-lg-6">
+                           <label class="col-form-label">UF</label>
+                           <input id="form_contato_uf" name="taskbudget" type="text" placeholder="Informe a UF" class="form-control">
+                        </div>
+                     </div>
                      <div style="margin-top: 16px; display: flex; justify-content: center">
-                        <button type="button" class="btn btn-primary" id="btnAddResposanvel">Criar responsável</button>
+                        <button type="button" class="btn btn-primary" id="btnAddContato">Adicionar contato</button>
                      </div>
                   </form>
                </div>
