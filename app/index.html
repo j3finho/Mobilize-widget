@@ -418,7 +418,7 @@
          <div class="modal-content">
             <div class="modal-header">
                <h5 class="modal-title add-task-title">Lista dos candidatos</h5>
-               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="clearDataTable('datatable-buttons-candidatos')" aria-label="Close"></button>
             </div>
             <div class="modal-body">
             <div class="tab-pane" id="subscricao" role="tabpanel">
@@ -446,7 +446,7 @@
             <div class="modal-content">
                <div class="modal-header">
                   <h5 class="modal-title add-task-title">Atividades</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="clearDataTable('datatable-buttons-atividades')" aria-label="Close"></button>
                </div>
                <div class="modal-body">
                <div class="tab-pane" id="subscricao" role="tabpanel">
@@ -2998,6 +2998,10 @@
              }
              $('#' + modalID).modal('show')
              $('#modalAdicionarCandidato').css('z-index', 1051)
+         }
+
+         function clearDataTable(table) {
+            $('#' + table).DataTable().clear().draw().destroy();;
          }
       </script>
    </body>

@@ -231,7 +231,7 @@ function getApizohoSites() {
           .appendTo("#datatable-sites_wrapper .col-md-6:eq(0)");
 
         $("div.toolbarsite").html(
-          '<button class="btn btn-primary  p-2" data-bs-toggle="modal" data-bs-target=".modalAdicionarSite" onclick="escolhalatlong(``, 1),habilitarAlturaSite(`form_cliente_tipoSite`,1)" ><i class="mdi mdi-plus me-1"></i>  Criar Sites</button>&nbsp;&nbsp;&nbsp;<button class="btn btn-primary  p-2" data-bs-toggle="modal" data-bs-target=".modalAdicionarCandidato" onclick="escolhalatlongCand(``, 1),corredorAcessoCand(``, 1),habilitarAlturaCand(`form_candidato_tipo_site`,1)"><i class="mdi mdi-plus me-1"></i>Criar Candidato</button>'
+          '<button class="btn btn-primary  p-2" data-bs-toggle="modal" data-bs-target=".modalAdicionarSite" onclick="escolhalatlong(``, 1),habilitarAlturaSite(`form_cliente_tipoSite`,1)" >Criar Sites</button>&nbsp;&nbsp;&nbsp;<button class="btn btn-primary  p-2" data-bs-toggle="modal" data-bs-target=".modalAdicionarCandidato" onclick="escolhalatlongCand(``, 1),corredorAcessoCand(``, 1),habilitarAlturaCand(`form_candidato_tipo_site`,1)">Criar Candidato</button>'
         );
       });
     });
@@ -490,7 +490,7 @@ function viewCandidatosPorSite(n) {
                             </button>
                             `;
                 },
-                width: "130px",
+                width: "150px",
                 title: "Ações"
             },
             {
@@ -609,6 +609,7 @@ function viewAtividadesPorSite(n) {
         var config = {
             appName: "mobilize",
             reportName: "widget_atividades_full",
+            criteria: "(site=" + n.id + ")",
         }
         var getRecords = recordOps.getAllRecords(config);
         getRecords.then(function (response) {
@@ -643,27 +644,6 @@ function viewAtividadesPorSite(n) {
                 );
             });
 
-            // KPIS
-            var filtrodeAtividades = v_Atividades.filter(atividade => atividade.status == "Finalizado")
-            var totalFinalizados = adicionaZero(filtrodeAtividades.length);
-            document.querySelector('#tarefasFinalizadas').innerText = totalFinalizados;
-
-            var filtrodeAtividadesVc = v_Atividades.filter(function (v, i) {
-                var dataHoje = new Date();
-                var dataAtividade = new Date(v.dataTermino);
-                return (((v.status == "Em andamento" || v.status == "Não Iniciado") && dataHoje > dataAtividade));
-            })
-            var totalFinalizadosVc = adicionaZero(filtrodeAtividadesVc.length);
-            document.querySelector('#tarefasVencidas').innerText = totalFinalizadosVc;
-
-            var filtrodeAtividadesEA = v_Atividades.filter(atividade => atividade.status == "Em andamento")
-            var totalEmAndamentos = adicionaZero(filtrodeAtividadesEA.length);
-            document.querySelector('#tarefasEmAndamento').innerText = totalEmAndamentos;
-
-            var filtrodeAtividadesNI = v_Atividades.filter(atividade => atividade.status == "Não Iniciado")
-            var totalNaoIniciadas = adicionaZero(filtrodeAtividadesNI.length);
-            document.querySelector('#tarefasNaoIniciadas').innerText = totalNaoIniciadas;
-
             $(document).ready(function () {
                 var idioma =
                 {
@@ -695,6 +675,24 @@ function viewAtividadesPorSite(n) {
                     },
                 };
 
+                 /*
+                {
+                  orderable: true,
+                  data: 'tarefa',
+                  defaultContent: '',
+                  render: function (data, type, row) {
+                      if ((row.status == "Em andamento" || row.status == "Não Iniciado") && new Date() > new Date(row.dataTermino)) {
+                          return '<span style="color: #fff; background-color: #f00;">' + row.tarefa + '</span>';
+                      } else if ((row.status == "Em andamento" || row.status == "Não Iniciado") && new Date() == new Date(row.dataTermino)) {
+                          return '<span style="color: #000; background-color: #ff0;">' + row.tarefa + '</span>';
+                      } else {
+                          return '<span style="color: #000; background-color: #0f0;">' + row.tarefa + '</span>';
+                      }
+                  },
+                  width: 'auto',
+                  title: "Tarefas",
+                } */
+
                 $('#datatable-buttons-atividades').DataTable({
                     data: v_Atividades,
                     "paging": true,
@@ -716,23 +714,7 @@ function viewAtividadesPorSite(n) {
 
                     ],
                     columns: [
-                        {
-                            className: 'details-control',
-                            orderable: true,
-                            data: 'tarefa',
-                            defaultContent: '',
-                            render: function (data, type, row) {
-                                if ((row.status == "Em andamento" || row.status == "Não Iniciado") && new Date() > new Date(row.dataTermino)) {
-                                    return '<span style="color: #fff; background-color: #f00;">' + row.tarefa + '</span>';
-                                } else if ((row.status == "Em andamento" || row.status == "Não Iniciado") && new Date() == new Date(row.dataTermino)) {
-                                    return '<span style="color: #000; background-color: #ff0;">' + row.tarefa + '</span>';
-                                } else {
-                                    return '<span style="color: #000; background-color: #0f0;">' + row.tarefa + '</span>';
-                                }
-                            },
-                            width: 'auto',
-                            title: "Tarefas",
-                        },
+                        { data: 'tarefa', title: 'Tarefa'},
                         { data: 'site', title: "Id Site" },
                         { data: 'dataInicio', title: "Data de Inicio" },
                         { data: 'dataTermino', title: "Data de Término" },
