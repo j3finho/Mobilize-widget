@@ -297,6 +297,7 @@ function viewSite(n) {
         cliente: data.cliente.display_value,
         uf: data.UF.display_value,
         municipio: data.Municipio2.display_value,
+        anexo: data.Anexos.length > 0 ? data.Anexos[0].ID : ""
       });
 
       var filtrarSite = v_sites.filter((site) => site.id == n.id);
@@ -853,8 +854,22 @@ function editViewSite(n) {
         dataNormal: data.Data_de_Acionamento,
         uf: data.UF.length != "" ? data.UF.ID : "",
         municipio: data.Municipio2.length != "" ? data.Municipio2.ID : "",
+        anexo: data.Anexos.length > 0 ? data.Anexos[0].ID : ""
       });
       var filtrarSite = v_sites.filter((site) => site.id == n.id);
+
+      var anexoId = filtrarSite.map((site) => site.anexo)
+      var downloader =  $('#downloadFile')
+      if(anexoId.length > 0) {
+        var url = $('#dadosurlzoho').val();
+        downloader.attr("href", "https://creator.zoho.com/api/v2" + url + "report/Anexos_Report/" + filtrarSite.map((site) => site.anexo) + "/Anexos/download")
+        // downloader.attr("href", "https://creator.zoho.com/api/v2/mobilizeengenharia1/mobilize/report/Anexos_Report/4388176000000588021/Anexos/download")
+        downloader.attr('display', 'block')
+      }
+      else {
+        downloader.attr('display', 'none')
+      }
+
       var cliente = filtrarSite
         .map((site) => site.idCliente)
         .reduce((site) => site.idCliente);

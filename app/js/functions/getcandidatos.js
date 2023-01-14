@@ -261,4 +261,4 @@ function viewCandidato(obj) {
     })
 }
 
-export default getApizohoCandidatos;
+// export default getApizohoCandidatos;
