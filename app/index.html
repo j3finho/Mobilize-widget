@@ -546,8 +546,10 @@
          <div class="modal-dialog modal-lg">
             <div class="modal-content">
                <div class="modal-header">
-                  <h5 class="modal-title add-task-title">Adicionar Novo Candidato</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <h5 class="modal-title add-task-title" id="modal_title_candidato">Adicionar Novo Candidato</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal()"></button>
+                  
+                  <button type="button" onclick="closeModal()"></button>
                </div>
                <div class="modal-body">
                   <form id="form_candidato" role="form">
@@ -3280,11 +3282,19 @@
             })
          }
 
+         function closeModal() {
+            $('#modalCandidatosPorSite').css('z-index', '')
+            resetForm("modalAdicionarCandidato")
+         }
+
          function createCandidato() {
                ZOHO.CREATOR.init()
                   .then(function (data) {
                         //var form_candidato_status = document.getElementById("form_candidato_status");
                         //var form_candidato_statusValue = form_candidato_status.options[form_candidato_status.selectedIndex].value;
+
+                        var form_candidato_altura_edificio = document.getElementById("form_candidato_altura_edificio").value;
+
 
                         var form_candidato_sigla = document.getElementById("form_candidato_sigla").value;
 
@@ -3605,6 +3615,7 @@
                               'Justificativa_O_acesso_ao_site_est_dispon_vel_24horas_dia_7dias_semana' : acessojustificativa,
                               'Justificativa_A_rea_locada_atende_os_requisitos_m_nimos_exigidos_pela_legisla_o_local': legislacaoLocaljustificativa,
                               'Justificativa_O_candidato_est_localizado_dentro_do_anel_de_busca': anelBuscajustificativa,
+                              'Altura_do_Edifica_o': form_candidato_altura_edificio
                            }
                         }
                         var config = {

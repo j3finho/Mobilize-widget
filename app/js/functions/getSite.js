@@ -607,6 +607,281 @@ function viewCandidatosPorSite(n) {
   });
 }
 
+
+function viewCandidato(obj) {
+  console.log("recebendo os valores da API referente ao candidato em questao");
+
+  $('#modal_title_candidato').text("Visualizar candidato")
+
+  var form_candidato_contato = document.getElementById("form_candidato_contato")
+
+  var form_candidato_sigla = document.getElementById("form_candidato_sigla");
+
+  var form_candidato_site = document.getElementById("form_candidato_site");
+
+  var form_candidato_tipo_site = document.getElementById("form_candidato_tipo_site");
+
+  var form_candidato_aluguel = document.getElementById("form_candidato_aluguel");
+
+  var form_candidato_proprietario = document.getElementById("form_candidato_proprietario");
+
+  var form_candidato_corredor = document.getElementById("form_candidato_corredor");
+
+  var form_candidato_pontoCardealLat = document.getElementById("form_candidato_pontoCardealLat");
+
+  var form_candidato_pontoCardealLong = document.getElementById("form_candidato_pontoCardealLong");
+
+  var form = document.querySelector('#form_candidato');
+  var tipoDeOpcao = form.form_tipo_opcao
+
+
+
+  var anelBuscajustificativa = document.getElementById("form_candidato_candidatolocalizado")
+  var usoPropostojustificativa = document.getElementById("form_candidato_proprietariointeressado")
+  var legislacaoLocaljustificativa = document.getElementById("form_candidato_arealocadaatende")
+  var documentacaojustificativa = document.getElementById("form_candidato_justifique_documentacaonecessaria")
+  var acessojustificativa = document.getElementById("form_candidato_justifique_acessodisponivel").value
+  var energiajustificativa = document.getElementById("form_candidato_justifique_energiadisponivel")
+  var obstrucaojustificativa = document.getElementById("form_candidato_justifique_obstrucao")
+
+
+  var form_candidato_endereco = document.getElementById("form_candidato_endereco");
+  var form_candidato_complemento = document.getElementById("form_candidato_complemento");
+  var form_candidato_cep = document.getElementById("form_candidato_cep");
+  var form_candidato_numero = document.getElementById("form_candidato_numero");
+  var form_candidato_bairro = document.getElementById("form_candidato_bairro");
+  var form_candidato_municipio = document.getElementById("form_candidato_municipio");
+  var form_candidato_uf = document.getElementById("form_candidato_uf");
+  var form_candidato_distancia_pn = document.getElementById("form_candidato_distancia_pn");
+  var form_candidato_pre_comar = document.getElementById("form_candidato_pre_comar");
+  var form_candidato_profundidade = document.getElementById("form_candidato_profundidade");
+  var form_candidato_area_locada = document.getElementById("form_candidato_area_locada");
+  var form_candidato_largura_area = document.getElementById("form_candidato_largura_area").value;
+  var form_candidato_altura_edificio = document.getElementById("form_candidato_altura_edificio").value;
+  var form_candidato_latitude = document.getElementById("form_candidato_latitude")
+  var form_candidato_longitude = document.getElementById("form_candidato_longitude")
+  var form_candidato_grauLat = document.getElementById("form_candidato_grauLat");
+  var form_candidato_grauLong = document.getElementById("form_candidato_grauLong");
+  var form_candidato_minutoLat = document.getElementById("form_candidato_minutoLat");
+  var form_candidato_minutLong = document.getElementById("form_candidato_minutLong");
+  var form_candidato_segundoLat = document.getElementById("form_candidato_segundoLat");
+  var form_candidato_segundoLong = document.getElementById("form_candidato_segundoLong");
+  var form_candidato_observacao = document.getElementById("form_candidato_observacao");
+  var form_candidato_altitude = document.getElementById("form_candidato_altitude");
+
+
+  var config = {
+      appName: "mobilize",
+      reportName: "widget_candidatos_full",
+      id: obj.id
+  }
+
+  ZOHO.CREATOR.API.getRecordById(config).then((response) => {
+      if (response.code != 3000) {
+          Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Não foi possível carregar o candidato. Tente novamente mais tarde! - Erro: ' + response.code,
+          })
+          return
+      }
+      const nao_informado = "Não informado"
+      console.log("Buscou pelo candidato: " + response.data.ID)
+
+
+      const candidato = response.data;
+
+      // 
+      form_candidato_sigla.value = candidato.Sigla_do_Candidato;
+      form_candidato_sigla.disabled = true;
+
+      //
+     //var siteOption = new Option((candidato.Site.ID_Site_Mobilize.lenght > 0 ? candidato.Site.ID_Site_Mobilize : nao_informado), candidato.Site.ID);
+     // console.log("ID mobilize: "+ candidato.Site.ID_Site_Mobilize)
+      //form_candidato_site.add(siteOption)
+      //form_candidato_site.value = siteOption.value;
+      form_candidato_site.disabled = true;
+
+      // 
+      var tipoSiteOption = new Option(candidato.Tipo_Site.display_value, candidato.Tipo_Site.ID);
+      //form_candidato_tipo_site.add(tipoSiteOption)
+      form_candidato_tipo_site.value = tipoSiteOption.value;
+      form_candidato_tipo_site.disabled = true;
+
+      // 
+      form_candidato_aluguel.value = candidato.Valor_do_Aluguel;
+      form_candidato_aluguel.disabled = true
+
+      //
+      $("input[name=form_tipo_propriedade][value=" + candidato.Tipo_de_Negocia_o + "]").prop('checked', true);
+      $("input[name=form_tipo_propriedade]").prop('disabled', true);
+
+      //
+      var proprietarioOption = new Option(candidato.Proprietario, candidato.Proprietario.ID);
+      //form_candidato_proprietario.add(proprietarioOption)
+      form_candidato_proprietario.value = proprietarioOption.value;
+      form_candidato_proprietario.disabled = true;
+
+      //
+      var contatoOption = new Option(candidato.Contato.display_value, candidato.Contato.ID);
+      //form_candidato_contato.add(contatoOption)
+      form_candidato_contato.value = contatoOption.value;
+      form_candidato_contato.disabled = true;
+
+      //
+      form_candidato_cep.value = candidato.CEP.lenght > 0 ? candidato.CEP : nao_informado;
+      form_candidato_cep.disabled = true;
+
+      //
+      form_candidato_endereco.value =  candidato.Endereco.lenght > 0 ? candidato.Endereco : nao_informado
+      form_candidato_endereco.disabled = true;
+
+      //
+      form_candidato_numero.value = candidato.Endere_o.lenght > 0 ? candidato.Endere_o : nao_informado
+      form_candidato_numero.disabled = true;
+
+      //
+      form_candidato_complemento.value =  candidato.Complemento.lenght > 0 ? candidato.Complemento : nao_informado
+      form_candidato_complemento.disabled = true;
+
+      //
+      form_candidato_bairro.value = candidato.Bairro.lenght > 0 ? candidato.Bairro : nao_informado;
+      form_candidato_bairro.disabled = true;
+
+      //
+      form_candidato_municipio.value =  candidato.Municipio.lenght > 0 ? candidato.Municipio : nao_informado
+      form_candidato_municipio.disabled = true;
+
+      //
+      form_candidato_uf.value = candidato.UF;
+      form_candidato_uf.disabled = true;
+
+      //
+      form_candidato_distancia_pn.value =  candidato.Distancia_PN.lenght > 0 ? candidato.Distancia_PN : nao_informado
+      form_candidato_distancia_pn.disabled = true;
+
+      //
+      form_candidato_pre_comar.value = candidato.Pre_Comar_m.lenght > 0 ? candidato.Pre_Comar_m : nao_informado
+      form_candidato_pre_comar.disabled = true;
+
+      //
+      form_candidato_largura_area.value = candidato.Largura_area.lenght > 0 ? candidato.Largura_area : nao_informado
+      form_candidato_largura_area.disabled = true;
+
+      //
+      form_candidato_profundidade.value = candidato.Profundidade_area.lenght > 0 ? candidato.Profundidade_area : nao_informado
+      form_candidato_profundidade.disabled = true;
+
+      //
+      var corredorDeAcessoOption = new Option(candidato.Corredor_de_Acesso);
+      //form_candidato_corredor.add(corredorDeAcessoOption)
+      form_candidato_corredor.value = corredorDeAcessoOption.value;
+      form_candidato_corredor.disabled = true;
+
+      //
+      form_candidato_area_locada.value = candidato.Area_Locada_m.lenght > 0 ? candidato.Area_Locada_m : nao_informado
+      form_candidato_area_locada.disabled = true;
+
+      //
+      form_candidato_altura_edificio.value = candidato.Altura_do_Edifica_o.lenght > 0 ? candidato.Altura_do_Edifica_o : nao_informado
+      form_candidato_altura_edificio.disabled = true;
+
+      //
+      tipoDeOpcao.value = candidato.Opcao
+      tipoDeOpcao.disabled = true
+
+
+      // Lat & Long - Decimal
+      form_candidato_latitude.value = candidato.Latitude.lenght > 0 ? candidato.Latitude : nao_informado;
+      form_candidato_latitude.disabled = true;
+      form_candidato_longitude.value = candidato.Longitude.lenght > 0 ? candidato.Longitude : nao_informado;
+      form_candidato_longitude.disabled = true;
+
+      // Lat & Long - GMS / UTM
+      form_candidato_grauLat.value = candidato.GrauLAT.lenght > 0 ? candidato.GrauLAT : nao_informado;
+      form_candidato_grauLat.disabled = true;
+
+      form_candidato_grauLong.value = candidato.GrauLONG.lenght > 0 ? candidato.GrauLONG : nao_informado;
+      form_candidato_grauLong.disabled = true;
+
+      form_candidato_minutoLat.value = candidato.MinutoLAT.lenght > 0 ? candidato.MinutoLAT : nao_informado;
+      form_candidato_minutoLat.disabled = true;
+      form_candidato_minutLong.value = candidato.MinutoLONG.lenght > 0 ? candidato.MinutoLONG : nao_informado;
+      form_candidato_minutLong.disabled = true;
+
+      form_candidato_segundoLat.value = candidato.SegundoLAT.lenght > 0 ? candidato.SegundoLAT : nao_informado;
+      form_candidato_segundoLat.disabled = true;
+
+      form_candidato_segundoLong.value = candidato.SegundoLONG.lenght > 0 ? candidato.SegundoLONG : nao_informado;
+      form_candidato_segundoLong.disabled = true;
+
+      form_candidato_pontoCardealLat.value = candidato.Ponto_Cardeal_LAT.lenght > 0 ? candidato.Ponto_Cardeal_LAT : nao_informado;
+      form_candidato_pontoCardealLat.disabled = true;
+
+      form_candidato_pontoCardealLong.value = candidato.PontoCardealLONG.lenght > 0 ? candidato.PontoCardealLONG : nao_informado;
+      form_candidato_pontoCardealLong.disabled = true;
+
+      //
+      form_candidato_altitude.value = candidato.Altitude
+      form_candidato_altitude.disabled = true
+
+      //
+      $("input[name=anelBusca][value=" + candidato.anelBusca + "]").prop('checked', true);
+      $("input[name=anelBusca]").prop('disabled', true);
+      anelBuscajustificativa.value = candidato.Justificativa_O_candidato_est_localizado_dentro_do_anel_de_busca.lenght > 0 ? candidato.Justificativa_O_candidato_est_localizado_dentro_do_anel_de_busca : "";
+      usoPropostojustificativa.disabled = true;
+      anelBuscajustificativa.disabled = true;
+
+      //
+      $("input[name=usoProposto][value=" + candidato.usoProposto + "]").prop('checked', true);
+      $("input[name=usoProposto]").prop('disabled', true);
+      usoPropostojustificativa.value = candidato.Justificativa_O_propriet_rio_est_interessado_no_uso_proposto.lenght > 0 ? candidato.Justificativa_O_propriet_rio_est_interessado_no_uso_proposto : "";
+      usoPropostojustificativa.disabled = true;
+
+      //
+      $("input[name=legislacaoLocal][value=" + candidato.legislacaoLocal + "]").prop('checked', true);
+      $("input[name=legislacaoLocal]").prop('disabled', true);
+      legislacaoLocaljustificativa.value = candidato.Justificativa_A_rea_locada_atende_os_requisitos_m_nimos_exigidos_pela_legisla_o_local.lenght > 0 ? candidato.Justificativa_A_rea_locada_atende_os_requisitos_m_nimos_exigidos_pela_legisla_o_local : "";
+      legislacaoLocaljustificativa.disabled = true;
+
+      //
+      $("input[name=documentacao][value=" + candidato.legislacaoLocal + "]").prop('checked', true);
+      $("input[name=documentacao]").prop('disabled', true);
+      documentacaojustificativa.value = candidato.Justificativa_A_documenta_o_necess_ria_est_dispon_vel.lenght > 0 ? candidato.Justificativa_A_documenta_o_necess_ria_est_dispon_vel : "";
+      documentacaojustificativa.disabled = true;
+
+      //
+      $("input[name=acesso][value=" + candidato.acesso + "]").prop('checked', true);
+      $("input[name=acesso]").prop('disabled', true);
+      acessojustificativa.value =  candidato.Justificativa_O_acesso_ao_site_est_dispon_vel_24horas_dia_7dias_semana.lenght > 0 ? candidato.Justificativa_O_acesso_ao_site_est_dispon_vel_24horas_dia_7dias_semana : "";
+      acessojustificativa.disabled = true;
+
+      //
+      $("input[name=energia][value=" + candidato.energia + "]").prop('checked', true);
+      $("input[name=energia]").prop('disabled', true);
+      energiajustificativa.value = candidato.Justificativa_Existe_energia_dispon_vel_no_site.lenght > 0 ? candidato.Justificativa_Existe_energia_dispon_vel_no_site : "";
+
+      //
+      $("input[name=obstrucao][value=" + candidato.obstrucao +"]").prop('checked', true);
+      $("input[name=obstrucao]").prop('disabled', true);
+      obstrucaojustificativa.value = candidato.Justificativa_Existe_alguma_obstru_o_ou_interfer_ncia_vis_vel.lenght > 0 ? candidato.Justificativa_Existe_alguma_obstru_o_ou_interfer_ncia_vis_vel : "";
+      obstrucaojustificativa.disabled = true;
+
+      //
+      form_candidato_observacao.value = candidato.Coment_rios;
+      form_candidato_observacao.disabled = true;
+
+      console.log("Ve se chegou no modal")
+
+      //
+      $('#form_candidato_anexo').prop('disabled', true)
+      //$('#addCandidato').val("Editar candidato")
+
+      $('#modalAdicionarCandidato').modal('show')
+      $('#modalCandidatosPorSite').css('z-index', 1051)
+  })
+}
+
 function viewAtividadesPorSite(n) {
     var creatorSdkPromise = ZOHO.CREATOR.init();
     creatorSdkPromise.then(function (data) {
