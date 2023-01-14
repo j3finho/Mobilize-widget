@@ -22,6 +22,8 @@
       </style>
    </head>
    <body>
+      <button class="btn btn-primary  p-2" data-bs-toggle="modal" data-bs-target=".modalAdicionarCandidato" onclick="escolhalatlongCand(``, 1),corredorAcessoCand(``, 1),habilitarAlturaCand(`form_candidato_tipo_site`,1)">Criar Candidato</button>
+
       <div class="container-fluid ">
       <div class="row px-4 pt-5">
          <div class="col-xl-12">
@@ -658,30 +660,37 @@
                               class="form-control">
                         </div>
                         <div class="col-lg-4">
-                           <label class="col-form-label">Endereço<span class="text-danger">*</span></label>
+                           <label class="col-form-label">Endereço</span></label>
                            <input id="form_candidato_endereco" name="taskbudget" type="text"
                               placeholder="Informe o Endereço" class="form-control" >
                         </div>
                         <div class="col-lg-4">
-                           <label class="col-form-label">Complemento<span class="text-danger">*</span></label>
-                           <input id="form_candidato_complemento" name="taskbudget" type="text"
-                              placeholder="Informe Complemento"  class="form-control" >
+                           <label class="col-form-label">Numero</span></label>
+                           <input id="form_candidato_numero" name="taskbudget" type="text"
+                              placeholder="Informe o Numero do local" class="form-control" >
                         </div>
                      </div>
                      <div class="row">
                         <div class="col-lg-4">
-                           <label class="col-form-label">Bairro<span class="text-danger">*</span></label>
+                           <label class="col-form-label">Complemento</span></label>
+                           <input id="form_candidato_complemento" name="taskbudget" type="text"
+                              placeholder="Informe Complemento"  class="form-control" >
+                        </div>
+                        <div class="col-lg-4">
+                           <label class="col-form-label">Bairro</span></label>
                            <input id="form_candidato_bairro" name="taskbudget" type="text"
                               placeholder="Informe o Bairro" class="form-control"  required>
                         </div>
                         <div class="col-lg-4">
-                           <label class="col-form-label">Município<span class="text-danger">*</span></label>
-                           <input id="form_candidato_municipio" disabled name="taskbudget" type="text"
+                           <label class="col-form-label">Município</span></label>
+                           <input id="form_candidato_municipio" name="taskbudget" type="text"
                               placeholder="Informe o Município" class="form-control">
                         </div>
+                     </div>
+                     <div class="row">
                         <div class="col-lg-4">
-                           <label class="col-form-label">UF<span class="text-danger">*</span></label>
-                           <input id="form_candidato_uf" disabled name="taskbudget" type="text" placeholder="Informe a UF" class="form-control">
+                           <label class="col-form-label">UF</label>
+                           <input id="form_candidato_uf" name="taskbudget" type="text" placeholder="Informe a UF" class="form-control">
                         </div>
                      </div>
                      <div class="row">
@@ -697,13 +706,13 @@
                         </div>
                      </div>
                      <div class="row">
-                        <div class="col-lg-4 ">
+                        <div class="col-lg-6">
                            <label class="col-form-label">Largura Área Locada<span
                               class="text-danger">*</span></label>
                            <input id="form_candidato_largura_area_normal"  onblur="calculoarea()" name="taskbudget" type="text"
                               placeholder="Informe a Largura Área Locada" class="form-control" required="">
                         </div>
-                        <div class="col-lg-4 ">
+                        <div class="col-lg-6">
                            <label class="col-form-label">Profundidade Área Locada<span class="text-danger">*</span></label>
                            <input id="form_candidato_profundidade_normal"  onblur="calculoarea()" name="taskbudget" type="text"
                               placeholder="Informe a Profundidade" class="form-control" required="">
@@ -731,7 +740,7 @@
                               placeholder="Informe a Profundidade" class="form-control">
                         </div>
                      </div>
-                     <div class="row pt-4">
+                     <div class="row">
                         <div class="col-lg-6">
                            <label class="col-form-label">Área Locada Total<span class="text-danger"></span></label>
                            <input id="form_candidato_area_locada" disabled name="taskbudget" type="text"
@@ -2807,7 +2816,7 @@
                      $('.utmcand').css("display", "block");
                      $('.latitudecand').css("display", "none");
                  }else if(des == 'Decimal'){
-                     $('.latitudecand').css("display", "block");
+                     $('.latitudecand').css("display", "flex");
                      $('.utmcand').css("display", "none");
                  }else{
                      $('.latitudecand').css("display", "none");
@@ -2819,7 +2828,7 @@
                      $('.latitudecand').css("display", "none");
                  }else if(des == 'Decimal'){
                      $('.utmcand').css("display", "none");
-                     $('.latitudecand').css("display", "block");
+                     $('.latitudecand').css("display", "flex");
                  }else{
                      $('.utmcand').css("display", "none");
                      $('.latitudecand').css("display", "none");
@@ -2830,7 +2839,7 @@
                      $('.latitudecand').css("display", "none");
                  }else if(des == 'Decimal'){
                      $('.utmcand').css("display", "none");
-                     $('.latitudecand').css("display", "block");
+                     $('.latitudecand').css("display", "flex");
                  }else{
                      $('.utmcand').css("display", "none");
                      $('.latitudecand').css("display", "none");

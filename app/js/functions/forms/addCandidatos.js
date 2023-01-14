@@ -3,9 +3,6 @@ import adicionaZero, { mostrarErro } from "../ultilitys.js";
 function addCandidato() {
     ZOHO.CREATOR.init()
         .then(function (data) {
-            var queryParams = ZOHO.CREATOR.UTIL.getQueryParams();
-            var paramsID = queryParams.idconta
-
             //var form_candidato_status = document.getElementById("form_candidato_status");
             //var form_candidato_statusValue = form_candidato_status.options[form_candidato_status.selectedIndex].value;
 
@@ -55,6 +52,7 @@ function addCandidato() {
             var form_candidato_endereco = document.getElementById("form_candidato_endereco").value;
             var form_candidato_complemento = document.getElementById("form_candidato_complemento").value;
             var form_candidato_cep = document.getElementById("form_candidato_cep").value;
+            var form_candidato_numero = document.getElementById("form_candidato_numero").value;
             var form_candidato_bairro = document.getElementById("form_candidato_bairro").value;
             var form_candidato_distancia_pn = document.getElementById("form_candidato_distancia_pn").value;
             var form_candidato_pre_comar = document.getElementById("form_candidato_pre_comar").value;
@@ -121,18 +119,18 @@ function addCandidato() {
                 mostrarErro("form_candidato_cep", "CEP não informado");
                 return 
             }
-            if(form_candidato_endereco == "") {
-                mostrarErro("form_candidato_endereco", "Endereço não informado");
-                return 
-            }
-            if(form_candidato_complemento == "") {
-                mostrarErro("form_candidato_complemento", "Complemento não informado");
-                return 
-            }
-            if(form_candidato_bairro == "") {
-                mostrarErro("form_candidato_bairro", "Bairro não informado");
-                return 
-            }
+            // if(form_candidato_endereco == "") {
+            //     mostrarErro("form_candidato_endereco", "Endereço não informado");
+            //     return 
+            // }
+            // if(form_candidato_complemento == "") {
+            //     mostrarErro("form_candidato_complemento", "Complemento não informado");
+            //     return 
+            // }
+            // if(form_candidato_bairro == "") {
+            //     mostrarErro("form_candidato_bairro", "Bairro não informado");
+            //     return 
+            // }
             if(form_candidato_distancia_pn == "") {
                 mostrarErro("form_candidato_distancia_pn", "Distância PN não informado");
                 return 
@@ -287,6 +285,7 @@ function addCandidato() {
                     'Valor_do_Aluguel': valorFinal2,
                     'Tipo_de_Negocia_o': tipoDeNegociacao,
                     'Endereco': form_candidato_endereco,
+                    "Endere_o": form_candidato_numero,
                     'Complemento': form_candidato_complemento,
                     'Largura_area':form_candidato_larguratotal,
                     'Profundidade_area':form_candidato_profundidadenormal,
@@ -609,9 +608,9 @@ export function addContato() {
                     "Telefone": telefone,
                     "E_mail": email,
                     "Address": {
-                        "address_line_1": endereco,
-                        "address_line_2": numero,
-                        "district_city" : complemento,
+                        "address_line_1": endereco + " " + numero,
+                        "address_line_2": complemento,
+                        "district_city" : bairro,
                         "state_province" : municipio,
                         "postal_code" : uf,
                         "country" : cep
