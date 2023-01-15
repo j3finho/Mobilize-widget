@@ -537,8 +537,8 @@
          <div class="modal-dialog modal-lg">
             <div class="modal-content">
                <div class="modal-header">
-                  <h5 class="modal-title add-task-title" id="modal_title_candidato">Adicionar Novo Candidato</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal()"></button>
+                  <h5 class="modal-title add-task-title" id="modal_title_candidato">Novo Candidato</h5>
+                  <button type="button" class="btn-close" aria-label="Close" onclick="closeModal()"></button>
                </div>
                <div class="modal-body">
                   <form id="form_candidato" role="form">
@@ -2434,65 +2434,11 @@
       </script>
       
       <script>
-         $('input[type=radio][name=anelBusca]').change(function() {
-            if (this.value == "Não") {
-               continuarComCandidato()
-               $('#form_candidato_candidatolocalizado').prop('disabled', false)
-               return
-             }
-             $('#form_candidato_candidatolocalizado').prop('disabled', true)
-         });
-         $('input[type=radio][name=usoProposto]').change(function() {
-            if (this.value == "Não") {
-               continuarComCandidato()
-               $('#form_candidato_proprietariointeressado').prop('disabled', false)
-               return
-             }
-             $('#form_candidato_proprietariointeressado').prop('disabled', true)
-         });
-         $('input[type=radio][name=legislacaoLocal]').change(function() {
-            if (this.value == "Não") {
-               continuarComCandidato()
-               $('#form_candidato_arealocadaatende').prop('disabled', false)
-               return
-             }
-             $('#form_candidato_arealocadaatende').prop('disabled', true)
-         });
-         $('input[type=radio][name=documentacao]').change(function() {
-            if (this.value == "Não") {
-               continuarComCandidato()
-               $('#form_candidato_justifique_documentacaonecessaria').prop('disabled', false)
-               return
-             }
-             $('#form_candidato_justifique_documentacaonecessaria').prop('disabled', true)
-         });
-         $('input[type=radio][name=acesso]').change(function() {
-             if (this.value == "Não") {
-                 continuarComCandidato()
-               $('#form_candidato_justifique_acessodisponivel').prop('disabled', false)
-               return
-             }
-             $('#form_candidato_justifique_acessodisponivel').prop('disabled', true)
-         });
-         $('input[type=radio][name=energia]').change(function() {
-             if (this.value == "Não") {
-                 continuarComCandidato()
-            $('#form_candidato_justifique_energiadisponivel').prop('disabled', false)
-               return
-            }
-            $('#form_candidato_justifique_energiadisponivel').prop('disabled', true)
-         });
-         $('input[type=radio][name=obstrucao]').change(function() {
-             if (this.value == "Sim") {
-                 continuarComCandidato()
-             $('#form_candidato_justifique_obstrucao').prop('disabled', false)
-               return
-             }   
-            $('#form_candidato_justifique_obstrucao').prop('disabled', true)
-         });
-         
-         function continuarComCandidato() {
-             Swal.fire({
+         function habilitarJustifitiva(obj, condicao, campoJustifitiva) {
+            var campo = $('#' + campoJustifitiva)
+            campo.val("")
+            if(obj.value == condicao) {
+               Swal.fire({
                  title: 'Deseja continuar com este Candidato?',
                  text: "Se SIM, informar a justificativa no campo a seguir.",
                  icon: 'question',
@@ -2504,13 +2450,37 @@
                  reverseButtons: true
              }).then((result) => {
                  if (result.dismiss === Swal.DismissReason.cancel) {
-                     $('#modalAdicionarCandidato').modal('hide');
-                     $('#form_candidato').each (function(){
-                          this.reset();
-                     });
+                     closeModal()
+                     return
                  }
              })
+               campo.prop('disabled', false)
+               return
+            }
+            campo.prop('disabled', true)
          }
+
+         $('input[type=radio][name=anelBusca]').change(function() {
+            habilitarJustifitiva(this, "Não","form_candidato_candidatolocalizado" )
+         });
+         $('input[type=radio][name=usoProposto]').change(function() {
+            habilitarJustifitiva(this, "Não","form_candidato_proprietariointeressado" )
+         });
+         $('input[type=radio][name=legislacaoLocal]').change(function() {
+            habilitarJustifitiva(this, "Não","form_candidato_arealocadaatende" )
+         });
+         $('input[type=radio][name=documentacao]').change(function() {
+            habilitarJustifitiva(this, "Não","form_candidato_justifique_documentacaonecessaria" )
+         });
+         $('input[type=radio][name=acesso]').change(function() {
+            habilitarJustifitiva(this, "Não","form_candidato_justifique_acessodisponivel" )
+         });
+         $('input[type=radio][name=energia]').change(function() {
+            habilitarJustifitiva(this, "Não","form_candidato_justifique_energiadisponivel" )
+         });
+         $('input[type=radio][name=obstrucao]').change(function() {
+            habilitarJustifitiva(this, "Sim","form_candidato_justifique_obstrucao" )
+         });
 
          function clearDataTable(table) {
             $('#' + table).DataTable().clear().draw().destroy();;
@@ -2741,13 +2711,16 @@
 
          function closeModal() {
             $('#modalCandidatosPorSite').css('z-index', '')
+            $('#modalAdicionarCandidato').modal('hide')
             resetForm("form_candidato")
-            //
+            $('#modal_title_candidato').text("Novo Candidato")
 
+            //
             $('#btnNovoProprietario').css('display', 'block')
             $('#btnAddContact').css('display', 'block')
             $('#addCandidato').css('display', 'block')
             $('#editCandidato').css('display', 'none')
+
             //
             const defaultOption = '<option value="">Selecione..</option>'
             $('#form_candidato_site')
@@ -2807,6 +2780,14 @@
                $("input[name=obstrucao]").prop('disabled', false);
                $('#form_candidato_observacao').prop('disabled', false)
                $('#form_candidato_anexo').prop('disabled', false)
+               
+               $('#form_candidato_candidatolocalizado').prop('disabled', true)
+               $('#form_candidato_proprietariointeressado').prop('disabled', true)
+               $('#form_candidato_arealocadaatende').prop('disabled', true)
+               $('#form_candidato_justifique_documentacaonecessaria').prop('disabled', true)
+               $('#form_candidato_justifique_acessodisponivel').prop('disabled', true)
+               $('#form_candidato_justifique_energiadisponivel').prop('disabled', true)
+               $('#form_candidato_justifique_obstrucao').prop('disabled', true)
          }
 
          function createCandidato() {
