@@ -2435,60 +2435,60 @@
       
       <script>
          $('input[type=radio][name=anelBusca]').change(function() {
-             if (this.value == "Não") {
-                 continuarComCandidato()
-                 return
+            if (this.value == "Não") {
+               continuarComCandidato()
+               $('#form_candidato_candidatolocalizado').prop('disabled', false)
+               return
              }
-             var field = document.querySelector("#form_candidato_candidatolocalizado");
-             field.disabled = true;
+             $('#form_candidato_candidatolocalizado').prop('disabled', true)
          });
          $('input[type=radio][name=usoProposto]').change(function() {
-             if (this.value == "Não") {
-                 continuarComCandidato()
-                 return
+            if (this.value == "Não") {
+               continuarComCandidato()
+               $('#form_candidato_proprietariointeressado').prop('disabled', false)
+               return
              }
-             var field = document.querySelector("#form_candidato_proprietariointeressado");
-             field.disabled = true;
+             $('#form_candidato_proprietariointeressado').prop('disabled', true)
          });
          $('input[type=radio][name=legislacaoLocal]').change(function() {
-             if (this.value == "Não") {
-                 continuarComCandidato()
-                 return
+            if (this.value == "Não") {
+               continuarComCandidato()
+               $('#form_candidato_arealocadaatende').prop('disabled', false)
+               return
              }
-             var field = document.querySelector("#form_candidato_arealocadaatende");
-             field.disabled = true;
+             $('#form_candidato_arealocadaatende').prop('disabled', true)
          });
          $('input[type=radio][name=documentacao]').change(function() {
-             if (this.value == "Não") {
-                 continuarComCandidato()
-                 return
+            if (this.value == "Não") {
+               continuarComCandidato()
+               $('#form_candidato_justifique_documentacaonecessaria').prop('disabled', false)
+               return
              }
-             var field = document.querySelector("#form_candidato_justifique_documentacaonecessaria");
-             field.disabled = true;
+             $('#form_candidato_justifique_documentacaonecessaria').prop('disabled', true)
          });
          $('input[type=radio][name=acesso]').change(function() {
              if (this.value == "Não") {
                  continuarComCandidato()
-                 return
+               $('#form_candidato_justifique_acessodisponivel').prop('disabled', false)
+               return
              }
-             var field = document.querySelector("#form_candidato_justifique_acessodisponivel");
-             field.disabled = true;
+             $('#form_candidato_justifique_acessodisponivel').prop('disabled', true)
          });
          $('input[type=radio][name=energia]').change(function() {
              if (this.value == "Não") {
                  continuarComCandidato()
-                 return
-             }
-             var field = document.querySelector("#form_candidato_justifique_energiadisponivel");
-             field.disabled = true;
+            $('#form_candidato_justifique_energiadisponivel').prop('disabled', false)
+               return
+            }
+            $('#form_candidato_justifique_energiadisponivel').prop('disabled', true)
          });
          $('input[type=radio][name=obstrucao]').change(function() {
              if (this.value == "Sim") {
                  continuarComCandidato()
-                 return
+             $('#form_candidato_justifique_obstrucao').prop('disabled', false)
+               return
              }   
-             var field = document.querySelector("#form_candidato_justifique_obstrucao");
-             field.disabled = true;
+            $('#form_candidato_justifique_obstrucao').prop('disabled', true)
          });
          
          function continuarComCandidato() {
