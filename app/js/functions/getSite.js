@@ -656,8 +656,8 @@ function viewCandidato(obj) {
   var form_candidato_pre_comar = document.getElementById("form_candidato_pre_comar");
   var form_candidato_profundidade = document.getElementById("form_candidato_profundidade");
   var form_candidato_area_locada = document.getElementById("form_candidato_area_locada");
-  var form_candidato_largura_area = document.getElementById("form_candidato_largura_area").value;
-  var form_candidato_altura_edificio = document.getElementById("form_candidato_altura_edificio").value;
+  var form_candidato_largura_area = document.getElementById("form_candidato_largura_area");
+  var form_candidato_altura_edificio = document.getElementById("form_candidato_altura_edificio");
   var form_candidato_latitude = document.getElementById("form_candidato_latitude")
   var form_candidato_longitude = document.getElementById("form_candidato_longitude")
   var form_candidato_grauLat = document.getElementById("form_candidato_grauLat");
@@ -696,20 +696,19 @@ function viewCandidato(obj) {
       form_candidato_sigla.disabled = true;
 
       //
-     //var siteOption = new Option((candidato.Site.ID_Site_Mobilize.lenght > 0 ? candidato.Site.ID_Site_Mobilize : nao_informado), candidato.Site.ID);
-     // console.log("ID mobilize: "+ candidato.Site.ID_Site_Mobilize)
-      //form_candidato_site.add(siteOption)
-      //form_candidato_site.value = siteOption.value;
+     var siteOption = new Option((candidato.Site.display_value.lenght > 0 ? candidato.Site.display_value : nao_informado), candidato.Site.ID);
+      form_candidato_site.add(siteOption)
+      form_candidato_site.value = siteOption.value;
       form_candidato_site.disabled = true;
 
       // 
       var tipoSiteOption = new Option(candidato.Tipo_Site.display_value, candidato.Tipo_Site.ID);
-      //form_candidato_tipo_site.add(tipoSiteOption)
+      form_candidato_tipo_site.add(tipoSiteOption)
       form_candidato_tipo_site.value = tipoSiteOption.value;
       form_candidato_tipo_site.disabled = true;
 
       // 
-      form_candidato_aluguel.value = candidato.Valor_do_Aluguel;
+      form_candidato_aluguel.value = maskCurrency(candidato.Valor_do_Aluguel)
       form_candidato_aluguel.disabled = true
 
       //
@@ -724,7 +723,7 @@ function viewCandidato(obj) {
 
       //
       var contatoOption = new Option(candidato.Contato.display_value, candidato.Contato.ID);
-      //form_candidato_contato.add(contatoOption)
+      form_candidato_contato.add(contatoOption)
       form_candidato_contato.value = contatoOption.value;
       form_candidato_contato.disabled = true;
 
@@ -774,7 +773,6 @@ function viewCandidato(obj) {
 
       //
       var corredorDeAcessoOption = new Option(candidato.Corredor_de_Acesso);
-      //form_candidato_corredor.add(corredorDeAcessoOption)
       form_candidato_corredor.value = corredorDeAcessoOption.value;
       form_candidato_corredor.disabled = true;
 
@@ -815,10 +813,18 @@ function viewCandidato(obj) {
       form_candidato_segundoLong.value = candidato.SegundoLONG.lenght > 0 ? candidato.SegundoLONG : nao_informado;
       form_candidato_segundoLong.disabled = true;
 
-      form_candidato_pontoCardealLat.value = candidato.Ponto_Cardeal_LAT.lenght > 0 ? candidato.Ponto_Cardeal_LAT : nao_informado;
+      if(candidato.Ponto_Cardeal_LAT.lenght > 0) {
+        form_candidato_pontoCardealLat.value = candidato.Ponto_Cardeal_LAT;
+      } else {
+        form_candidato_pontoCardealLat.selectedIndex = 0
+      }
       form_candidato_pontoCardealLat.disabled = true;
 
-      form_candidato_pontoCardealLong.value = candidato.PontoCardealLONG.lenght > 0 ? candidato.PontoCardealLONG : nao_informado;
+      if(candidato.PontoCardealLONG.lenght > 0 ) {
+        form_candidato_pontoCardealLong.value = candidato.PontoCardealLONG
+      } else {
+        form_candidato_pontoCardealLong.selectedIndex = 0
+      }
       form_candidato_pontoCardealLong.disabled = true;
 
       //
@@ -875,7 +881,12 @@ function viewCandidato(obj) {
 
       //
       $('#form_candidato_anexo').prop('disabled', true)
-      //$('#addCandidato').val("Editar candidato")
+
+      //
+      $('#btnNovoProprietario').css('display', 'none')
+      $('#btnAddContact').css('display', 'none')
+      $('#addCandidato').css('display', 'none')
+      $('#editCandidato').css('display', 'block')
 
       $('#modalAdicionarCandidato').modal('show')
       $('#modalCandidatosPorSite').css('z-index', 1051)

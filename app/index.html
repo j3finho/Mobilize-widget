@@ -397,6 +397,25 @@
             </div>
          </div>
       </div>
+
+
+     <!-- MODAL VISUALIZAÇÃO CANDIDATOS POR SITE -->
+      <div class="modal fade modalCandidatosPorSite" id="modalCandidatosPorSite" data-bs-keyboard="false" data-bs-backdrop="static"  tabindex="-1" role="dialog"
+      aria-labelledby="myLargeModalLabel" aria-hidden="true">
+         <div class="modal-dialog" style="max-width: 1200px;">
+             <div class="modal-content">
+                 <div  class="modal-header">
+                     <h5 class="modal-title add-task-title">Lista dos candidatos</h5>
+                     <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="clearDataTable('datatable-buttons-candidatos')" aria-label="Close"></button>
+                 </div>
+                 <div class="modal-body">
+                      <table id="datatable-buttons-candidatos" class="table-striped table table-bordered dt-responsive nowrap w-100"> </table>
+                 </div>
+             </div>
+         </div>
+     </div>
+
+
       <div id="modalCandidatoDados1" class="modal fade bs-example-modal-lg modalCandidatoDados1" tabindex="-1" role="dialog"
          aria-labelledby="myLargeModalLabel" aria-hidden="true">
          <div class="modal-dialog modal-lg">
@@ -411,34 +430,6 @@
             </div>
          </div>
       </div>
-
-   <!-- MODAL VISUALIZAÇÃO CANDIDATOS POR SITE -->
-      <div id="modalCandidatosPorSite" data-bs-keyboard="false" data-bs-backdrop="static" class="modal fade modalAdicionarContato" tabindex="-1" role="dialog"
-      aria-labelledby="myLargeModalLabel" aria-hidden="true">
-      <div class="modal-dialog" style="max-width: 1200px;">
-         <div class="modal-content">
-            <div class="modal-header">
-               <h5 class="modal-title add-task-title">Lista dos candidatos</h5>
-               <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="clearDataTable('datatable-buttons-candidatos')" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            <div class="tab-pane" id="subscricao" role="tabpanel">
-               <div class="col-12">
-                  <div class="card">
-                     <div class="card-body">
-                        <div class="pt-2">
-                           <table id="datatable-buttons-candidatos" class="table-striped table table-bordered dt-responsive nowrap w-100"> </table>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            </div>
-         </div>
-         <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-   </div>
 
       <!-- MODAL ATIVIDADES POR SITE -->
       <div id="modalAtividadesPorSite" data-bs-keyboard="false" data-bs-backdrop="static" class="modal fade modalAdicionarContato" tabindex="-1" role="dialog"
@@ -548,8 +539,6 @@
                <div class="modal-header">
                   <h5 class="modal-title add-task-title" id="modal_title_candidato">Adicionar Novo Candidato</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal()"></button>
-                  
-                  <button type="button" onclick="closeModal()"></button>
                </div>
                <div class="modal-body">
                   <form id="form_candidato" role="form">
@@ -641,7 +630,7 @@
                            <select class="form-select validate" id="form_candidato_contato"  required disabled>
                               <option value="" selected>Selecione..</option>
                            </select>
-                           <button type="button" onclick="abrirModalNewContact()" class="btn btn-primary" style="margin-top: 16px; float: right;">Novo contato</button>
+                           <button id="btnAddContact" type="button" onclick="abrirModalNewContact()" class="btn btn-primary" style="margin-top: 16px; float: right;">Novo contato</button>
                         </div>
                      </div>
                      <div class="row pt-4">
@@ -1072,6 +1061,9 @@
                      <div class="row">
                         <div class="col-lg-10 pt-3">
                            <button type="button" class="btn btn-primary" id="addCandidato" onclick="createCandidato()">Criar Candidato</button>
+                        </div>
+                        <div class="col-lg-10 pt-3">
+                           <button type="button" class="btn btn-primary" id="editCandidato" style="display: none;">Editar candidato</button>
                         </div>
                      </div>
                   </form>
