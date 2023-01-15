@@ -547,7 +547,7 @@
                            <label class="col-form-label">Sigla do Candidato<span
                               class="text-danger">*</span></label>
                            <input id="form_candidato_sigla" name="taskbudget" type="text"
-                              placeholder="Informe a Sigla do Candidato" class="form-control" required>
+                              placeholder="Informe a Sigla do Candidato" class="form-control" maxlength="4" required>
                         </div>
                      </div>
                      <div class="row">
@@ -2741,7 +2741,53 @@
 
          function closeModal() {
             $('#modalCandidatosPorSite').css('z-index', '')
-            resetForm("modalAdicionarCandidato")
+            resetForm("form_candidato")
+            //
+               $('#form_candidato_sigla').prop('disabled', false)
+               $('#form_candidato_site').prop('disabled', false)
+               $('#form_candidato_tipo_site').prop('disabled', false)
+               $('#form_candidato_aluguel').prop('disabled', false)
+               $("input[name=form_tipo_propriedade]").prop('disabled', false);
+               $('#form_candidato_proprietario').prop('disabled', false);
+               $('#form_candidato_cep').prop('disabled', false);
+               $('#form_candidato_endereco').prop('disabled', false);
+               $('#form_candidato_numero').prop('disabled', false);
+               $('#form_candidato_complemento').prop('disabled', false);
+               $('#form_candidato_bairro').prop('disabled', false);
+               $('#form_candidato_municipio').prop('disabled', false);
+               $('#form_candidato_uf').prop('disabled', false);
+               $('#form_candidato_distancia_pn').prop('disabled', false);
+               $('#form_candidato_pre_comar').prop('disabled', false);
+               $('#form_candidato_largura_area').prop('disabled', false);
+               $('#form_candidato_profundidade').prop('disabled', false);
+               $('#form_candidato_corredor').prop('disabled', false);
+               $('#form_candidato_area_locada').prop('disabled', false);
+               $('#form_candidato_altura_edificio').prop('disabled', false);
+               $('#tipoDeOpcao').prop('disabled', false);
+               $('#form_candidato_latitude').prop('disabled', false);
+               $('#form_candidato_longitude').prop('disabled', false);
+               $('#form_candidato_grauLat').prop('disabled', false);
+               $('#form_candidato_grauLong').prop('disabled', false);
+               $('#form_candidato_minutoLat').prop('disabled', false);
+               $('#form_candidato_minutLong').prop('disabled', false);
+               $('#form_candidato_segundoLat').prop('disabled', false);
+               $('#form_candidato_segundoLong').prop('disabled', false);
+               $('#form_candidato_pontoCardealLat').prop('disabled', false);
+               $('#form_candidato_pontoCardealLong').prop('disabled', false);
+               $('#form_candidato_altitude').prop('disabled', false);
+               $("input[name=anelBusca]").prop('disabled', false);
+               $("input[name=usoProposto]").prop('disabled', false);
+               $("input[name=legislacaoLocal]").prop('disabled', false);
+               $("input[name=documentacao]").prop('disabled', false);
+               $("input[name=acesso]").prop('disabled', false);
+               $("input[name=energia]").prop('disabled', false);
+               $("input[name=obstrucao]").prop('disabled', false);
+               $('#form_candidato_observacao').prop('disabled', false)
+               $('#form_candidato_anexo').prop('disabled', false)
+               $('#btnNovoProprietario').css('display', 'block')
+               $('#btnAddContact').css('display', 'block')
+               $('#addCandidato').css('display', 'block')
+               $('#editCandidato').css('display', 'none')
          }
 
          function createCandidato() {
@@ -3145,7 +3191,7 @@
                   });
             }
 
-            function mostrarErro(campo, mensagem) {
+         function mostrarErro(campo, mensagem) {
                if(campo.length > 0) {
                   var field = document.getElementById(campo);
 
@@ -3163,7 +3209,7 @@
                   showConfirmButton: true,
                   });
                }
-
+               
       </script>
       <script src="js/functions/getSite.js"></script>
       <script src="js/functions/getusuario.js"></script>

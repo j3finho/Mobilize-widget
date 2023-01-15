@@ -1,3 +1,4 @@
+
 function adicionaZero(numero) {
   if (numero <= 9) return "0" + numero;
   else return numero;
@@ -696,7 +697,7 @@ function viewCandidato(obj) {
       form_candidato_sigla.disabled = true;
 
       //
-     var siteOption = new Option((candidato.Site.display_value.lenght > 0 ? candidato.Site.display_value : nao_informado), candidato.Site.ID);
+     var siteOption = new Option((candidato.Site.display_value.length > 0 ? candidato.Site.display_value : nao_informado), candidato.Site.ID);
       form_candidato_site.add(siteOption)
       form_candidato_site.value = siteOption.value;
       form_candidato_site.disabled = true;
