@@ -2743,12 +2743,35 @@
             $('#modalCandidatosPorSite').css('z-index', '')
             resetForm("form_candidato")
             //
+
+            $('#btnNovoProprietario').css('display', 'block')
+            $('#btnAddContact').css('display', 'block')
+            $('#addCandidato').css('display', 'block')
+            $('#editCandidato').css('display', 'none')
+            //
+            const defaultOption = '<option value="">Selecione..</option>'
+            $('#form_candidato_site')
+               .empty()
+               .append(defaultOption)
+               .prop('disabled', false);
+
+            $('#form_candidato_tipo_site')
+               .empty()
+               .append(defaultOption)
+               .prop('disabled', false);
+
+            $('#form_candidato_proprietario')
+               .empty()
+               .append(defaultOption)
+               .prop('disabled', false);
+
+            $('#form_candidato_contato')
+               .empty()
+               .append(defaultOption);
+
                $('#form_candidato_sigla').prop('disabled', false)
-               $('#form_candidato_site').prop('disabled', false)
-               $('#form_candidato_tipo_site').prop('disabled', false)
                $('#form_candidato_aluguel').prop('disabled', false)
                $("input[name=form_tipo_propriedade]").prop('disabled', false);
-               $('#form_candidato_proprietario').prop('disabled', false);
                $('#form_candidato_cep').prop('disabled', false);
                $('#form_candidato_endereco').prop('disabled', false);
                $('#form_candidato_numero').prop('disabled', false);
@@ -2784,10 +2807,6 @@
                $("input[name=obstrucao]").prop('disabled', false);
                $('#form_candidato_observacao').prop('disabled', false)
                $('#form_candidato_anexo').prop('disabled', false)
-               $('#btnNovoProprietario').css('display', 'block')
-               $('#btnAddContact').css('display', 'block')
-               $('#addCandidato').css('display', 'block')
-               $('#editCandidato').css('display', 'none')
          }
 
          function createCandidato() {
@@ -3209,7 +3228,7 @@
                   showConfirmButton: true,
                   });
                }
-               
+
       </script>
       <script src="js/functions/getSite.js"></script>
       <script src="js/functions/getusuario.js"></script>

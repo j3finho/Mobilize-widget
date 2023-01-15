@@ -237,13 +237,41 @@ function getApizohoSites() {
           .appendTo("#datatable-sites_wrapper .col-md-6:eq(0)");
 
         $("div.toolbarsite").html(
-          '<button class="btn btn-primary  p-2" data-bs-toggle="modal" data-bs-target=".modalAdicionarSite" onclick="escolhalatlong(``, 1),habilitarAlturaSite(`form_cliente_tipoSite`,1)" >Criar Sites</button>&nbsp;&nbsp;&nbsp;<button class="btn btn-primary p-2" data-bs-toggle="modal" data-bs-target=".modalAdicionarCandidato" onclick="escolhalatlongCand(``, 1),corredorAcessoCand(``, 1),habilitarAlturaCand(`form_candidato_tipo_site`,1)">Criar Candidato</button>'
+          '<button class="btn btn-primary  p-2" data-bs-toggle="modal" data-bs-target=".modalAdicionarSite" onclick="escolhalatlong(``, 1),habilitarAlturaSite(`form_cliente_tipoSite`,1)" >Criar Sites</button>&nbsp;&nbsp;&nbsp;<button class="btn btn-primary p-2" data-bs-toggle="modal" data-bs-target=".modalAdicionarCandidato" onclick="getProprietarios(),escolhalatlongCand(``, 1),corredorAcessoCand(``, 1),habilitarAlturaCand(`form_candidato_tipo_site`,1)">Criar Candidato</button>'
         );
       });
     });
   });
 }
 getApizohoSites();
+
+function getProprietarios() {
+  const proprietariosField = document.getElementById('form_candidato_proprietario')
+
+  var config = {
+      appName: "mobilize",
+      reportName: "Widget_Proprietario"
+  }
+
+  ZOHO.CREATOR.init().then((data) => {
+      ZOHO.CREATOR.API.getAllRecords(config).then((response) => {
+          if(response.code != 3000) {
+              console.log("Não foi possível carregar os proprietários - Erro: " + response.code);
+              return
+          }
+
+          response.data.forEach((proprietario, inicio) => {
+          console.log("carregando os propriestarios ");
+              const nome = proprietario.Nome
+              if(nome != '') {
+                  var option = new Option(nome, proprietario.ID)
+                  proprietariosField.add(option)
+              }
+          })
+          console.log("Adicionado a lista os proprietários");
+      })
+  })
+}
 
 function viewSite(n) {
   console.log("teste view Site");
@@ -717,8 +745,8 @@ function viewCandidato(obj) {
       $("input[name=form_tipo_propriedade]").prop('disabled', true);
 
       //
-      var proprietarioOption = new Option(candidato.Proprietario, candidato.Proprietario.ID);
-      //form_candidato_proprietario.add(proprietarioOption)
+      var proprietarioOption = new Option(candidato.Proprietario.display_value, candidato.Proprietario.ID);
+      form_candidato_proprietario.add(proprietarioOption)
       form_candidato_proprietario.value = proprietarioOption.value;
       form_candidato_proprietario.disabled = true;
 
