@@ -22,7 +22,6 @@
       </style>
    </head>
    <body>
-
       <div class="container-fluid ">
       <div class="row px-4 pt-5">
          <div class="col-xl-12">
@@ -1058,13 +1057,10 @@
                               class="form-control" type="file">
                         </div>
                      </div>
-                     <div class="row">
-                        <div class="col-lg-10 pt-3">
-                           <button type="button" class="btn btn-primary" id="addCandidato" onclick="createCandidato()">Criar Candidato</button>
-                        </div>
-                        <div class="col-lg-10 pt-3">
-                           <button type="button" class="btn btn-primary" id="editCandidato" style="display: none;">Editar candidato</button>
-                        </div>
+                     <div class="rowCenterItems">
+                        <button type="button" class="btn btn-primary" id="addCandidato" onclick="createCandidato()">Criar Candidato</button>
+                        <button type="button" class="btn btn-primary" id="editCandidato" style="display: none;" onclick="desabilitarCampoCandidato(false, false)">Editar candidato</button>
+                        <button type="button" class="btn btn-primary" id="btnSalvarAlteracoes" style="display: none;">Salvar alterações</button>
                      </div>
                   </form>
                </div>
@@ -1417,26 +1413,6 @@
                            <label class="col-form-label">Etapa<span class="text-danger"></span></label>
                            <select class="form-select validate" id="editar_cliente_etapa" required>
                               <option value="" selected>Selecione..</option>
-                              <!--
-                                 <option value="0 - ACIONAMENTO">0 - ACIONAMENTO</option>
-                                 <option value="1 - PRE-ANÁLISE AMBIENTAL">1 - PRE-ANÁLISE AMBIENTAL</option>
-                                 <option value="2 - BUSCA">2 - BUSCA</option>
-                                 <option value="3 - ELABORAÇÃO DE SAR">3 - ELABORAÇÃO DE SAR</option>
-                                 <option value="4 - QUALIFICAÇÃO INTERNA">4 - QUALIFICAÇÃO INTERNA</option>
-                                 <option value="5 – QUALIFICAÇÃO CLIENTE">5 – QUALIFICAÇÃO CLIENTE</option>
-                                 <option value="6 – FORMALIZAÇÃO CONTRATUAL">6 – FORMALIZAÇÃO CONTRATUAL</option>
-                                 <option value="7 – APROVAÇÃO DE VALOR">7 – APROVAÇÃO DE VALOR</option>
-                                 <option value="8 - ASSINATURA DE CONTRATO LOCADOR">8 - ASSINATURA DE CONTRATO LOCADOR</option>
-                                 <option value="9 - CONTRATO ASSINADO COM PENDÊNCIA">9 - CONTRATO ASSINADO COM PENDÊNCIA</option>
-                                 <option value="10 - CONTRATO ASSINADO EM CHANCELA">10 - CONTRATO ASSINADO EM CHANCELA</option>
-                                 <option value="11 - CONTRATO APROVADO CLIENTE">11 - CONTRATO APROVADO CLIENTE</option>
-                                 <option value="12 – AGUARDANDO VIAS FISICAS ASSINADAS">12 – AGUARDANDO VIAS FISICAS ASSINADAS</option>
-                                 <option value="13 – AGUARDANDO ENVIO DAS VIAS FÍSICAS">13 – AGUARDANDO ENVIO DAS VIAS FÍSICAS</option>
-                                 <option value="14 - CRÍTICO">14 - CRÍTICO</option>
-                                 <option value="15 - ON HOLD">15 - ON HOLD</option>
-                                 <option value="16 - CANCELADO">16 - CANCELADO</option>
-                                 <option value="17 - FINALIZADO">17 - FINALIZADO</option>
-                                 -->
                            </select>
                         </div>
                         <div class="col-lg-6">
@@ -1999,7 +1975,7 @@
                            <input id="form_proprietario_uf" disabled name="taskbudget" type="text" placeholder="Informe a UF" class="form-control">
                         </div>
                      </div>
-                     <div style="margin-top: 16px; display: flex; justify-content: center">
+                     <div class="rowCenterItems">
                         <button type="button" class="btn btn-primary" id="btnAddProprietario" onclick="adicionarProprietario()">Criar proprietário</button>
                      </div>
                   </form>
@@ -2099,7 +2075,7 @@
                            <input id="form_contato_uf" name="taskbudget" type="text" placeholder="Informe a UF" class="form-control">
                         </div>
                      </div>
-                     <div style="margin-top: 16px; display: flex; justify-content: center">
+                     <div class="rowCenterItems">
                         <button type="button" class="btn btn-primary" id="btnAddContato" onclick="addContato()">Adicionar contato</button>
                      </div>
                   </form>
@@ -2710,6 +2686,8 @@
          }
 
          function closeModal() {
+            desabilitarCampoCandidato(false, true)
+
             $('#modalCandidatosPorSite').css('z-index', '')
             $('#modalAdicionarCandidato').modal('hide')
             resetForm("form_candidato")
@@ -2720,74 +2698,6 @@
             $('#btnAddContact').css('display', 'block')
             $('#addCandidato').css('display', 'block')
             $('#editCandidato').css('display', 'none')
-
-            //
-            const defaultOption = '<option value="">Selecione..</option>'
-            $('#form_candidato_site')
-               .empty()
-               .append(defaultOption)
-               .prop('disabled', false);
-
-            $('#form_candidato_tipo_site')
-               .empty()
-               .append(defaultOption)
-               .prop('disabled', false);
-
-            $('#form_candidato_proprietario')
-               .empty()
-               .append(defaultOption)
-               .prop('disabled', false);
-
-            $('#form_candidato_contato')
-               .empty()
-               .append(defaultOption);
-
-               $('#form_candidato_sigla').prop('disabled', false)
-               $('#form_candidato_aluguel').prop('disabled', false)
-               $("input[name=form_tipo_propriedade]").prop('disabled', false);
-               $('#form_candidato_cep').prop('disabled', false);
-               $('#form_candidato_endereco').prop('disabled', false);
-               $('#form_candidato_numero').prop('disabled', false);
-               $('#form_candidato_complemento').prop('disabled', false);
-               $('#form_candidato_bairro').prop('disabled', false);
-               $('#form_candidato_municipio').prop('disabled', false);
-               $('#form_candidato_uf').prop('disabled', false);
-               $('#form_candidato_distancia_pn').prop('disabled', false);
-               $('#form_candidato_pre_comar').prop('disabled', false);
-               $('#form_candidato_largura_area').prop('disabled', false);
-               $('#form_candidato_profundidade').prop('disabled', false);
-               $('#form_candidato_corredor').prop('disabled', false);
-               $('#form_candidato_area_locada').prop('disabled', false);
-               $('#form_candidato_altura_edificio').prop('disabled', false);
-               $('#tipoDeOpcao').prop('disabled', false);
-               $('#form_candidato_latitude').prop('disabled', false);
-               $('#form_candidato_longitude').prop('disabled', false);
-               $('#form_candidato_grauLat').prop('disabled', false);
-               $('#form_candidato_grauLong').prop('disabled', false);
-               $('#form_candidato_minutoLat').prop('disabled', false);
-               $('#form_candidato_minutLong').prop('disabled', false);
-               $('#form_candidato_segundoLat').prop('disabled', false);
-               $('#form_candidato_segundoLong').prop('disabled', false);
-               $('#form_candidato_pontoCardealLat').prop('disabled', false);
-               $('#form_candidato_pontoCardealLong').prop('disabled', false);
-               $('#form_candidato_altitude').prop('disabled', false);
-               $("input[name=anelBusca]").prop('disabled', false);
-               $("input[name=usoProposto]").prop('disabled', false);
-               $("input[name=legislacaoLocal]").prop('disabled', false);
-               $("input[name=documentacao]").prop('disabled', false);
-               $("input[name=acesso]").prop('disabled', false);
-               $("input[name=energia]").prop('disabled', false);
-               $("input[name=obstrucao]").prop('disabled', false);
-               $('#form_candidato_observacao').prop('disabled', false)
-               $('#form_candidato_anexo').prop('disabled', false)
-               
-               $('#form_candidato_candidatolocalizado').prop('disabled', true)
-               $('#form_candidato_proprietariointeressado').prop('disabled', true)
-               $('#form_candidato_arealocadaatende').prop('disabled', true)
-               $('#form_candidato_justifique_documentacaonecessaria').prop('disabled', true)
-               $('#form_candidato_justifique_acessodisponivel').prop('disabled', true)
-               $('#form_candidato_justifique_energiadisponivel').prop('disabled', true)
-               $('#form_candidato_justifique_obstrucao').prop('disabled', true)
          }
 
          function createCandidato() {

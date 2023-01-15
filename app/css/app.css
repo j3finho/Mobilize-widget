@@ -8,6 +8,12 @@ File: Main Css File
 */
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap");
 
+.rowCenterItems {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-around
+}
+
 thead, th, td {
   text-align: center;
 }
