@@ -569,10 +569,10 @@
                            <label class="col-form-label">Valor do Aluguel<span
                               class="text-danger">*</span></label>
                            <input id="form_candidato_aluguel" onInput="mascaraMoeda(event)" name="taskbudget"
-                              type="text" placeholder="Informe a Sigla do Candidato" class="form-control"
+                              type="text" placeholder="Informe o valor do aluguel" class="form-control"
                               required="" maxlength="15">
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6" id="tipo_propriedade_content">
                            <label class="col-form-label" id="tipo_propriedade">Tipo de Propriedade<span
                               class="text-danger">*</span></label>
                            <br>
@@ -2875,7 +2875,7 @@
                return
             }
             if (candidatoAnelBuscaJustificativa == "" && candidatoLegislacaoLocal == "Não") {
-               mostrarErro("", "Justificativa Legislação Local não respondida");
+               mostrarErro("anel_busca_title_question", "Justificativa Legislação Local não respondida");
                return
             }
             if (candidatoDocumentacao == "") {
