@@ -167,7 +167,7 @@ function getApizohoSites() {
             order: [[2, "asc"]],
             paging: true,
             lengthChange: !1,
-            buttons: ["copy", "excel", "pdf"],
+            buttons: [ "excel", "pdf"],
             dom:
               "<'row'<'col-sm-6 toolbarsite'><'col-sm-6'B>>" +
               "<'row'<'col-sm-6'><'col-sm-6'f>>" +
@@ -493,7 +493,7 @@ function viewCandidatosPorSite(n) {
             order: [[1, "desc"]],
             paging: true,
             lengthChange: !1,
-            buttons: ["copy", "excel", "pdf"],
+            buttons: ["excel", "pdf"],
             dom:
                 `
                 "<'row'<'col-sm-6 toolbarcandidato'><'col-sm-6'B>>"
@@ -908,7 +908,7 @@ function viewAtividadesPorSite(n) {
                     data: v_Atividades,
                     "paging": true,
                     "lengthChange": !1,
-                    "buttons": ["copy", "excel", "pdf"],
+                    "buttons": [ "excel", "pdf" ],
                     "dom": "<'row'<'col-sm-6 toolbaratividade'><'col-sm-6'B>>" +
                         "<'row'<'col-sm-6'><'col-sm-6'f>>" +
                         "<'row'<'col-sm-12'tr>>" +
