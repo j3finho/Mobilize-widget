@@ -1095,26 +1095,26 @@
                      <div class="row">
                         <div class="col-lg-6">
                            <label class="col-form-label">Cliente<span class="text-danger">*</span></label>
-                           <select class="form-select validate" id="form_cliente_site" required>
+                           <select class="form-select validate" id="form_cliente_site" tabindex="1900" required>
                               <option value="" selected>Selecione..</option>
                            </select>
                         </div>
                         <div class="col-lg-6">
                            <label class="col-form-label">ID Site Mobilize/Centro de custo<span class="text-danger">*</span></label>
-                           <input id="form_cliente_IdsiteMobilize" name="taskbudget" type="text"
+                           <input id="form_cliente_IdsiteMobilize" name="taskbudget" tabindex="1901" type="text"
                               placeholder="Informe o ID Site Mobilize" class="form-control" >
                         </div>
                      </div>
                      <div class="row">
                         <div class="col-lg-6">
                            <label class="col-form-label">Operadora<span class="text-danger">*</span></label>
-                           <select class="form-select validate" id="form_cliente_operadora" required>
+                           <select class="form-select validate" id="form_cliente_operadora" tabindex="1902" required>
                               <option value="" selected>Selecione..</option>
                            </select>
                         </div>
                         <div class="col-lg-6">
                            <label class="col-form-label">ID Site Sharing<span class="text-danger">*</span></label>
-                           <input id="form_cliente_Idsharing" name="taskbudget" type="text"
+                           <input id="form_cliente_Idsharing" name="taskbudget" tabindex="1903" type="text"
                               placeholder="Informe a Sigla o ID Site Sharing" class="form-control" required>
                         </div>
                      </div>
@@ -1127,34 +1127,34 @@
                         <div class="col-lg-6">
                            <label class="col-form-label">ID Site Operadora<span
                               class="text-danger">*</span></label>
-                           <input id="form_cliente_idSiteOperadora" name="taskbudget" type="text"
+                           <input id="form_cliente_idSiteOperadora" name="taskbudget" tabindex="1904" type="text"
                               placeholder="Informe a Sigla o ID Site Operadora" class="form-control" required>
                         </div>
                      </div>
                      <div class="row">
                         <div class="col-lg-6">
                            <label class="col-form-label">Tipo Site<span class="text-danger"></span></label>
-                           <select class="form-select" id="form_cliente_tipoSite" onchange="habilitarAlturaSite(this.id,1)">
+                           <select class="form-select" id="form_cliente_tipoSite" tabindex="1905" onchange="habilitarAlturaSite(this.id,1)">
                               <option value="" selected>Selecione...</option>
                            </select>
                         </div>
                         <div class="col-lg-6">
                            <label class="col-form-label">Data de Acionamento<span
                               class="text-danger">*</span></label>
-                           <input id="form_cliente_dataAcionamento" name="taskbudget" type="date" placeholder="Informe a Data de Acionamento" class="form-control" required>
+                           <input id="form_cliente_dataAcionamento" name="taskbudget" type="date" tabindex="1906" placeholder="Informe a Data de Acionamento" class="form-control" required>
                         </div>
                      </div>
                      <div class="row">
                         <div class="col-lg-6">
                            <label class="col-form-label">Projeto<span class="text-danger">*</span></label>
                            <input id="form_cliente_projeto" name="taskbudget" type="text"
-                              placeholder="Informe o Nome do Projeto" class="form-control" required>
+                              placeholder="Informe o Nome do Projeto" class="form-control" tabindex="1907" required>
                         </div>
                         <div class="col-lg-6">
                            <label class="col-form-label">
                            Sub Projeto<span class="text-danger"></span>
                            </label>
-                           <input id="form_cliente_subProjeto" name="taskbudget" type="text"
+                           <input id="form_cliente_subProjeto" name="taskbudget" tabindex="1908" type="text"
                               placeholder="Informe o Sub Projeto" class="form-control">
                         </div>
                      </div>
@@ -1162,7 +1162,7 @@
                         <div class="col-lg-6">
                            <label class="col-form-label">Target do Aluguel<span class="text-danger"></span></label>
                            <input id="form_cliente_targetAluguel" onInput="mascaraMoeda(event)" name="taskbudget"
-                              type="text" placeholder="Informe o Target do Aluguel" class="form-control"
+                              type="text" placeholder="Informe o Target do Aluguel" class="form-control" tabindex="1909"
                               required="" maxlength="15">
                         </div>
                      </div>
@@ -1175,14 +1175,14 @@
                      <div class="row">
                         <div class="col-lg-6">
                            <label class="col-form-label">UF<span class="text-danger">*</span></label>
-                           <select class="form-select validate" id="form_site_uf" required>
+                           <select class="form-select validate" id="form_site_uf" tabindex="1910" required>
                               <option value="" selected>Selecione...</option>
                            </select>
                         </div>
                         <div class="col-lg-6">
                            <label class="col-form-label">Município<span class="text-danger">*</span></label>
                            <div class="col-lg-12">
-                              <select class="form-select validate" id="form_site_municipio" required>
+                              <select class="form-select validate" id="form_site_municipio" tabindex="1911" required>
                                  <option value="" selected>Selecione...</option>
                               </select>
                            </div>
@@ -1202,7 +1202,7 @@
                         </div>
                         <div class="col-lg-6">
                            <label class="col-form-label">Raio de Busca (M)<span class="text-danger">*</span></label>
-                           <select class="form-select validate" id="form_cliente_raioBusca" required>
+                           <select class="form-select validate" id="form_cliente_raioBusca" tabindex="1912" required>
                               <option value="" selected>Selecione..</option>
                               <option value="50">50</option>
                               <option value="100">100</option>
@@ -1224,7 +1224,7 @@
                         <div class="col-lg-6">
                            <label class="col-form-label">Altura Prevista (M)<span
                               class="text-danger">*</span></label>
-                           <select class="form-select validate" id="form_cliente_alturaPrevista" required>
+                           <select class="form-select validate" id="form_cliente_alturaPrevista" tabindex="1913" required>
                               <option value="" selected>Selecione..</option>
                               <option value="0">0</option>
                               <option value="10">10</option>
@@ -1252,7 +1252,7 @@
                      <div class="row">
                         <div class="col-lg-6">
                            <label class="col-form-label">Opção<span class="text-danger"></span></label>
-                           <select class="form-select validate" id="form_cliente_opcao" onchange="escolhalatlong(this.value,1);">
+                           <select class="form-select validate" id="form_cliente_opcao" onchange="escolhalatlong(this.value,1);" tabindex="1914">
                               <option value="" selected>Selecione..</option>
                               <option value="Decimal">Decimal</option>
                               <option  value="UTM">UTM</option>
@@ -1280,13 +1280,13 @@
                                  <label class="col-form-label">Grau LAT <span class="text-danger">*</span></label>
                                  <input id="form_cliente_grauLat" name="taskbudget" type="text"
                                     placeholder="Informe a Largura o Grau Latitudinal" class="form-control"
-                                    tabindex="2001">
+                                    tabindex="1921">
                               </div>
                               <div class="col-lg-6">
                                  <label class="col-form-label">Grau LONG <span class="text-danger">*</span></label>
                                  <input id="form_cliente_grauLong" name="taskbudget" type="text"
                                     placeholder="Informe o Grau Longitudinal" class="form-control"
-                                    tabindex="2005">
+                                    tabindex="1925">
                               </div>
                            </div>
                            <div class="row">
@@ -1294,13 +1294,13 @@
                                  <label class="col-form-label">Minuto LAT <span class="text-danger">*</span></label>
                                  <input id="form_cliente_minLat" name="taskbudget" type="text"
                                     placeholder="Informe o  minuto Latitudinal" class="form-control"
-                                    tabindex="2002">
+                                    tabindex="1922">
                               </div>
                               <div class="col-lg-6">
                                  <label class="col-form-label">Minuto LONG <span class="text-danger">*</span></label>
                                  <input id="form_cliente_minLong" name="taskbudget" type="text"
                                     placeholder="Informe o minuto Longitudinal" class="form-control"
-                                    tabindex="2006">
+                                    tabindex="1926">
                               </div>
                            </div>
                            <div class="row">
@@ -1308,19 +1308,19 @@
                                  <label class="col-form-label">Segundo LAT <span class="text-danger">*</span></label>
                                  <input id="form_cliente_segLat" name="taskbudget" type="text"
                                     placeholder="Informe o segundo Longitudinal" class="form-control"
-                                    tabindex="2003">
+                                    tabindex="1923">
                               </div>
                               <div class="col-lg-6">
                                  <label class="col-form-label">Segundo LONG<span class="text-danger">*</span></label>
                                  <input id="form_cliente_segLong" name="taskbudget" type="text"
                                     placeholder="Informe o segundo Longitudinal" class="form-control"
-                                    tabindex="2007">
+                                    tabindex="1927">
                               </div>
                            </div>
                            <div class="row">
                               <div class="col-lg-6">
                                  <label class="col-form-label">Ponto Cardeal LAT<span class="text-danger">*</span></label>
-                                 <select class="form-select validate" id="form_cliente_pontoCardealLat" tabindex="2004">
+                                 <select class="form-select validate" id="form_cliente_pontoCardealLat" tabindex="1924">
                                     <option value="" selected>Selecione..</option>
                                     <option value="N">N</option>
                                     <option value="S">S</option>
@@ -1329,7 +1329,7 @@
                               <div class="col-lg-6">
                                  <label class="col-form-label">Ponto Cardeal LONG<span
                                     class="text-danger">*</span></label>
-                                 <select class="form-select validate" id="form_cliente_pontoCardealLong" tabindex="2008">
+                                 <select class="form-select validate" id="form_cliente_pontoCardealLong" tabindex="1928">
                                     <option value="" selected>Selecione..</option>
                                     <option value="E">E</option>
                                     <option value="W">W</option>
@@ -1347,14 +1347,14 @@
                            <div class="col-lg-6">
                               <label class="col-form-label">Coordenador Cliente<span
                                  class="text-danger"></span></label>
-                              <select class="form-select validate" id="form_cliente_coordenadorCliente">
+                              <select class="form-select validate" tabindex="1929" id="form_cliente_coordenadorCliente">
                                  <option value="" selected>Selecione..</option>
                               </select>
                            </div>
                            <div class="col-lg-6">
                               <label class="col-form-label">Coordenador Mobilize<span
                                  class="text-danger"></span></label>
-                              <select class="form-select validate" id="form_cliente_coordenadorMobilize"  >
+                              <select class="form-select validate" tabindex="1930" id="form_cliente_coordenadorMobilize"  >
                                  <option value="" selected>Selecione..</option>
                               </select>
                            </div>
@@ -1363,7 +1363,7 @@
                         <div class="col-lg-6">
                            <div class="mt-3">
                               <label for="formFile" class="form-label">Anexo</label>
-                              <input id="form_cliente_anexo" name="form_cliente_anexo" value="4194304"
+                              <input id="form_cliente_anexo" name="form_cliente_anexo" tabindex="1931" value="4194304"
                                  accept=".gif,.png, .pdf, .doc , .csv, .xlsx, .xls, .jpg, .jpeg, .docx"
                                  class="form-control" type="file">
                            </div>

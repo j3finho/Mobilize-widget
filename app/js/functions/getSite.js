@@ -316,7 +316,7 @@ function viewSite(n) {
         operadora: data.Operadora.display_value,
         radioDeBusca: data.RAIO_DE_BUSCA_M,
         aluguel: data.Target_do_Aluguel,
-        tipoSite: data.Tipo_Site.display_value,
+        tipoSite: data.TipoSiteCandidato,
         projeto: data.Projeto,
         subProjeto: data.Sub_Projeto,
         etapa: data.Etapa.display_value,
@@ -517,7 +517,7 @@ function viewCandidatosPorSite(n) {
                             <button id="${data["id"]}"  type="button" onclick="viewCandidato(this)" class="btn_view_site btn btn-outline-secondary btn-sm edit" title="Visualizar">
                                 <i class="far fa-eye"></i>
                             </button>
-                            <button id="${data["id"]}"  type="button" onclick="" class="btn_view_site btn btn-outline-secondary btn-sm edit" title="Excluir">
+                            <button id="${data["id"]}"  type="button" onclick="excluirCandidato(${data['id']}, ${data['status']})" class="btn_view_site btn btn-outline-secondary btn-sm edit" title="Excluir">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                             `;
@@ -601,7 +601,7 @@ function viewCandidatosPorSite(n) {
                               <path d="M3.05 3.05a7 7 0 0 0 0 9.9.5.5 0 0 1-.707.707 8 8 0 0 1 0-11.314.5.5 0 0 1 .707.707zm2.122 2.122a4 4 0 0 0 0 5.656.5.5 0 1 1-.708.708 5 5 0 0 1 0-7.072.5.5 0 0 1 .708.708zm5.656-.708a.5.5 0 0 1 .708 0 5 5 0 0 1 0 7.072.5.5 0 1 1-.708-.708 4 4 0 0 0 0-5.656.5.5 0 0 1 0-.708zm2.122-2.12a.5.5 0 0 1 .707 0 8 8 0 0 1 0 11.313.5.5 0 0 1-.707-.707 7 7 0 0 0 0-9.9.5.5 0 0 1 0-.707zM6 8a2 2 0 1 1 2.5 1.937V15.5a.5.5 0 0 1-1 0V9.937A2 2 0 0 1 6 8z"/>
                           </svg>
                       </button>
-                      <button  title="Protocolo CUOS" onClick="alterarProtCuos('${row.id}', '${row.protocoloCuosId}')" class="btn_view_site btn btn-outline-secondary btn-sm edit" >
+                      <button  title="Protocolo CUOS" onClick="alterarProtCuos('${row.id}', "row.protocoloCuosId")" class="btn_view_site btn btn-outline-secondary btn-sm edit" >
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                               <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                               <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -811,6 +811,50 @@ function viewCandidato(obj) {
       $('#modalAdicionarCandidato').modal('show')
       $('#modalCandidatosPorSite').css('z-index', 1051)
   })
+}
+
+function excluirCandidato(id, status) {
+  Swal.fire({
+    title: 'Deseja excluir este candidato?',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sim',
+    cancelButtonText: 'Não',
+    reverseButtons: true
+}).then((result) => {
+    if (result.isConfirmed) {            
+        if(["Aprovado", "Em Documentação", "Concluído"].includes(status)) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Candidato com status ' + status + " . Não é possível exclui-lo."
+         })
+          return
+        }
+        config = {
+          appName: "mobilize",
+          reportName: "widget_atividades_full",
+          criteria: "(ID=" + id + ")"
+       }
+       ZOHO.CREATOR.API.deleteRecord(config).then(function(response){
+          if(response.code != 3000) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Ocorreu um erro ao tentar excluir o candidato. Tente novamente mais tarde'
+           })
+            return
+          }
+          Swal.fire({
+            icon: 'sucess',
+            title: 'Candidato excluido com sucesso',
+         })
+         setTimeout(() => document.location.reload(true), 2000);
+      });
+    }
+})
 }
 
 function viewAtividadesPorSite(n) {
