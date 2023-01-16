@@ -270,15 +270,13 @@ function getMunicipios(municipioID, estadoID) {
 
 function getRegional(regionalId, estadoID) {
   var regiao = $('#' + regionalId)
-  var estadoSigla = $('#' + estadoID).text()
+  var estadoSigla = $('#' + estadoID).find(':selected').text()
 
   const norte = ["AC", "AM", "RO", "RR", "PA", "TO", "AP"]
   const nordeste = ["MA", "PI", "CE", "RN", "PB", "PE", "AL", "SE", "BA"]
   const centroOeste = ["MT", "MS", "GO", "DF"]
   const suldeste = ["MG", "ES", "SP", "RJ"]
   const sul = ["RS", "PR", "SC"]
-
-  console.log("ta buscando a regiao: " + estadoSigla)
 
   if(norte.includes(estadoSigla)) {
     regiao.val('Norte')
