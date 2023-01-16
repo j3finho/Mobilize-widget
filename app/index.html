@@ -1132,33 +1132,28 @@
                         </div>
                      </div>
                      <div class="row">
-                        <div class="col-lg-6">
+                        <!-- <div class="col-lg-6">
                            <label class="col-form-label">Tipo Site<span class="text-danger"></span></label>
                            <select class="form-select" id="form_cliente_tipoSite" tabindex="1905" onchange="habilitarAlturaSite(this.id,1)">
                               <option value="" selected>Selecione...</option>
                            </select>
-                        </div>
+                        </div> -->
                         <div class="col-lg-6">
                            <label class="col-form-label">Data de Acionamento<span
                               class="text-danger">*</span></label>
                            <input id="form_cliente_dataAcionamento" name="taskbudget" type="date" tabindex="1906" placeholder="Informe a Data de Acionamento" class="form-control" required>
                         </div>
-                     </div>
-                     <div class="row">
                         <div class="col-lg-6">
                            <label class="col-form-label">Projeto<span class="text-danger">*</span></label>
                            <input id="form_cliente_projeto" name="taskbudget" type="text"
                               placeholder="Informe o Nome do Projeto" class="form-control" tabindex="1907" required>
                         </div>
-                        <div class="col-lg-6">
-                           <label class="col-form-label">
-                           Sub Projeto<span class="text-danger"></span>
-                           </label>
-                           <input id="form_cliente_subProjeto" name="taskbudget" tabindex="1908" type="text"
-                              placeholder="Informe o Sub Projeto" class="form-control">
-                        </div>
                      </div>
                      <div class="row">
+                        <div class="col-lg-6">
+                           <label class="col-form-label">Sub Projeto<span class="text-danger"></span></label>
+                           <input id="form_cliente_subProjeto" name="taskbudget" tabindex="1908" type="text" placeholder="Informe o Sub Projeto" class="form-control">
+                        </div>
                         <div class="col-lg-6">
                            <label class="col-form-label">Target do Aluguel<span class="text-danger"></span></label>
                            <input id="form_cliente_targetAluguel" onInput="mascaraMoeda(event)" name="taskbudget"
@@ -1175,7 +1170,7 @@
                      <div class="row">
                         <div class="col-lg-6">
                            <label class="col-form-label">UF<span class="text-danger">*</span></label>
-                           <select class="form-select validate" id="form_site_uf" tabindex="1910" required>
+                           <select class="form-select validate" id="form_site_uf" onchange="getMunicipios('form_site_municipio', this.value),getRegional('form_cliente_regional', this.id)" tabindex="1910" required>
                               <option value="" selected>Selecione...</option>
                            </select>
                         </div>
@@ -3094,7 +3089,6 @@
       <script src="js/functions/getAtividades.js"></script>
       <script src="js/functions/validations.js"></script>
       <script src="js/functions/buscaCep.js"></script>
-      <script src="js/functions/getProprietarios.js"></script>
       <script src="js/functions/getContatos.js"></script>
    </body>
 </html>

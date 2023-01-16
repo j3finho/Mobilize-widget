@@ -237,7 +237,7 @@ function getApizohoSites() {
           .appendTo("#datatable-sites_wrapper .col-md-6:eq(0)");
 
         $("div.toolbarsite").html(
-          '<button class="btn btn-primary  p-2" data-bs-toggle="modal" data-bs-target=".modalAdicionarSite" onclick="getClientes(),escolhalatlong(``, 1),habilitarAlturaSite(`form_cliente_tipoSite`,1)" >Criar Sites</button>&nbsp;&nbsp;&nbsp;<button class="btn btn-primary p-2" data-bs-toggle="modal" data-bs-target=".modalAdicionarCandidato" onclick="getProprietarios(),escolhalatlongCand(``, 1),corredorAcessoCand(``, 1),habilitarAlturaCand(`form_candidato_tipo_site`,1)">Criar Candidato</button>'
+          '<button class="btn btn-primary  p-2" data-bs-toggle="modal" data-bs-target=".modalAdicionarSite" onclick="actionCadastrarSite()" >Criar Sites</button>&nbsp;&nbsp;&nbsp;<button class="btn btn-primary p-2" data-bs-toggle="modal" data-bs-target=".modalAdicionarCandidato" onclick="actionCadastrarCandidato()">Criar Candidato</button>'
         );
       });
     });
@@ -245,14 +245,68 @@ function getApizohoSites() {
 }
 getApizohoSites();
 
-function getClientes() {
-  var clientes = $('#form_cliente_site')
+
+function actionCadastrarSite() {
+  escolhalatlong('', 1)
+  habilitarAlturaSite('form_cliente_tipoSite',1)
+  getAllRecords('widget_clientes_full', 'form_cliente_site', '')
+  getAllRecords('widget_operadoras_full', 'form_cliente_operadora', '')
+  getAllRecords('widget_etapas_full', 'form_cliente_etapa', '(Ordem==0&&Nome_da_Etapa=="ACIONAMENTO")')
+  getAllRecords('widget_estados_full', 'form_site_uf')
+  getAllRecords('widget_contatos_full', 'form_cliente_coordenadorCliente', '')
+  getAllRecords('widget_responsaveis_full', 'form_cliente_coordenadorMobilize', '(Funcao.contains("Coordenador"))')
+}
+
+function actionCadastrarCandidato() {
+  escolhalatlongCand('', 1)
+  // corredorAcessoCand('', 1)
+  // habilitarAlturaCand('form_candidato_tipo_site',1)
+  getAllRecords('Widget_Proprietario', 'form_candidato_proprietario', '')
+}
+
+function getMunicipios(municipioID, estadoID) {
+  getAllRecords('widget_municipios_full', municipioID, '(uf1.ID==' + estadoID + ')')
+}
+
+function getRegional(regionalId, estadoID) {
+  var regiao = $('#' + regionalId)
+  var estadoSigla = $('#' + estadoID).text()
+
+  const norte = ["AC", "AM", "RO", "RR", "PA", "TO", "AP"]
+  const nordeste = ["MA", "PI", "CE", "RN", "PB", "PE", "AL", "SE", "BA"]
+  const centroOeste = ["MT", "MS", "GO", "DF"]
+  const suldeste = ["MG", "ES", "SP", "RJ"]
+  const sul = ["RS", "PR", "SC"]
+
+  console.log("ta buscando a regiao: " + estadoSigla)
+
+  if(norte.includes(estadoSigla)) {
+    regiao.val('Norte')
+  }
+  if(nordeste.includes(estadoSigla)) {
+    regiao.val('Nordeste')
+  }
+  if(centroOeste.includes(estadoSigla)) {
+    regiao.val('Centro Oeste')
+
+  }
+  if(suldeste.includes(estadoSigla)) {
+    regiao.val('Suldeste')
+  }
+  if(sul.includes(estadoSigla)) {
+    regiao.val('Sul')
+  }
+}
+
+function getAllRecords(report, inputField, criteria) {
+  var field = $('#' + inputField)
   config = {
     appName: "mobilize",
-    reportName: "widget_clientes_full",
+    reportName: report, 
+    criteria: criteria
   }
 
-  clientes
+  field
       .empty()
       .append('<option value="">Selecione..</option>')
   
@@ -262,41 +316,40 @@ function getClientes() {
           $.each(responseCandidato.error, function(key,val) {             
               error = error + val + ". ";
            });
-          console.log("Nao foi possivel carregar os clientes. - " + error)
+          console.log("Nao foi possivel carregar os dados - " + error)
           return
       }
       response.data.forEach((data) => {
-          clientes.append('<option value=" ' + data.ID + ' ">' + data.nameClient + '</option>')
-      })
-  });
-}
-
-function getProprietarios() {
-  const proprietariosField = document.getElementById('form_candidato_proprietario')
-
-  var config = {
-      appName: "mobilize",
-      reportName: "Widget_Proprietario"
-  }
-
-  ZOHO.CREATOR.init().then((data) => {
-      ZOHO.CREATOR.API.getAllRecords(config).then((response) => {
-          if(response.code != 3000) {
-              console.log("Não foi possível carregar os proprietários - Erro: " + response.code);
-              return
+          var value = data.ID
+          var textContent = ""
+          if(report == "widget_clientes_full") {
+              textContent = data.nameClient
+          }
+          else if(report == "widget_operadoras_full") {
+             textContent = data.Nome_Operadora1
+          }
+          else if(report == "widget_etapas_full") {
+            textContent = data.Ordem + " - " + data.Nome_da_Etapa
+          }
+          else if(report == "widget_estados_full") {
+            textContent = data.Sigla
+          }
+          else if(["widget_contatos_full", "Widget_Proprietario"].includes(report)) {
+            textContent = data.Nome
+          }
+          else if(report == "widget_responsaveis_full") {
+            textContent = data.Nome.display_value
+          }
+          else if(report == "widget_municipios_full") {
+            textContent = data.name
           }
 
-          response.data.forEach((proprietario, inicio) => {
-          console.log("carregando os propriestarios ");
-              const nome = proprietario.Nome
-              if(nome != '') {
-                  var option = new Option(nome, proprietario.ID)
-                  proprietariosField.add(option)
-              }
-          })
-          console.log("Adicionado a lista os proprietários");
+          field.append('<option value="'+value+'">' + textContent + '</option>')
+          if(report == "widget_etapas_full") {
+            field.val(value)
+          }
       })
-  })
+  });
 }
 
 function viewSite(n) {
