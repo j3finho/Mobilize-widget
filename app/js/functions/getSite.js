@@ -516,11 +516,8 @@ function viewCandidatosPorSite(n) {
                   return `
                             <button id="${data["id"]}"  type="button" onclick="viewCandidato(this)" class="btn_view_site btn btn-outline-secondary btn-sm edit" title="Visualizar">
                                 <i class="far fa-eye"></i>
-                                </button>
-                                <button id="${data["id"]}"  type="button" onclick="" class="btn_view_site btn btn-outline-secondary btn-sm edit" title="Editar">
-                                <i class="fas fa-pencil-alt"></i>
-                                </button>
-                                <button id="${data["id"]}"  type="button" onclick="" class="btn_view_site btn btn-outline-secondary btn-sm edit" title="Excluir">
+                            </button>
+                            <button id="${data["id"]}"  type="button" onclick="" class="btn_view_site btn btn-outline-secondary btn-sm edit" title="Excluir">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                             `;
@@ -717,63 +714,8 @@ function desabilitarCampoCandidato(isEnabled, clearSelectOptions) {
 
 
 function viewCandidato(obj) {
-  console.log("recebendo os valores da API referente ao candidato em questao");
-
   $('#modal_title_candidato').text("Visualizar candidato")
   desabilitarCampoCandidato(true, false)
-
-  var form_candidato_contato = document.getElementById("form_candidato_contato")
-
-  var form_candidato_sigla = document.getElementById("form_candidato_sigla");
-
-  var form_candidato_site = document.getElementById("form_candidato_site");
-
-  var form_candidato_tipo_site = document.getElementById("form_candidato_tipo_site");
-
-  var form_candidato_aluguel = document.getElementById("form_candidato_aluguel");
-
-  var form_candidato_proprietario = document.getElementById("form_candidato_proprietario");
-
-  var form_candidato_corredor = document.getElementById("form_candidato_corredor");
-
-  var form_candidato_pontoCardealLat = document.getElementById("form_candidato_pontoCardealLat");
-
-  var form_candidato_pontoCardealLong = document.getElementById("form_candidato_pontoCardealLong");
-
-  var form = document.querySelector('#form_candidato');
-  var tipoDeOpcao = form.form_tipo_opcao
-
-  var anelBuscajustificativa = document.getElementById("form_candidato_candidatolocalizado")
-  var usoPropostojustificativa = document.getElementById("form_candidato_proprietariointeressado")
-  var legislacaoLocaljustificativa = document.getElementById("form_candidato_arealocadaatende")
-  var documentacaojustificativa = document.getElementById("form_candidato_justifique_documentacaonecessaria")
-  var acessojustificativa = document.getElementById("form_candidato_justifique_acessodisponivel")
-  var energiajustificativa = document.getElementById("form_candidato_justifique_energiadisponivel")
-  var obstrucaojustificativa = document.getElementById("form_candidato_justifique_obstrucao")
-
-  var form_candidato_endereco = document.getElementById("form_candidato_endereco");
-  var form_candidato_complemento = document.getElementById("form_candidato_complemento");
-  var form_candidato_cep = document.getElementById("form_candidato_cep");
-  var form_candidato_numero = document.getElementById("form_candidato_numero");
-  var form_candidato_bairro = document.getElementById("form_candidato_bairro");
-  var form_candidato_municipio = document.getElementById("form_candidato_municipio");
-  var form_candidato_uf = document.getElementById("form_candidato_uf");
-  var form_candidato_distancia_pn = document.getElementById("form_candidato_distancia_pn");
-  var form_candidato_pre_comar = document.getElementById("form_candidato_pre_comar");
-  var form_candidato_profundidade = document.getElementById("form_candidato_profundidade");
-  var form_candidato_area_locada = document.getElementById("form_candidato_area_locada");
-  var form_candidato_largura_area = document.getElementById("form_candidato_largura_area");
-  var form_candidato_altura_edificio = document.getElementById("form_candidato_altura_edificio");
-  var form_candidato_latitude = document.getElementById("form_candidato_latitude")
-  var form_candidato_longitude = document.getElementById("form_candidato_longitude")
-  var form_candidato_grauLat = document.getElementById("form_candidato_grauLat");
-  var form_candidato_grauLong = document.getElementById("form_candidato_grauLong");
-  var form_candidato_minutoLat = document.getElementById("form_candidato_minutoLat");
-  var form_candidato_minutLong = document.getElementById("form_candidato_minutLong");
-  var form_candidato_segundoLat = document.getElementById("form_candidato_segundoLat");
-  var form_candidato_segundoLong = document.getElementById("form_candidato_segundoLong");
-  var form_candidato_observacao = document.getElementById("form_candidato_observacao");
-  var form_candidato_altitude = document.getElementById("form_candidato_altitude");
 
   document.getElementById('candidatoID').value = obj.id
 
@@ -792,149 +734,9 @@ function viewCandidato(obj) {
           })
           return
       }
-      const nao_informado = ""
-      console.log("Buscou pelo candidato: " + response.data.ID)
-
 
       const candidato = response.data;
 
-
-      console.log("ID do candidato: " + obj.id)
-
-      // // 
-      // form_candidato_sigla.value = candidato.Sigla_do_Candidato;
-
-      // //
-      // var siteOption = new Option((candidato.Site.display_value.length > 0 ? candidato.Site.display_value : nao_informado), candidato.Site.ID);
-      // form_candidato_site.add(siteOption)
-      // form_candidato_site.value = siteOption.value;
-
-      // // 
-      // var tipoSiteOption = new Option(candidato.Tipo_Site.display_value, candidato.Tipo_Site.ID);
-      // form_candidato_tipo_site.add(tipoSiteOption)
-      // form_candidato_tipo_site.value = tipoSiteOption.value;
-
-      // // 
-      // form_candidato_aluguel.value = maskCurrency(candidato.Valor_do_Aluguel)
-
-      // //
-      // $("input[name=form_tipo_propriedade][value=" + candidato.Tipo_de_Negocia_o + "]").prop('checked', true);
-
-      // //
-      // var proprietarioOption = new Option(candidato.Proprietario.display_value, candidato.Proprietario.ID);
-      // form_candidato_proprietario.add(proprietarioOption)
-      // form_candidato_proprietario.value = proprietarioOption.value;
-
-      // //
-      // var contatoOption = new Option(candidato.Contato.display_value, candidato.Contato.ID);
-      // form_candidato_contato.add(contatoOption)
-      // form_candidato_contato.value = contatoOption.value;
-
-      // //
-      // form_candidato_cep.value = candidato.CEP.lenght > 0 ? candidato.CEP : nao_informado;
-
-      // console.log("CEP do candidato: " + candidato.CEP)
-
-      // //
-      // form_candidato_endereco.value =  candidato.Endereco.lenght > 0 ? candidato.Endereco : nao_informado
-
-      // //
-      // form_candidato_numero.value = candidato.Endere_o.lenght > 0 ? candidato.Endere_o : nao_informado
-
-      // //
-      // form_candidato_complemento.value =  candidato.Complemento.lenght > 0 ? candidato.Complemento : nao_informado
-
-      // //
-      // form_candidato_bairro.value = candidato.Bairro.lenght > 0 ? candidato.Bairro : nao_informado;
-
-      // //
-      // form_candidato_municipio.value =  candidato.Municipio.lenght > 0 ? candidato.Municipio : nao_informado
-
-      // //
-      // form_candidato_uf.value = candidato.UF;
-
-      // //
-      // form_candidato_distancia_pn.value =  candidato.Distancia_PN.lenght > 0 ? candidato.Distancia_PN : nao_informado
-
-      // //
-      // form_candidato_pre_comar.value = candidato.Pre_Comar_m.lenght > 0 ? candidato.Pre_Comar_m : nao_informado
-
-      // //
-      // form_candidato_largura_area.value = candidato.Largura_area.lenght > 0 ? candidato.Largura_area : nao_informado
-
-      // //
-      // form_candidato_profundidade.value = candidato.Profundidade_area.lenght > 0 ? candidato.Profundidade_area : nao_informado
-
-      // //
-      // var corredorDeAcessoOption = new Option(candidato.Corredor_de_Acesso);
-      // form_candidato_corredor.value = corredorDeAcessoOption.value;
-
-      // //
-      // form_candidato_area_locada.value = candidato.Area_Locada_m.lenght > 0 ? candidato.Area_Locada_m : nao_informado
-
-      // //
-      // form_candidato_altura_edificio.value = candidato.Altura_do_Edifica_o.lenght > 0 ? candidato.Altura_do_Edifica_o : nao_informado
-
-      // //
-      // tipoDeOpcao.value = candidato.Opcao
-
-
-      // // Lat & Long - Decimal
-      // form_candidato_latitude.value = candidato.Latitude.lenght > 0 ? candidato.Latitude : nao_informado;
-      // form_candidato_longitude.value = candidato.Longitude.lenght > 0 ? candidato.Longitude : nao_informado;
-
-      // // Lat & Long - GMS / UTM
-      // form_candidato_grauLat.value = candidato.GrauLAT.lenght > 0 ? candidato.GrauLAT : nao_informado;
-      // form_candidato_grauLong.value = candidato.GrauLONG.lenght > 0 ? candidato.GrauLONG : nao_informado;
-      // form_candidato_minutoLat.value = candidato.MinutoLAT.lenght > 0 ? candidato.MinutoLAT : nao_informado;
-      // form_candidato_minutLong.value = candidato.MinutoLONG.lenght > 0 ? candidato.MinutoLONG : nao_informado;
-      // form_candidato_segundoLat.value = candidato.SegundoLAT.lenght > 0 ? candidato.SegundoLAT : nao_informado;
-      // form_candidato_segundoLong.value = candidato.SegundoLONG.lenght > 0 ? candidato.SegundoLONG : nao_informado;
-
-      // if(candidato.Ponto_Cardeal_LAT.lenght > 0) {
-      //   form_candidato_pontoCardealLat.value = candidato.Ponto_Cardeal_LAT;
-      // } else {
-      //   form_candidato_pontoCardealLat.selectedIndex = 0
-      // }
-
-      // if(candidato.PontoCardealLONG.lenght > 0 ) {
-      //   form_candidato_pontoCardealLong.value = candidato.PontoCardealLONG
-      // } else {
-      //   form_candidato_pontoCardealLong.selectedIndex = 0
-      // }
-
-      // //
-      // form_candidato_altitude.value = candidato.Altitude
-
-      // //
-      // $("input[name=anelBusca][value=" + candidato.anelBusca + "]").prop('checked', true);
-      // anelBuscajustificativa.value = candidato.Justificativa_O_candidato_est_localizado_dentro_do_anel_de_busca.lenght > 0 ? candidato.Justificativa_O_candidato_est_localizado_dentro_do_anel_de_busca : "";
-
-      // //
-      // $("input[name=usoProposto][value=" + candidato.usoProposto + "]").prop('checked', true);
-      // usoPropostojustificativa.value = candidato.Justificativa_O_propriet_rio_est_interessado_no_uso_proposto.lenght > 0 ? candidato.Justificativa_O_propriet_rio_est_interessado_no_uso_proposto : "";
-
-      // //
-      // $("input[name=legislacaoLocal][value=" + candidato.legislacaoLocal + "]").prop('checked', true);
-      // legislacaoLocaljustificativa.value = candidato.Justificativa_A_rea_locada_atende_os_requisitos_m_nimos_exigidos_pela_legisla_o_local.lenght > 0 ? candidato.Justificativa_A_rea_locada_atende_os_requisitos_m_nimos_exigidos_pela_legisla_o_local : "";
-
-      // //
-      // $("input[name=documentacao][value=" + candidato.legislacaoLocal + "]").prop('checked', true);
-      // documentacaojustificativa.value = candidato.Justificativa_A_documenta_o_necess_ria_est_dispon_vel.lenght > 0 ? candidato.Justificativa_A_documenta_o_necess_ria_est_dispon_vel : "";
-
-      // //
-      // $("input[name=acesso][value=" + candidato.acesso + "]").prop('checked', true);
-      // acessojustificativa.value =  candidato.Justificativa_O_acesso_ao_site_est_dispon_vel_24horas_dia_7dias_semana.lenght > 0 ? candidato.Justificativa_O_acesso_ao_site_est_dispon_vel_24horas_dia_7dias_semana : "";
-
-      // //
-      // $("input[name=energia][value=" + candidato.energia + "]").prop('checked', true);
-      // energiajustificativa.value = candidato.Justificativa_Existe_energia_dispon_vel_no_site.lenght > 0 ? candidato.Justificativa_Existe_energia_dispon_vel_no_site : "";
-
-      // //
-      // $("input[name=obstrucao][value=" + candidato.obstrucao +"]").prop('checked', true);
-      // obstrucaojustificativa.value = candidato.Justificativa_Existe_alguma_obstru_o_ou_interfer_ncia_vis_vel.lenght > 0 ? candidato.Justificativa_Existe_alguma_obstru_o_ou_interfer_ncia_vis_vel : "";
-
-      //
       $('#form_candidato_sigla').val(candidato.Sigla_do_Candidato)
       $('#form_candidato_site')
           .append('<option value="'+candidato.Site.ID+'">'+candidato.Site.display_value+'</option>')
@@ -999,12 +801,12 @@ function viewCandidato(obj) {
       $('#form_candidato_justifique_obstrucao').val(candidato.Justificativa_Existe_alguma_obstru_o_ou_interfer_ncia_vis_vel)
       $('#form_candidato_observacao').val(candidato.Coment_rios)
 
-      console.log("Ve se chegou no modal")
       //
       $('#btnNovoProprietario').css('display', 'none')
       $('#btnAddContact').css('display', 'none')
       $('#addCandidato').css('display', 'none')
       $('#editCandidato').css('display', 'block')
+
 
       $('#modalAdicionarCandidato').modal('show')
       $('#modalCandidatosPorSite').css('z-index', 1051)

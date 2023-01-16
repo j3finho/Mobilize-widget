@@ -17,7 +17,6 @@ import {
 } from "./functions/forms/getSelects.js";
 import addSite from "./functions/forms/addSites.js";
 import adicionaZero from "./functions/ultilitys.js";
-import createCandidato from "./functions/forms/addCandidatos.js";
 
 function runSelects(){
     getSelectResponsavel();
@@ -170,26 +169,12 @@ btnAddAtividade.addEventListener('click', () => addTask());
 const btnAddSite = document.getElementById('addSite');
 btnAddSite.addEventListener('click', () => addSite());
 
-/*
-const btnAddCandidato = document.getElementById('addCandidato');
-btnAddCandidato.addEventListener('click', () => createCandidato());
-*/
-
 const campoAddSiteEstado = document.getElementById('form_site_uf');
 campoAddSiteEstado.addEventListener('change', () => escolhaEstado(1));
 
 const campoEdtSiteEstado = document.getElementById('form_editar_site_uf');
 campoEdtSiteEstado.addEventListener('change', () => escolhaEstado(2));
 
-/*
-const btnAddProprietario = document.getElementById('btnAddProprietario')
-btnAddProprietario.addEventListener('click', () => adicionarProprietario())
-*/
-
-/*
-const btnAddContato = document.getElementById('btnAddContato');
-btnAddContato.addEventListener('click', () => addContato());
-*/
 
 // Colocando a data de hoje
 let dataDeHoje = new Date()
