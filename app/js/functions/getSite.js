@@ -237,13 +237,39 @@ function getApizohoSites() {
           .appendTo("#datatable-sites_wrapper .col-md-6:eq(0)");
 
         $("div.toolbarsite").html(
-          '<button class="btn btn-primary  p-2" data-bs-toggle="modal" data-bs-target=".modalAdicionarSite" onclick="escolhalatlong(``, 1),habilitarAlturaSite(`form_cliente_tipoSite`,1)" >Criar Sites</button>&nbsp;&nbsp;&nbsp;<button class="btn btn-primary p-2" data-bs-toggle="modal" data-bs-target=".modalAdicionarCandidato" onclick="getProprietarios(),escolhalatlongCand(``, 1),corredorAcessoCand(``, 1),habilitarAlturaCand(`form_candidato_tipo_site`,1)">Criar Candidato</button>'
+          '<button class="btn btn-primary  p-2" data-bs-toggle="modal" data-bs-target=".modalAdicionarSite" onclick="getClientes(),escolhalatlong(``, 1),habilitarAlturaSite(`form_cliente_tipoSite`,1)" >Criar Sites</button>&nbsp;&nbsp;&nbsp;<button class="btn btn-primary p-2" data-bs-toggle="modal" data-bs-target=".modalAdicionarCandidato" onclick="getProprietarios(),escolhalatlongCand(``, 1),corredorAcessoCand(``, 1),habilitarAlturaCand(`form_candidato_tipo_site`,1)">Criar Candidato</button>'
         );
       });
     });
   });
 }
 getApizohoSites();
+
+function getClientes() {
+  var clientes = $('#form_cliente_site')
+  config = {
+    appName: "mobilize",
+    reportName: "widget_clientes_full",
+  }
+
+  clientes
+      .empty()
+      .append('<option value="">Selecione..</option>')
+  
+  ZOHO.CREATOR.API.getAllRecords(config).then(function(response) {
+      if(response.code != 3000) {
+          var error = []
+          $.each(responseCandidato.error, function(key,val) {             
+              error = error + val + ". ";
+           });
+          console.log("Nao foi possivel carregar os clientes. - " + error)
+          return
+      }
+      response.data.forEach((data) => {
+          clientes.append('<option value=" ' + data.ID + ' ">' + data.nameClient + '</option>')
+      })
+  });
+}
 
 function getProprietarios() {
   const proprietariosField = document.getElementById('form_candidato_proprietario')
