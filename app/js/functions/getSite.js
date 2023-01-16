@@ -775,6 +775,7 @@ function viewCandidato(obj) {
   var form_candidato_observacao = document.getElementById("form_candidato_observacao");
   var form_candidato_altitude = document.getElementById("form_candidato_altitude");
 
+  document.getElementById('candidatoID').value = obj.id
 
   var config = {
       appName: "mobilize",
@@ -797,139 +798,206 @@ function viewCandidato(obj) {
 
       const candidato = response.data;
 
-      // 
-      form_candidato_sigla.value = candidato.Sigla_do_Candidato;
+
+      console.log("ID do candidato: " + obj.id)
+
+      // // 
+      // form_candidato_sigla.value = candidato.Sigla_do_Candidato;
+
+      // //
+      // var siteOption = new Option((candidato.Site.display_value.length > 0 ? candidato.Site.display_value : nao_informado), candidato.Site.ID);
+      // form_candidato_site.add(siteOption)
+      // form_candidato_site.value = siteOption.value;
+
+      // // 
+      // var tipoSiteOption = new Option(candidato.Tipo_Site.display_value, candidato.Tipo_Site.ID);
+      // form_candidato_tipo_site.add(tipoSiteOption)
+      // form_candidato_tipo_site.value = tipoSiteOption.value;
+
+      // // 
+      // form_candidato_aluguel.value = maskCurrency(candidato.Valor_do_Aluguel)
+
+      // //
+      // $("input[name=form_tipo_propriedade][value=" + candidato.Tipo_de_Negocia_o + "]").prop('checked', true);
+
+      // //
+      // var proprietarioOption = new Option(candidato.Proprietario.display_value, candidato.Proprietario.ID);
+      // form_candidato_proprietario.add(proprietarioOption)
+      // form_candidato_proprietario.value = proprietarioOption.value;
+
+      // //
+      // var contatoOption = new Option(candidato.Contato.display_value, candidato.Contato.ID);
+      // form_candidato_contato.add(contatoOption)
+      // form_candidato_contato.value = contatoOption.value;
+
+      // //
+      // form_candidato_cep.value = candidato.CEP.lenght > 0 ? candidato.CEP : nao_informado;
+
+      // console.log("CEP do candidato: " + candidato.CEP)
+
+      // //
+      // form_candidato_endereco.value =  candidato.Endereco.lenght > 0 ? candidato.Endereco : nao_informado
+
+      // //
+      // form_candidato_numero.value = candidato.Endere_o.lenght > 0 ? candidato.Endere_o : nao_informado
+
+      // //
+      // form_candidato_complemento.value =  candidato.Complemento.lenght > 0 ? candidato.Complemento : nao_informado
+
+      // //
+      // form_candidato_bairro.value = candidato.Bairro.lenght > 0 ? candidato.Bairro : nao_informado;
+
+      // //
+      // form_candidato_municipio.value =  candidato.Municipio.lenght > 0 ? candidato.Municipio : nao_informado
+
+      // //
+      // form_candidato_uf.value = candidato.UF;
+
+      // //
+      // form_candidato_distancia_pn.value =  candidato.Distancia_PN.lenght > 0 ? candidato.Distancia_PN : nao_informado
+
+      // //
+      // form_candidato_pre_comar.value = candidato.Pre_Comar_m.lenght > 0 ? candidato.Pre_Comar_m : nao_informado
+
+      // //
+      // form_candidato_largura_area.value = candidato.Largura_area.lenght > 0 ? candidato.Largura_area : nao_informado
+
+      // //
+      // form_candidato_profundidade.value = candidato.Profundidade_area.lenght > 0 ? candidato.Profundidade_area : nao_informado
+
+      // //
+      // var corredorDeAcessoOption = new Option(candidato.Corredor_de_Acesso);
+      // form_candidato_corredor.value = corredorDeAcessoOption.value;
+
+      // //
+      // form_candidato_area_locada.value = candidato.Area_Locada_m.lenght > 0 ? candidato.Area_Locada_m : nao_informado
+
+      // //
+      // form_candidato_altura_edificio.value = candidato.Altura_do_Edifica_o.lenght > 0 ? candidato.Altura_do_Edifica_o : nao_informado
+
+      // //
+      // tipoDeOpcao.value = candidato.Opcao
+
+
+      // // Lat & Long - Decimal
+      // form_candidato_latitude.value = candidato.Latitude.lenght > 0 ? candidato.Latitude : nao_informado;
+      // form_candidato_longitude.value = candidato.Longitude.lenght > 0 ? candidato.Longitude : nao_informado;
+
+      // // Lat & Long - GMS / UTM
+      // form_candidato_grauLat.value = candidato.GrauLAT.lenght > 0 ? candidato.GrauLAT : nao_informado;
+      // form_candidato_grauLong.value = candidato.GrauLONG.lenght > 0 ? candidato.GrauLONG : nao_informado;
+      // form_candidato_minutoLat.value = candidato.MinutoLAT.lenght > 0 ? candidato.MinutoLAT : nao_informado;
+      // form_candidato_minutLong.value = candidato.MinutoLONG.lenght > 0 ? candidato.MinutoLONG : nao_informado;
+      // form_candidato_segundoLat.value = candidato.SegundoLAT.lenght > 0 ? candidato.SegundoLAT : nao_informado;
+      // form_candidato_segundoLong.value = candidato.SegundoLONG.lenght > 0 ? candidato.SegundoLONG : nao_informado;
+
+      // if(candidato.Ponto_Cardeal_LAT.lenght > 0) {
+      //   form_candidato_pontoCardealLat.value = candidato.Ponto_Cardeal_LAT;
+      // } else {
+      //   form_candidato_pontoCardealLat.selectedIndex = 0
+      // }
+
+      // if(candidato.PontoCardealLONG.lenght > 0 ) {
+      //   form_candidato_pontoCardealLong.value = candidato.PontoCardealLONG
+      // } else {
+      //   form_candidato_pontoCardealLong.selectedIndex = 0
+      // }
+
+      // //
+      // form_candidato_altitude.value = candidato.Altitude
+
+      // //
+      // $("input[name=anelBusca][value=" + candidato.anelBusca + "]").prop('checked', true);
+      // anelBuscajustificativa.value = candidato.Justificativa_O_candidato_est_localizado_dentro_do_anel_de_busca.lenght > 0 ? candidato.Justificativa_O_candidato_est_localizado_dentro_do_anel_de_busca : "";
+
+      // //
+      // $("input[name=usoProposto][value=" + candidato.usoProposto + "]").prop('checked', true);
+      // usoPropostojustificativa.value = candidato.Justificativa_O_propriet_rio_est_interessado_no_uso_proposto.lenght > 0 ? candidato.Justificativa_O_propriet_rio_est_interessado_no_uso_proposto : "";
+
+      // //
+      // $("input[name=legislacaoLocal][value=" + candidato.legislacaoLocal + "]").prop('checked', true);
+      // legislacaoLocaljustificativa.value = candidato.Justificativa_A_rea_locada_atende_os_requisitos_m_nimos_exigidos_pela_legisla_o_local.lenght > 0 ? candidato.Justificativa_A_rea_locada_atende_os_requisitos_m_nimos_exigidos_pela_legisla_o_local : "";
+
+      // //
+      // $("input[name=documentacao][value=" + candidato.legislacaoLocal + "]").prop('checked', true);
+      // documentacaojustificativa.value = candidato.Justificativa_A_documenta_o_necess_ria_est_dispon_vel.lenght > 0 ? candidato.Justificativa_A_documenta_o_necess_ria_est_dispon_vel : "";
+
+      // //
+      // $("input[name=acesso][value=" + candidato.acesso + "]").prop('checked', true);
+      // acessojustificativa.value =  candidato.Justificativa_O_acesso_ao_site_est_dispon_vel_24horas_dia_7dias_semana.lenght > 0 ? candidato.Justificativa_O_acesso_ao_site_est_dispon_vel_24horas_dia_7dias_semana : "";
+
+      // //
+      // $("input[name=energia][value=" + candidato.energia + "]").prop('checked', true);
+      // energiajustificativa.value = candidato.Justificativa_Existe_energia_dispon_vel_no_site.lenght > 0 ? candidato.Justificativa_Existe_energia_dispon_vel_no_site : "";
+
+      // //
+      // $("input[name=obstrucao][value=" + candidato.obstrucao +"]").prop('checked', true);
+      // obstrucaojustificativa.value = candidato.Justificativa_Existe_alguma_obstru_o_ou_interfer_ncia_vis_vel.lenght > 0 ? candidato.Justificativa_Existe_alguma_obstru_o_ou_interfer_ncia_vis_vel : "";
 
       //
-      var siteOption = new Option((candidato.Site.display_value.length > 0 ? candidato.Site.display_value : nao_informado), candidato.Site.ID);
-      form_candidato_site.add(siteOption)
-      form_candidato_site.value = siteOption.value;
+      $('#form_candidato_sigla').val(candidato.Sigla_do_Candidato)
+      $('#form_candidato_site')
+          .append('<option value="'+candidato.Site.ID+'">'+candidato.Site.display_value+'</option>')
+          .val(candidato.Site.ID)
 
-      // 
-      var tipoSiteOption = new Option(candidato.Tipo_Site.display_value, candidato.Tipo_Site.ID);
-      form_candidato_tipo_site.add(tipoSiteOption)
-      form_candidato_tipo_site.value = tipoSiteOption.value;
+      $('#form_candidato_tipo_site')
+          .append('<option value="'+candidato.Tipo_Site.ID+'">'+candidato.Tipo_Site.display_value+'</option>')
+          .val(candidato.Tipo_Site.ID)
 
-      // 
-      form_candidato_aluguel.value = maskCurrency(candidato.Valor_do_Aluguel)
-
-      //
+      $('#form_candidato_aluguel').val(maskCurrency(candidato.Valor_do_Aluguel))
       $("input[name=form_tipo_propriedade][value=" + candidato.Tipo_de_Negocia_o + "]").prop('checked', true);
+      $('#form_candidato_proprietario')
+          .append('<option value="'+candidato.Proprietario.ID+'">'+candidato.Proprietario.display_value+'</option>')
+          .val(candidato.Proprietario.ID)
 
-      //
-      var proprietarioOption = new Option(candidato.Proprietario.display_value, candidato.Proprietario.ID);
-      form_candidato_proprietario.add(proprietarioOption)
-      form_candidato_proprietario.value = proprietarioOption.value;
+      $('#form_candidato_contato')
+        .append('<option value="'+candidato.Contato.ID+'">'+candidato.Contato.display_value+'</option>')
+        .val(candidato.Contato.ID)
+      
+      $('#form_candidato_cep').val(candidato.CEP)
+      $('#form_candidato_endereco').val(candidato.Endereco)
+      $('#form_candidato_numero').val(candidato.Endere_o)
+      $('#form_candidato_complemento').val(candidato.Endere_o)
+      $('#form_candidato_bairro').val(candidato.Bairro)
+      $('#form_candidato_municipio').val(candidato.Municipio)
+      $('#form_candidato_uf').val(candidato.UF)
+      $('#form_candidato_distancia_pn').val(candidato.Distancia_PN)
+      $('#form_candidato_pre_comar').val(candidato.Pre_Comar_m)
+      $('#form_candidato_largura_area_normal').val(candidato.Largura_area)
+      $('#form_candidato_profundidade_normal').val(candidato.Profundidade_area)
+      $('#form_candidato_corredor').val(candidato.Corredor_de_Acesso)
+      $('#form_candidato_largura_area').val(candidato.Largura_Corredor_de_Acesso)
+      $('#form_candidato_profundidade').val(candidato.Profundidade_Corredor_de_Acesso)
+      $('#form_candidato_area_locada').val(candidato.Area_Locada_m)
+      $('#form_candidato_altura_edificio').val(candidato.Altura_do_Edifica_o)
+      $('#form_tipo_opcao').val(candidato.Opcao)
+      $('#form_candidato_latitude').val(candidato.Latitude)
+      $('#form_candidato_longitude').val(candidato.Longitude)
+      $('#candidatoGrauLat').val(candidato.GrauLAT)
+      $('#candidatoGrauLong').val(candidato.GrauLONG)
+      $('#candidatoMinutoLat').val(candidato.MinutoLAT)
+      $('#candidatoMinutLong').val(candidato.MinutoLONG)
+      $('#candidatoSegundoLat').val(candidato.SegundoLAT)
+      $('#candidatoSegundoLong').val(candidato.SegundoLONG)
+      $('#form_candidato_pontoCardealLat').val(candidato.Ponto_Cardeal_LAT)
+      $('#form_candidato_pontoCardealLong').val(candidato.PontoCardealLONG)
+      $('#form_candidato_altitude').val(candidato.Altitude)
 
-      //
-      var contatoOption = new Option(candidato.Contato.display_value, candidato.Contato.ID);
-      form_candidato_contato.add(contatoOption)
-      form_candidato_contato.value = contatoOption.value;
-
-      //
-      form_candidato_cep.value = candidato.CEP.lenght > 0 ? candidato.CEP : nao_informado;
-
-      //
-      form_candidato_endereco.value =  candidato.Endereco.lenght > 0 ? candidato.Endereco : nao_informado
-
-      //
-      form_candidato_numero.value = candidato.Endere_o.lenght > 0 ? candidato.Endere_o : nao_informado
-
-      //
-      form_candidato_complemento.value =  candidato.Complemento.lenght > 0 ? candidato.Complemento : nao_informado
-
-      //
-      form_candidato_bairro.value = candidato.Bairro.lenght > 0 ? candidato.Bairro : nao_informado;
-
-      //
-      form_candidato_municipio.value =  candidato.Municipio.lenght > 0 ? candidato.Municipio : nao_informado
-
-      //
-      form_candidato_uf.value = candidato.UF;
-
-      //
-      form_candidato_distancia_pn.value =  candidato.Distancia_PN.lenght > 0 ? candidato.Distancia_PN : nao_informado
-
-      //
-      form_candidato_pre_comar.value = candidato.Pre_Comar_m.lenght > 0 ? candidato.Pre_Comar_m : nao_informado
-
-      //
-      form_candidato_largura_area.value = candidato.Largura_area.lenght > 0 ? candidato.Largura_area : nao_informado
-
-      //
-      form_candidato_profundidade.value = candidato.Profundidade_area.lenght > 0 ? candidato.Profundidade_area : nao_informado
-
-      //
-      var corredorDeAcessoOption = new Option(candidato.Corredor_de_Acesso);
-      form_candidato_corredor.value = corredorDeAcessoOption.value;
-
-      //
-      form_candidato_area_locada.value = candidato.Area_Locada_m.lenght > 0 ? candidato.Area_Locada_m : nao_informado
-
-      //
-      form_candidato_altura_edificio.value = candidato.Altura_do_Edifica_o.lenght > 0 ? candidato.Altura_do_Edifica_o : nao_informado
-
-      //
-      tipoDeOpcao.value = candidato.Opcao
-
-
-      // Lat & Long - Decimal
-      form_candidato_latitude.value = candidato.Latitude.lenght > 0 ? candidato.Latitude : nao_informado;
-      form_candidato_longitude.value = candidato.Longitude.lenght > 0 ? candidato.Longitude : nao_informado;
-
-      // Lat & Long - GMS / UTM
-      form_candidato_grauLat.value = candidato.GrauLAT.lenght > 0 ? candidato.GrauLAT : nao_informado;
-      form_candidato_grauLong.value = candidato.GrauLONG.lenght > 0 ? candidato.GrauLONG : nao_informado;
-      form_candidato_minutoLat.value = candidato.MinutoLAT.lenght > 0 ? candidato.MinutoLAT : nao_informado;
-      form_candidato_minutLong.value = candidato.MinutoLONG.lenght > 0 ? candidato.MinutoLONG : nao_informado;
-      form_candidato_segundoLat.value = candidato.SegundoLAT.lenght > 0 ? candidato.SegundoLAT : nao_informado;
-      form_candidato_segundoLong.value = candidato.SegundoLONG.lenght > 0 ? candidato.SegundoLONG : nao_informado;
-
-      if(candidato.Ponto_Cardeal_LAT.lenght > 0) {
-        form_candidato_pontoCardealLat.value = candidato.Ponto_Cardeal_LAT;
-      } else {
-        form_candidato_pontoCardealLat.selectedIndex = 0
-      }
-
-      if(candidato.PontoCardealLONG.lenght > 0 ) {
-        form_candidato_pontoCardealLong.value = candidato.PontoCardealLONG
-      } else {
-        form_candidato_pontoCardealLong.selectedIndex = 0
-      }
-
-      //
-      form_candidato_altitude.value = candidato.Altitude
-
-      //
       $("input[name=anelBusca][value=" + candidato.anelBusca + "]").prop('checked', true);
-      anelBuscajustificativa.value = candidato.Justificativa_O_candidato_est_localizado_dentro_do_anel_de_busca.lenght > 0 ? candidato.Justificativa_O_candidato_est_localizado_dentro_do_anel_de_busca : "";
-
-      //
+      $('#form_candidato_candidatolocalizado').val(candidato.Justificativa_O_candidato_est_localizado_dentro_do_anel_de_busca)
       $("input[name=usoProposto][value=" + candidato.usoProposto + "]").prop('checked', true);
-      usoPropostojustificativa.value = candidato.Justificativa_O_propriet_rio_est_interessado_no_uso_proposto.lenght > 0 ? candidato.Justificativa_O_propriet_rio_est_interessado_no_uso_proposto : "";
-
-      //
+      $('#form_candidato_proprietariointeressado').val(candidato.Justificativa_O_propriet_rio_est_interessado_no_uso_proposto)
       $("input[name=legislacaoLocal][value=" + candidato.legislacaoLocal + "]").prop('checked', true);
-      legislacaoLocaljustificativa.value = candidato.Justificativa_A_rea_locada_atende_os_requisitos_m_nimos_exigidos_pela_legisla_o_local.lenght > 0 ? candidato.Justificativa_A_rea_locada_atende_os_requisitos_m_nimos_exigidos_pela_legisla_o_local : "";
-
-      //
-      $("input[name=documentacao][value=" + candidato.legislacaoLocal + "]").prop('checked', true);
-      documentacaojustificativa.value = candidato.Justificativa_A_documenta_o_necess_ria_est_dispon_vel.lenght > 0 ? candidato.Justificativa_A_documenta_o_necess_ria_est_dispon_vel : "";
-
-      //
+      $('#form_candidato_arealocadaatende').val(candidato.Justificativa_A_rea_locada_atende_os_requisitos_m_nimos_exigidos_pela_legisla_o_local)
+      $("input[name=documentacao][value=" + candidato.documentacao + "]").prop('checked', true);
+      $('#form_candidato_justifique_documentacaonecessaria').val(candidato.Justificativa_A_documenta_o_necess_ria_est_dispon_vel)
       $("input[name=acesso][value=" + candidato.acesso + "]").prop('checked', true);
-      acessojustificativa.value =  candidato.Justificativa_O_acesso_ao_site_est_dispon_vel_24horas_dia_7dias_semana.lenght > 0 ? candidato.Justificativa_O_acesso_ao_site_est_dispon_vel_24horas_dia_7dias_semana : "";
-
-      //
+      $('#form_candidato_justifique_acessodisponivel').val(candidato.Justificativa_O_acesso_ao_site_est_dispon_vel_24horas_dia_7dias_semana)
       $("input[name=energia][value=" + candidato.energia + "]").prop('checked', true);
-      energiajustificativa.value = candidato.Justificativa_Existe_energia_dispon_vel_no_site.lenght > 0 ? candidato.Justificativa_Existe_energia_dispon_vel_no_site : "";
-
-      //
-      $("input[name=obstrucao][value=" + candidato.obstrucao +"]").prop('checked', true);
-      obstrucaojustificativa.value = candidato.Justificativa_Existe_alguma_obstru_o_ou_interfer_ncia_vis_vel.lenght > 0 ? candidato.Justificativa_Existe_alguma_obstru_o_ou_interfer_ncia_vis_vel : "";
-
-      //
-      form_candidato_observacao.value = candidato.Coment_rios;
+      $('#form_candidato_justifique_energiadisponivel').val(candidato.Justificativa_Existe_energia_dispon_vel_no_site)
+      $("input[name=obstrucao][value=" + candidato.obstrucao + "]").prop('checked', true);
+      $('#form_candidato_justifique_obstrucao').val(candidato.Justificativa_Existe_alguma_obstru_o_ou_interfer_ncia_vis_vel)
+      $('#form_candidato_observacao').val(candidato.Coment_rios)
 
       console.log("Ve se chegou no modal")
       //

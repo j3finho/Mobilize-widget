@@ -28,6 +28,7 @@
             <input type="hidden" value="" id="logado_usuario_id" />
             <input type="hidden" value="" id="dadosurlzoho" />
             <input type="hidden" value="" id="useremailzoho" />
+            <input type="hidden" value="" id="candidatoID" />
             <div class="card">
                <div class="card-body">
                   <div class="row">
@@ -1059,8 +1060,8 @@
                      </div>
                      <div class="rowCenterItems">
                         <button type="button" class="btn btn-primary" id="addCandidato" onclick="createCandidato()">Criar Candidato</button>
-                        <button type="button" class="btn btn-primary" id="editCandidato" style="display: none;" onclick="desabilitarCampoCandidato(false, false)">Editar candidato</button>
-                        <button type="button" class="btn btn-primary" id="btnSalvarAlteracoes" style="display: none;">Salvar alterações</button>
+                        <button type="button" class="btn btn-primary" id="editCandidato" style="display: none;" onclick="desabilitarCampoCandidato(false, false),$('#btnSalvarAlteracoes').css('display', 'block'),$('#' + this.id).css('display', 'none')">Editar candidato</button>
+                        <button type="button" class="btn btn-primary" id="btnSalvarAlteracoes" style="display: none;" onclick="editarCandidato()">Salvar alterações</button>
                      </div>
                   </form>
                </div>
@@ -2688,6 +2689,7 @@
          function closeModal() {
             desabilitarCampoCandidato(false, true)
 
+            $('#candidatoID').val('')
             $('#modalCandidatosPorSite').css('z-index', '')
             $('#modalAdicionarCandidato').modal('hide')
             resetForm("form_candidato")
@@ -2698,6 +2700,7 @@
             $('#btnAddContact').css('display', 'block')
             $('#addCandidato').css('display', 'block')
             $('#editCandidato').css('display', 'none')
+            $('#btnSalvarAlteracoes').css('display', 'none')
          }
 
          function createCandidato() {
@@ -2750,8 +2753,7 @@
                         var energiajustificativa = document.getElementById("form_candidato_justifique_energiadisponivel").value
                         var obstrucaojustificativa = document.getElementById("form_candidato_justifique_obstrucao").value
 
-                     //  var form_candidato_cuos = document.getElementById("form_candidato_cuos");
-                     //  var form_candidato_cuosValue = form_candidato_cuos.options[form_candidato_cuos.selectedIndex].value;
+
                         var form_candidato_endereco = document.getElementById("form_candidato_endereco").value;
                         var form_candidato_complemento = document.getElementById("form_candidato_complemento").value;
                         var form_candidato_cep = document.getElementById("form_candidato_cep").value;
@@ -2801,39 +2803,15 @@
                            mostrarErro("tipo_propriedade", "Tipo de propriedade não informada");
                            return
                         }
-                        /*
-                        var opcaoCuos = form_candidato_cuos.options[form_candidato_cuos.selectedIndex].text;
-                        if(opcaoCuos == "Selecione..") {
-                           mostrarErro("form_candidato_cuos", "CUOS não selecionada");
-                           return
-                        }
-                        */
                         var opcaoProprietario = form_candidato_proprietario.options[form_candidato_proprietario.selectedIndex].text;
                         if(opcaoProprietario == "Selecione..") {
                            mostrarErro("form_candidato_proprietario", "Proprietário não selecionado");
                            return 
                         }
-                        //var opcaoStatusQualificacao = form_candidato_status.options[form_candidato_status.selectedIndex].text;
-                        //if(opcaoStatusQualificacao == "Selecione..") {
-                        //   mostrarErro("form_candidato_status", "Status do Candidato não selecionado");
-                        //  return 
-                        //}
                         if(form_candidato_cep == "") {
                            mostrarErro("form_candidato_cep", "CEP não informado");
                            return 
                         }
-                        // if(form_candidato_endereco == "") {
-                        //     mostrarErro("form_candidato_endereco", "Endereço não informado");
-                        //     return 
-                        // }
-                        // if(form_candidato_complemento == "") {
-                        //     mostrarErro("form_candidato_complemento", "Complemento não informado");
-                        //     return 
-                        // }
-                        // if(form_candidato_bairro == "") {
-                        //     mostrarErro("form_candidato_bairro", "Bairro não informado");
-                        //     return 
-                        // }
                         if(form_candidato_distancia_pn == "") {
                            mostrarErro("form_candidato_distancia_pn", "Distância PN não informado");
                            return 
@@ -3100,6 +3078,337 @@
                         
                   });
             }
+
+            function editarCandidato() {
+            var candidatoSigla = $('#form_candidato_sigla').val()
+            var candidatoSite = $('#form_candidato_site').val()
+            var candidatoTipoSite = $('#form_candidato_tipo_site').val()
+            var candidatoAluguel = $('#form_candidato_aluguel').val().replace('R$', '').replaceAll('.', '').replace(',', '.').trim();
+            var candidatoTipoDeNegociacao = $('input[name=form_tipo_propriedade]').val()
+            var candidatoProprietario = $('#form_candidato_proprietario').val()
+            var candidatoContato = $('#form_candidato_contato').val()
+            var candidatoCep = $('#form_candidato_cep').val()
+            var candidatoEndereco = $('#form_candidato_endereco').val()
+            var candidatoNumero = $('#form_candidato_numero').val()
+            var candidatoComplemento = $('#form_candidato_complemento').val()
+            var candidatoBairro= $('#form_candidato_bairro').val()
+            var candidatoMunicipio = $('#form_candidato_municipio').val()
+            var candidatoUF= $('#form_candidato_uf').val()
+            var candidatoDistanciaPN = $('#form_candidato_distancia_pn').val()
+            var candidatoPreComar = $('#form_candidato_pre_comar').val()
+            var candidatoLarguraAreaLocada = $('#form_candidato_largura_area_normal').val()
+            var candidatoProfundidadeAreaLocada = $('#form_candidato_profundidade_normal').val()
+            var candidatoCorredorAcesso = $('#form_candidato_corredor').val()
+            var candidatoLarguraCorredorAcesso = $('#form_candidato_largura_area').val()
+            var candidatoProfundidadeCorredorAcesso = $('#form_candidato_profundidade').val()
+            var candidatoAreaLocadaTotal = $('#form_candidato_area_locada').val()
+            var candidatoAlturaEdificio = $('#form_candidato_altura_edificio').val()
+            var candidatoTipoDeOpcao = $('#form_tipo_opcao').val()
+            var candidatoLatitude = $('#form_candidato_latitude').val()
+            var candidatoLongitude = $('#form_candidato_longitude').val()
+            var candidatoGrauLat = $('#candidatoGrauLat').val()
+            var candidatoGrauLong = $('#candidatoGrauLong').val()
+            var candidatoMinutoLat = $('#candidatoMinutoLat').val()
+            var candidatoMinutLong = $('#candidatoMinutLong').val()
+            var candidatoSegundoLat = $('#candidatoSegundoLat').val()
+            var candidatoSegundoLong = $('#candidatoSegundoLong').val()
+            var candidatoPontoCardealLat = $('#form_candidato_pontoCardealLat').val()
+            var candidatoPontoCardealLong = $('#form_candidato_pontoCardealLong').val()
+            var candidatoAltitude = $('#form_candidato_altitude').val()
+            var candidatoAnelBusca = $('input[name=anelBusca]').val()
+            var candidatoAnelBuscaJustificativa = $('#form_candidato_candidatolocalizado').val()
+            var candidatoUsoProposto = $('input[name=usoProposto]').val()
+            var candidatoUsoPropostoJustificativa = $('#form_candidato_proprietariointeressado').val()
+            var candidatoLegislacaoLocal = $('input[name=legislacaoLocal]').val()
+            var candidatoLegislacaoLocaljustificativa = $('#form_candidato_arealocadaatende').val()
+            var candidatoDocumentacao = $('input[name=documentacao]').val()
+            var candidatoDocumentacaoJustificativa = $('#form_candidato_justifique_documentacaonecessaria').val()
+            var candidatoAcesso = $('input[name=acesso]').val()
+            var candidatoAcessoJustificativa = $('#form_candidato_justifique_acessodisponivel').val()
+            var candidatoEnergia = $('input[name=energia]').val()
+            var candidatoEnergiaJustificativa = $('#form_candidato_justifique_energiadisponivel').val()
+            var candidatoObstrucao = $('input[name=obstrucao]').val()
+            var candidatoObstrucaoJustificativa = $('#form_candidato_justifique_obstrucao').val()
+            var candidatoObservacao = $('#form_candidato_observacao').val()
+            
+            if (candidatoSigla == "") {
+               mostrarErro("form_candidato_sigla", "Sigla do candidato não informada");
+               return
+            }
+            if (candidatoSite == "Selecione..") {
+               mostrarErro("form_candidato_site", "Site não selecionado");
+               return
+            }
+            if (candidatoTipoSite == "Selecione..") {
+               mostrarErro("form_candidato_tipo_site", "Tipo de site não selecionado");
+               return
+            }
+            if (candidatoAluguel == "") {
+               mostrarErro("form_candidato_aluguel", "Valor do Aluguel não informado");
+               return
+            }
+            if (candidatoTipoDeNegociacao == "") {
+               mostrarErro("tipo_propriedade", "Tipo de propriedade não informada");
+               return
+            }
+            if (candidatoProprietario == "Selecione..") {
+               mostrarErro("form_candidato_proprietario", "Proprietário não selecionado");
+               return
+            }
+            if (candidatoCep == "") {
+               mostrarErro("form_candidato_cep", "CEP não informado");
+               return
+            }
+            if (candidatoDistanciaPN == "") {
+               mostrarErro("form_candidato_distancia_pn", "Distância PN não informado");
+               return
+            }
+            if (candidatoPreComar == "") {
+               mostrarErro("form_candidato_pre_comar", "Pré-Comar não informado");
+               return
+            }
+            if (candidatoLarguraAreaLocada == "") {
+               mostrarErro("form_candidato_largura_area_normal", "Área locada não informado");
+               return
+            }
+            if (candidatoProfundidadeAreaLocada == "") {
+               mostrarErro("form_candidato_profundidade_normal", "Profundidade da Área locada não informado");
+               return
+            }
+            if (candidatoCorredorAcesso == "Selecione..") {
+               mostrarErro("form_candidato_corredor", "Corredor de acesso não selecionado");
+               return
+            }
+            if (candidatoTipoDeOpcao == "Selecione..") {
+               mostrarErro("form_tipo_opcao", "Tipo de ponto cardinal não selecionado");
+               return
+            }
+            if (candidatoTipoDeOpcao == "Decimal") {
+               if (candidatoLatitude == "") {
+                  mostrarErro("form_candidato_latitude", "Latitude não informada")
+                  return
+               } else if (candidatoLongitude == "") {
+                  mostrarErro("form_candidato_longitude", "Longitude não informada")
+                  return
+               }
+            }
+            if (candidatoTipoDeOpcao == "UTM") {
+               if (candidatoGrauLat == "") {
+                  mostrarErro("form_candidato_grauLat", "Grau LAT não informada")
+                  return
+               } else if (candidatoMinutoLat == "") {
+                  mostrarErro("form_candidato_minutoLat", "Minuto LAT não informada")
+                  return
+               } else if (candidatoSegundoLat == "") {
+                  mostrarErro("form_candidato_segundoLat", "Segundos LAT não informada")
+                  return
+               } else if (candidatoPontoCardealLat == "Selecione..") {
+                  mostrarErro("form_candidato_pontoCardealLat", "Ponto Cardeal LAT não selecionada")
+                  return
+               } else if (candidatoGrauLong == "") {
+                  mostrarErro("form_candidato_grauLong", "Grau LONG não informada")
+                  return
+               } else if (candidatoMinutLong == "") {
+                  mostrarErro("form_candidato_minutLong", "Minuto LONG não informada")
+                  return
+               } else if (candidatoSegundoLong == "") {
+                  mostrarErro("form_candidato_segundoLong", "Segundos LONG não informada")
+                  return
+               } else if (candidatoPontoCardealLong == "Selecione..") {
+                  mostrarErro("form_candidato_pontoCardealLong", "Ponto Cardeal LONG não selecionada")
+                  return
+               }
+            }
+            if (candidatoAltitude == "") {
+               mostrarErro("form_candidato_altitude", "Altitude não informada");
+               return
+            }
+            if (candidatoAnelBusca == "") {
+               mostrarErro("", "Questão Anel de Busca não respondida");
+               return
+            }
+            if (candidatoAnelBuscaJustificativa == "" && candidatoAnelBusca == "Não") {
+               mostrarErro("", "Justificativa Anel de Busca não informada");
+               return
+            }
+            if (candidatoUsoProposto == "") {
+               mostrarErro("", "Questão Uso Proposto não respondida");
+               return
+            }
+            if (candidatoUsoPropostoJustificativa == "" && candidatoUsoProposto == "Não") {
+               mostrarErro("", "Justificativa Uso Proposto não informada");
+               return
+            }
+            if (candidatoLegislacaoLocal == "") {
+               mostrarErro("", "Questão Legislação Local não respondida");
+               return
+            }
+            if (candidatoAnelBuscaJustificativa == "" && candidatoLegislacaoLocal == "Não") {
+               mostrarErro("", "Justificativa Legislação Local não respondida");
+               return
+            }
+            if (candidatoDocumentacao == "") {
+               mostrarErro("", "Questão Documentação não respondida");
+               return
+            }
+            if (candidatoDocumentacaoJustificativa == "" && candidatoDocumentacao == "Não") {
+               mostrarErro("", "Justificativa Documentação Local não respondida");
+               return
+            }
+            if (candidatoAcesso == "") {
+               mostrarErro("", "Questão Acesso não respondida");
+               return
+            }
+            if (candidatoAcessoJustificativa == "" && candidatoAcesso == "Não") {
+               mostrarErro("", "Justificativa Acesso não respondida");
+               return
+            }
+            if (candidatoEnergia == "") {
+               mostrarErro("", "Questão Energia não respondida");
+               return
+            }
+            if (candidatoEnergiaJustificativa == "" && candidatoEnergia == "Não") {
+               mostrarErro("", "Justificativa Energia não respondida");
+               return
+            }
+            if (candidatoObstrucao == "") {
+               mostrarErro("", "Questão Obstrução não respondida");
+               return
+            }
+            if (candidatoObstrucaoJustificativa == "" && candidatoObstrucao == "Sim") {
+               mostrarErro("", "Justificativa Obstrução não respondida");
+               return
+            }
+            if (candidatoObstrucao == "") {
+               mostrarErro("form_candidato_observacao", "Observação não respondida");
+               return
+            }
+
+            var candidatoID = $('#candidatoID').val()
+            if(candidatoID.length > 0) {
+               var configEdit = {
+                  appName: "mobilize",
+                  reportName: "widget_candidatos_full",
+                  id: candidatoID,
+                  data: {
+                     'data': {
+                        'Sigla_do_Candidato': candidatoSigla,
+                        'Site': candidatoSite,
+                        'Tipo_Site': candidatoTipoSite,
+                        'Valor_do_Aluguel': candidatoAluguel,
+                        'Tipo_de_Negocia_o': candidatoTipoDeNegociacao,
+                        'Proprietario': candidatoProprietario,
+                        'Contato': candidatoContato,
+                        'CEP': candidatoCep,
+                        'Endereco': candidatoEndereco,
+                        'Endere_o': candidatoNumero,
+                        'Complemento': candidatoComplemento,
+                        'Bairro': candidatoBairro,
+                        'Municipio': candidatoMunicipio,
+                        'UF': candidatoUF,
+                        'Distancia_PN': candidatoDistanciaPN,
+                        'Pre_Comar_m': candidatoPreComar,
+                        'Largura_area': candidatoLarguraAreaLocada,
+                        'Profundidade_area': candidatoProfundidadeAreaLocada,
+                        'Corredor_de_Acesso': candidatoCorredorAcesso,
+                        'Largura_Corredor_de_Acesso': candidatoLarguraCorredorAcesso,
+                        'Profundidade_Corredor_de_Acesso': candidatoProfundidadeCorredorAcesso,
+                        'Area_Locada_m': candidatoAreaLocadaTotal,
+                        'Altura_do_Edifica_o': candidatoAlturaEdificio,
+                        'Opcao': candidatoTipoDeOpcao,
+                        'Latitude': candidatoLatitude,
+                        'Longitude': candidatoLongitude,
+                        'GrauLAT': candidatoGrauLat,
+                        'GrauLONG': candidatoGrauLong,
+                        'MinutoLAT': candidatoMinutoLat,
+                        'MinutoLONG': candidatoMinutLong,
+                        'SegundoLAT': candidatoSegundoLat,
+                        'SegundoLONG': candidatoSegundoLong,
+                        'Ponto_Cardeal_LAT': candidatoPontoCardealLat,
+                        'PontoCardealLONG': candidatoPontoCardealLong,
+                        'Altitude': candidatoAltitude,
+                        'anelBusca': candidatoAnelBusca,
+                        'Justificativa_O_candidato_est_localizado_dentro_do_anel_de_busca': candidatoAnelBuscaJustificativa,
+                        'usoProposto': candidatoUsoProposto,
+                        'Justificativa_O_propriet_rio_est_interessado_no_uso_proposto': candidatoUsoPropostoJustificativa,
+                        'legislacaoLocal': candidatoLegislacaoLocal,
+                        'Justificativa_A_rea_locada_atende_os_requisitos_m_nimos_exigidos_pela_legisla_o_local': candidatoLegislacaoLocaljustificativa,
+                        'documentacao': candidatoDocumentacao,
+                        'Justificativa_A_documenta_o_necess_ria_est_dispon_vel': candidatoDocumentacaoJustificativa,
+                        'acesso': candidatoAcesso,
+                        'Justificativa_O_acesso_ao_site_est_dispon_vel_24horas_dia_7dias_semana': candidatoAcessoJustificativa,
+                        'energia': candidatoEnergia,
+                        'Justificativa_Existe_energia_dispon_vel_no_site': candidatoEnergiaJustificativa,
+                        'obstrucao': candidatoObstrucao,
+                        'Justificativa_Existe_alguma_obstru_o_ou_interfer_ncia_vis_vel': candidatoObstrucaoJustificativa,
+                        'Coment_rios': candidatoObservacao
+                     }
+                  }
+               }
+
+               ZOHO.CREATOR.API.updateRecord(configEdit).then(function(response){
+                     if(response.code != 3000) {
+                        v_erro = ""
+                        $.each(response.error, function(key,val) {             
+                           v_erro = v_erro + val + ". ";
+                        });
+                        Swal.fire({
+                           icon: 'error',
+                           title: 'Oops...',
+                           text: 'Não foi possível atualizar o registro. Tente novamente mais. - Error: ' + v_erro
+                        })
+                       return
+                     }
+                     addAnexoCandidato(candidatoSite, candidatoID)
+                     Swal.fire({
+                        icon: 'success',
+                        title: 'Candidato atualizado com sucesso.'
+                     })
+                     setTimeout(() => document.location.reload(true), 1000)
+               });
+            }
+         }
+
+         function addAnexoCandidato(siteID, candiadtoID) {
+            var fileObject = document.getElementById("form_candidato_anexo").files[0];
+            if (fileObject != null) {
+               const configAnexo = {
+                  appName: "mobilize",
+                  formName: "Anexos",
+                  data: {
+                        "data": {
+                           "Site": siteID,
+                           "Candidato": candiadtoID,
+                           "Tipo_do_Anexo": "Documento",
+                           "Descricao": "",
+                           'usuario': 'samyr@mobilize-eng.com.br'
+                        }
+                  }
+               }
+                  ZOHO.CREATOR.API.addRecord(configAnexo).then((responseAnexo) => {
+                     if (responseAnexo.code != 3000) {
+                        console.log("Erro ao criar o registro do anexo - Error: " + responseAnexo.code)
+                        return
+                     }
+                     console.log("Registro do Anexo criado: " + responseAnexo.data.ID)
+                     var configPdf = {
+                        appName: "mobilize",
+                        reportName: "Anexos_Report",
+                        id: responseAnexo.data.ID,
+                        fieldName: "Anexos",
+                        file: fileObject
+                     }
+                     ZOHO.CREATOR.API.uploadFile(configPdf).then((response) => {
+                        if(response.code != 3000) {
+                           console.log("Erro ao inserir o anexo no registro - Error: " + responseAnexo.code)
+                           return
+                        }
+                        console.log("Anexo inserido com sucesso")
+                        return
+                     })
+               })
+            }
+         }
 
          function mostrarErro(campo, mensagem) {
                if(campo.length > 0) {
