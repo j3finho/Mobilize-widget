@@ -686,7 +686,7 @@ function viewCandidatosPorSite(n) {
                               <path d="M3.05 3.05a7 7 0 0 0 0 9.9.5.5 0 0 1-.707.707 8 8 0 0 1 0-11.314.5.5 0 0 1 .707.707zm2.122 2.122a4 4 0 0 0 0 5.656.5.5 0 1 1-.708.708 5 5 0 0 1 0-7.072.5.5 0 0 1 .708.708zm5.656-.708a.5.5 0 0 1 .708 0 5 5 0 0 1 0 7.072.5.5 0 1 1-.708-.708 4 4 0 0 0 0-5.656.5.5 0 0 1 0-.708zm2.122-2.12a.5.5 0 0 1 .707 0 8 8 0 0 1 0 11.313.5.5 0 0 1-.707-.707 7 7 0 0 0 0-9.9.5.5 0 0 1 0-.707zM6 8a2 2 0 1 1 2.5 1.937V15.5a.5.5 0 0 1-1 0V9.937A2 2 0 0 1 6 8z"/>
                           </svg>
                       </button>
-                      <button  title="Protocolo CUOS" onClick="alterarProtCuos('${row.id}', "row.protocoloCuosId")" class="btn_view_site btn btn-outline-secondary btn-sm edit" >
+                      <button  title="Protocolo CUOS" onClick="alterarProtCuos('${row.id}', '${row.protocoloCuosId}')" class="btn_view_site btn btn-outline-secondary btn-sm edit" >
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart-line-fill" viewBox="0 0 16 16">
                           <path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z"/>
                         </svg>
@@ -1029,141 +1029,134 @@ function viewAtividadesPorSite(n) {
                 );
             });
 
-            if(v_Atividades.length == 0) {
-              $('#atividadesNaoCriadas')
-              .prop('display', 'block')
-              .html('<h4>Não há atividades para este Site</h4>')
-              return
-            }
-
-            $('#atividadesNaoCriadas').css('display', 'none')
-
-            $(document).ready(function () {
-                var idioma =
-                {
-                    "bJQueryUI": true,
-                    "sProcessing": "Processando...",
-                    "sLengthMenu": "Mostrar _MENU_ registros",
-                    "sZeroRecords": "Não há declarações emitidas no momento",
-                    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-                    "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
-                    "sInfoFiltered": "",
-                    "sInfoPostFix": "",
-                    "sSearch": "Buscar:",
-                    "sUrl": "",
-                    "oPaginate": {
-                        "sFirst": "Primeiro",
-                        "sPrevious": "Anterior",
-                        "sNext": "Seguinte",
-                        "sLast": "Último"
-
-                    },
-                    "oAria": {
-                        "sSortAscending": ": Ativar para ordenar  a columna de maneira ascendente",
-                        "sSortDescending": ": Ativar para ordenar  a columna de maneira descendente"
-                    },
-
-                    "pageLength": {
-                        "-1": "Mostrar todos os registros",
-                        "_": "Mostrar %d registros"
-                    },
-                };
-
-                 /*
-                {
-                  orderable: true,
-                  data: 'tarefa',
-                  defaultContent: '',
-                  render: function (data, type, row) {
-                      if ((row.status == "Em andamento" || row.status == "Não Iniciado") && new Date() > new Date(row.dataTermino)) {
-                          return '<span style="color: #fff; background-color: #f00;">' + row.tarefa + '</span>';
-                      } else if ((row.status == "Em andamento" || row.status == "Não Iniciado") && new Date() == new Date(row.dataTermino)) {
-                          return '<span style="color: #000; background-color: #ff0;">' + row.tarefa + '</span>';
-                      } else {
-                          return '<span style="color: #000; background-color: #0f0;">' + row.tarefa + '</span>';
-                      }
-                  },
-                  width: 'auto',
-                  title: "Tarefas",
-                } */
-
-                $('#datatable-buttons-atividades').DataTable({
-                    data: v_Atividades,
-                    "paging": true,
-                    "lengthChange": !1,
-                    "buttons": [ "excel", "pdf" ],
-                    "dom": "<'row'<'col-sm-6 toolbaratividade'><'col-sm-6'B>>" +
-                        "<'row'<'col-sm-6'><'col-sm-6'f>>" +
-                        "<'row'<'col-sm-12'tr>>" +
-                        "<'row'<'col-sm-5'i><'col-sm-7'p>>"
-                    ,
-                    "searching": true,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": true,
-                    "language": idioma,
-                    "order": [
-                        [7, 'desc'],
-                        [3, 'asc'],
-
-                    ],
-                    columns: [
-                        { data: 'tarefa', title: 'Tarefa'},
-                        { data: 'site', title: "Id Site" },
-                        { data: 'dataInicio', title: "Data de Inicio" },
-                        { data: 'dataTermino', title: "Data de Término" },
-                        { data: 'dataConclusao', title: "Data de Conclusão" },
-                        { data: 'tempoHoras', title: "Tempo Consumido" },
-                        { data: 'responsavel', title: "Responsável" },
-                        {
-                            className: 'details-control',
-                            orderable: true,
-                            data: 'status',
-                            defaultContent: '',
-                            render: function (data, type, row) {
-                                if (row.status === 'Em andamento')
-                                    return '<span class="badge rounded-pill badge-soft-info font-size-12">Em andamento</span>';
-                                else if (row.status === "Finalizado") {
-                                    return '<span class="badge rounded-pill badge-soft-success font-size-12">Finalizado</span>';
-                                } else if (row.status === "Não Iniciado") {
-                                    return '<span class="badge rounded-pill badge-soft-danger font-size-12">Não Iniciado</span>';
-                                }
-                            },
-                            width: 'auto',
-                            title: "Status",
-                        },
-                        {
-                            className: 'dt-body-center',
-                            orderable: false,
-                            data: null,
-                            defaultContent: '',
-                            render: function (data, type, row) {
-                                if (row.status === 'Em andamento')
-                                    return `
-                                <div class="col-3">
-                                <button id="${data['id']}" onclick="concluirAtividade(this)" type="button" class="btn btn-success btn-sm">Concluir</button>
-                                </div>
-                                `;
-                                else if (row.status === "Finalizado") {
-                                    return `
-                                <div class="col-3">
-                                <button id="${data['id']}" onclick="concluirAtividade(this)" type="button" class="btn btn-success btn-sm" disabled>Concluir</button>
-                                </div>
-                                `;
-                                } else if (row.status === "Não Iniciado") {
-                                    return `
-                                <div class="col-3">
-                                <button id="${data['id']}" onclick="iniciarAtividade(this)" type="button" class="btn btn-warning btn-sm">Iniciar  </button>
-                                </div>
-                                `;
-                                }
-                            },
-                            title: "Ações",
+            if(v_Atividades.length > 0) {
+              $(document).ready(function () {
+                  var idioma =
+                  {
+                      "bJQueryUI": true,
+                      "sProcessing": "Processando...",
+                      "sLengthMenu": "Mostrar _MENU_ registros",
+                      "sZeroRecords": "Não há declarações emitidas no momento",
+                      "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                      "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
+                      "sInfoFiltered": "",
+                      "sInfoPostFix": "",
+                      "sSearch": "Buscar:",
+                      "sUrl": "",
+                      "oPaginate": {
+                          "sFirst": "Primeiro",
+                          "sPrevious": "Anterior",
+                          "sNext": "Seguinte",
+                          "sLast": "Último"
+  
+                      },
+                      "oAria": {
+                          "sSortAscending": ": Ativar para ordenar  a columna de maneira ascendente",
+                          "sSortDescending": ": Ativar para ordenar  a columna de maneira descendente"
+                      },
+  
+                      "pageLength": {
+                          "-1": "Mostrar todos os registros",
+                          "_": "Mostrar %d registros"
+                      },
+                  };
+  
+                   /*
+                  {
+                    orderable: true,
+                    data: 'tarefa',
+                    defaultContent: '',
+                    render: function (data, type, row) {
+                        if ((row.status == "Em andamento" || row.status == "Não Iniciado") && new Date() > new Date(row.dataTermino)) {
+                            return '<span style="color: #fff; background-color: #f00;">' + row.tarefa + '</span>';
+                        } else if ((row.status == "Em andamento" || row.status == "Não Iniciado") && new Date() == new Date(row.dataTermino)) {
+                            return '<span style="color: #000; background-color: #ff0;">' + row.tarefa + '</span>';
+                        } else {
+                            return '<span style="color: #000; background-color: #0f0;">' + row.tarefa + '</span>';
                         }
-                    ],
-                }).buttons().container().appendTo("#datatable-Tarefas_wrapper .col-md-6:eq(0)");
-                $('div.toolbaratividade').html('');
-            });
+                    },
+                    width: 'auto',
+                    title: "Tarefas",
+                  } */
+  
+                  $('#datatable-buttons-atividades').DataTable({
+                      data: v_Atividades,
+                      "paging": true,
+                      "lengthChange": !1,
+                      "buttons": [ "excel", "pdf" ],
+                      "dom": "<'row'<'col-sm-6 toolbaratividade'><'col-sm-6'B>>" +
+                          "<'row'<'col-sm-6'><'col-sm-6'f>>" +
+                          "<'row'<'col-sm-12'tr>>" +
+                          "<'row'<'col-sm-5'i><'col-sm-7'p>>"
+                      ,
+                      "searching": true,
+                      "ordering": true,
+                      "info": true,
+                      "autoWidth": true,
+                      "language": idioma,
+                      "order": [
+                          [7, 'desc'],
+                          [3, 'asc'],
+  
+                      ],
+                      columns: [
+                          { data: 'tarefa', title: 'Tarefa'},
+                          { data: 'site', title: "Id Site" },
+                          { data: 'dataInicio', title: "Data de Inicio" },
+                          { data: 'dataTermino', title: "Data de Término" },
+                          { data: 'dataConclusao', title: "Data de Conclusão" },
+                          { data: 'tempoHoras', title: "Tempo Consumido" },
+                          { data: 'responsavel', title: "Responsável" },
+                          {
+                              className: 'details-control',
+                              orderable: true,
+                              data: 'status',
+                              defaultContent: '',
+                              render: function (data, type, row) {
+                                  if (row.status === 'Em andamento')
+                                      return '<span class="badge rounded-pill badge-soft-info font-size-12">Em andamento</span>';
+                                  else if (row.status === "Finalizado") {
+                                      return '<span class="badge rounded-pill badge-soft-success font-size-12">Finalizado</span>';
+                                  } else if (row.status === "Não Iniciado") {
+                                      return '<span class="badge rounded-pill badge-soft-danger font-size-12">Não Iniciado</span>';
+                                  }
+                              },
+                              width: 'auto',
+                              title: "Status",
+                          },
+                          {
+                              className: 'dt-body-center',
+                              orderable: false,
+                              data: null,
+                              defaultContent: '',
+                              render: function (data, type, row) {
+                                  if (row.status === 'Em andamento')
+                                      return `
+                                  <div class="col-3">
+                                  <button id="${data['id']}" onclick="concluirAtividade(this)" type="button" class="btn btn-success btn-sm">Concluir</button>
+                                  </div>
+                                  `;
+                                  else if (row.status === "Finalizado") {
+                                      return `
+                                  <div class="col-3">
+                                  <button id="${data['id']}" onclick="concluirAtividade(this)" type="button" class="btn btn-success btn-sm" disabled>Concluir</button>
+                                  </div>
+                                  `;
+                                  } else if (row.status === "Não Iniciado") {
+                                      return `
+                                  <div class="col-3">
+                                  <button id="${data['id']}" onclick="iniciarAtividade(this)" type="button" class="btn btn-warning btn-sm">Iniciar  </button>
+                                  </div>
+                                  `;
+                                  }
+                              },
+                              title: "Ações",
+                          }
+                      ],
+                  }).buttons().container().appendTo("#datatable-Tarefas_wrapper .col-md-6:eq(0)");
+                  $('div.toolbaratividade').html('');
+              });
+            }
         });
     });
   }

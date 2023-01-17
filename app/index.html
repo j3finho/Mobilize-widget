@@ -441,7 +441,6 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="clearDataTable('datatable-buttons-atividades')" aria-label="Close"></button>
                </div>
                <div class="modal-body">
-               <div id="atividadesNaoCriadas"></div>
                <div class="tab-pane" id="subscricao" role="tabpanel">
                   <div class="col-12">
                      <div class="card">
@@ -2483,7 +2482,7 @@
          });
 
          function clearDataTable(table) {
-            $('#' + table).DataTable().clear().draw().destroy();;
+            $('#' + table).DataTable().clear().draw().destroy();
          }
 
              $('#btnNovoProprietario').click(function() {
