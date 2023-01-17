@@ -261,6 +261,8 @@ function actionCadastrarCandidato() {
   escolhalatlongCand('', 1)
   // corredorAcessoCand('', 1)
   // habilitarAlturaCand('form_candidato_tipo_site',1)
+  getAllRecords('widget_sites_full', 'form_candidato_site', '')
+  getAllRecords('widget_sitetipos_full', 'form_candidato_tipo_site', '')
   getAllRecords('Widget_Proprietario', 'form_candidato_proprietario', '')
 }
 
@@ -340,6 +342,12 @@ function getAllRecords(report, inputField, criteria) {
           }
           else if(report == "widget_municipios_full") {
             textContent = data.name
+          }
+          else if(report == "widget_sites_full") {
+            textContent = data.ID_Site_Sharing
+          }
+          else if(report == "widget_sitetipos_full") {
+            textContent = data.Tipo_Site
           }
 
           field.append('<option value="'+value+'">' + textContent + '</option>')
