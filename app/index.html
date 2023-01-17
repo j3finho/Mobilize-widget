@@ -2765,22 +2765,23 @@
             var candidatoPontoCardealLat = $('#form_candidato_pontoCardealLat').val()
             var candidatoPontoCardealLong = $('#form_candidato_pontoCardealLong').val()
             var candidatoAltitude = $('#form_candidato_altitude').val()
-            var candidatoAnelBusca = $('input[name=anelBusca]').val()
+            var candidatoAnelBusca = $('input[name=anelBusca]:checked').val()
             var candidatoAnelBuscaJustificativa = $('#form_candidato_candidatolocalizado').val()
-            var candidatoUsoProposto = $('input[name=usoProposto]').val()
+            var candidatoUsoProposto = $('input[name=usoProposto]:checked').val()
             var candidatoUsoPropostoJustificativa = $('#form_candidato_proprietariointeressado').val()
-            var candidatoLegislacaoLocal = $('input[name=legislacaoLocal]').val()
+            var candidatoLegislacaoLocal = $('input[name=legislacaoLocal]:checked').val()
             var candidatoLegislacaoLocaljustificativa = $('#form_candidato_arealocadaatende').val()
-            var candidatoDocumentacao = $('input[name=documentacao]').val()
+            var candidatoDocumentacao = $('input[name=documentacao]:checked').val()
             var candidatoDocumentacaoJustificativa = $('#form_candidato_justifique_documentacaonecessaria').val()
-            var candidatoAcesso = $('input[name=acesso]').val()
+            var candidatoAcesso = $('input[name=acesso]:checked').val()
             var candidatoAcessoJustificativa = $('#form_candidato_justifique_acessodisponivel').val()
-            var candidatoEnergia = $('input[name=energia]').val()
+            var candidatoEnergia = $('input[name=energia]:checked').val()
             var candidatoEnergiaJustificativa = $('#form_candidato_justifique_energiadisponivel').val()
-            var candidatoObstrucao = $('input[name=obstrucao]').val()
+            var candidatoObstrucao = $('input[name=obstrucao]:checked').val()
             var candidatoObstrucaoJustificativa = $('#form_candidato_justifique_obstrucao').val()
             var candidatoObservacao = $('#form_candidato_observacao').val()
 
+            
             if (candidatoSigla == "") {
                mostrarErro("form_candidato_sigla", "Sigla do candidato não informada");
                return
@@ -2873,15 +2874,15 @@
                mostrarErro("form_candidato_altitude", "Altitude não informada");
                return
             }
-            if (candidatoAnelBusca == "") {
-               mostrarErro("form_candidato_candidatolocalizado", "Questão Anel de Busca não respondida");
+            if (candidatoAnelBusca == null) {
+               mostrarErro("", "Questão Anel de Busca não respondida");
                return
             }
             if (candidatoAnelBuscaJustificativa == "" && candidatoAnelBusca == "Não") {
-               mostrarErro("", "Justificativa Anel de Busca não informada");
+               mostrarErro("form_candidato_candidatolocalizado", "Justificativa Anel de Busca não informada");
                return
             }
-            if (candidatoUsoProposto == "") {
+            if (candidatoUsoProposto == null) {
                mostrarErro("", "Questão Uso Proposto não respondida");
                return
             }
@@ -2897,7 +2898,7 @@
                mostrarErro("form_candidato_arealocadaatende", "Justificativa Legislação Local não respondida");
                return
             }
-            if (candidatoDocumentacao == "") {
+            if (candidatoDocumentacao == null) {
                mostrarErro("", "Questão Documentação não respondida");
                return
             }
@@ -2905,7 +2906,7 @@
                mostrarErro("form_candidato_justifique_documentacaonecessaria", "Justificativa Documentação Local não respondida");
                return
             }
-            if (candidatoAcesso == "") {
+            if (candidatoAcesso == null) {
                mostrarErro("", "Questão Acesso não respondida");
                return
             }
@@ -2913,7 +2914,7 @@
                mostrarErro("form_candidato_justifique_acessodisponivel", "Justificativa Acesso não respondida");
                return
             }
-            if (candidatoEnergia == "") {
+            if (candidatoEnergia == null) {
                mostrarErro("", "Questão Energia não respondida");
                return
             }
@@ -2921,7 +2922,7 @@
                mostrarErro("form_candidato_justifique_energiadisponivel", "Justificativa Energia não respondida");
                return
             }
-            if (candidatoObstrucao == "") {
+            if (candidatoObstrucao == null) {
                mostrarErro("", "Questão Obstrução não respondida");
                return
             }
