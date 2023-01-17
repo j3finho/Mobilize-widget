@@ -1417,6 +1417,7 @@ function editSite() {
     },
     function (isConfirm) {
       if (isConfirm) {
+        $('#btnEditarSite').prop('disabled', true)
         ZOHO.CREATOR.init().then(function (data) {
           var queryParams = ZOHO.CREATOR.UTIL.getQueryParams();
           var paramsID = queryParams.idconta;
@@ -1577,6 +1578,99 @@ function editSite() {
           console.log(dataInicioAFormatada);
           var LatFormatado = parseInt(form_cliente_latitude);
           var LongFormatado = parseInt(form_cliente_longitude);
+
+          var opcaoCliente = $('#editar_cliente_site').find(':selected').text()
+          if (opcaoCliente == "Selecione..") {
+             mostrarErro("editar_cliente_site", "Cliente não selecionado")
+             return
+          }
+          if (form_cliente_IdsiteMobilize == "") {
+             mostrarErro("editar_cliente_IdsiteMobilize", "ID Mobilize não informado")
+             return
+          }
+          var opcaoOperadora = $('#editar_cliente_operadora').find(':selected').text()
+          if (opcaoOperadora == "Selecione..") {
+             mostrarErro("editar_cliente_operadora", "Operadora não selecionada")
+             return
+          }
+          if (form_cliente_Idsharing == "") {
+             mostrarErro("editar_cliente_Idsharing", "ID Site Sharing não informada")
+             return
+          }
+          if (form_cliente_idSiteOperadora == "") {
+             mostrarErro("editar_cliente_idSiteOperadora", "ID Site Operadora não informada")
+             return
+          }
+          if (form_cliente_projeto == "") {
+             mostrarErro("editar_cliente_projeto", "Projeto não informado")
+             return
+          }
+          var opcaoUFTexto = $('#form_editar_site_uf').find(':selected').text()
+          if (opcaoUFTexto == "Selecione..") {
+             mostrarErro("form_editar_site_uf", "UF não selecionada")
+             return
+          }
+          var opcaoMunicipioTexto = $('#form_editar_site_municipio').find(':selected').text()
+          if (opcaoMunicipioTexto == "Selecione...") {
+             mostrarErro("form_editar_site_municipio", "Municipio não selecionada")
+             return
+          }
+          var opcaoRaioBusca = $('#editar_cliente_raioBusca').find(':selected').text()
+          if (opcaoRaioBusca == "Selecione..") {
+             mostrarErro("editar_cliente_raioBusca", "Raio de Busca não selecionada")
+             return
+          }
+          if (form_cliente_opcao == "Selecione..") {
+             mostrarErro("editar_cliente_raioBusca", "Tipo de ponto nominal não selecionada")
+             return
+          }
+          if (form_cliente_opcao == "Decimal" && form_cliente_opcao != "Selecione..") {
+             if (form_cliente_latitude == "") {
+                mostrarErro("editar_cliente_latitude", "Latitude não informada")
+                return
+             } else if (form_cliente_longitude == "") {
+                mostrarErro("editar_cliente_latitude", "Longitude não informada")
+                return
+             }
+          }
+          if (form_cliente_opcao == "UTM" && form_cliente_opcao != "Selecione..") {
+             var pontoCardealLAT = form_cliente_pontoCardealLat.options[form_cliente_pontoCardealLat.selectedIndex].text
+             var pontoCardealLONG = form_cliente_pontoCardealLong.options[form_cliente_pontoCardealLong.selectedIndex].text
+             var grauLat = document.getElementById("editar_cliente_grauLat").value
+             var grauLong = document.getElementById("editar_cliente_grauLong").value
+             var minLat = document.getElementById("editar_cliente_minLat").value
+             var minLong = document.getElementById("editar_cliente_minLong").value
+             var segLat = document.getElementById("editar_cliente_segLat").value
+             var segLong = document.getElementById("editar_cliente_segLong").value
+
+             if (grauLat == "") {
+                mostrarErro("editar_cliente_grauLat", "Grau LAT não informada")
+                return
+             } else if (minLat == "") {
+                mostrarErro("editar_cliente_minLat", "Minuto LAT não informada")
+                return
+             } else if (segLat == "") {
+                mostrarErro("editar_cliente_segLat", "Segundos LAT não informada")
+                return
+             } else if (pontoCardealLAT == "Selecione..") {
+                mostrarErro("editar_cliente_pontoCardealLat", "Ponto Cardeal LAT não selecionada")
+                return
+             } else if (grauLong == "") {
+                mostrarErro("editar_cliente_grauLong", "Grau LONG não informada")
+                return
+             } else if (minLong == "") {
+                mostrarErro("editar_cliente_minLong", "Minuto LONG não informada")
+                return
+             } else if (segLong == "") {
+                mostrarErro("editar_cliente_segLong", "Segundos LONG não informada")
+                return
+             } else if (pontoCardealLONG == "Selecione..") {
+                mostrarErro("editar_cliente_pontoCardealLong", "Ponto Cardeal LONG não selecionada")
+                return
+             }
+          }
+
+
           var formData = {
             data: {
               Projeto: form_cliente_projeto,

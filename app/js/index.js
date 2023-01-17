@@ -15,7 +15,6 @@ import {
     getSelectPropietario,
     getEtapas
 } from "./functions/forms/getSelects.js";
-import addSite from "./functions/forms/addSites.js";
 import adicionaZero from "./functions/ultilitys.js";
 
 function runSelects(){
@@ -166,8 +165,8 @@ function calculoarea(){
 const btnAddAtividade = document.getElementById('addtask');
 btnAddAtividade.addEventListener('click', () => addTask());
 
-const btnAddSite = document.getElementById('addSite');
-btnAddSite.addEventListener('click', () => addSite());
+// const btnAddSite = document.getElementById('addSite');
+// btnAddSite.addEventListener('click', () => addSite());
 
 const campoAddSiteEstado = document.getElementById('form_site_uf');
 campoAddSiteEstado.addEventListener('change', () => escolhaEstado(1));

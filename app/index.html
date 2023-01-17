@@ -651,12 +651,12 @@
                         </div>
                         <div class="col-lg-4">
                            <label class="col-form-label">Endereço</span></label>
-                           <input id="form_candidato_endereco" name="taskbudget" type="text"
+                           <input id="form_candidato_endereco" maxlength="200" name="taskbudget" type="text"
                               placeholder="Informe o Endereço" class="form-control" >
                         </div>
                         <div class="col-lg-4">
                            <label class="col-form-label">Numero</span></label>
-                           <input id="form_candidato_numero" name="taskbudget" type="text"
+                           <input id="form_candidato_numero" maxlength="10" name="taskbudget" type="text"
                               placeholder="Informe o Numero do local" class="form-control" >
                         </div>
                      </div>
@@ -664,34 +664,34 @@
                         <div class="col-lg-4">
                            <label class="col-form-label">Complemento</span></label>
                            <input id="form_candidato_complemento" name="taskbudget" type="text"
-                              placeholder="Informe Complemento"  class="form-control" >
+                              placeholder="Informe Complemento" maxlength="200" class="form-control" >
                         </div>
                         <div class="col-lg-4">
                            <label class="col-form-label">Bairro</span></label>
                            <input id="form_candidato_bairro" name="taskbudget" type="text"
-                              placeholder="Informe o Bairro" class="form-control"  required>
+                              placeholder="Informe o Bairro" maxlength="150" class="form-control"  required>
                         </div>
                         <div class="col-lg-4">
                            <label class="col-form-label">Município</span></label>
                            <input id="form_candidato_municipio" name="taskbudget" type="text"
-                              placeholder="Informe o Município" class="form-control">
+                              placeholder="Informe o Município" maxlength="80" class="form-control">
                         </div>
                      </div>
                      <div class="row">
                         <div class="col-lg-4">
                            <label class="col-form-label">UF</label>
-                           <input id="form_candidato_uf" name="taskbudget" type="text" placeholder="Informe a UF" class="form-control">
+                           <input id="form_candidato_uf" name="taskbudget" maxlength="2" type="text" placeholder="Informe a UF" class="form-control">
                         </div>
                      </div>
                      <div class="row">
                         <div class="col-lg-6">
                            <label class="col-form-label">Distancia PN<span class="text-danger">*</span></label>
-                           <input id="form_candidato_distancia_pn" name="taskbudget" type="text"
+                           <input id="form_candidato_distancia_pn" maxlength="20" name="taskbudget" type="text"
                               placeholder="Informe a Distancia PN"  class="form-control" required="">
                         </div>
                         <div class="col-lg-6">
                            <label class="col-form-label">Pré-Comar(m)<span class="text-danger">*</span></label>
-                           <input id="form_candidato_pre_comar" name="taskbudget" type="text"
+                           <input id="form_candidato_pre_comar"  maxlength="20" name="taskbudget" type="text"
                               placeholder="Informe o Pré-Comar(m)" class="form-control"  required="">
                         </div>
                      </div>
@@ -699,12 +699,12 @@
                         <div class="col-lg-6">
                            <label class="col-form-label">Largura Área Locada<span
                               class="text-danger">*</span></label>
-                           <input id="form_candidato_largura_area_normal"  onblur="calculoarea()" name="taskbudget" type="text"
+                           <input id="form_candidato_largura_area_normal" maxlength="20"  onblur="calculoarea()" name="taskbudget" type="text"
                               placeholder="Informe a Largura Área Locada" class="form-control" required="">
                         </div>
                         <div class="col-lg-6">
                            <label class="col-form-label">Profundidade Área Locada<span class="text-danger">*</span></label>
-                           <input id="form_candidato_profundidade_normal"  onblur="calculoarea()" name="taskbudget" type="text"
+                           <input id="form_candidato_profundidade_normal"  maxlength="20"  onblur="calculoarea()" name="taskbudget" type="text"
                               placeholder="Informe a Profundidade" class="form-control" required="">
                         </div>
                      </div>
@@ -722,12 +722,12 @@
                            <label class="col-form-label">Largura Área Locada<span
                               class="text-danger"></span></label>
                            <input id="form_candidato_largura_area" onblur="calculoarea()" name="taskbudget" type="text"
-                              placeholder="Informe a Largura Área Locada" class="form-control">
+                              placeholder="Informe a Largura Área Locada"  maxlength="20" class="form-control">
                         </div>
                         <div class="col-lg-4 corredoracesso">
                            <label class="col-form-label">Profundidade<span class="text-danger"></span></label>
                            <input id="form_candidato_profundidade" onblur="calculoarea()" name="taskbudget" type="text"
-                              placeholder="Informe a Profundidade" class="form-control">
+                              placeholder="Informe a Profundidade"  maxlength="20" class="form-control">
                         </div>
                      </div>
                      <div class="row">
@@ -740,7 +740,7 @@
                            <label class="col-form-label">Altura do Edifício<span
                               class="text-danger"></span></label>
                            <input id="form_candidato_altura_edificio" name="taskbudget" type="text"
-                              placeholder="Informe a Altura do Edifício" class="form-control">
+                              placeholder="Informe a Altura do Edifício"  maxlength="20" class="form-control">
                         </div>
                      </div>
                      <div class="row pt-4">
@@ -766,14 +766,14 @@
                               <label class="col-form-label">Latitude <span
                                  class="text-danger">*</span></label>
                               <input id="form_candidato_latitude" name="taskbudget" type="text"
-                                 placeholder="Informe a Largura Área Locada" class="form-control" onchange="formatPontoCardinal(this.id)" required >
+                                 placeholder="Informe a Largura Área Locada" class="form-control" maxlength="11" onchange="formatPontoCardinal(this.id)" required >
                               <small id="emailHelp" class="form-text text-muted">Ex.: -23.1234</small>
                            </div>
                            <div class="col-lg-6">
                               <label class="col-form-label">Longitude <span
                                  class="text-danger">*</span></label>
                               <input id="form_candidato_longitude" name="taskbudget" type="text"
-                                 placeholder="Informe a Largura Área Locada" class="form-control" onchange="formatPontoCardinal(this.id)" required>>
+                                 placeholder="Informe a Largura Área Locada" class="form-control" maxlength="11" onchange="formatPontoCardinal(this.id)" required>>
                               <small id="emailHelp" class="form-text text-muted">Ex.: -46.1234</small>
                            </div>
                         </div>
@@ -783,9 +783,11 @@
                                  <label class="col-form-label">Grau LAT<span class="text-danger">*</span></label>
                                  <input
                                     id="form_candidato_grauLat" name="taskbudget" type="text"
-                                    placeholder="Informe a Largura o Grau Latitudinal" class="form-control"
+                                    placeholder="Informe o Grau Latitudinal" maxlength="2" class="form-control"
                                     tabindex="1001"
                                     >
+                                 <small id="emailHelp" class="form-text text-muted">Ex: 23</small>
+
                               </div>
                               <div class="col-lg-6">
                                  <label class="col-form-label">
@@ -794,8 +796,9 @@
                                  <input
                                     id="form_candidato_grauLong" name="taskbudget" type="text"
                                     placeholder="Informe o Grau Longitudinal" class="form-control"
-                                    tabindex="1005"
+                                    tabindex="1005" maxlength="2"
                                     >
+                                 <small id="emailHelp" class="form-text text-muted">Ex: 15</small>
                               </div>
                            </div>
                            <div class="row">
@@ -806,8 +809,9 @@
                                  <input
                                     id="form_candidato_minutoLat" name="taskbudget" type="text"
                                     placeholder="Informe o  minuto Latitudinal" class="form-control"
-                                    tabindex="1002"
+                                    tabindex="1002" maxlength="2"
                                     >
+                                 <small id="emailHelp" class="form-text text-muted">Ex: 37</small>
                               </div>
                               <div class="col-lg-6">
                                  <label class="col-form-label">
@@ -816,8 +820,9 @@
                                  <input
                                     id="form_candidato_minutLong" name="taskbudget" type="text"
                                     placeholder="Informe o minuto Longitudinal" class="form-control"
-                                    tabindex="1006"
+                                    tabindex="1006" maxlength="2"
                                     >
+                                 <small id="emailHelp" class="form-text text-muted">Ex: 9</small>
                               </div>
                            </div>
                            <div class="row">
@@ -828,8 +833,9 @@
                                  <input
                                     id="form_candidato_segundoLat" name="taskbudget" type="text"
                                     placeholder="Informe o segundo Longitudinal" class="form-control"
-                                    tabindex="1003"
+                                    tabindex="1003" maxlength="8"
                                     >
+                                 <small id="emailHelp" class="form-text text-muted">Ex: 47.667</small>
                               </div>
                               <div class="col-lg-6">
                                  <label class="col-form-label">
@@ -838,8 +844,9 @@
                                  <input
                                     id="form_candidato_segundoLong" name="taskbudget" type="text"
                                     placeholder="Informe o segundo Longitudinal" class="form-control"
-                                    tabindex="1007"
+                                    tabindex="1007" maxlength="8"
                                     >
+                                 <small id="emailHelp" class="form-text text-muted">Ex: 41.8793</small>
                               </div>
                            </div>
                            <div class="row">
@@ -875,7 +882,7 @@
                            <div class="col-lg-4">
                               <label class="col-form-label">Altitude<span class="text-danger">*</span></label>
                               <input id="form_candidato_altitude" name="taskbudget" type="text"
-                                 placeholder="Informe a Altitude" class="form-control">
+                                 placeholder="Informe a Altitude"  maxlength="20" class="form-control">
                            </div>
                         </div>
                         <div class="row pt-4">
@@ -1088,7 +1095,7 @@
             <div class="modal-content">
                <div class="modal-header">
                   <h5 class="modal-title add-task-title">Adicionar Novo Site</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="resetForm('NewtaskForm')" aria-label="Close"></button>
                </div>
                <div class="modal-body">
                   <form id="NewtaskForm" role="form">
@@ -1101,7 +1108,7 @@
                         </div>
                         <div class="col-lg-6">
                            <label class="col-form-label">ID Site Mobilize/Centro de custo<span class="text-danger">*</span></label>
-                           <input id="form_cliente_IdsiteMobilize" name="taskbudget" tabindex="1901" type="text"
+                           <input id="form_cliente_IdsiteMobilize" maxlength="10" name="taskbudget" tabindex="1901" type="text"
                               placeholder="Informe o ID Site Mobilize" class="form-control" >
                         </div>
                      </div>
@@ -1115,7 +1122,7 @@
                         <div class="col-lg-6">
                            <label class="col-form-label">ID Site Sharing<span class="text-danger">*</span></label>
                            <input id="form_cliente_Idsharing" name="taskbudget" tabindex="1903" type="text"
-                              placeholder="Informe a Sigla o ID Site Sharing" class="form-control" required>
+                              placeholder="Informe a Sigla o ID Site Sharing" maxlength="20" class="form-control" required>
                         </div>
                      </div>
                      <div class="row">
@@ -1128,7 +1135,7 @@
                            <label class="col-form-label">ID Site Operadora<span
                               class="text-danger">*</span></label>
                            <input id="form_cliente_idSiteOperadora" name="taskbudget" tabindex="1904" type="text"
-                              placeholder="Informe a Sigla o ID Site Operadora" class="form-control" required>
+                              placeholder="Informe a Sigla o ID Site Operadora" maxlength="20" class="form-control" required>
                         </div>
                      </div>
                      <div class="row">
@@ -1145,14 +1152,14 @@
                         </div>
                         <div class="col-lg-6">
                            <label class="col-form-label">Projeto<span class="text-danger">*</span></label>
-                           <input id="form_cliente_projeto" name="taskbudget" type="text"
+                           <input id="form_cliente_projeto" name="taskbudget" maxlength="150" type="text"
                               placeholder="Informe o Nome do Projeto" class="form-control" tabindex="1907" required>
                         </div>
                      </div>
                      <div class="row">
                         <div class="col-lg-6">
                            <label class="col-form-label">Sub Projeto<span class="text-danger"></span></label>
-                           <input id="form_cliente_subProjeto" name="taskbudget" tabindex="1908" type="text" placeholder="Informe o Sub Projeto" class="form-control">
+                           <input id="form_cliente_subProjeto" name="taskbudget" tabindex="1908" maxlength="150" type="text" placeholder="Informe o Sub Projeto" class="form-control">
                         </div>
                         <div class="col-lg-6">
                            <label class="col-form-label">Target do Aluguel<span class="text-danger"></span></label>
@@ -1185,7 +1192,7 @@
                      </div>
                      <div class="row">
                         <div class="col-lg-6">
-                           <label class="col-form-label">Regional<span class="text-danger">*</span></label>
+                           <label class="col-form-label">Regional<span class="text-danger"></span></label>
                            <select class="form-select" id="form_cliente_regional" disabled>
                               <option value="" selected>Selecione..</option>
                               <option value="Norte">Norte</option>
@@ -1246,7 +1253,7 @@
                      </div>
                      <div class="row">
                         <div class="col-lg-6">
-                           <label class="col-form-label">Opção<span class="text-danger"></span></label>
+                           <label class="col-form-label">Opção<span class="text-danger">*</span></label>
                            <select class="form-select validate" id="form_cliente_opcao" onchange="escolhalatlong(this.value,1);" tabindex="1914">
                               <option value="" selected>Selecione..</option>
                               <option value="Decimal">Decimal</option>
@@ -1273,43 +1280,49 @@
                            <div class="row">
                               <div class="col-lg-6">
                                  <label class="col-form-label">Grau LAT <span class="text-danger">*</span></label>
-                                 <input id="form_cliente_grauLat" name="taskbudget" type="text"
-                                    placeholder="Informe a Largura o Grau Latitudinal" class="form-control"
+                                 <input id="form_cliente_grauLat" maxlength="2" name="taskbudget" type="text"
+                                    placeholder="Informe o Grau Latitudinal" class="form-control"
                                     tabindex="1921">
+                                 <small id="emailHelp" class="form-text text-muted">Ex: 23</small>
                               </div>
                               <div class="col-lg-6">
                                  <label class="col-form-label">Grau LONG <span class="text-danger">*</span></label>
-                                 <input id="form_cliente_grauLong" name="taskbudget" type="text"
+                                 <input id="form_cliente_grauLong" max="2" name="taskbudget" type="text"
                                     placeholder="Informe o Grau Longitudinal" class="form-control"
                                     tabindex="1925">
+                                 <small id="emailHelp" class="form-text text-muted">Ex: 15</small>
                               </div>
                            </div>
                            <div class="row">
                               <div class="col-lg-6">
                                  <label class="col-form-label">Minuto LAT <span class="text-danger">*</span></label>
-                                 <input id="form_cliente_minLat" name="taskbudget" type="text"
+                                 <input id="form_cliente_minLat" maxlength="2" name="taskbudget" type="text"
                                     placeholder="Informe o  minuto Latitudinal" class="form-control"
                                     tabindex="1922">
+                                 <small id="emailHelp" class="form-text text-muted">Ex: 37</small>
                               </div>
                               <div class="col-lg-6">
                                  <label class="col-form-label">Minuto LONG <span class="text-danger">*</span></label>
-                                 <input id="form_cliente_minLong" name="taskbudget" type="text"
+                                 <input id="form_cliente_minLong" maxlength="2" name="taskbudget" type="text"
                                     placeholder="Informe o minuto Longitudinal" class="form-control"
                                     tabindex="1926">
+                                 <small id="emailHelp" class="form-text text-muted">Ex: 9</small>
                               </div>
                            </div>
                            <div class="row">
                               <div class="col-lg-6">
                                  <label class="col-form-label">Segundo LAT <span class="text-danger">*</span></label>
-                                 <input id="form_cliente_segLat" name="taskbudget" type="text"
+                                 <input id="form_cliente_segLat" maxlength="8" name="taskbudget" type="text"
                                     placeholder="Informe o segundo Longitudinal" class="form-control"
                                     tabindex="1923">
+                                 <small id="emailHelp" class="form-text text-muted">Ex: 47.667</small>
                               </div>
                               <div class="col-lg-6">
                                  <label class="col-form-label">Segundo LONG<span class="text-danger">*</span></label>
-                                 <input id="form_cliente_segLong" name="taskbudget" type="text"
+                                 <input id="form_cliente_segLong" name="taskbudget" maxlength="8" type="text"
                                     placeholder="Informe o segundo Longitudinal" class="form-control"
                                     tabindex="1927">
+                                 <small id="emailHelp" class="form-text text-muted">Ex: 41.8793</small>
                               </div>
                            </div>
                            <div class="row">
@@ -1365,7 +1378,7 @@
                         </div>
                      </div>
                      <div class="col-lg-10 pt-3">
-                        <button type="button" class="btn btn-primary" id="addSite">Criar Site</button>
+                        <button type="button" class="btn btn-primary" id="addNewSite" onclick="addSite()">Criar Site</button>
                      </div>
                   </form>
                </div>
@@ -1669,7 +1682,7 @@
                         </div>
                      </div>
                      <div class="col-lg-10 pt-3">
-                        <button type="button" onclick="editSite()" class="btn btn-primary">Editar Site</button>
+                        <button type="button" id="btnEditarSite" onclick="editSite()" class="btn btn-primary">Editar Site</button>
                      </div>
                   </form>
                </div>
@@ -2566,7 +2579,7 @@
                         }
                      }
                }
-
+               $('#btnNovoProprietario').pro('disabled', true)
                ZOHO.CREATOR.API.addRecord(configProprietario).then((response) => {
                      if(response.code == 3001) {
                         $.each(responseCandidato.error, function(key,val) {             
@@ -2577,6 +2590,7 @@
                            type: "error",
                            showConfirmButton: true
                         });
+                        $('#btnNovoProprietario').pro('disabled', false)
                         return
                      }
                      var proprietarios = document.getElementById("form_candidato_proprietario")
@@ -2592,6 +2606,7 @@
                      });
                      $("#modalAdicionarProprietario").modal('hide')
                      $("#modalAdicionarCandidato").css('z-index', '');
+                      $('#btnNovoProprietario').pro('disabled', false)
                })
             });
          }
@@ -2661,6 +2676,7 @@
                      }
                }
             
+               $('#btnAddContato').prop('disabled', true)
                ZOHO.CREATOR.API.addRecord(configContato).then((response) => {
                      if(response.code == 3001) {
                         $.each(response.error, function(key,val) {             
@@ -2671,6 +2687,7 @@
                            type: "error",
                            showConfirmButton: true
                         });
+                         $('#btnAddContato').prop('disabled', false)
                         return
                      }
                      var contatos = document.getElementById("form_candidato_contato")
@@ -2686,6 +2703,7 @@
                      });
                      $("#modalAdicionarContato").modal('hide')
                      $("#modalAdicionarCandidato").css('z-index', '');
+                     $('#btnAddContato').prop('disabled', false)
                })
             })
          }
@@ -2964,6 +2982,7 @@
                      'Coment_rios': candidatoObservacao
                }
             }
+            $('#addCandidato').prop('disabled', true)
             var id_candidato = $('#candidatoID').val()
             if (id_candidato.length > 0) {
                var configEdit = {
@@ -3081,7 +3100,378 @@
                   type: "error",
                   showConfirmButton: true,
                   });
-               }
+         }
+
+         function addSite() {
+            ZOHO.CREATOR.init()
+               .then(function(data) {
+                     var queryParams = ZOHO.CREATOR.UTIL.getQueryParams();
+                     var paramsID = queryParams.idconta
+
+                     var form_cliente_site = document.getElementById("form_cliente_site");
+                     var form_cliente_siteValue = form_cliente_site.options[form_cliente_site.selectedIndex].value;
+
+                     var form_cliente_operadora = document.getElementById("form_cliente_operadora");
+                     var form_cliente_operadoraValue = form_cliente_operadora.options[form_cliente_operadora.selectedIndex].value;
+
+                     var form_cliente_coordenadorCliente = document.getElementById("form_cliente_coordenadorCliente");
+                     var form_cliente_coordenadorClienteValue = form_cliente_coordenadorCliente.options[form_cliente_coordenadorCliente.selectedIndex].value;
+
+                     var form_cliente_coordenadorMobilize = document.getElementById("form_cliente_coordenadorMobilize");
+                     var form_cliente_coordenadorMobilizeValue = form_cliente_coordenadorMobilize.options[form_cliente_coordenadorMobilize.selectedIndex].value;
+
+                     var form_cliente_etapa = document.getElementById("form_cliente_etapa");
+                     var form_cliente_etapaValue = form_cliente_etapa.options[form_cliente_etapa.selectedIndex].value;
+
+                     var form_cliente_regional = document.getElementById("form_cliente_regional");
+                     var form_cliente_regionalValue = form_cliente_regional.options[form_cliente_regional.selectedIndex].value;
+
+                     var form_cliente_alturaPrevista = document.getElementById("form_cliente_alturaPrevista");
+                     var form_cliente_alturaPrevistaValue = form_cliente_alturaPrevista.options[form_cliente_alturaPrevista.selectedIndex].value;
+
+                     var form_cliente_raioBusca = document.getElementById("form_cliente_raioBusca");
+                     var form_cliente_raioBuscaValue = form_cliente_raioBusca.options[form_cliente_raioBusca.selectedIndex].value;
+
+                     var form_cliente_opcao = document.getElementById("form_cliente_opcao");
+                     var form_cliente_opcaoValue = form_cliente_opcao.options[form_cliente_opcao.selectedIndex].value;
+
+                     var form_cliente_pontoCardealLat = document.getElementById("form_cliente_pontoCardealLat");
+                     if (form_cliente_pontoCardealLat != null) {
+                        var form_cliente_pontoCardealLatValue = form_cliente_pontoCardealLat.options[form_cliente_pontoCardealLat.selectedIndex].value;
+                     }
+
+                     var form_cliente_pontoCardealLong = document.getElementById("form_cliente_pontoCardealLong");
+                     if (form_cliente_pontoCardealLong != null) {
+                        var form_cliente_pontoCardealLongValue = form_cliente_pontoCardealLong.options[form_cliente_pontoCardealLong.selectedIndex].value;
+                     }
+
+                     var form_cliente_IdsiteMobilize = document.getElementById("form_cliente_IdsiteMobilize").value;
+
+                     var form_cliente_Idsharing = document.getElementById("form_cliente_Idsharing").value;
+
+                     var form_cliente_idSiteOperadora = document.getElementById("form_cliente_idSiteOperadora").value;
+
+                     var form_cliente_projeto = document.getElementById("form_cliente_projeto").value;
+
+                     var form_cliente_subProjeto = document.getElementById("form_cliente_subProjeto").value;
+
+                     var form_cliente_targetAluguel = document.getElementById("form_cliente_targetAluguel").value;
+
+                     var form_cliente_uf = document.getElementById("form_site_uf");
+                     var form_cliente_ufValue = form_cliente_uf.options[form_cliente_uf.selectedIndex].value;
+                     var form_cliente_municipio = document.getElementById("form_site_municipio");
+                     var form_cliente_municipioValue = form_cliente_municipio.options[form_cliente_municipio.selectedIndex].value;
+
+                     var form_cliente_latitude = document.getElementById("form_cliente_latitude").value.replace(',', '.');
+
+                     var form_cliente_longitude = document.getElementById("form_cliente_longitude").value.replace(',', '.');
+
+                     if (document.querySelector('#lat_long').innerHTML == '') {
+                        var form_cliente_grauLat = document.getElementById("form_cliente_grauLat").value;
+
+                        var form_cliente_grauLong = document.getElementById("form_cliente_grauLong").value;
+
+                        var form_cliente_minLat = document.getElementById("form_cliente_minLat").value;
+
+                        var form_cliente_minLong = document.getElementById("form_cliente_minLong").value;
+
+                        var form_cliente_segLat = document.getElementById("form_cliente_segLat").value;
+
+                        var form_cliente_segLong = document.getElementById("form_cliente_segLong").value;
+                     }
+
+                     var form_cliente_dataAcionamento = document.getElementById("form_cliente_dataAcionamento").value;
+
+                     const meses = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                     let dataInicioAnterior = new Date(form_cliente_dataAcionamento);
+                     let dataInicioAFormatada = (adicionaZero(dataInicioAnterior.getDate().toString()) + "-" + meses[(dataInicioAnterior.getMonth())] + "-" + dataInicioAnterior.getFullYear());
+
+                     var valorFinal2 = form_cliente_targetAluguel.replace('R$', '').replaceAll('.', '').replace(',', '.').trim()
+
+                     var opcaoCliente = $('#form_cliente_site').find(':selected').text()
+                     if (opcaoCliente == "Selecione..") {
+                        mostrarErro("form_cliente_site", "Cliente não selecionado")
+                        return
+                     }
+                     if (form_cliente_IdsiteMobilize == "") {
+                        mostrarErro("form_cliente_IdsiteMobilize", "ID Mobilize não informado")
+                        return
+                     }
+                     var opcaoOperadora = $('#form_cliente_operadora').find(':selected').text()
+                     if (opcaoOperadora == "Selecione..") {
+                        mostrarErro("form_cliente_operadora", "Operadora não selecionada")
+                        return
+                     }
+                     if (form_cliente_Idsharing == "") {
+                        mostrarErro("form_cliente_Idsharing", "ID Site Sharing não informada")
+                        return
+                     }
+                     if (form_cliente_idSiteOperadora == "") {
+                        mostrarErro("form_cliente_idSiteOperadora", "ID Site Operadora não informada")
+                        return
+                     }
+                     if (form_cliente_projeto == "") {
+                        mostrarErro("form_cliente_projeto", "Projeto não informado")
+                        return
+                     }
+                     var opcaoUFTexto = $('#form_site_uf').find(':selected').text()
+                     if (opcaoUFTexto == "Selecione..") {
+                        mostrarErro("form_site_uf", "UF não selecionada")
+                        return
+                     }
+                     var opcaoMunicipioTexto = $('#form_site_municipio').find(':selected').text()
+                     if (opcaoMunicipioTexto == "Selecione...") {
+                        mostrarErro("form_site_municipio", "Municipio não selecionada")
+                        return
+                     }
+                     var opcaoRaioBusca = $('#form_cliente_raioBusca').find(':selected').text()
+                     if (opcaoRaioBusca == "Selecione..") {
+                        mostrarErro("form_cliente_raioBusca", "Raio de Busca não selecionada")
+                        return
+                     }
+                     var opcaoPontoNominal = form_cliente_opcao.options[form_cliente_opcao.selectedIndex].text
+                     if (opcaoPontoNominal == "Selecione..") {
+                        mostrarErro("form_cliente_opcao", "Tipo de ponto nominal não selecionada")
+                        return
+                     }
+                     if (opcaoPontoNominal == "Decimal" && opcaoPontoNominal != "Selecione..") {
+                        if (form_cliente_latitude == "") {
+                           mostrarErro("form_cliente_latitude", "Latitude não informada")
+                           return
+                        } else if (form_cliente_longitude == "") {
+                           mostrarErro("form_cliente_longitude", "Longitude não informada")
+                           return
+                        }
+                     }
+                     if (opcaoPontoNominal == "UTM" && opcaoPontoNominal != "Selecione..") {
+                        var pontoCardealLAT = form_cliente_pontoCardealLat.options[form_cliente_pontoCardealLat.selectedIndex].text
+                        var pontoCardealLONG = form_cliente_pontoCardealLong.options[form_cliente_pontoCardealLong.selectedIndex].text
+                        var grauLat = document.getElementById("form_cliente_grauLat").value
+                        var grauLong = document.getElementById("form_cliente_grauLong").value
+                        var minLat = document.getElementById("form_cliente_minLat").value
+                        var minLong = document.getElementById("form_cliente_minLong").value
+                        var segLat = document.getElementById("form_cliente_segLat").value
+                        var segLong = document.getElementById("form_cliente_segLong").value
+
+                        if (grauLat == "") {
+                           mostrarErro("form_cliente_grauLat", "Grau LAT não informada")
+                           return
+                        } else if (minLat == "") {
+                           mostrarErro("form_cliente_minLat", "Minuto LAT não informada")
+                           return
+                        } else if (segLat == "") {
+                           mostrarErro("form_cliente_segLat", "Segundos LAT não informada")
+                           return
+                        } else if (pontoCardealLAT == "Selecione..") {
+                           mostrarErro("form_cliente_pontoCardealLat", "Ponto Cardeal LAT não selecionada")
+                           return
+                        } else if (grauLong == "") {
+                           mostrarErro("form_cliente_grauLong", "Grau LONG não informada")
+                           return
+                        } else if (minLong == "") {
+                           mostrarErro("form_cliente_minLong", "Minuto LONG não informada")
+                           return
+                        } else if (segLong == "") {
+                           mostrarErro("form_cliente_segLong", "Segundos LONG não informada")
+                           return
+                        } else if (pontoCardealLONG == "Selecione..") {
+                           mostrarErro("form_cliente_pontoCardealLong", "Ponto Cardeal LONG não selecionada")
+                           return
+                        }
+                     }
+
+
+                     var formData = {
+                        "data": {
+                           'Projeto': form_cliente_projeto,
+                           'UF': form_cliente_ufValue,
+                           'Municipio2': form_cliente_municipioValue,
+                           'Etapa': form_cliente_etapaValue,
+                           'ID_Site_Mobilize': form_cliente_IdsiteMobilize,
+                           'Data_de_Acionamento': dataInicioAFormatada,
+                           'Longitude': form_cliente_longitude,
+                           'Latitude': form_cliente_latitude,
+                           'Operadora': form_cliente_operadoraValue,
+                           'ID_Site_Operadora': form_cliente_idSiteOperadora,
+                           'ID_Site_Sharing': form_cliente_Idsharing,
+                           'cliente': form_cliente_siteValue,
+                           'regional': form_cliente_regionalValue,
+                           'Altura_Prevista_M': form_cliente_alturaPrevistaValue,
+                           'RAIO_DE_BUSCA_M': form_cliente_raioBuscaValue,
+                           'Target_do_Aluguel': valorFinal2,
+                           'Opcao': form_cliente_opcaoValue,
+                           'GrauLAT': form_cliente_grauLat,
+                           'GrauLONG': form_cliente_grauLong,
+                           'MinutoLAT': form_cliente_minLat,
+                           'MinutoLONG': form_cliente_minLong,
+                           'SegundosLAT': form_cliente_segLat,
+                           'SegundosLONG': form_cliente_segLong,
+                           'PontoCardealLAT': form_cliente_pontoCardealLatValue,
+                           'PontoCardealLONG': form_cliente_pontoCardealLongValue,
+                           'Coordenador_Mobilize': form_cliente_coordenadorMobilizeValue,
+                           'Sub_Projeto': form_cliente_subProjeto,
+                           'Contato': form_cliente_coordenadorClienteValue
+                        }
+                     }
+                     var fileObject = document.getElementById("form_cliente_anexo").files[0];
+                     var config = {
+                        appName: "mobilize",
+                        formName: "Site",
+                        data: formData
+                     }
+
+
+                     $('#addNewSite').prop('disabled', true)
+                     var userEmail = $('#useremailzoho').val()
+                     if (!$('input[name="form_cliente_anexo"]').val()) {
+                        ZOHO.CREATOR.API.addRecord(config).then(function(response) {
+                           if (response.code == 3000) {
+                                 console.log('cadastrou o formulario SITE')
+                                 var idSite = response.data.ID;
+
+                                 var formDataAnexos = {
+                                    "data": {
+                                       'Tipo_do_Anexo': 'Tipo Site',
+                                       'Site': idSite,
+                                       'usuario': userEmail
+                                    }
+                                 }
+                                 var fileObject = document.getElementById("form_cliente_anexo").files[0];
+
+
+                                 var configAnexo = {
+                                    appName: "mobilize",
+                                    formName: "Anexos",
+                                    data: formDataAnexos
+                                 }
+
+                                 ZOHO.CREATOR.API.addRecord(configAnexo).then(function(responseAnexo) {
+                                    var fileObject = document.getElementById("form_cliente_anexo").files[0];
+                                    if (responseAnexo.code == 3000) {
+                                       console.log('FORM SITE')
+                                       swal({
+                                             title: "Site Adicionado com sucesso!",
+                                             type: "success",
+                                             showConfirmButton: false
+                                       });
+                                       setTimeout(() => {
+                                             document.location.reload(true);
+                                       }, 2000)
+                                    }
+                                 });
+                           } else {
+                                 var v_erro = "";
+                                 $.each(response.error, function(key, val) {
+                                    v_erro = v_erro + val + ". ";
+                                 });
+                                 swal({
+                                    title: "Atualize a Pagina e tente novamente! (" + v_erro + ")",
+                                    type: "error",
+                                    showConfirmButton: true
+                                 });
+                           }
+
+                        });
+
+                     } else {
+                        ZOHO.CREATOR.API.addRecord(config).then(function(response) {
+                           if (response.code == 3000) {
+                                 console.log('cadastrou o formulario SITE')
+                                 var idSite = response.data.ID;
+
+                                 var formDataAnexos = {
+                                    "data": {
+                                       'Tipo_do_Anexo': 'Tipo Site',
+                                       'Site': idSite,
+                                       'usuario': userEmail
+                                    }
+                                 }
+                                 var fileObject = document.getElementById("form_cliente_anexo").files[0];
+
+
+                                 var configAnexo = {
+                                    appName: "mobilize",
+                                    formName: "Anexos",
+                                    data: formDataAnexos
+                                 }
+
+                                 ZOHO.CREATOR.API.addRecord(configAnexo).then(function(responseAnexo) {
+                                    var fileObject = document.getElementById("form_cliente_anexo").files[0];
+                                    if (responseAnexo.code == 3000) {
+                                       console.log('FORM SITE')
+
+
+                                       var configPdf = {
+                                             appName: "mobilize",
+                                             reportName: "Anexos_Report",
+                                             id: responseAnexo.data.ID,
+                                             fieldName: "Anexos",
+                                             file: fileObject
+                                       }
+                                       swal({
+                                             title: "Site Adicionado com sucesso!",
+                                             type: "success",
+                                             showConfirmButton: false
+                                       });
+                                       setTimeout(() => {
+                                             document.location.reload(true);
+                                       }, 2000)
+
+
+                                    } else {
+                                       var v_erro = "";
+                                       $.each(responseAnexo.error, function(key, val) {
+                                             v_erro = v_erro + val + ". ";
+                                       });
+                                       swal({
+                                             title: "Atualize a Pagina e tente novamente! (" + v_erro + ")",
+                                             type: "error",
+                                             showConfirmButton: true
+                                       });
+
+                                    }
+                                    if (fileObject != null) {
+                                       ZOHO.CREATOR.API.uploadFile(configPdf).then(function(responsePdf) {
+                                             if (responsePdf.code == 3000) {
+
+                                                console.log('PDF')
+                                                swal({
+                                                   title: "Site Adicionado com sucesso!",
+                                                   type: "success",
+                                                   showConfirmButton: false
+                                                });
+                                                setTimeout(() => {
+                                                   document.location.reload(true);
+                                                }, 2000)
+                                             } else {
+                                                var v_erro = "";
+                                                $.each(responsePdf.error, function(key, val) {
+                                                   v_erro = v_erro + val + ". ";
+                                                });
+                                                swal({
+                                                   title: "Atualize a Pagina e tente novamente! (" + v_erro + ")",
+                                                   type: "error",
+                                                   showConfirmButton: true
+                                                });
+                                             }
+                                       });
+                                    }
+                                 });
+                           } else {
+                                 var v_erro = "";
+                                 $.each(response.error, function(key, val) {
+                                    v_erro = v_erro + val + ". ";
+                                 });
+                                 swal({
+                                    title: "Atualize a Pagina e tente novamente! (" + v_erro + ")",
+                                    type: "error",
+                                    showConfirmButton: true
+                                 });
+                           }
+                        });
+                     }
+               });
+         }
 
       </script>
       <script src="js/functions/getSite.js"></script>
