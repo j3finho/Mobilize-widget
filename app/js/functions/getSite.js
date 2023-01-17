@@ -120,8 +120,8 @@ function getApizohoSites() {
           cliente: data.cliente.ID,
           uf: data.UF.display_value,
           //municipio: data.Municipio2.display_value,
-          municipio:
-            data.Municipio2.length != "" ? data.Municipio2.display_value : "",
+          municipio: data.Municipio2.length != "" ? data.Municipio2.display_value : "",
+          candidatos: data.Candidato.lenght > 0
         });
       });
 
@@ -206,7 +206,7 @@ function getApizohoSites() {
                                         <i class="fas fa-pencil-alt"></i>
                                     </button>
                                     &nbsp;&nbsp;
-                                    <button id="${row.id}" type="button" onclick="excluirSite(this)" class="btn btn-outline-secondary btn-sm" title="Excluir Site">
+                                    <button id="${row.id}" type="button" onclick="excluirSite(this, ${row.candidatos},'${row.idSiteSharing}')" class="btn btn-outline-secondary btn-sm" title="Excluir Site">
                                          <i class="fas fa-trash-alt"></i>
                                     </button>
                                     &nbsp;&nbsp;
@@ -912,7 +912,7 @@ function excluirCandidato(id, status, ID_Mobilize) {
       if (result.isConfirmed) {
           if (["Aprovado", "Em Documentação", "Concluído"].includes(status)) {
               Swal.fire({
-                  icon: 'success',
+                  icon: 'error',
                   title: 'Oops...',
                   text: 'Candidato com status ' + status + " . Não é possível exclui-lo."
               })
@@ -937,10 +937,51 @@ function excluirCandidato(id, status, ID_Mobilize) {
                   'O candidato ' + ID_Mobilize + ' foi excluido com sucesso',
                   'success'
               )
+              setTimeout(() => document.location.reload(true), 1000);
+          });
+      }
+  })
+}
+
+function excluirSite(obj, candidatos, ID_Site) {
+  Swal.fire({
+      title: 'Deseja excluir este site?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Não',
+      reverseButtons: true
+  }).then((result) => {
+      if (result.isConfirmed) {
+          if (candidatos) {
               Swal.fire({
-                  icon: 'sucess',
-                  title: 'Candidato excluido com sucesso',
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Não é possível deletar o site, pois ha candidato para o site'
               })
+              return
+          }
+          config = {
+              appName: "mobilize",
+              reportName: "widget_sites_full",
+              criteria: "(ID == " + obj.id + ")",
+          };
+          ZOHO.CREATOR.API.deleteRecord(config).then(function(response) {
+              if (response.code != 3000) {
+                  Swal.fire({
+                      icon: 'error',
+                      title: 'Oops...',
+                      text: 'Ocorreu um erro ao tentar excluir o site. Tente novamente mais tarde'
+                  })
+                  return
+              }
+              Swal.fire(
+                  'Deletado!',
+                  'O site ' + ID_Site + ' foi excluido com sucesso',
+                  'success'
+              )
               setTimeout(() => document.location.reload(true), 1000);
           });
       }
@@ -1120,6 +1161,8 @@ function viewAtividadesPorSite(n) {
   }
 
 function editViewSite(n) {
+
+
   $("#modalEditarSite").modal("show");
   var idUpdate = n.id;
   var campo = $("#form_editar_site_uf");
