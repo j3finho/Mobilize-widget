@@ -3002,6 +3002,7 @@
                            title: 'Oops...',
                            text: 'Não foi possível atualizar o registro. Tente novamente mais. - Error: ' + v_erro
                         })
+                        $('#addCandidato').prop('disabled', false)
                         return
                      }
                      addAnexoCandidato(candidatoSite, id_candidato)
@@ -3028,6 +3029,7 @@
                            title: 'Oops...',
                            text: 'Não foi possível atualizar o registro. Tente novamente mais. - Error: ' + v_erro
                         })
+            $('#addCandidato').prop('disabled', false)
                         return
                      }
                      const candidatoID = responseCandidato.data.ID;
@@ -3214,13 +3216,17 @@
                         mostrarErro("form_cliente_projeto", "Projeto não informado")
                         return
                      }
+                     if (form_cliente_projeto == "") {
+                        mostrarErro("form_cliente_projeto", "Projeto não informado")
+                        return
+                     }
                      var opcaoUFTexto = $('#form_site_uf').find(':selected').text()
                      if (opcaoUFTexto == "Selecione..") {
                         mostrarErro("form_site_uf", "UF não selecionada")
                         return
                      }
                      var opcaoMunicipioTexto = $('#form_site_municipio').find(':selected').text()
-                     if (opcaoMunicipioTexto == "Selecione...") {
+                     if (opcaoMunicipioTexto == "Selecione..") {
                         mostrarErro("form_site_municipio", "Municipio não selecionada")
                         return
                      }
@@ -3280,6 +3286,7 @@
                         }
                      }
 
+                     console.log(dataInicioAFormatada)
 
                      var formData = {
                         "data": {
@@ -3360,6 +3367,7 @@
                                     }
                                  });
                            } else {
+                     $('#addNewSite').prop('disabled', false)
                                  var v_erro = "";
                                  $.each(response.error, function(key, val) {
                                     v_erro = v_erro + val + ". ";
@@ -3419,6 +3427,7 @@
 
 
                                     } else {
+                     $('#addNewSite').prop('disabled', false)
                                        var v_erro = "";
                                        $.each(responseAnexo.error, function(key, val) {
                                              v_erro = v_erro + val + ". ";
@@ -3458,6 +3467,7 @@
                                     }
                                  });
                            } else {
+                     $('#addNewSite').prop('disabled', false)
                                  var v_erro = "";
                                  $.each(response.error, function(key, val) {
                                     v_erro = v_erro + val + ". ";

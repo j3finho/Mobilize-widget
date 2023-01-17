@@ -602,7 +602,7 @@ function viewCandidatosPorSite(n) {
                             <button id="${data["id"]}"  type="button" onclick="viewCandidato(this)" class="btn_view_site btn btn-outline-secondary btn-sm edit" title="Visualizar">
                                 <i class="far fa-eye"></i>
                             </button>
-                            <button id="${data["id"]}"  type="button" onclick="excluirCandidato(${data['id']}, ${data['status']})" class="btn_view_site btn btn-outline-secondary btn-sm edit" title="Excluir">
+                            <button id="${data["id"]}"  type="button" onclick="excluirCandidato('${row.id}', '${row.status}', '${row.siglaCandidato}')" class="btn_view_site btn btn-outline-secondary btn-sm edit" title="Excluir">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                             `;
@@ -898,48 +898,53 @@ function viewCandidato(obj) {
   })
 }
 
-function excluirCandidato(id, status) {
+function excluirCandidato(id, status, ID_Mobilize) {
   Swal.fire({
-    title: 'Deseja excluir este candidato?',
-    icon: 'question',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Sim',
-    cancelButtonText: 'Não',
-    reverseButtons: true
-}).then((result) => {
-    if (result.isConfirmed) {            
-        if(["Aprovado", "Em Documentação", "Concluído"].includes(status)) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Candidato com status ' + status + " . Não é possível exclui-lo."
-         })
-          return
-        }
-        config = {
-          appName: "mobilize",
-          reportName: "widget_atividades_full",
-          criteria: "(ID=" + id + ")"
-       }
-       ZOHO.CREATOR.API.deleteRecord(config).then(function(response){
-          if(response.code != 3000) {
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Ocorreu um erro ao tentar excluir o candidato. Tente novamente mais tarde'
-           })
-            return
+      title: 'Deseja excluir este candidato?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Não',
+      reverseButtons: true
+  }).then((result) => {
+      if (result.isConfirmed) {
+          if (["Aprovado", "Em Documentação", "Concluído"].includes(status)) {
+              Swal.fire({
+                  icon: 'success',
+                  title: 'Oops...',
+                  text: 'Candidato com status ' + status + " . Não é possível exclui-lo."
+              })
+              return
           }
-          Swal.fire({
-            icon: 'sucess',
-            title: 'Candidato excluido com sucesso',
-         })
-         setTimeout(() => document.location.reload(true), 2000);
-      });
-    }
-})
+          config = {
+              appName: "mobilize",
+              reportName: "widget_candidatos_full",
+              criteria: "(ID == " + id + ")",
+          };
+          ZOHO.CREATOR.API.deleteRecord(config).then(function(response) {
+              if (response.code != 3000) {
+                  Swal.fire({
+                      icon: 'error',
+                      title: 'Oops...',
+                      text: 'Ocorreu um erro ao tentar excluir o candidato. Tente novamente mais tarde'
+                  })
+                  return
+              }
+              Swal.fire(
+                  'Deletado!',
+                  'O candidato ' + ID_Mobilize + ' foi excluido com sucesso',
+                  'success'
+              )
+              Swal.fire({
+                  icon: 'sucess',
+                  title: 'Candidato excluido com sucesso',
+              })
+              setTimeout(() => document.location.reload(true), 1000);
+          });
+      }
+  })
 }
 
 function viewAtividadesPorSite(n) {
