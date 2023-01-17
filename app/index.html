@@ -441,6 +441,7 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="clearDataTable('datatable-buttons-atividades')" aria-label="Close"></button>
                </div>
                <div class="modal-body">
+               <div id="atividadesNaoCriadas"></div>
                <div class="tab-pane" id="subscricao" role="tabpanel">
                   <div class="col-12">
                      <div class="card">
@@ -1968,44 +1969,44 @@
                         <div class="col-lg-4">
                            <label class="col-form-label">CEP<span class="text-danger">*</span></label>
                            <input id="form_proprietario_cep" name="taskbudget" type="text"
-                              placeholder="Informe o CEP" class="form-control"  maxlength="8">
+                              placeholder="Informe o CEP" class="form-control"  maxlength="8" onkeypress="return /^-?[0-9]\d*(\.\d+)?$/.test(event.key)">
                            <a href="https://buscacepinter.correios.com.br/app/endereco/index.php"
                               target="_blank"><small id="emailHelp" class="form-text text-muted">Não localizou o CEP. Clique aqui!</small></a>
                            <input id="form_proprietario_cep_antigo"  name="taskbudget" type="hidden"
                               class="form-control">
                         </div>
                         <div class="col-lg-4">
-                           <label class="col-form-label">Endereço<span class="text-danger">*</span></label>
+                           <label class="col-form-label">Endereço<span class="text-danger"></span></label>
                            <input id="form_proprietario_endereco" name="taskbudget" type="text"
-                              placeholder="Informe o Endereço" class="form-control" >
+                              placeholder="Informe o Endereço" class="form-control" maxlength="200">
                         </div>
                         <div class="col-lg-4">
-                           <label class="col-form-label">Numero<span class="text-danger">*</span></label>
+                           <label class="col-form-label">Numero<span class="text-danger"></span></label>
                            <input id="form_proprietario_numero" name="taskbudget" type="text"
-                              placeholder="Informe o Numero"  class="form-control" >
+                              placeholder="Informe o Numero"  class="form-control" maxlength="10" onkeypress="return /^-?[0-9]\d*(\.\d+)?$/.test(event.key)">
                         </div>
                      </div>
                      <div class="row">
                         <div class="col-lg-6">
-                           <label class="col-form-label">Complemento<span class="text-danger">*</span></label>
+                           <label class="col-form-label">Complemento<span class="text-danger"></span></label>
                            <input id="form_proprietario_complemento" name="taskbudget" type="text"
-                              placeholder="Informe Complemento"  class="form-control" >
+                              placeholder="Informe Complemento"  class="form-control" maxlength="50" >
                         </div>
                         <div class="col-lg-6">
-                           <label class="col-form-label">Bairro<span class="text-danger">*</span></label>
+                           <label class="col-form-label">Bairro<span class="text-danger"></span></label>
                            <input id="form_proprietario_bairro" name="taskbudget" type="text"
-                              placeholder="Informe o Bairro" class="form-control"  required>
+                              placeholder="Informe o Bairro" class="form-control" maxlength="150" required>
                         </div>
                      </div>
                      <div class="row">
                         <div class="col-lg-6">
-                           <label class="col-form-label">Município<span class="text-danger">*</span></label>
-                           <input id="form_proprietario_municipio" disabled name="taskbudget" type="text"
-                              placeholder="Informe o Município" class="form-control">
+                           <label class="col-form-label">Município<span class="text-danger"></span></label>
+                           <input id="form_proprietario_municipio" name="taskbudget" type="text"
+                              placeholder="Informe o Município" class="form-control" maxlength="80">
                         </div>
                         <div class="col-lg-6">
-                           <label class="col-form-label">UF<span class="text-danger">*</span></label>
-                           <input id="form_proprietario_uf" disabled name="taskbudget" type="text" placeholder="Informe a UF" class="form-control">
+                           <label class="col-form-label">UF<span class="text-danger"></span></label>
+                           <input id="form_proprietario_uf" name="taskbudget" maxlength="2" type="text" placeholder="Informe a UF" class="form-control">
                         </div>
                      </div>
                      <div class="rowCenterItems">
@@ -2068,7 +2069,7 @@
                         <div class="col-lg-4">
                            <label class="col-form-label">CEP<span class="text-danger">*</span></label>
                            <input id="form_contato_cep" name="taskbudget" type="text"
-                              placeholder="Informe o CEP" class="form-control"  maxlength="8">
+                              placeholder="Informe o CEP" class="form-control"  maxlength="8" onkeypress="return /^-?[0-9]\d*(\.\d+)?$/.test(event.key)">
                            <a href="https://buscacepinter.correios.com.br/app/endereco/index.php"
                               target="_blank"><small id="emailHelp" class="form-text text-muted">Não localizou o CEP. Clique aqui!</small></a>
                            <input id="form_proprietario_cep_antigo"  name="taskbudget" type="hidden"
@@ -2077,35 +2078,35 @@
                         <div class="col-lg-4">
                            <label class="col-form-label">Endereço</label>
                            <input id="form_contato_endereco" name="taskbudget" type="text"
-                              placeholder="Informe o Endereço" class="form-control" >
+                              placeholder="Informe o Endereço" class="form-control" maxlength="200">
                         </div>
                         <div class="col-lg-4">
                            <label class="col-form-label">Numero</label>
                            <input id="form_contato_numero" name="taskbudget" type="text"
-                              placeholder="Informe o Numero"  class="form-control" >
+                              placeholder="Informe o Numero"  class="form-control" maxlength="10" onkeypress="return /^-?[0-9]\d*(\.\d+)?$/.test(event.key)">
                         </div>
                      </div>
                      <div class="row">
                         <div class="col-lg-6">
                            <label class="col-form-label">Complemento</label>
                            <input id="form_contato_complemento" name="taskbudget" type="text"
-                              placeholder="Informe Complemento"  class="form-control" >
+                              placeholder="Informe Complemento"  class="form-control" maxlength="50">
                         </div>
                         <div class="col-lg-6">
                            <label class="col-form-label">Bairro</label>
                            <input id="form_contato_bairro" name="taskbudget" type="text"
-                              placeholder="Informe o Bairro" class="form-control"  required>
+                              placeholder="Informe o Bairro" class="form-control" maxlength="150" required>
                         </div>
                      </div>
                      <div class="row">
                         <div class="col-lg-6">
                            <label class="col-form-label">Município</label>
                            <input id="form_contato_municipio"  name="taskbudget" type="text"
-                              placeholder="Informe o Município" class="form-control">
+                              placeholder="Informe o Município" class="form-control" maxlength="80">
                         </div>
                         <div class="col-lg-6">
                            <label class="col-form-label">UF</label>
-                           <input id="form_contato_uf" name="taskbudget" type="text" placeholder="Informe a UF" class="form-control">
+                           <input id="form_contato_uf" name="taskbudget" type="text" placeholder="Informe a UF" class="form-control" maxlength="2">
                         </div>
                      </div>
                      <div class="rowCenterItems">
@@ -2469,7 +2470,7 @@
             habilitarJustifitiva(this, "Não","form_candidato_arealocadaatende" )
          });
          $('input[type=radio][name=documentacao]').change(function() {
-            habilitarJustifitiva(this, "Não","form_candidato_justifique_documentacaonecessaria" )
+            habilitarJustifitiva(this, "Sim","form_candidato_justifique_documentacaonecessaria" )
          });
          $('input[type=radio][name=acesso]').change(function() {
             habilitarJustifitiva(this, "Não","form_candidato_justifique_acessodisponivel" )
@@ -2478,7 +2479,7 @@
             habilitarJustifitiva(this, "Não","form_candidato_justifique_energiadisponivel" )
          });
          $('input[type=radio][name=obstrucao]').change(function() {
-            habilitarJustifitiva(this, "Sim","form_candidato_justifique_obstrucao" )
+            habilitarJustifitiva(this, "Não","form_candidato_justifique_obstrucao" )
          });
 
          function clearDataTable(table) {
@@ -2487,12 +2488,13 @@
 
              $('#btnNovoProprietario').click(function() {
                const siglaCandidato = $('#form_candidato_sigla').val()
+               const siteID = $('#form_candidato_site').val()
                if(siglaCandidato == "") {
-                  Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Necessário informar a Sigla do Candidato primeiro!',
-                  })
+                  mostrarErro('form_candidato_sigla', 'Necessário informar a Sigla do Candidato!')
+                  return
+               }
+               else if(siteID == "") {
+                  mostrarErro('form_candidato_site', 'Necessário selecionar o site antes.')
                   return
                }
                $('#modalAdicionarProprietario').modal('show')
@@ -2521,6 +2523,7 @@
             console.log("Tentando adicionar o proprietário")
             ZOHO.CREATOR.init().then(function (data) {
                const siglaCandidato = document.getElementById("form_candidato_sigla").value;
+               const siteID = $('#form_candidato_site').find(':selected').val();
                const nome = document.getElementById("form_proprietario_nome").value
                const cpfCNPJ = document.getElementById("form_proprietario_cpf_cnpj").value
                const razaoSocial = document.getElementById("form_proprietario_razao_social").value
@@ -2549,7 +2552,7 @@
                      return
                }
                else if(!emailValid) {
-                     mostrarErro("form_responsavel_email", "E-mail inválido.")
+                     mostrarErro("form_proprietario_email", "E-mail inválido.")
                      return
                } 
                else if(telefone.length < 10) {
@@ -2566,9 +2569,7 @@
                      formName: "Propriet_rio",
                      data: {
                         "data": {
-                           "Nome": {
-                                 "first_name1": nome
-                           }, 
+                           "Nome": nome, 
                            "CPF_CNPJ": cpfCNPJ,
                            "Razao_Social": razaoSocial,
                            "CEP": cep,
@@ -2580,13 +2581,14 @@
                            "Municipio": mucinicipio,
                            "Email": email, 
                            "Phone_Number": telefone,
-                           "Sigla_do_Candidato": siglaCandidato
+                           "Sigla_do_Candidato": siglaCandidato,
+                           "Site": siteID
                         }
                      }
                }
-               $('#btnNovoProprietario').pro('disabled', true)
+               $('#btnAddProprietario').prop('disabled', true)
                ZOHO.CREATOR.API.addRecord(configProprietario).then((response) => {
-                     if(response.code == 3001) {
+                     if(response.code != 3000) {
                         $.each(responseCandidato.error, function(key,val) {             
                            v_erro = v_erro + val + ". ";
                         });
@@ -2595,14 +2597,12 @@
                            type: "error",
                            showConfirmButton: true
                         });
-                        $('#btnNovoProprietario').pro('disabled', false)
+                        $('#btnAddProprietario').prop('disabled', false)
                         return
                      }
-                     var proprietarios = document.getElementById("form_candidato_proprietario")
-                     var option = document.createElement("option")
-                     option.value = response.data.ID
-                     option.text = nome
-                     proprietarios.add(option)
+                     $('#form_candidato_proprietario')
+                        .append('<option value="'+response.data.ID+ '">'+nome+'</option>')
+                        .val(response.data.ID);
 
                      swal({
                         title: "Proprietario adicionado com sucesso!",
@@ -2611,7 +2611,10 @@
                      });
                      $("#modalAdicionarProprietario").modal('hide')
                      $("#modalAdicionarCandidato").css('z-index', '');
-                      $('#btnNovoProprietario').pro('disabled', false)
+                     $('#btnAddProprietario').prop('disabled', false)
+
+                     resetForm('form_proprietario')
+                     getContacts()
                })
             });
          }
@@ -2695,12 +2698,10 @@
                          $('#btnAddContato').prop('disabled', false)
                         return
                      }
-                     var contatos = document.getElementById("form_candidato_contato")
-                     var option = document.createElement("option")
-                     option.value = response.data.ID
-                     option.text = nome
-                     contatos.add(option)
-            
+                     $('#form_candidato_contato')
+                        .append('<option value="'+response.data.ID+ '">'+nome+'</option>')
+                        .val(response.data.ID);
+
                      swal({
                         title: "Contato adicionado com sucesso!",
                         type: "success",
@@ -2709,6 +2710,7 @@
                      $("#modalAdicionarContato").modal('hide')
                      $("#modalAdicionarCandidato").css('z-index', '');
                      $('#btnAddContato').prop('disabled', false)
+                     resetForm('form_contato')
                })
             })
          }
@@ -2873,7 +2875,7 @@
                return
             }
             if (candidatoAnelBusca == "") {
-               mostrarErro("", "Questão Anel de Busca não respondida");
+               mostrarErro("form_candidato_candidatolocalizado", "Questão Anel de Busca não respondida");
                return
             }
             if (candidatoAnelBuscaJustificativa == "" && candidatoAnelBusca == "Não") {
@@ -2885,23 +2887,23 @@
                return
             }
             if (candidatoUsoPropostoJustificativa == "" && candidatoUsoProposto == "Não") {
-               mostrarErro("", "Justificativa Uso Proposto não informada");
+               mostrarErro("form_candidato_proprietariointeressado", "Justificativa Uso Proposto não informada");
                return
             }
             if (candidatoLegislacaoLocal == "") {
                mostrarErro("", "Questão Legislação Local não respondida");
                return
             }
-            if (candidatoAnelBuscaJustificativa == "" && candidatoLegislacaoLocal == "Não") {
-               mostrarErro("anel_busca_title_question", "Justificativa Legislação Local não respondida");
+            if (candidatoLegislacaoLocaljustificativa == "" && candidatoLegislacaoLocal == "Não") {
+               mostrarErro("form_candidato_arealocadaatende", "Justificativa Legislação Local não respondida");
                return
             }
             if (candidatoDocumentacao == "") {
                mostrarErro("", "Questão Documentação não respondida");
                return
             }
-            if (candidatoDocumentacaoJustificativa == "" && candidatoDocumentacao == "Não") {
-               mostrarErro("", "Justificativa Documentação Local não respondida");
+            if (candidatoDocumentacaoJustificativa == "" && candidatoDocumentacao == "Sim") {
+               mostrarErro("form_candidato_justifique_documentacaonecessaria", "Justificativa Documentação Local não respondida");
                return
             }
             if (candidatoAcesso == "") {
@@ -2909,7 +2911,7 @@
                return
             }
             if (candidatoAcessoJustificativa == "" && candidatoAcesso == "Não") {
-               mostrarErro("", "Justificativa Acesso não respondida");
+               mostrarErro("form_candidato_justifique_acessodisponivel", "Justificativa Acesso não respondida");
                return
             }
             if (candidatoEnergia == "") {
@@ -2917,15 +2919,15 @@
                return
             }
             if (candidatoEnergiaJustificativa == "" && candidatoEnergia == "Não") {
-               mostrarErro("", "Justificativa Energia não respondida");
+               mostrarErro("form_candidato_justifique_energiadisponivel", "Justificativa Energia não respondida");
                return
             }
             if (candidatoObstrucao == "") {
                mostrarErro("", "Questão Obstrução não respondida");
                return
             }
-            if (candidatoObstrucaoJustificativa == "" && candidatoObstrucao != "Não") {
-               mostrarErro("", "Justificativa Obstrução não respondida");
+            if (candidatoObstrucaoJustificativa == "" && candidatoObstrucao == "Não") {
+               mostrarErro("form_candidato_justifique_obstrucao", "Justificativa Obstrução não respondida");
                return
             }
             if (candidatoObstrucao == "") {
