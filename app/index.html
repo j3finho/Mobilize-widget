@@ -643,7 +643,7 @@
                         <div class="col-lg-4">
                            <label class="col-form-label">CEP<span class="text-danger">*</span></label>
                            <input id="form_candidato_cep" name="taskbudget" type="text"
-                              placeholder="Informe o CEP" class="form-control" maxlength="8">
+                              placeholder="Informe o CEP" class="form-control" maxlength="8" onkeypress="return /^-?[0-9]\d*(\.\d+)?$/.test(event.key)">
                            <a href="https://buscacepinter.correios.com.br/app/endereco/index.php"
                               target="_blank"><small id="emailHelp" class="form-text text-muted">Não localizou o CEP. Clique aqui!</small></a>
                            <input id="form_candidato_cep_antigo"  name="taskbudget" type="hidden"
@@ -657,14 +657,14 @@
                         <div class="col-lg-4">
                            <label class="col-form-label">Numero</span></label>
                            <input id="form_candidato_numero" maxlength="10" name="taskbudget" type="text"
-                              placeholder="Informe o Numero do local" class="form-control" >
+                              placeholder="Informe o Numero do local" class="form-control" onkeypress="return /^-?[0-9]\d*(\.\d+)?$/.test(event.key)" >
                         </div>
                      </div>
                      <div class="row">
                         <div class="col-lg-4">
                            <label class="col-form-label">Complemento</span></label>
                            <input id="form_candidato_complemento" name="taskbudget" type="text"
-                              placeholder="Informe Complemento" maxlength="200" class="form-control" >
+                              placeholder="Informe Complemento" maxlength="50" class="form-control" >
                         </div>
                         <div class="col-lg-4">
                            <label class="col-form-label">Bairro</span></label>
@@ -686,33 +686,37 @@
                      <div class="row">
                         <div class="col-lg-6">
                            <label class="col-form-label">Distancia PN<span class="text-danger">*</span></label>
-                           <input id="form_candidato_distancia_pn" maxlength="20" name="taskbudget" type="text"
-                              placeholder="Informe a Distancia PN"  class="form-control" required="">
+                           <input id="form_candidato_distancia_pn" maxlength="15" name="taskbudget" type="text"
+                              placeholder="Informe a Distancia PN"  class="form-control" required="" onkeyup="this.value = this.value.replace(/^\.|[^-?\d\.]|\.(?=.*\.)|^0+(?=\d)/g, '')
+">
                         </div>
                         <div class="col-lg-6">
                            <label class="col-form-label">Pré-Comar(m)<span class="text-danger">*</span></label>
-                           <input id="form_candidato_pre_comar"  maxlength="20" name="taskbudget" type="text"
-                              placeholder="Informe o Pré-Comar(m)" class="form-control"  required="">
+                           <input id="form_candidato_pre_comar"  maxlength="15" name="taskbudget" type="text"
+                              placeholder="Informe o Pré-Comar(m)" class="form-control"  required="" onkeyup="this.value = this.value.replace(/^\.|[^-?\d\.]|\.(?=.*\.)|^0+(?=\d)/g, '')
+">
                         </div>
                      </div>
                      <div class="row">
                         <div class="col-lg-6">
                            <label class="col-form-label">Largura Área Locada<span
                               class="text-danger">*</span></label>
-                           <input id="form_candidato_largura_area_normal" maxlength="20"  onblur="calculoarea()" name="taskbudget" type="text"
-                              placeholder="Informe a Largura Área Locada" class="form-control" required="">
+                           <input id="form_candidato_largura_area_normal" maxlength="15"  onblur="calculoarea()" name="taskbudget" type="text"
+                              placeholder="Informe a Largura Área Locada" class="form-control" required="" onkeyup="this.value = this.value.replace(/^\.|[^-?\d\.]|\.(?=.*\.)|^0+(?=\d)/g, '')
+">
                         </div>
                         <div class="col-lg-6">
                            <label class="col-form-label">Profundidade Área Locada<span class="text-danger">*</span></label>
-                           <input id="form_candidato_profundidade_normal"  maxlength="20"  onblur="calculoarea()" name="taskbudget" type="text"
-                              placeholder="Informe a Profundidade" class="form-control" required="">
+                           <input id="form_candidato_profundidade_normal"  maxlength="15"  onblur="calculoarea()" name="taskbudget" type="text"
+                              placeholder="Informe a Profundidade" class="form-control" required="" onkeyup="this.value = this.value.replace(/^\.|[^-?\d\.]|\.(?=.*\.)|^0+(?=\d)/g, '')
+">
                         </div>
                      </div>
                      <div class="row">
                         <div class="col-lg-4">
                            <label class="col-form-label">Corredor de Acesso?<span
                               class="text-danger">*</span></label>
-                           <select class="form-select validate" id="form_candidato_corredor" onchange="corredorAcessoCand(this.value,'1'),calculoarea(),onChanged(this.id)" required>
+                           <select class="form-select validate" id="form_candidato_corredor" onchange="corredorAcessoCand(this.value,'1'),calculoarea()" required>
                               <option value="" selected>Selecione..</option>
                               <option value="Sim">Sim</option>
                               <option value="Não">Não</option>
@@ -722,12 +726,13 @@
                            <label class="col-form-label">Largura Área Locada<span
                               class="text-danger"></span></label>
                            <input id="form_candidato_largura_area" onblur="calculoarea()" name="taskbudget" type="text"
-                              placeholder="Informe a Largura Área Locada"  maxlength="20" class="form-control">
+                              placeholder="Informe a Largura Área Locada"  maxlength="15" class="form-control" onkeyup="this.value = this.value.replace(/^\.|[^-?\d\.]|\.(?=.*\.)|^0+(?=\d)/g, '')
+">
                         </div>
                         <div class="col-lg-4 corredoracesso">
                            <label class="col-form-label">Profundidade<span class="text-danger"></span></label>
                            <input id="form_candidato_profundidade" onblur="calculoarea()" name="taskbudget" type="text"
-                              placeholder="Informe a Profundidade"  maxlength="20" class="form-control">
+                              placeholder="Informe a Profundidade"  maxlength="15" class="form-control" onkeyup="this.value = this.value.replace(/^\.|[^-?\d\.]|\.(?=.*\.)|^0+(?=\d)/g, '')">
                         </div>
                      </div>
                      <div class="row">
@@ -740,7 +745,8 @@
                            <label class="col-form-label">Altura do Edifício<span
                               class="text-danger"></span></label>
                            <input id="form_candidato_altura_edificio" name="taskbudget" type="text"
-                              placeholder="Informe a Altura do Edifício"  maxlength="20" class="form-control">
+                              placeholder="Informe a Altura do Edifício"  maxlength="15" class="form-control" onkeyup="this.value = this.value.replace(/^\.|[^-?\d\.]|\.(?=.*\.)|^0+(?=\d)/g, '')
+">
                         </div>
                      </div>
                      <div class="row pt-4">
@@ -753,7 +759,7 @@
                         <div class="col-lg-6">
                            <label class="col-form-label">OPÇÃO<span class="text-danger">*</span></label>
                            <br>
-                           <select class="form-select validate" id="form_tipo_opcao" onchange="escolhalatlongCand(this.value,'1'),onChanged(this.id)" required>
+                           <select class="form-select validate" id="form_tipo_opcao" onchange="escolhalatlongCand(this.value,'1')" required>
                               <option value="" selected>Selecione..</option>
                               <option value="Decimal">Decimal</option>
                               <option  value="UTM">UTM</option>
@@ -766,14 +772,16 @@
                               <label class="col-form-label">Latitude <span
                                  class="text-danger">*</span></label>
                               <input id="form_candidato_latitude" name="taskbudget" type="text"
-                                 placeholder="Informe a Largura Área Locada" class="form-control" maxlength="11" onchange="formatPontoCardinal(this.id)" required >
+                                 placeholder="Informe a Largura Área Locada" class="form-control" maxlength="11" onkeyup="this.value = this.value.replace(/^\.|[^-?\d\.]|\.(?=.*\.)|^0+(?=\d)/g, '')
+" required >
                               <small id="emailHelp" class="form-text text-muted">Ex.: -23.1234</small>
                            </div>
                            <div class="col-lg-6">
                               <label class="col-form-label">Longitude <span
                                  class="text-danger">*</span></label>
                               <input id="form_candidato_longitude" name="taskbudget" type="text"
-                                 placeholder="Informe a Largura Área Locada" class="form-control" maxlength="11" onchange="formatPontoCardinal(this.id)" required>>
+                                 placeholder="Informe a Largura Área Locada" class="form-control" maxlength="11"  onkeyup="this.value = this.value.replace(/^\.|[^-?\d\.]|\.(?=.*\.)|^0+(?=\d)/g, '')
+" required>>
                               <small id="emailHelp" class="form-text text-muted">Ex.: -46.1234</small>
                            </div>
                         </div>
@@ -784,7 +792,7 @@
                                  <input
                                     id="form_candidato_grauLat" name="taskbudget" type="text"
                                     placeholder="Informe o Grau Latitudinal" maxlength="2" class="form-control"
-                                    tabindex="1001"
+                                    tabindex="1001" onkeypress="return /^-?[0-9]\d*(\.\d+)?$/.test(event.key)"
                                     >
                                  <small id="emailHelp" class="form-text text-muted">Ex: 23</small>
 
@@ -796,7 +804,7 @@
                                  <input
                                     id="form_candidato_grauLong" name="taskbudget" type="text"
                                     placeholder="Informe o Grau Longitudinal" class="form-control"
-                                    tabindex="1005" maxlength="2"
+                                    tabindex="1005" maxlength="2" onkeypress="return /^-?[0-9]\d*(\.\d+)?$/.test(event.key)"
                                     >
                                  <small id="emailHelp" class="form-text text-muted">Ex: 15</small>
                               </div>
@@ -809,7 +817,7 @@
                                  <input
                                     id="form_candidato_minutoLat" name="taskbudget" type="text"
                                     placeholder="Informe o  minuto Latitudinal" class="form-control"
-                                    tabindex="1002" maxlength="2"
+                                    tabindex="1002" maxlength="2" onkeypress="return /^-?[0-9]\d*(\.\d+)?$/.test(event.key)"
                                     >
                                  <small id="emailHelp" class="form-text text-muted">Ex: 37</small>
                               </div>
@@ -820,7 +828,7 @@
                                  <input
                                     id="form_candidato_minutLong" name="taskbudget" type="text"
                                     placeholder="Informe o minuto Longitudinal" class="form-control"
-                                    tabindex="1006" maxlength="2"
+                                    tabindex="1006" maxlength="2" onkeypress="return /^-?[0-9]\d*(\.\d+)?$/.test(event.key)"
                                     >
                                  <small id="emailHelp" class="form-text text-muted">Ex: 9</small>
                               </div>
@@ -833,7 +841,8 @@
                                  <input
                                     id="form_candidato_segundoLat" name="taskbudget" type="text"
                                     placeholder="Informe o segundo Longitudinal" class="form-control"
-                                    tabindex="1003" maxlength="8"
+                                    tabindex="1003" maxlength="8" onkeyup="this.value = this.value.replace(/^\.|[^-?\d\.]|\.(?=.*\.)|^0+(?=\d)/g, '')
+"
                                     >
                                  <small id="emailHelp" class="form-text text-muted">Ex: 47.667</small>
                               </div>
@@ -844,7 +853,8 @@
                                  <input
                                     id="form_candidato_segundoLong" name="taskbudget" type="text"
                                     placeholder="Informe o segundo Longitudinal" class="form-control"
-                                    tabindex="1007" maxlength="8"
+                                    tabindex="1007" maxlength="8" onkeyup="this.value = this.value.replace(/^\.|[^-?\d\.]|\.(?=.*\.)|^0+(?=\d)/g, '')
+"
                                     >
                                  <small id="emailHelp" class="form-text text-muted">Ex: 41.8793</small>
                               </div>
@@ -882,7 +892,7 @@
                            <div class="col-lg-4">
                               <label class="col-form-label">Altitude<span class="text-danger">*</span></label>
                               <input id="form_candidato_altitude" name="taskbudget" type="text"
-                                 placeholder="Informe a Altitude"  maxlength="20" class="form-control">
+                                 placeholder="Informe a Altitude"  maxlength="10" class="form-control" onkeypress="return /^-?[0-9]\d*(\.\d+)?$/.test(event.key)">
                            </div>
                         </div>
                         <div class="row pt-4">
@@ -1066,7 +1076,7 @@
                         </div>
                      </div>
                      <div class="rowCenterItems">
-                        <button type="button" class="btn btn-primary" id="addCandidato" onclick="createEditCandidato(true)">Cadastrar</button>
+                        <button type="button" class="btn btn-primary" id="addCandidato" onclick="createEditCandidato()">Cadastrar</button>
                         <button type="button" class="btn btn-primary" id="editCandidato" style="display: none;" onclick="enableFieldsToEdit()">Editar candidato</button>
                         <script>
                            function enableFieldsToEdit() {
@@ -1266,13 +1276,15 @@
                               <div class="col-lg-6">
                                  <label class="col-form-label">Latitude <span class="text-danger">*</span></label>
                                  <input id="form_cliente_latitude" maxlength="11" name="taskbudget" type="text"
-                                    placeholder="Informe a Latitude" class="form-control" onchange="formatPontoCardinal(this.id)">
+                                    placeholder="Informe a Latitude" class="form-control" onkeyup="this.value = this.value.replace(/^\.|[^-?\d\.]|\.(?=.*\.)|^0+(?=\d)/g, '')
+">
                                  <small id="emailHelp" class="form-text text-muted">Ex.: -23.1234</small>
                               </div>
                               <div class="col-lg-6">
                                  <label class="col-form-label">Longitude <span class="text-danger">*</span></label>
                                  <input id="form_cliente_longitude" maxlength="11" name="taskbudget" type="text"
-                                    placeholder="Informe a Longitude" class="form-control" onchange="formatPontoCardinal(this.id)">
+                                    placeholder="Informe a Longitude" class="form-control" onkeyup="this.value = this.value.replace(/^\.|[^-?\d\.]|\.(?=.*\.)|^0+(?=\d)/g, '')
+">
                                  <small id="emailHelp" class="form-text text-muted">Ex.: -46.1234</small>
                               </div>
                            </div>
@@ -1283,14 +1295,14 @@
                                  <label class="col-form-label">Grau LAT <span class="text-danger">*</span></label>
                                  <input id="form_cliente_grauLat" maxlength="2" name="taskbudget" type="text"
                                     placeholder="Informe o Grau Latitudinal" class="form-control"
-                                    tabindex="1921">
+                                    tabindex="1921" onkeypress="return /^-?[0-9]\d*(\.\d+)?$/.test(event.key)">
                                  <small id="emailHelp" class="form-text text-muted">Ex: 23</small>
                               </div>
                               <div class="col-lg-6">
                                  <label class="col-form-label">Grau LONG <span class="text-danger">*</span></label>
                                  <input id="form_cliente_grauLong" max="2" name="taskbudget" type="text"
                                     placeholder="Informe o Grau Longitudinal" class="form-control"
-                                    tabindex="1925">
+                                    tabindex="1925" onkeypress="return /^-?[0-9]\d*(\.\d+)?$/.test(event.key)">
                                  <small id="emailHelp" class="form-text text-muted">Ex: 15</small>
                               </div>
                            </div>
@@ -1299,14 +1311,14 @@
                                  <label class="col-form-label">Minuto LAT <span class="text-danger">*</span></label>
                                  <input id="form_cliente_minLat" maxlength="2" name="taskbudget" type="text"
                                     placeholder="Informe o  minuto Latitudinal" class="form-control"
-                                    tabindex="1922">
+                                    tabindex="1922" onkeypress="return /^-?[0-9]\d*(\.\d+)?$/.test(event.key)">
                                  <small id="emailHelp" class="form-text text-muted">Ex: 37</small>
                               </div>
                               <div class="col-lg-6">
                                  <label class="col-form-label">Minuto LONG <span class="text-danger">*</span></label>
                                  <input id="form_cliente_minLong" maxlength="2" name="taskbudget" type="text"
                                     placeholder="Informe o minuto Longitudinal" class="form-control"
-                                    tabindex="1926">
+                                    tabindex="1926" onkeypress="return /^-?[0-9]\d*(\.\d+)?$/.test(event.key)">
                                  <small id="emailHelp" class="form-text text-muted">Ex: 9</small>
                               </div>
                            </div>
@@ -1315,14 +1327,16 @@
                                  <label class="col-form-label">Segundo LAT <span class="text-danger">*</span></label>
                                  <input id="form_cliente_segLat" maxlength="8" name="taskbudget" type="text"
                                     placeholder="Informe o segundo Longitudinal" class="form-control"
-                                    tabindex="1923">
+                                    tabindex="1923" onkeyup="this.value = this.value.replace(/^\.|[^-?\d\.]|\.(?=.*\.)|^0+(?=\d)/g, '')
+">
                                  <small id="emailHelp" class="form-text text-muted">Ex: 47.667</small>
                               </div>
                               <div class="col-lg-6">
                                  <label class="col-form-label">Segundo LONG<span class="text-danger">*</span></label>
                                  <input id="form_cliente_segLong" name="taskbudget" maxlength="8" type="text"
                                     placeholder="Informe o segundo Longitudinal" class="form-control"
-                                    tabindex="1927">
+                                    tabindex="1927" onkeyup="this.value = this.value.replace(/^\.|[^-?\d\.]|\.(?=.*\.)|^0+(?=\d)/g, '')
+">
                                  <small id="emailHelp" class="form-text text-muted">Ex: 41.8793</small>
                               </div>
                            </div>
@@ -2342,7 +2356,6 @@
          };
          
          function habilitarAlturaCand(id, local){
-             onChanged(id)
              valor = $('#'+id+' option:selected').html();
              console.log("Valor::"+valor+"::");
              if(local == '1'){
@@ -2416,16 +2429,7 @@
              }
              v_area_total = ((v_profundidade * v_area_locada) + (v_profundidade_normal * v_largura_area_normal));
              $('#form_candidato_area_locada').val(v_area_total);
-         }
-         
-             function formatPontoCardinal(campo_id) {
-                 const field = document.getElementById(campo_id);
-                 if(field.contains(',')) {
-                     field.value = field.value.replace(',', '.')
-                 }
-             }
-         
-             
+         }       
       </script>
       
       <script>
@@ -2721,10 +2725,10 @@
             //
             $('#btnNovoProprietario').css('display', 'block')
             $('#btnAddContact').css('display', 'block').prop('disabled', false)
-            $('#createEditCandidato').text('Cadastrar')
+            $('#addCandidato').text('Cadastrar')
          }
 
-         function createEditCandidato(novoRegistro) {
+         function createEditCandidato() {
             var candidatoSigla = $('#form_candidato_sigla').val()
             var candidatoSite = $('#form_candidato_site').val()
             var candidatoTipoSite = $('#form_candidato_tipo_site').val()
@@ -2920,7 +2924,7 @@
                mostrarErro("", "Questão Obstrução não respondida");
                return
             }
-            if (candidatoObstrucaoJustificativa == "" && candidatoObstrucao == "Sim") {
+            if (candidatoObstrucaoJustificativa == "" && candidatoObstrucao != "Não") {
                mostrarErro("", "Justificativa Obstrução não respondida");
                return
             }
@@ -2985,7 +2989,7 @@
             }
             $('#addCandidato').prop('disabled', true)
             var id_candidato = $('#candidatoID').val()
-            if (id_candidato.length > 0 && !novoRegistro) {
+            if (id_candidato != '') {
                var configEdit = {
                      appName: "mobilize",
                      reportName: "widget_candidatos_full",
@@ -3011,6 +3015,7 @@
                         icon: 'success',
                         title: 'Candidato atualizado com sucesso.'
                      })
+                     $('#addCandidato').prop('disabled', false)
                      setTimeout(() => document.location.reload(true), 1000)
                });
             } else {
@@ -3019,7 +3024,7 @@
                      formName: "Candidato",
                      data: formData
                }
-               ZOHO.CREATOR.API.addRecord(config).then(function(responseCandidato) {
+               ZOHO.CREATOR.API.addRecord(configAdd).then(function(response) {
                      if (response.code != 3000) {
                         v_erro = ""
                         $.each(response.error, function(key, val) {
@@ -3030,15 +3035,16 @@
                            title: 'Oops...',
                            text: 'Não foi possível atualizar o registro. Tente novamente mais. - Error: ' + v_erro
                         })
-            $('#addCandidato').prop('disabled', false)
+                        $('#addCandidato').prop('disabled', false)
                         return
                      }
-                     const candidatoID = responseCandidato.data.ID;
+                     const candidatoID = response.data.ID;
                      addAnexoCandidato(candidatoSite, candidatoID)
                      Swal.fire({
                         icon: 'success',
-                        title: 'Candidato atualizado com sucesso.'
+                        title: 'Candidato cadastrado com sucesso.'
                      })
+                     $('#addCandidato').prop('disabled', false)
                      setTimeout(() => document.location.reload(true), 1000)
                });
             }
@@ -3483,7 +3489,6 @@
                      }
                });
          }
-
       </script>
       <script src="js/functions/getSite.js"></script>
       <script src="js/functions/getusuario.js"></script>

@@ -117,8 +117,8 @@ function getApizohoSites() {
           projeto: data.Projeto,
           //etapa:  ((data.Etapa.length != '') ? data.Etapa.display_value : ''),
           //dataAcionamento: dataAcionamentoFormatada,
-          cliente: data.cliente.ID,
-          uf: data.UF.display_value,
+          cliente: data.cliente != "" ? data.cliente.ID : "",
+          uf: data.UF != "" ? data.UF.display_value : "",
           //municipio: data.Municipio2.display_value,
           municipio: data.Municipio2.length != "" ? data.Municipio2.display_value : "",
           candidatos: data.Candidato.lenght > 0
@@ -260,7 +260,7 @@ function actionCadastrarSite() {
 function actionCadastrarCandidato() {
   escolhalatlongCand('', 1)
   corredorAcessoCand('', 1)
-  // habilitarAlturaCand('form_candidato_tipo_site',1)
+  habilitarAlturaCand('form_candidato_tipo_site',1)
   getAllRecords('widget_sites_full', 'form_candidato_site', '')
   getAllRecords('widget_sitetipos_full', 'form_candidato_tipo_site', '')
   getAllRecords('Widget_Proprietario', 'form_candidato_proprietario', '')

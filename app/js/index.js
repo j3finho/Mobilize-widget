@@ -19,19 +19,19 @@ import adicionaZero from "./functions/ultilitys.js";
 
 function runSelects(){
     getSelectResponsavel();
-    getSelectUf('form_site_uf');
-    getSelectUf('form_editar_site_uf');
+    // getSelectUf('form_site_uf');
+    // getSelectUf('form_editar_site_uf');
     getSelectSite();
     getSelectStatus();
-    getSelectTarefas();
+    // getSelectTarefas();
     capturarDados();
-    getSelectClientes();
-    getSelectOperadoras();
-    getSelectTipoSite();
-    getSelectContatos();
-    getSelectPropietario();
-    getEtapas("editar_cliente_etapa");
-    getEtapas("form_cliente_etapa");
+    // getSelectClientes();
+    // getSelectOperadoras();
+    // getSelectTipoSite();
+    // getSelectContatos();
+    // getSelectPropietario();
+    // getEtapas("editar_cliente_etapa");
+    // getEtapas("form_cliente_etapa");
 }
 
 runSelects();
