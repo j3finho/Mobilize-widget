@@ -259,7 +259,7 @@ function actionCadastrarSite() {
 
 function actionCadastrarCandidato() {
   escolhalatlongCand('', 1)
-  // corredorAcessoCand('', 1)
+  corredorAcessoCand('', 1)
   // habilitarAlturaCand('form_candidato_tipo_site',1)
   getAllRecords('widget_sites_full', 'form_candidato_site', '')
   getAllRecords('widget_sitetipos_full', 'form_candidato_tipo_site', '')
@@ -313,7 +313,7 @@ function getAllRecords(report, inputField, criteria) {
   ZOHO.CREATOR.API.getAllRecords(config).then(function(response) {
       if(response.code != 3000) {
           var error = []
-          $.each(responseCandidato.error, function(key,val) {             
+          $.each(response.error, function(key,val) {             
               error = error + val + ". ";
            });
           console.log("Nao foi possivel carregar os dados - " + error)
@@ -1161,7 +1161,13 @@ function viewAtividadesPorSite(n) {
   }
 
 function editViewSite(n) {
-
+  getAllRecords('widget_clientes_full', 'editar_cliente_site', '')
+  getAllRecords('widget_operadoras_full', 'editar_cliente_operadora', '')
+  getAllRecords('widget_etapas_full', 'editar_cliente_etapa', '')
+  getAllRecords('widget_sitetipos_full', 'editar_cliente_tipoSite', '')
+  getAllRecords('widget_estados_full', 'form_editar_site_uf')
+  getAllRecords('widget_contatos_full', 'editar_cliente_coordenadorCliente', '')
+  getAllRecords('widget_responsaveis_full', 'editar_cliente_coordenadorMobilize', '(Funcao.contains("Coordenador"))')
 
   $("#modalEditarSite").modal("show");
   var idUpdate = n.id;
@@ -1387,6 +1393,8 @@ function editViewSite(n) {
       $("#form_editar_site_municipio").val(
         filtrarSite.map((site) => site.municipio)
       );
+      getMunicipios('form_editar_site_municipio', filtrarSite.map((site) => site.uf))
+
       $("#form_editar_site_municipio_old").val(
         filtrarSite.map((site) => site.municipio)
       );
@@ -1465,7 +1473,6 @@ function editSite() {
     },
     function (isConfirm) {
       if (isConfirm) {
-        $('#btnEditarSite').prop('disabled', true)
         ZOHO.CREATOR.init().then(function (data) {
           var queryParams = ZOHO.CREATOR.UTIL.getQueryParams();
           var paramsID = queryParams.idconta;
@@ -1751,6 +1758,7 @@ function editSite() {
               Opcao: form_cliente_opcao,
             },
           };
+        $('#btnEditarSite').prop('disabled', true)
           var config = {
             appName: "mobilize",
             reportName: "widget_sites_full",
@@ -1779,11 +1787,13 @@ function editSite() {
                 type: "error",
                 showConfirmButton: true,
               });
+        $('#btnEditarSite').prop('disabled', false)
             }
           });
         });
       } else {
         swal("Cancelado", "O site não foi atualizado", "error");
+        $('#btnEditarSite').prop('disabled', false)
       }
     }
   );

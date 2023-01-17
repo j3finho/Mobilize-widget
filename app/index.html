@@ -52,7 +52,7 @@
                                        <span class=" p-1"> Sites </span>
                                        </a>
                                     </li>
-                                    <li class="nav-item waves-effect waves-light">
+                                    <!-- <li class="nav-item waves-effect waves-light">
                                        <a id="btn_candidatos" class="nav-link" data-bs-toggle="tab"
                                           href="#subscricao" role="tab">
                                        <span class=" p-1"> Candidatos </span>
@@ -63,7 +63,7 @@
                                           href="#home-1" role="tab">
                                        <span class=" p-1"> Tarefas </span>
                                        </a>
-                                    </li>
+                                    </li> -->
                                  </ul>
                               </div>
                            </div>
@@ -1066,13 +1066,14 @@
                         </div>
                      </div>
                      <div class="rowCenterItems">
-                        <button type="button" class="btn btn-primary" id="addCandidato" onclick="createEditCandidato()">Cadastrar</button>
+                        <button type="button" class="btn btn-primary" id="addCandidato" onclick="createEditCandidato(true)">Cadastrar</button>
                         <button type="button" class="btn btn-primary" id="editCandidato" style="display: none;" onclick="enableFieldsToEdit()">Editar candidato</button>
                         <script>
                            function enableFieldsToEdit() {
                               desabilitarCampoCandidato(false, false)
                               $('#editCandidato').css('display', 'none')
                               $('#modal_title_candidato').text("Editar candidato")
+
                               $('#addCandidato')
                                  .css('display', 'block')
                                  .text("Salvar alterações")
@@ -1482,7 +1483,7 @@
                      <div class="row">
                         <div class="col-lg-6">
                            <label class="col-form-label">UF<span class="text-danger"></span></label>
-                           <select class="form-select validate" id="form_editar_site_uf" required>
+                           <select class="form-select validate" id="form_editar_site_uf" onchange="getMunicipios('form_editar_site_municipio', this.value),getRegional('editar_cliente_regional', this.id)" required>
                               <option value="" selected>Selecione...</option>
                            </select>
                         </div>
@@ -1504,7 +1505,7 @@
                               <option value="Norte">Norte</option>
                               <option value="Nordeste">Nordeste</option>
                               <option value="Centro Oeste">Centro Oeste</option>
-                              <option value="Sudeste">Sudeste</option>
+                              <option value="Suldeste">Suldeste</option>
                               <option value="Sul">Sul</option>
                            </select>
                         </div>
@@ -2719,11 +2720,11 @@
 
             //
             $('#btnNovoProprietario').css('display', 'block')
-            $('#btnAddContact').css('display', 'block')
+            $('#btnAddContact').css('display', 'block').prop('disabled', false)
             $('#createEditCandidato').text('Cadastrar')
          }
 
-         function createEditCandidato() {
+         function createEditCandidato(novoRegistro) {
             var candidatoSigla = $('#form_candidato_sigla').val()
             var candidatoSite = $('#form_candidato_site').val()
             var candidatoTipoSite = $('#form_candidato_tipo_site').val()
@@ -2984,7 +2985,7 @@
             }
             $('#addCandidato').prop('disabled', true)
             var id_candidato = $('#candidatoID').val()
-            if (id_candidato.length > 0) {
+            if (id_candidato.length > 0 && !novoRegistro) {
                var configEdit = {
                      appName: "mobilize",
                      reportName: "widget_candidatos_full",
