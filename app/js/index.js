@@ -25,6 +25,7 @@ function runSelects(){
     getSelectStatus();
     // getSelectTarefas();
     capturarDados();
+    getSelectMunicipio('MG', 1, 'form_site_municipio')
     // getSelectClientes();
     // getSelectOperadoras();
     // getSelectTipoSite();

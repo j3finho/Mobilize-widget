@@ -406,7 +406,7 @@
              <div class="modal-content">
                  <div  class="modal-header">
                      <h5 class="modal-title add-task-title">Lista dos candidatos</h5>
-                     <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="clearDataTable('datatable-buttons-candidatos')" aria-label="Close"></button>
+                     <button type="button" class="btn-close" onclick="clearDataTable('datatable-buttons-candidatos')" data-bs-dismiss="modal" aria-label="Close"></button>
                  </div>
                  <div class="modal-body">
                       <table id="datatable-buttons-candidatos" class="table-striped table table-bordered dt-responsive nowrap w-100"> </table>
@@ -415,22 +415,6 @@
          </div>
      </div>
 
-
-      <div id="modalCandidatoDados1" class="modal fade bs-example-modal-lg modalCandidatoDados1" tabindex="-1" role="dialog"
-         aria-labelledby="myLargeModalLabel" aria-hidden="true">
-         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title add-task-title">&nbsp;</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-               </div>
-               <div class="modal-body">
-                  <!-- <iframe src="" style="width: 100%; height: 500px;" frameborder="0" allowTransparency="true" scrolling="auto" id="iframecandidatodados1"></iframe> -->
-               </div>
-            </div>
-         </div>
-      </div>
-
       <!-- MODAL ATIVIDADES POR SITE -->
       <div id="modalAtividadesPorSite" data-bs-keyboard="false" data-bs-backdrop="static" class="modal fade modalAdicionarContato" tabindex="-1" role="dialog"
          aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -438,19 +422,10 @@
             <div class="modal-content">
                <div class="modal-header">
                   <h5 class="modal-title add-task-title">Atividades</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="clearDataTable('datatable-buttons-atividades')" aria-label="Close"></button>
+                  <button type="button" class="btn-close" onclick="clearDataTable('datatable-buttons-atividades')" data-bs-dismiss="modal" aria-label="Close"></button>
                </div>
                <div class="modal-body">
-               <div class="tab-pane" id="subscricao" role="tabpanel">
-                  <div class="col-12">
-                     <div class="card">
-                        <div class="card-body">
-                           <div class="pt-2">
-                              <table id="datatable-buttons-atividades" class="table-striped table table-bordered dt-responsive nowrap w-100"> </table>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
+                  <table id="datatable-buttons-atividades" class="table-striped table table-bordered dt-responsive nowrap w-100"> </table>
                </div>
                </div>
             </div>
@@ -1582,7 +1557,7 @@
                            </select>
                         </div>
                      </div>
-                     <div class="row latlongsessaovisualizar">
+                     <div class="row latlongsessaoeditar">
                         <div class="col-lg-6">
                            <label class="col-form-label">Latitude <span class="text-danger">*</span></label>
                            <input id="editar_cliente_latitude" maxlength="11" name="taskbudget" type="text"
@@ -1596,7 +1571,7 @@
                            <small id="emailHelp" class="form-text text-muted">Ex.: -46.1234</small>
                         </div>
                      </div>
-                     <div class="utmsessaovisualizar">
+                     <div class="utmsessaoeditar">
                         <div class="row">
                            <div class="col-lg-6">
                               <label class="col-form-label">Grau LAT<span class="text-danger">*</span></label>
@@ -1831,7 +1806,7 @@
                            <hr>
                         </div>
                      </div>
-                     <div class="row latlongsessaoeditar">
+                     <div class="row latlongsessaovisualizar">
                         <div class="col-lg-6">
                            <label class="col-form-label">Latitude <span class="text-danger"></span></label>
                            <input id="form_cliente_edit_latitude" name="taskbudget" type="text"
@@ -1843,7 +1818,7 @@
                               class="form-control" disabled>
                         </div>
                      </div>
-                     <div class="utmsessaoeditar">
+                     <div class="utmsessaovisualizar">
                         <div class="row">
                            <div class="col-lg-6">
                               <label class="col-form-label">Grau LAT<span class="text-danger"></span></label>
@@ -2269,7 +2244,7 @@
                      $('.latlongsessaoeditar').css("display", "none");
                  }else if(des == 'Decimal'){
                      $('.utmsessaoeditar').css("display", "none");
-                     $('.latlongsessaoeditar').css("display", "block");
+                     $('.latlongsessaoeditar').css("display", "flex");
                  }else{
                      $('.utmsessaoeditar').css("display", "none");
                      $('.latlongsessaoeditar').css("display", "none");
@@ -2280,7 +2255,7 @@
                      $('.latlongsessaovisualizar').css("display", "none");
                  }else if(des == 'Decimal'){
                      $('.utmsessaovisualizar').css("display", "none");
-                     $('.latlongsessaovisualizar').css("display", "block");
+                     $('.latlongsessaovisualizar').css("display", "flex");
                  }else{
                      $('.utmsessaovisualizar').css("display", "none");
                      $('.latlongsessaovisualizar').css("display", "none");
@@ -2288,10 +2263,7 @@
              }
          };
          
-         function escolhalatlongCand(des, local){
-             console.log('des: ',des);
-             console.log('local: ',local);
-             if(local == 1){
+         function escolhalatlongCand(des){
                  if(des == 'UTM'){
                      $('.utmcand').css("display", "block");
                      $('.latitudecand').css("display", "none");
@@ -2302,29 +2274,6 @@
                      $('.latitudecand').css("display", "none");
                      $('.utmcand').css("display", "none");
                  }
-             }else if(local == 2){
-                 if(des == 'UTM'){
-                     $('.utmcand').css("display", "block");
-                     $('.latitudecand').css("display", "none");
-                 }else if(des == 'Decimal'){
-                     $('.utmcand').css("display", "none");
-                     $('.latitudecand').css("display", "flex");
-                 }else{
-                     $('.utmcand').css("display", "none");
-                     $('.latitudecand').css("display", "none");
-                 }
-             }else if(local == 3){
-                 if(des == 'UTM'){
-                     $('.utmcand').css("display", "block");
-                     $('.latitudecand').css("display", "none");
-                 }else if(des == 'Decimal'){
-                     $('.utmcand').css("display", "none");
-                     $('.latitudecand').css("display", "flex");
-                 }else{
-                     $('.utmcand').css("display", "none");
-                     $('.latitudecand').css("display", "none");
-                 }
-             }
          };
          
          function habilitarAlturaSite(id, local){

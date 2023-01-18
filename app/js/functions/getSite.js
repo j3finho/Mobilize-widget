@@ -359,131 +359,59 @@ function getAllRecords(report, inputField, criteria) {
 }
 
 function viewSite(n) {
-  console.log("teste view Site");
-  $("#modalvisualizarSite").modal("show");
-  var creatorSdkPromise = ZOHO.CREATOR.init();
-  creatorSdkPromise.then(function (data) {
-    var recordOps = ZOHO.CREATOR.API;
-    var queryParams = ZOHO.CREATOR.UTIL.getQueryParams();
-    var config = {
-      appName: "mobilize",
-      reportName: "widget_sites_full",
-      id: n.id,
-    };
-    var getRecords = recordOps.getRecordById(config);
-    var v_sites = [];
-    getRecords.then(function (response) {
+  var config = {
+    appName: "mobilize",
+    reportName: "widget_sites_full",
+    id: n.id,
+  };
+  ZOHO.CREATOR.API.getRecordById(config).then((response) => {
+    if(response.code != 3000) {
+      swal({
+        title: "Nao foi possivel carregar o site",
+        type: "error",
+        showConfirmButton: true
+     });
+      return
+    }
       var data = response.data;
-      console.log(data, "Visualizar Sites");
       var dataAcionamento = data.Data_de_Acionamento;
       var novaDataAcionamento = new Date(dataAcionamento);
-      var dataAcionamentoFormatada =
-        adicionaZero(novaDataAcionamento.getDate().toString()) +
-        "/" +
-        adicionaZero(novaDataAcionamento.getMonth() + 1).toString() +
-        "/" +
-        novaDataAcionamento.getFullYear().toString().replace("-", "");
+      var dataAcionamentoFormatada =  adicionaZero(novaDataAcionamento.getDate().toString())+"/"+adicionaZero(novaDataAcionamento.getMonth() + 1).toString()+"/"+novaDataAcionamento.getFullYear().toString().replace("-", "");
+      
       var aluguel = data.Target_do_Aluguel;
       var aluguelFormatado = toFloat(aluguel);
       var aluguelParse = aluguelFormatado.toLocaleString("pt-BR", {
         style: "currency",
         currency: "BRL",
       });
-      v_sites.push({
-        id: data.ID,
-        idSiteMobilize: data.ID_Site_Mobilize,
-        idSiteOperadora: data.ID_Site_Operadora,
-        idSiteSharing: data.ID_Site_Sharing,
-        latitude: data.Latitude,
-        latitudeBusca: data.Latitude_de_Busca,
-        longitude: data.Longitude,
-        longitudeBusca: data.Longitude_de_Busca,
-        operadora: data.Operadora.display_value,
-        radioDeBusca: data.RAIO_DE_BUSCA_M,
-        aluguel: data.Target_do_Aluguel,
-        tipoSite: data.TipoSiteCandidato,
-        projeto: data.Projeto,
-        subProjeto: data.Sub_Projeto,
-        etapa: data.Etapa.display_value,
-        dataAcionamento: dataAcionamentoFormatada,
-        regional: data.regional,
-        aluguel: aluguelParse,
-        tipoContrato: data.Tipo_de_Contrato,
-        alturaPrevista: data.Altura_Prevista_M,
-        opcao: data.Opcao,
-        cordMobilize: data.Coordenador_Mobilize.display_value,
-        cordCliente: data.Contato.display_value,
-        cliente: data.cliente.display_value,
-        uf: data.UF.display_value,
-        municipio: data.Municipio2.display_value,
-        anexo: data.Anexos.length > 0 ? data.Anexos[0].ID : ""
-      });
 
-      var filtrarSite = v_sites.filter((site) => site.id == n.id);
-      console.log(filtrarSite, "filtro site");
-      $("#form_cliente_edit_site").val(filtrarSite.map((site) => site.cliente));
-      $("#form_cliente_edit_IdsiteMobilize").val(
-        filtrarSite.map((site) => site.idSiteMobilize)
-      );
-      $("#form_cliente_edit_operadora").val(
-        filtrarSite.map((site) => site.operadora)
-      );
-      $("#form_cliente_edit_Idsharing").val(
-        filtrarSite.map((site) => site.idSiteSharing)
-      );
-      $("#form_cliente_edit_etapa").val(filtrarSite.map((site) => site.etapa));
-      $("#form_cliente_edit_idSiteOperadora").val(
-        filtrarSite.map((site) => site.idSiteOperadora)
-      );
-      $("#form_cliente_edit_tipoSite").val(
-        filtrarSite.map((site) => site.tipoSite)
-      );
-      $("#form_cliente_edit_id_dataAcionamento").val(
-        filtrarSite.map((site) => site.dataAcionamento)
-      );
-      $("#form_cliente_edit_projeto").val(
-        filtrarSite.map((site) => site.projeto)
-      );
-      $("#form_cliente_edit_Subprojeto").val(
-        filtrarSite.map((site) => site.subProjeto)
-      );
-      $("#form_cliente_edit_regional").val(
-        filtrarSite.map((site) => site.regional)
-      );
-      $("#form_cliente_edit_targetAluguel").val(
-        filtrarSite.map((site) => site.aluguel)
-      );
-      $("#form_cliente_edit_raioBusca").val(
-        filtrarSite.map((site) => site.radioDeBusca)
-      );
-      $("#form_cliente_edit_alturaPrevista").val(
-        filtrarSite.map((site) => site.alturaPrevista)
-      );
-      $("#form_cliente_edit_opcao").val(filtrarSite.map((site) => site.opcao));
-      $("#form_cliente_edit_latitude").val(
-        filtrarSite.map((site) => site.latitude)
-      );
-      $("#form_cliente_edit_longitude").val(
-        filtrarSite.map((site) => site.longitude)
-      );
-      $("#form_cliente_edit_coordenadorCliente").val(
-        filtrarSite.map((site) => site.cordCliente)
-      );
-      $("#form_cliente_edit_coordenadorMobilize").val(
-        filtrarSite.map((site) => site.cordMobilize)
-      );
-      $("#form_cliente_edit_UF").val(filtrarSite.map((site) => site.uf));
-      $("#form_cliente_edit_municipio").val(
-        filtrarSite.map((site) => site.municipio)
-      );
+      $("#form_cliente_edit_site").val(data.cliente.display_value);
+      $("#form_cliente_edit_IdsiteMobilize").val(data.ID_Site_Mobilize);
+      $("#form_cliente_edit_operadora").val(data.Operadora.display_value);
+      $("#form_cliente_edit_Idsharing").val(data.ID_Site_Sharing);
+      $("#form_cliente_edit_etapa").val(data.Etapa.display_value);
+      $("#form_cliente_edit_idSiteOperadora").val(data.ID_Site_Operadora);
+      $("#form_cliente_edit_tipoSite").val(data.TipoSiteCandidato);
+      $("#form_cliente_edit_id_dataAcionamento").val(dataAcionamentoFormatada);
+      $("#form_cliente_edit_projeto").val(data.Projeto);
+      $("#form_cliente_edit_Subprojeto").val(data.Sub_Projeto);
+      $("#form_cliente_edit_regional").val(data.regional);
+      $("#form_cliente_edit_targetAluguel").val(aluguelParse);
+      $("#form_cliente_edit_raioBusca").val(data.RAIO_DE_BUSCA_M);
+      $("#form_cliente_edit_alturaPrevista").val(data.Altura_Prevista_M);
+      $("#form_cliente_edit_opcao").val(data.Opcao);
+      $("#form_cliente_edit_latitude").val(data.Latitude);
+      $("#form_cliente_edit_longitude").val(data.Longitude);
+      $("#form_cliente_edit_coordenadorCliente").val(data.Contato.display_value);
+      $("#form_cliente_edit_coordenadorMobilize").val(data.Coordenador_Mobilize.display_value);
+      $("#form_cliente_edit_UF").val(data.UF.display_value);
+      $("#form_cliente_edit_municipio").val(data.Municipio2.display_value);
 
-      escolhalatlong(
-        filtrarSite.map((site) => site.opcao),
-        2
-      );
-      habilitarAlturaSite("form_cliente_edit_tipoSite", 3);
-    });
-  });
+      var opcao = data.Opcao
+      escolhalatlong(opcao, 2)
+      habilitarAlturaSite("form_cliente_edit_tipoSite", 2);
+      $("#modalvisualizarSite").modal("show");
+  })
 }
 
 function viewCandidatosPorSite(n) {
@@ -891,7 +819,7 @@ function viewCandidato(obj) {
       $('#addCandidato').css('display', 'none')
       $('#editCandidato').css('display', 'block')
 
-
+      escolhalatlongCand(candidato.Opcao)
       $('#modalAdicionarCandidato').modal('show')
       $('#modalCandidatosPorSite').css('z-index', 1051)
   })
@@ -1170,7 +1098,6 @@ function editViewSite(n) {
   getAllRecords('widget_contatos_full', 'editar_cliente_coordenadorCliente', '')
   getAllRecords('widget_responsaveis_full', 'editar_cliente_coordenadorMobilize', '(Funcao.contains("Coordenador"))')
 
-  $("#modalEditarSite").modal("show");
   var idUpdate = n.id;
   var campo = $("#form_editar_site_uf");
   var creatorSdkPromise = ZOHO.CREATOR.init();
@@ -1407,8 +1334,9 @@ function editViewSite(n) {
         1,
         "form_editar_site_municipio"
       );
-      escolhalatlong(opcao, 2);
+      escolhalatlong(opcao, 3);
       habilitarAlturaSite("editar_cliente_tipoSite", 2);
+     $("#modalEditarSite").modal("show");
     });
   });
 }
