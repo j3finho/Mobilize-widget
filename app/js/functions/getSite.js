@@ -163,7 +163,7 @@ function getApizohoSites() {
                                         <i class="far fa-eye"></i>
                                     </button>
                                     &nbsp;&nbsp;
-                                    <button id="${row.id}" type="button" onclick="editViewSite(this)" class="btn btn-outline-secondary btn-sm" title="Editar">
+                                    <button id="${row.id}" type="button" onclick="editarSite(this)" class="btn btn-outline-secondary btn-sm" title="Editar">
                                         <i class="fas fa-pencil-alt"></i>
                                     </button>
                                     &nbsp;&nbsp;
@@ -265,7 +265,7 @@ function getRegional(regionalId, estadoID) {
   const norte = ["AC", "AM", "RO", "RR", "PA", "TO", "AP"]
   const nordeste = ["MA", "PI", "CE", "RN", "PB", "PE", "AL", "SE", "BA"]
   const centroOeste = ["MT", "MS", "GO", "DF"]
-  const suldeste = ["MG", "ES", "SP", "RJ"]
+  const sudeste = ["MG", "ES", "SP", "RJ"]
   const sul = ["RS", "PR", "SC"]
 
   if(norte.includes(estadoSigla)) {
@@ -278,8 +278,8 @@ function getRegional(regionalId, estadoID) {
     regiao.val('Centro Oeste')
 
   }
-  if(suldeste.includes(estadoSigla)) {
-    regiao.val('Suldeste')
+  if(sudeste.includes(estadoSigla)) {
+    regiao.val('Sudeste')
   }
   if(sul.includes(estadoSigla)) {
     regiao.val('Sul')
@@ -310,7 +310,8 @@ async function getAllRecords(report, inputField, criteria) {
           console.log("Nao foi possivel carregar os dados - " + error)
           return
       }
-      response.data.forEach((data) => {
+      response.data
+      .forEach((data) => {
           var value = data.ID
           var textContent = ""
           if(report == "widget_clientes_full") {
@@ -1080,244 +1081,101 @@ function viewAtividadesPorSite(n) {
     });
   }
 
-function editViewSite(n) {
-  getAllRecords('widget_clientes_full', 'editar_cliente_site', '')
-  getAllRecords('widget_operadoras_full', 'editar_cliente_operadora', '')
-  getAllRecords('widget_etapas_full', 'editar_cliente_etapa', '')
-  getAllRecords('widget_sitetipos_full', 'editar_cliente_tipoSite', '')
-  getAllRecords('widget_estados_full', 'form_editar_site_uf')
-  getAllRecords('widget_contatos_full', 'editar_cliente_coordenadorCliente', '')
-  getAllRecords('widget_responsaveis_full', 'editar_cliente_coordenadorMobilize', '(Funcao.contains("Coordenador"))')
+ function editarSite(n) {
+  var cliente = $('#editar_cliente_site')
+  var operadora = $('#editar_cliente_operadora')
+  var etapa = $('#editar_cliente_etapa')
+  var tipoSite = $('#editar_cliente_tipoSite')
+  var uf = $('#form_editar_site_uf')
+  var municipio = $('#form_editar_site_municipio')
+  var coordenadorCliente = $('#editar_cliente_coordenadorCliente')
+  var coordenadorMobilize = $('#editar_cliente_coordenadorMobilize')
 
-  var idUpdate = n.id;
-  var campo = $("#form_editar_site_uf");
-  var creatorSdkPromise = ZOHO.CREATOR.init();
-  creatorSdkPromise.then(function (data) {
-    var recordOps = ZOHO.CREATOR.API;
-    var config = {
+  var config = {
       appName: "mobilize",
       reportName: "widget_sites_full",
       id: n.id,
-    };
-    var getRecords = recordOps.getRecordById(config);
-    var v_sites = [];
-    getRecords.then(function (response) {
-      var data = response.data;
-      console.log(data, "Visualizar Sites");
-      var dataAcionamento = data.Data_de_Acionamento;
-      var novaDataAcionamento = new Date(dataAcionamento);
-      var dataAcionamentoFormatada =
-        adicionaZero(novaDataAcionamento.getDate().toString()) +
-        "/" +
-        adicionaZero(novaDataAcionamento.getMonth() + 1).toString() +
-        "/" +
-        novaDataAcionamento.getFullYear().toString().replace("-", "");
-      var aluguel = data.Target_do_Aluguel;
-      var aluguelFormatado = toFloat(aluguel);
-      var aluguelParse = aluguelFormatado.toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL",
-      });
-      v_sites.push({
-        id: data.ID,
-        cliente: data.cliente.length != "" ? data.cliente.display_value : "",
-        idSiteMobilize: data.ID_Site_Mobilize,
-        idSiteOperadora: data.ID_Site_Operadora,
-        idSiteSharing: data.ID_Site_Sharing,
-        idCliente: data.cliente.length != "" ? data.cliente.ID : "",
-        latitude: data.Latitude,
-        latitudeBusca: data.Latitude_de_Busca,
-        longitude: data.Longitude,
-        longitudeBusca: data.Longitude_de_Busca,
-        idOperadora: data.Operadora.length != "" ? data.Operadora.ID : "",
-        operadora: data.Operadora.length != "" ? data.Operadora.display_value : "",
-        radioDeBusca: data.RAIO_DE_BUSCA_M,
-        aluguel: aluguelParse,
-        idtipoSite: data.Tipo_Site.length != "" ? data.Tipo_Site.ID : "",
-        tipoSite: data.TipoSiteCandidato,
-        projeto: data.Projeto,
-        subProjeto: data.Sub_Projeto,
-        etapa: data.Etapa,
-        dataAcionamento: dataAcionamentoFormatada,
-        regional: data.regional,
-        tipoContrato: data.Tipo_de_Contrato,
-        alturaPrevista: data.Altura_Prevista_M,
-        opcao: data.Opcao,
-        grauLat: data.GrauLAT,
-        grauLong: data.GrauLONG,
-        minutoLat: data.MinutoLAT,
-        minutoLong: data.MinutoLONG,
-        segLat: data.SegundosLAT,
-        segLong: data.SegundosLONG,
-        pontoCardLat: data.PontoCardealLAT,
-        pontoCardLong: data.PontoCardealLONG,
-        idCordMobilize:data.Coordenador_Mobilize.length != "" ? data.Coordenador_Mobilize.ID : "",
-        cordMobilize:data.Coordenador_Mobilize.length != "" ? data.Coordenador_Mobilize.display_value : "",
-        idcordCliente: data.Contato.length != "" ? data.Contato.ID : "",
-        cordCliente: data.Contato.display_value,
-        dataNormal: data.Data_de_Acionamento,
-        uf: data.UF.length != "" ? data.UF.ID : "",
-        municipio: data.Municipio2.length != "" ? data.Municipio2.ID : "",
-        anexo: data.Anexos.length > 0 ? data.Anexos[0].ID : ""
-      });
-      var filtrarSite = v_sites.filter((site) => site.id == n.id);
+  };
+  ZOHO.CREATOR.API.getRecordById(config).then((response) => {
+    var data = response.data
 
-      var anexoId = filtrarSite.map((site) => site.anexo)
-      var downloader =  $('#downloadFile')
-      if(anexoId.length > 0) {
-        var url = $('#dadosurlzoho').val();
-        downloader.attr("href", "https://creator.zoho.com/api/v2" + url + "report/Anexos_Report/" + filtrarSite.map((site) => site.anexo) + "/Anexos/download")
-        // downloader.attr("href", "https://creator.zoho.com/api/v2/mobilizeengenharia1/mobilize/report/Anexos_Report/4388176000000588021/Anexos/download")
-        downloader.attr('display', 'block')
-      }
-      else {
-        downloader.attr('display', 'none')
-      }
+    getAllRecords('widget_clientes_full', 'editar_cliente_site', '(ID!='+data.cliente.ID+')' )
+    getAllRecords('widget_operadoras_full', 'editar_cliente_operadora','(ID!='+data.Operadora.ID+')')
+    getAllRecords('widget_etapas_full', 'editar_cliente_etapa')
+    getAllRecords('widget_sitetipos_full', 'editar_cliente_tipoSite', '(ID!='+data.TipoSiteCandidatoID+')')
+    getAllRecords('widget_estados_full', 'form_editar_site_uf', '(ID!='+data.UF.ID+')')
+    getAllRecords('widget_contatos_full', 'editar_cliente_coordenadorCliente', '(ID!='+data.Contato.ID+')')
+    getAllRecords('widget_responsaveis_full', 'editar_cliente_coordenadorMobilize', '(Funcao.contains("Coordenador")&&ID!='+data.Coordenador_Mobilize.ID+')')
 
-      var cliente = filtrarSite
-        .map((site) => site.idCliente)
-        .reduce((site) => site.idCliente);
-      var operadora = filtrarSite
-        .map((site) => site.idOperadora)
-        .reduce((site) => site.idOperadora);
-      var etapa = filtrarSite
-        .map((site) => site.etapa)
-        .reduce((site) => site.etapa);
-      var tipoSite = filtrarSite
-        .map((site) => site.idtipoSite)
-        .reduce((site) => site.idtipoSite);
-      var regional = filtrarSite
-        .map((site) => site.regional)
-        .reduce((site) => site.regional);
-      var tipoContrato = filtrarSite
-        .map((site) => site.tipoContrato)
-        .reduce((site) => site.tipoContrato);
-      var alturaPrevista = filtrarSite
-        .map((site) => site.alturaPrevista)
-        .reduce((site) => site.alturaPrevista);
-      var radioDeBusca = filtrarSite
-        .map((site) => site.radioDeBusca)
-        .reduce((site) => site.radioDeBusca);
-      var opcao = filtrarSite
-        .map((site) => site.opcao)
-        .reduce((site) => site.opcao);
-      var pontoCardLat = filtrarSite
-        .map((site) => site.pontoCardLat)
-        .reduce((site) => site.pontoCardLat);
-      var pontoCardLong = filtrarSite
-        .map((site) => site.pontoCardLong)
-        .reduce((site) => site.pontoCardLong);
-      var idcordCliente = filtrarSite
-        .map((site) => site.idcordCliente)
-        .reduce((site) => site.idcordCliente);
-      var idCordMobilize = filtrarSite
-        .map((site) => site.idCordMobilize)
-        .reduce((site) => site.idCordMobilize);
-      var dataAcionamento = filtrarSite
-        .map((site) => site.dataNormal)
-        .reduce((site) => site.dataNormal);
-      var data = new Date(dataAcionamento);
-      var dataAcionamentoFormatada =
-        data.getFullYear().toString().replace("-", "") +
-        "-" +
-        adicionaZero(data.getMonth() + 1) +
-        "-" +
-        data.getDate();
+    cliente
+      .append('<option value="'+data.cliente.ID+'">'+data.cliente.display_value+'</option>')
+      .val(data.cliente.ID)
 
-      $("#form_editar_site_uf").val(filtrarSite.map((site) => site.uf));
-      $("#editar_cliente_site")
-        .find('[value="' + cliente + '"]')
-        .attr("selected", true);
-      $("#editar_cliente_operadora")
-        .find('[value="' + operadora + '"]')
-        .attr("selected", true);
-      $("#editar_cliente_etapa")
-        .find('[value="' + etapa.ID + '"]')
-        .attr("selected", true);
-      $("#editar_cliente_tipoSite")
-        .find('[value="' + tipoSite + '"]')
-        .attr("selected", true);
-      $("#editar_cliente_regional")
-        .find('[value="' + regional + '"]')
-        .attr("selected", true);
-      $("#editar_cliente_alturaPrevista")
-        .find('[value="' + alturaPrevista + '"]')
-        .attr("selected", true);
-      $("#editar_cliente_raioBusca")
-        .find('[value="' + radioDeBusca + '"]')
-        .attr("selected", true);
-      $("#editar_clienteopcao_")
-        .find('[value="' + opcao + '"]')
-        .attr("selected", true);
-      $("#editar_cliente_pontoCardealLat")
-        .find('[value="' + pontoCardLat + '"]')
-        .attr("selected", true);
-      $("#editar_cliente_pontoCardealLong")
-        .find('[value="' + pontoCardLong + '"]')
-        .attr("selected", true);
-      $("#editar_cliente_coordenadorCliente")
-        .find('[value="' + idcordCliente + '"]')
-        .attr("selected", true);
-      $("#editar_cliente_coordenadorMobilize")
-        .find('[value="' + idCordMobilize + '"]')
-        .attr("selected", true);
-      $("#editar_cliente_IdsiteMobilize").val(
-        filtrarSite.map((site) => site.idSiteMobilize)
-      );
-      $("#editar_cliente_Idsharing").val(
-        filtrarSite.map((site) => site.idSiteSharing)
-      );
-      $("#editar_cliente_idSiteOperadora").val(
-        filtrarSite.map((site) => site.idSiteOperadora)
-      );
-      $("#editar_cliente_projeto").val(filtrarSite.map((site) => site.projeto));
-      $("#editar_cliente_subProjeto").val(
-        filtrarSite.map((site) => site.subProjeto)
-      );
-      $("#editar_cliente_latitudeBusca").val(
-        filtrarSite.map((site) => site.latitudeBusca)
-      );
-      $("#editar_longitudeBusca").val(
-        filtrarSite.map((site) => site.longitudeBusca)
-      );
-      $("#editar_cliente_latitude").val(
-        filtrarSite.map((site) => site.latitude)
-      );
-      $("#editar_cliente_longitude").val(
-        filtrarSite.map((site) => site.longitude)
-      );
-      $("#editar_cliente_targetAluguel").val(
-        filtrarSite.map((site) => site.aluguel)
-      );
-      $("#editar_cliente_grauLat").val(filtrarSite.map((site) => site.grauLat));
-      $("#editar_cliente_grauLong").val(
-        filtrarSite.map((site) => site.grauLong)
-      );
-      $("#editar_cliente_minLat").val(
-        filtrarSite.map((site) => site.minutoLat)
-      );
-      $("#editar_cliente_minLong").val(
-        filtrarSite.map((site) => site.minutoLong)
-      );
-      $("#editar_cliente_segLat").val(filtrarSite.map((site) => site.segLat));
-      $("#editar_cliente_segLong").val(filtrarSite.map((site) => site.segLong));
-      $("#form_editar_site_municipio").val(
-        filtrarSite.map((site) => site.municipio)
-      );
-      getMunicipios('form_editar_site_municipio', filtrarSite.map((site) => site.uf), 1, true)
+    operadora
+      .append('<option value="'+data.Operadora.ID+'">'+data.Operadora.display_value+'</option>')
+      .val(data.Operadora.ID)
 
-      $("#form_editar_site_municipio_old").val(
-        filtrarSite.map((site) => site.municipio)
-      );
-      $("#editar_cliente_dataAcionamento").val(dataAcionamentoFormatada);
-      $("#idUpdate").val(idUpdate);
-      verificarRegional();
-      escolhalatlong(opcao, 3);
-      habilitarAlturaSite("editar_cliente_tipoSite", 2);
-     $("#modalEditarSite").modal("show");
-    });
-  });
-}
+    etapa
+      .append('<option value="'+data.Etapa.ID+'">'+data.Etapa.display_value+'</option>')
+      .val(data.Etapa.ID)
+
+    tipoSite.val(data.TipoSiteCandidatoID)
+
+    uf
+      .append('<option value="'+data.UF.ID+'">'+data.UF.display_value+'</option>')
+      .val(data.UF.ID)
+    getRegional('editar_cliente_regional', data.UF.ID)
+
+    municipio
+      .append('<option value="'+data.Municipio2.ID+'">'+data.Municipio2.display_value+'</option>')
+      .val(data.Municipio2.ID)
+
+      var novaDataAcionamento = new Date(data.Data_de_Acionamento);
+      var dataAcionamentoFormatada =  adicionaZero(novaDataAcionamento.getDate().toString())+"/"+adicionaZero(novaDataAcionamento.getMonth() + 1).toString()+"/"+novaDataAcionamento.getFullYear().toString().replace("-", "");
+    /*
+    var dataAcionamentoFormatada =
+    adicionaZero(novaDataAcionamento.getDate().toString()) +
+    "/" +
+    adicionaZero(novaDataAcionamento.getMonth() + 1).toString() +
+    "/" +
+    novaDataAcionamento.getFullYear().toString().replace("-", "");
+    */
+    $('#editar_cliente_dataAcionamento').val(dataAcionamentoFormatada)
+
+    coordenadorCliente
+      .append('<option value="'+data.Contato.ID+'">'+data.Contato.display_value+'</option>')
+      .val(data.Contato.ID)
+
+    coordenadorMobilize
+      .append('<option value="'+data.Coordenador_Mobilize.ID+'">'+data.Coordenador_Mobilize.display_value+'</option>')
+      .val(data.Coordenador_Mobilize.ID)
+
+    $("#editar_cliente_IdsiteMobilize").val(data.ID_Site_Mobilize);
+    $('#editar_cliente_Idsharing').val(data.ID_Site_Sharing)
+    $('#editar_cliente_idSiteOperadora').val(data.ID_Site_Operadora)
+    $('#editar_cliente_projeto').val(data.Projeto)
+    $('#editar_cliente_subProjeto').val(data.Sub_Projeto)
+    $('#editar_cliente_targetAluguel').val(maskCurrency(data.Target_do_Aluguel))
+    $('#editar_cliente_raioBusca').val(data.RAIO_DE_BUSCA_M)
+    $('#editar_cliente_alturaPrevista').val(data.Altura_Prevista_M)
+    $('#editar_clienteopcao_').val(data.Opcao)
+    $('#editar_cliente_latitude').val(data.Latitude)
+    $('#editar_cliente_longitude').val(data.Longitude)
+    $('#editar_cliente_grauLat').val(data.GrauLAT)
+    $('#editar_cliente_grauLong').val(data.GrauLONG)
+    $('#editar_cliente_minLat').val(data.MinutoLAT)
+    $('#editar_cliente_minLong').val(data.MinutoLONG)
+    $('#editar_cliente_segLat').val(data.SegundosLAT)
+    $('#editar_cliente_segLong').val(data.SegundosLONG)
+    $('#editar_cliente_pontoCardealLat').val(data.PontoCardealLAT)
+    $('#editar_cliente_pontoCardealLong').val(data.PontoCardealLONG)
+    verificarRegional()
+    escolhalatlong(data.Opcao, 3);
+    habilitarAlturaSite("editar_cliente_tipoSite", 2);
+    
+    $("#modalEditarSite").modal("show");
+  }).catch(err => console.log("Não foi possível carregar o site - " + err));
+ }
 
 // EXCLUSÕES //
 function excluirSite(obj) {
