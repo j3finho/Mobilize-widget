@@ -37,45 +37,6 @@ function verificarRegional() {
   }
 }
 
-function verificaSelectMunicipio(estadouf, pagina, campo) {
-  var creatorSdkPromise = ZOHO.CREATOR.init();
-  creatorSdkPromise.then(function (data) {
-    var recordOps = ZOHO.CREATOR.API;
-
-    var valorMun = $("#form_editar_site_municipio_old").val();
-    var config = {
-      appName: "mobilize",
-      reportName: "widget_municipios_full",
-      criteria: "(uf1.ID==" + estadouf + ")",
-      page: pagina,
-      pageSize: 200,
-    };
-    var getRecords = recordOps.getAllRecords(config);
-    getRecords.then(function (response) {
-      var v_municipiosSelectOptions = [];
-      var recordArr = response.data;
-      console.log(recordArr, "Municipios");
-      recordArr.forEach(function (data, inicio) {
-        v_municipiosSelectOptions.push({
-          id: data.ID,
-          nome: data.name,
-        });
-      });
-      const form_site_municipio = document.getElementById(campo);
-      v_municipiosSelectOptions.forEach((cod, cod2) => {
-        var option = new Option(cod.nome);
-        form_site_municipio.options[form_site_municipio.options.length] =
-          option;
-        $(option).val(cod.id);
-      });
-      if (v_municipiosSelectOptions.length >= 199) {
-        getSelectMunicipio(estadouf, pagina + 1, campo);
-      }
-      $("#form_editar_site_municipio").val(valorMun);
-    });
-  });
-}
-
 function getApizohoSites() {
   var creatorSdkPromise = ZOHO.CREATOR.init();
   creatorSdkPromise.then(function (data) {
@@ -266,9 +227,36 @@ function actionCadastrarCandidato() {
   getAllRecords('Widget_Proprietario', 'form_candidato_proprietario', '')
 }
 
-function getMunicipios(municipioID, estadoID) {
-  getAllRecords('widget_municipios_full', municipioID, '(uf1.ID==' + estadoID + ')')
+function getMunicipios(campo, estadoID, page, firstExecution) {
+ var field = $('#' + campo)
+  
+  if(firstExecution) {
+    field
+      .empty()
+      .append('<option value="">Selecione..</option>')
+  }
+
+  var config = {
+    appName: "mobilize",
+    reportName: "widget_municipios_full",
+    criteria: "(uf1.ID==" + estadoID + ")",
+    page: page,
+    pageSize: 200,
+  };
+  ZOHO.CREATOR.API.getAllRecords(config).then((responseJson) => {
+    const municipios = document.getElementById(campo)
+    $.each(responseJson.data, (index, value) => {
+      field.append('<option value="'+value.ID+ '">'+value.name+'</option>')
+      console.log("page: " + page + " : record: " + index + " name: " + value.name)
+    })
+
+    var num_of_records = Object.keys(responseJson.data).length;
+    if(num_of_records == 200) {
+      getMunicipios(campo, estadoID, (page + 1), false)
+    }
+  }).catch(err => console.log("Não há mais municípios após a page: " + page));
 }
+
 
 function getRegional(regionalId, estadoID) {
   var regiao = $('#' + regionalId)
@@ -300,10 +288,13 @@ function getRegional(regionalId, estadoID) {
 
 function getAllRecords(report, inputField, criteria) {
   var field = $('#' + inputField)
+  var page = 1
   config = {
     appName: "mobilize",
     reportName: report, 
-    criteria: criteria
+    criteria: criteria,
+    page: page,
+    limit: 200
   }
 
   field
@@ -340,9 +331,9 @@ function getAllRecords(report, inputField, criteria) {
           else if(report == "widget_responsaveis_full") {
             textContent = data.Nome.display_value
           }
-          else if(report == "widget_municipios_full") {
-            textContent = data.name
-          }
+          // else if(report == "widget_municipios_full") {
+          //   textContent = data.name
+          // }
           else if(report == "widget_sites_full") {
             textContent = data.ID_Site_Sharing
           }
@@ -1139,13 +1130,11 @@ function editViewSite(n) {
         longitude: data.Longitude,
         longitudeBusca: data.Longitude_de_Busca,
         idOperadora: data.Operadora.length != "" ? data.Operadora.ID : "",
-        operadora:
-          data.Operadora.length != "" ? data.Operadora.display_value : "",
+        operadora: data.Operadora.length != "" ? data.Operadora.display_value : "",
         radioDeBusca: data.RAIO_DE_BUSCA_M,
         aluguel: aluguelParse,
         idtipoSite: data.Tipo_Site.length != "" ? data.Tipo_Site.ID : "",
-        tipoSite:
-          data.Tipo_Site.length != "" ? data.Tipo_Site.display_value : "",
+        tipoSite: data.TipoSiteCandidato,
         projeto: data.Projeto,
         subProjeto: data.Sub_Projeto,
         etapa: data.Etapa,
@@ -1162,14 +1151,8 @@ function editViewSite(n) {
         segLong: data.SegundosLONG,
         pontoCardLat: data.PontoCardealLAT,
         pontoCardLong: data.PontoCardealLONG,
-        idCordMobilize:
-          data.Coordenador_Mobilize.length != ""
-            ? data.Coordenador_Mobilize.ID
-            : "",
-        cordMobilize:
-          data.Coordenador_Mobilize.length != ""
-            ? data.Coordenador_Mobilize.display_value
-            : "",
+        idCordMobilize:data.Coordenador_Mobilize.length != "" ? data.Coordenador_Mobilize.ID : "",
+        cordMobilize:data.Coordenador_Mobilize.length != "" ? data.Coordenador_Mobilize.display_value : "",
         idcordCliente: data.Contato.length != "" ? data.Contato.ID : "",
         cordCliente: data.Contato.display_value,
         dataNormal: data.Data_de_Acionamento,
@@ -1321,7 +1304,7 @@ function editViewSite(n) {
       $("#form_editar_site_municipio").val(
         filtrarSite.map((site) => site.municipio)
       );
-      getMunicipios('form_editar_site_municipio', filtrarSite.map((site) => site.uf))
+      getMunicipios('form_editar_site_municipio', filtrarSite.map((site) => site.uf), 1, true)
 
       $("#form_editar_site_municipio_old").val(
         filtrarSite.map((site) => site.municipio)
@@ -1329,11 +1312,6 @@ function editViewSite(n) {
       $("#editar_cliente_dataAcionamento").val(dataAcionamentoFormatada);
       $("#idUpdate").val(idUpdate);
       verificarRegional();
-      verificaSelectMunicipio(
-        filtrarSite.map((site) => site.uf),
-        1,
-        "form_editar_site_municipio"
-      );
       escolhalatlong(opcao, 3);
       habilitarAlturaSite("editar_cliente_tipoSite", 2);
      $("#modalEditarSite").modal("show");

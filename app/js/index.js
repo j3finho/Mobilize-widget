@@ -4,7 +4,6 @@ import {
     getSelectSite,
     capturarDados,
     getSelectUf,
-    getSelectMunicipio,
     getSelectResponsavel,
     getSelectTarefas,
     getSelectStatus,
@@ -25,7 +24,6 @@ function runSelects(){
     getSelectStatus();
     // getSelectTarefas();
     capturarDados();
-    getSelectMunicipio('MG', 1, 'form_site_municipio')
     // getSelectClientes();
     // getSelectOperadoras();
     // getSelectTipoSite();
@@ -37,6 +35,11 @@ function runSelects(){
 
 runSelects();
 
+
+
+
+
+/*
 function escolhaRegional(id, local) {
     valor = $('#'+id+' option:selected').html();
     if(local == 1){
@@ -162,6 +165,7 @@ function calculoarea(){
     v_area_total = ((v_profundidade * v_area_locada) + (v_profundidade_normal * v_largura_area_normal));
     $('#form_candidato_area_locada').val(v_area_total);
 }
+*/
 
 const btnAddAtividade = document.getElementById('addtask');
 btnAddAtividade.addEventListener('click', () => addTask());
@@ -169,11 +173,11 @@ btnAddAtividade.addEventListener('click', () => addTask());
 // const btnAddSite = document.getElementById('addSite');
 // btnAddSite.addEventListener('click', () => addSite());
 
-const campoAddSiteEstado = document.getElementById('form_site_uf');
-campoAddSiteEstado.addEventListener('change', () => escolhaEstado(1));
+// const campoAddSiteEstado = document.getElementById('form_site_uf');
+// campoAddSiteEstado.addEventListener('change', () => escolhaEstado(1));
 
-const campoEdtSiteEstado = document.getElementById('form_editar_site_uf');
-campoEdtSiteEstado.addEventListener('change', () => escolhaEstado(2));
+// const campoEdtSiteEstado = document.getElementById('form_editar_site_uf');
+// campoEdtSiteEstado.addEventListener('change', () => escolhaEstado(2));
 
 
 // Colocando a data de hoje

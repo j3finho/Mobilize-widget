@@ -198,7 +198,7 @@ export function capturarDados() {
 //             $("option").attr("text-truncate");
 //         });
 //     });
-}
+// } 
 
 
 export function getSelectResponsavel() {
@@ -375,43 +375,6 @@ export function getSelectStatus() {
 //         });
 //     });
 // }
-
-export function getSelectMunicipio(estadouf, pagina, campo) {
-    var creatorSdkPromise = ZOHO.CREATOR.init();
-    creatorSdkPromise.then(function (data) {
-        var recordOps = ZOHO.CREATOR.API;
-        var config = {
-            appName: "mobilize",
-            reportName: "widget_municipios_full",
-            criteria: "(uf1.ID==" + estadouf + ")",
-            page: pagina,
-            pageSize: 200
-        };
-        var getRecords = recordOps.getAllRecords(config);
-        getRecords.then(function (response) {
-            var v_municipiosSelectOptions = []
-            var recordArr = response.data;
-            console.log(recordArr, 'Municipios');
-            recordArr.forEach(function (data, inicio) {
-                v_municipiosSelectOptions.push(
-                    {
-                        id: data.ID,
-                        nome: data.name
-                    }
-                );
-            });
-            const form_site_municipio = document.getElementById(campo);
-            v_municipiosSelectOptions.forEach((cod, cod2) => {
-                var option = new Option(cod.nome);
-                form_site_municipio.options[form_site_municipio.options.length] = option;
-                $(option).val(cod.id)
-            });
-            if (v_municipiosSelectOptions.length >= 199) {
-                getSelectMunicipio(estadouf, (pagina + 1), campo);
-            }
-        });
-    });
-}
 
 // export function getEtapas(campo) {
 //     var creatorSdkPromise = ZOHO.CREATOR.init();
