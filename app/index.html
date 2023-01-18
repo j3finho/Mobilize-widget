@@ -2961,7 +2961,7 @@
                         $('#addCandidato').prop('disabled', false)
                         return
                      }
-                     addAnexoCandidato(candidatoSite, id_candidato)
+                     addAnexoCandidato(candidatoSite, id_candidato, 'form_candidato_anexo')
                      Swal.fire({
                         icon: 'success',
                         title: 'Candidato atualizado com sucesso.'
@@ -2990,7 +2990,7 @@
                         return
                      }
                      const candidatoID = response.data.ID;
-                     addAnexoCandidato(candidatoSite, candidatoID)
+                     addAnexoCandidato(candidatoSite, candidatoID, 'form_candidato_anexo')
                      Swal.fire({
                         icon: 'success',
                         title: 'Candidato cadastrado com sucesso.'
@@ -3001,8 +3001,8 @@
             }
          }
 
-         function addAnexoCandidato(siteID, candiadtoID) {
-            var fileObject = document.getElementById("form_candidato_anexo").files[0];
+         function addAnexoCandidato(siteID, candiadtoID, field) {
+            var fileObject = document.getElementById(field).files[0];
             var userEmail = $('#useremailzoho').val()
             if (fileObject != null) {
                const configAnexo = {
@@ -3288,158 +3288,33 @@
 
                      $('#addNewSite').prop('disabled', true)
                      var userEmail = $('#useremailzoho').val()
-                     if (!$('input[name="form_cliente_anexo"]').val()) {
-                        ZOHO.CREATOR.API.addRecord(config).then(function(response) {
-                           if (response.code == 3000) {
-                                 console.log('cadastrou o formulario SITE')
-                                 var idSite = response.data.ID;
 
-                                 var formDataAnexos = {
-                                    "data": {
-                                       'Tipo_do_Anexo': 'Tipo Site',
-                                       'Site': idSite,
-                                       'usuario': userEmail
-                                    }
-                                 }
-                                 var fileObject = document.getElementById("form_cliente_anexo").files[0];
-
-
-                                 var configAnexo = {
-                                    appName: "mobilize",
-                                    formName: "Anexos",
-                                    data: formDataAnexos
-                                 }
-
-                                 ZOHO.CREATOR.API.addRecord(configAnexo).then(function(responseAnexo) {
-                                    var fileObject = document.getElementById("form_cliente_anexo").files[0];
-                                    if (responseAnexo.code == 3000) {
-                                       console.log('FORM SITE')
-                                       swal({
-                                             title: "Site Adicionado com sucesso!",
-                                             type: "success",
-                                             showConfirmButton: false
-                                       });
-                                       setTimeout(() => {
-                                             document.location.reload(true);
-                                       }, 2000)
-                                    }
-                                 });
-                           } else {
-                     $('#addNewSite').prop('disabled', false)
-                                 var v_erro = "";
-                                 $.each(response.error, function(key, val) {
-                                    v_erro = v_erro + val + ". ";
-                                 });
-                                 swal({
-                                    title: "Atualize a Pagina e tente novamente! (" + v_erro + ")",
-                                    type: "error",
-                                    showConfirmButton: true
-                                 });
-                           }
-
+                     ZOHO.CREATOR.API.addRecord(config).then(function(response) {
+                     if (response.code != 3000) {
+                        var v_erro = "";
+                        $.each(response.error, function(key, val) {
+                           v_erro = v_erro + val + ". ";
                         });
-
-                     } else {
-                        ZOHO.CREATOR.API.addRecord(config).then(function(response) {
-                           if (response.code == 3000) {
-                                 console.log('cadastrou o formulario SITE')
-                                 var idSite = response.data.ID;
-
-                                 var formDataAnexos = {
-                                    "data": {
-                                       'Tipo_do_Anexo': 'Tipo Site',
-                                       'Site': idSite,
-                                       'usuario': userEmail
-                                    }
-                                 }
-                                 var fileObject = document.getElementById("form_cliente_anexo").files[0];
-
-
-                                 var configAnexo = {
-                                    appName: "mobilize",
-                                    formName: "Anexos",
-                                    data: formDataAnexos
-                                 }
-
-                                 ZOHO.CREATOR.API.addRecord(configAnexo).then(function(responseAnexo) {
-                                    var fileObject = document.getElementById("form_cliente_anexo").files[0];
-                                    if (responseAnexo.code == 3000) {
-                                       console.log('FORM SITE')
-
-
-                                       var configPdf = {
-                                             appName: "mobilize",
-                                             reportName: "Anexos_Report",
-                                             id: responseAnexo.data.ID,
-                                             fieldName: "Anexos",
-                                             file: fileObject
-                                       }
-                                       swal({
-                                             title: "Site Adicionado com sucesso!",
-                                             type: "success",
-                                             showConfirmButton: false
-                                       });
-                                       setTimeout(() => {
-                                             document.location.reload(true);
-                                       }, 2000)
-
-
-                                    } else {
-                     $('#addNewSite').prop('disabled', false)
-                                       var v_erro = "";
-                                       $.each(responseAnexo.error, function(key, val) {
-                                             v_erro = v_erro + val + ". ";
-                                       });
-                                       swal({
-                                             title: "Atualize a Pagina e tente novamente! (" + v_erro + ")",
-                                             type: "error",
-                                             showConfirmButton: true
-                                       });
-
-                                    }
-                                    if (fileObject != null) {
-                                       ZOHO.CREATOR.API.uploadFile(configPdf).then(function(responsePdf) {
-                                             if (responsePdf.code == 3000) {
-
-                                                console.log('PDF')
-                                                swal({
-                                                   title: "Site Adicionado com sucesso!",
-                                                   type: "success",
-                                                   showConfirmButton: false
-                                                });
-                                                setTimeout(() => {
-                                                   document.location.reload(true);
-                                                }, 2000)
-                                             } else {
-                                                var v_erro = "";
-                                                $.each(responsePdf.error, function(key, val) {
-                                                   v_erro = v_erro + val + ". ";
-                                                });
-                                                swal({
-                                                   title: "Atualize a Pagina e tente novamente! (" + v_erro + ")",
-                                                   type: "error",
-                                                   showConfirmButton: true
-                                                });
-                                             }
-                                       });
-                                    }
-                                 });
-                           } else {
-                     $('#addNewSite').prop('disabled', false)
-                                 var v_erro = "";
-                                 $.each(response.error, function(key, val) {
-                                    v_erro = v_erro + val + ". ";
-                                 });
-                                 swal({
-                                    title: "Atualize a Pagina e tente novamente! (" + v_erro + ")",
-                                    type: "error",
-                                    showConfirmButton: true
-                                 });
-                           }
+                        swal({
+                           title: "Não foi possível cadastrar o site. Tente novamente! - Error: " + v_erro,
+                           type: "error",
+                           showConfirmButton: true
                         });
+                        return
                      }
+
+                     const siteID = response.data.ID
+                     addAnexoCandidato(siteID, '', 'form_cliente_anexo')
+                     Swal.fire({
+                        icon: 'success',
+                        title: 'Site cadastrado com sucesso.'
+                     })
+                     $('#addNewSite').prop('disabled', false)
+                     setTimeout(() => document.location.reload(true), 1000)
+                  })
                });
          }
+      
       </script>
       <script src="js/functions/getSite.js"></script>
       <script src="js/functions/getusuario.js"></script>

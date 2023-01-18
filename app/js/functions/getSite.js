@@ -286,7 +286,7 @@ function getRegional(regionalId, estadoID) {
   }
 }
 
-function getAllRecords(report, inputField, criteria) {
+async function getAllRecords(report, inputField, criteria) {
   var field = $('#' + inputField)
   var page = 1
   config = {
