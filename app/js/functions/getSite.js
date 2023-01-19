@@ -374,6 +374,8 @@ function viewSite(n) {
 }
 
 function viewCandidatosPorSite(n) {
+  console.log("data-table is initialized: " + $.fn.dataTable.isDataTable('#datatable-buttons-candidatos'));
+
   var creatorSdkPromise = ZOHO.CREATOR.init();
   creatorSdkPromise.then(function (data) {
     var recordOps = ZOHO.CREATOR.API;
@@ -976,12 +978,12 @@ function viewAtividadesPorSite(n) {
   
                       ],
                       columns: [
-                          { data: 'tarefa', title: 'Tarefa'},
-                          { data: 'site', title: "Id Site" },
+                          { data: 'tarefa', title: 'Tarefa' },
+                          { data: 'site', title: "ID Site" },
                           { data: 'dataInicio', title: "Data de Inicio" },
                           { data: 'dataTermino', title: "Data de Término" },
-                          { data: 'dataConclusao', title: "Data de Conclusão" },
-                          { data: 'tempoHoras', title: "Tempo Consumido" },
+                          { data: 'dataConclusao', title: "Data de Conclusão"},
+                          { data: 'tempoHoras', title: "Tempo Consumido"},
                           { data: 'responsavel', title: "Responsável" },
                           {
                               className: 'details-control',
@@ -997,8 +999,7 @@ function viewAtividadesPorSite(n) {
                                       return '<span class="badge rounded-pill badge-soft-danger font-size-12">Não Iniciado</span>';
                                   }
                               },
-                              width: 'auto',
-                              title: "Status",
+                              title: "Status"
                           },
                           {
                               className: 'dt-body-center',
@@ -1026,7 +1027,7 @@ function viewAtividadesPorSite(n) {
                                   `;
                                   }
                               },
-                              title: "Ações",
+                              title: "Ações"
                           }
                       ],
                   }).buttons().container().appendTo("#datatable-Tarefas_wrapper .col-md-6:eq(0)");

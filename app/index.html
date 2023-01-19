@@ -407,7 +407,7 @@
              <div class="modal-content">
                  <div  class="modal-header">
                      <h5 class="modal-title add-task-title">Lista dos candidatos</h5>
-                     <button type="button" class="btn-close" onclick="clearDataTable('datatable-buttons-candidatos')" data-bs-dismiss="modal" aria-label="Close"></button>
+                     <button type="button" class="btn-close" onclick="clearDataTable('datatable-buttons-candidatos', 'modalCandidatosPorSite')" aria-label="Close"></button>
                  </div>
                  <div class="modal-body">
                       <table id="datatable-buttons-candidatos" class="table-striped table table-bordered dt-responsive nowrap w-100"> </table>
@@ -423,7 +423,7 @@
             <div class="modal-content">
                <div class="modal-header">
                   <h5 class="modal-title add-task-title">Atividades</h5>
-                  <button type="button" class="btn-close" onclick="clearDataTable('datatable-buttons-atividades')" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <button type="button" class="btn-close" onclick="clearDataTable('datatable-buttons-atividades', 'modalAtividadesPorSite')" aria-label="Close"></button>
                </div>
                <div class="modal-body">
                   <table id="datatable-buttons-atividades" class="table-striped table table-bordered dt-responsive nowrap w-100"> </table>
@@ -1849,8 +1849,13 @@
             habilitarJustifitiva(this, "Sim","form_candidato_justifique_obstrucao" )
          });
 
-         function clearDataTable(table) {
-            $('#' + table).DataTable().clear().draw().destroy();
+         function clearDataTable(table, modalId) {
+            $('#' + modalId).modal('hide')
+           var table =  $('#' + table).DataTable();
+           table
+            .clear()
+            .draw()
+            .destroy()
          }
 
              $('#btnNovoProprietario').click(function() {
