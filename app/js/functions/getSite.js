@@ -159,12 +159,8 @@ function getApizohoSites() {
                 render: function (data, type, row) {
                   return `
                                 <div class="d-flex" style="width: 100%; justify-content: center">
-                                    <button id="${row.id}" type="button" onclick="viewSite(this)" class="btn btn-outline-secondary btn-sm" title="Visualizar">
+                                    <button id="${row.id}" type="button" onclick="viewEditSite(this, true)" class="btn btn-outline-secondary btn-sm" title="Visualizar">
                                         <i class="far fa-eye"></i>
-                                    </button>
-                                    &nbsp;&nbsp;
-                                    <button id="${row.id}" type="button" onclick="editarSite(this)" class="btn btn-outline-secondary btn-sm" title="Editar">
-                                        <i class="fas fa-pencil-alt"></i>
                                     </button>
                                     &nbsp;&nbsp;
                                     <button id="${row.id}" type="button" onclick="excluirSite(this, ${row.candidatos},'${row.idSiteSharing}')" class="btn btn-outline-secondary btn-sm" title="Excluir Site">
@@ -208,43 +204,45 @@ getApizohoSites();
 
 
 function actionCadastrarSite() {
+  $('#downloadFile').css('display', 'none')
+  document.getElementById('form_cliente_dataAcionamento').valueAsDate = new Date()
   escolhalatlong('', 1)
   habilitarAlturaSite('form_cliente_tipoSite',1)
-  getAllRecords('widget_clientes_full', 'form_cliente_site', '')
-  getAllRecords('widget_operadoras_full', 'form_cliente_operadora', '')
-  getAllRecords('widget_etapas_full', 'form_cliente_etapa', '(Ordem==0&&Nome_da_Etapa=="ACIONAMENTO")')
+  getAllRecords('widget_clientes_full', 'form_cliente_site', '', true)
+  getAllRecords('widget_operadoras_full', 'form_cliente_operadora', '',true)
+  getAllRecords('widget_etapas_full', 'form_cliente_etapa', '(Ordem==0&&Nome_da_Etapa=="ACIONAMENTO")',true)
   getAllRecords('widget_estados_full', 'form_site_uf')
   getAllRecords('widget_contatos_full', 'form_cliente_coordenadorCliente', '')
-  getAllRecords('widget_responsaveis_full', 'form_cliente_coordenadorMobilize', '(Funcao.contains("Coordenador"))')
+  getAllRecords('widget_responsaveis_full', 'form_cliente_coordenadorMobilize', '(Funcao.contains("Coordenador"))',true)
 }
 
 function actionCadastrarCandidato() {
   escolhalatlongCand('', 1)
   corredorAcessoCand('', 1)
   habilitarAlturaCand('form_candidato_tipo_site',1)
-  getAllRecords('widget_sites_full', 'form_candidato_site', '')
-  getAllRecords('widget_sitetipos_full', 'form_candidato_tipo_site', '')
-  getAllRecords('Widget_Proprietario', 'form_candidato_proprietario', '')
+  getAllRecords('widget_sites_full', 'form_candidato_site', '',true)
+  getAllRecords('widget_sitetipos_full', 'form_candidato_tipo_site', '',true)
+  getAllRecords('Widget_Proprietario', 'form_candidato_proprietario', '',true)
 }
 
-function getMunicipios(campo, estadoID, page, firstExecution) {
+function getMunicipios(campo, estadoID, municipioID, page, firstExecution) {
  var field = $('#' + campo)
-  
-  if(firstExecution) {
+
+  if(firstExecution && municipioID == null) {
     field
       .empty()
       .append('<option value="">Selecione..</option>')
   }
 
+  var criterio = municipioID == null ? "(uf1.ID=="+estadoID+")" : "(uf1.ID=="+estadoID+"&&ID!="+municipioID+")"
   var config = {
     appName: "mobilize",
     reportName: "widget_municipios_full",
-    criteria: "(uf1.ID==" + estadoID + ")",
+    criteria: criterio,
     page: page,
     pageSize: 200,
   };
   ZOHO.CREATOR.API.getAllRecords(config).then((responseJson) => {
-    const municipios = document.getElementById(campo)
     $.each(responseJson.data, (index, value) => {
       field.append('<option value="'+value.ID+ '">'+value.name+'</option>')
       console.log("page: " + page + " : record: " + index + " name: " + value.name)
@@ -252,7 +250,7 @@ function getMunicipios(campo, estadoID, page, firstExecution) {
 
     var num_of_records = Object.keys(responseJson.data).length;
     if(num_of_records == 200) {
-      getMunicipios(campo, estadoID, (page + 1), false)
+      getMunicipios(campo, estadoID, municipioID,(page + 1), false)
     }
   }).catch(err => console.log("Não há mais municípios após a page: " + page));
 }
@@ -286,7 +284,7 @@ function getRegional(regionalId, estadoID) {
   }
 }
 
-async function getAllRecords(report, inputField, criteria) {
+function getAllRecords(report, inputField, criteria, clearContentBefore) {
   var field = $('#' + inputField)
   var page = 1
   config = {
@@ -297,10 +295,12 @@ async function getAllRecords(report, inputField, criteria) {
     limit: 200
   }
 
-  field
-      .empty()
-      .append('<option value="">Selecione..</option>')
-  
+  if(clearContentBefore) {
+    field
+        .empty()
+        .append('<option value="">Selecione..</option>')
+  }
+
   ZOHO.CREATOR.API.getAllRecords(config).then(function(response) {
       if(response.code != 3000) {
           var error = []
@@ -332,9 +332,6 @@ async function getAllRecords(report, inputField, criteria) {
           else if(report == "widget_responsaveis_full") {
             textContent = data.Nome.display_value
           }
-          // else if(report == "widget_municipios_full") {
-          //   textContent = data.name
-          // }
           else if(report == "widget_sites_full") {
             textContent = data.ID_Site_Sharing
           }
@@ -343,9 +340,6 @@ async function getAllRecords(report, inputField, criteria) {
           }
 
           field.append('<option value="'+value+'">' + textContent + '</option>')
-          if(report == "widget_etapas_full") {
-            field.val(value)
-          }
       })
   });
 }
@@ -1081,6 +1075,7 @@ function viewAtividadesPorSite(n) {
     });
   }
 
+  /*
  function editarSite(n) {
   var cliente = $('#editar_cliente_site')
   var operadora = $('#editar_cliente_operadora')
@@ -1099,13 +1094,13 @@ function viewAtividadesPorSite(n) {
   ZOHO.CREATOR.API.getRecordById(config).then((response) => {
     var data = response.data
 
-    getAllRecords('widget_clientes_full', 'editar_cliente_site', '(ID!='+data.cliente.ID+')' )
-    getAllRecords('widget_operadoras_full', 'editar_cliente_operadora','(ID!='+data.Operadora.ID+')')
-    getAllRecords('widget_etapas_full', 'editar_cliente_etapa')
-    getAllRecords('widget_sitetipos_full', 'editar_cliente_tipoSite', '(ID!='+data.TipoSiteCandidatoID+')')
-    getAllRecords('widget_estados_full', 'form_editar_site_uf', '(ID!='+data.UF.ID+')')
-    getAllRecords('widget_contatos_full', 'editar_cliente_coordenadorCliente', '(ID!='+data.Contato.ID+')')
-    getAllRecords('widget_responsaveis_full', 'editar_cliente_coordenadorMobilize', '(Funcao.contains("Coordenador")&&ID!='+data.Coordenador_Mobilize.ID+')')
+    getAllRecords('widget_clientes_full', 'editar_cliente_site', '(ID!='+data.cliente.ID+')' , false)
+    getAllRecords('widget_operadoras_full', 'editar_cliente_operadora','(ID!='+data.Operadora.ID+')', false)
+    getAllRecords('widget_etapas_full', 'editar_cliente_etapa', `(ID!=${data.Etapa.ID})`)
+    getAllRecords('widget_sitetipos_full', 'editar_cliente_tipoSite', '(ID!='+data.TipoSiteCandidatoID+')', false)
+    getAllRecords('widget_estados_full', 'form_editar_site_uf', '(ID!='+data.UF.ID+')', false)
+    getAllRecords('widget_contatos_full', 'editar_cliente_coordenadorCliente', '(ID!='+data.Contato.ID+')',false)
+    getAllRecords('widget_responsaveis_full', 'editar_cliente_coordenadorMobilize', '(Funcao.contains("Coordenador")&&ID!='+data.Coordenador_Mobilize.ID+')',false)
 
     cliente
       .append('<option value="'+data.cliente.ID+'">'+data.cliente.display_value+'</option>')
@@ -1129,18 +1124,9 @@ function viewAtividadesPorSite(n) {
     municipio
       .append('<option value="'+data.Municipio2.ID+'">'+data.Municipio2.display_value+'</option>')
       .val(data.Municipio2.ID)
+    getMunicipios(municipio.attr('id'), uf.val(), 1)
 
-      var novaDataAcionamento = new Date(data.Data_de_Acionamento);
-      var dataAcionamentoFormatada =  adicionaZero(novaDataAcionamento.getDate().toString())+"/"+adicionaZero(novaDataAcionamento.getMonth() + 1).toString()+"/"+novaDataAcionamento.getFullYear().toString().replace("-", "");
-    /*
-    var dataAcionamentoFormatada =
-    adicionaZero(novaDataAcionamento.getDate().toString()) +
-    "/" +
-    adicionaZero(novaDataAcionamento.getMonth() + 1).toString() +
-    "/" +
-    novaDataAcionamento.getFullYear().toString().replace("-", "");
-    */
-    $('#editar_cliente_dataAcionamento').val(dataAcionamentoFormatada)
+    // $('#editar_cliente_dataAcionamento').val(formatDate(data.Data_de_Acionamento))
 
     coordenadorCliente
       .append('<option value="'+data.Contato.ID+'">'+data.Contato.display_value+'</option>')
@@ -1176,6 +1162,198 @@ function viewAtividadesPorSite(n) {
     $("#modalEditarSite").modal("show");
   }).catch(err => console.log("Não foi possível carregar o site - " + err));
  }
+ */
+
+ function disabledEnabledFieldsSite(isDisabled, clearSelectOptions) {
+  $('#titleFormSite').text((isDisabled ? "Visualizar Site" : "Editar Site"))
+  $('#addNewSite').text('Salvar alterações').css('display', (!isDisabled ? 'block' : 'none'))
+  $('#btnEditarSite').css('display', (isDisabled ? 'block' : 'none'))
+
+  $("#form_cliente_IdsiteMobilize").prop('disabled', isDisabled)
+  $("#form_cliente_Idsharing").prop('disabled', isDisabled)
+  $("#form_cliente_idSiteOperadora").prop('disabled', isDisabled)
+  
+  var date = document.getElementById('form_cliente_dataAcionamento')
+  date.disabled = isDisabled
+  date.style.display = (!isDisabled ? 'block' : 'none')
+  
+  $("#form_cliente_dataAcionamento_view")
+      .prop('disabled', isDisabled)
+      .css('display', (isDisabled ? 'block' : 'none'))
+  
+  $("#form_cliente_projeto").prop('disabled', isDisabled)
+  $("#form_cliente_subProjeto").prop('disabled', isDisabled)
+  $("#form_cliente_targetAluguel").prop('disabled', isDisabled)
+  $("#form_cliente_alturaPrevista").prop('disabled', isDisabled)
+  $("#form_cliente_latitude").prop('disabled', isDisabled)
+  $("#form_cliente_longitude").prop('disabled', isDisabled)
+
+  $("#anexos").css('display', (isDisabled ? "none" : "block"))
+
+  var cliente = $("#form_cliente_site")
+  var operadora = $("#form_cliente_operadora")
+  var etapa = $("#form_cliente_etapa")
+  var uf = $("#form_site_uf")
+  var municipio = $("#form_site_municipio")
+  var regional = $("#form_cliente_regional")
+  var raioDeBusca =  $("#form_cliente_raioBusca")
+  var opcao =  $("#form_cliente_opcao")
+  var coordenadorCliente =  $("#form_cliente_coordenadorCliente")
+  var coordenadorMobilize = $("#form_cliente_coordenadorMobilize")
+  var tipoSite = $("#form_cliente_edit_tipoSite")
+
+
+  cliente.prop('disabled', isDisabled);
+  operadora.prop('disabled', isDisabled);
+  etapa.prop('disabled', isDisabled);
+  uf.prop('disabled', isDisabled);
+  municipio.prop('disabled', isDisabled)
+  regional.prop('disabled', isDisabled)
+  raioDeBusca.prop('disabled', isDisabled)
+  opcao.prop('disabled', isDisabled)
+  coordenadorCliente.prop('disabled', isDisabled)
+  coordenadorMobilize.prop('disabled', isDisabled)
+  tipoSite.prop('disabled', isDisabled)
+
+  if(!isDisabled) {
+    var clienteSelected = cliente.find(':selected').val()
+    var operadoraSelected = operadora.find(':selected').val()
+    var etapaSelected = etapa.find(':selected').val()
+    var ufSelected = uf.find(':selected').val()
+    var clienteSelected = cliente.find(':selected').val()
+    var _coordenadorCliente = coordenadorCliente.find(':selected').val()
+    var _coordenadorMobilize = coordenadorMobilize.find(':selected').val()
+    var municipioSelected = municipio.find(':selected').val()
+
+    getAllRecords('widget_clientes_full', 'form_cliente_site', '(ID!='+clienteSelected+')' , false)
+    getAllRecords('widget_operadoras_full', 'form_cliente_operadora','(ID!='+operadoraSelected+')', false)
+    getAllRecords('widget_etapas_full', 'form_cliente_etapa', `(ID!=${etapaSelected})`)
+    // getAllRecords('widget_sitetipos_full', 'editar_cliente_tipoSite', '(ID!='+_tipoSite+')', false)
+    getAllRecords('widget_estados_full', 'form_site_uf', '(ID!='+ufSelected+')', false)
+    getAllRecords('widget_contatos_full', 'form_cliente_coordenadorCliente', '(ID!='+_coordenadorCliente+')',false)
+    getAllRecords('widget_responsaveis_full', 'form_cliente_coordenadorMobilize', '(Funcao.contains("Coordenador")&&ID!='+_coordenadorMobilize+')',false)
+    getMunicipios('form_site_municipio', ufSelected,municipioSelected, 1, true)
+  }
+
+  if(clearSelectOptions) {
+     const defaultOption = '<option value="">Selecione..</option>'
+     cliente.empty().append(defaultOption)
+     operadora.empty().append(defaultOption)
+     etapa.empty().append(defaultOption)
+     uf.empty().append(defaultOption)
+     municipio.empty().append(defaultOption)
+     coordenadorCliente.empty().append(defaultOption)
+     coordenadorMobilize.empty().append(defaultOption)
+     regional.val('')
+     raioDeBusca.val('')
+     opcao.val('')
+  }
+ }
+
+
+ function viewEditSite(obj) {
+  var config = {
+    appName: "mobilize",
+    reportName: "widget_sites_full",
+    id: obj.id,
+  };
+  disabledEnabledFieldsSite(true, false)
+  ZOHO.CREATOR.API.getRecordById(config).then((response) => {
+    if(response.code != 3000) {
+      swal({
+        title: "Nao foi possivel carregar o site",
+        type: "error",
+        showConfirmButton: true
+     });
+      return
+    }
+      var data = response.data;
+
+      $('#siteID').val(obj.id)
+
+      if(data.cliente != '') {
+        $("#form_cliente_site")
+          .append(`<option value="${data.cliente.ID}">${data.cliente.display_value}</option>`)
+          .val(data.cliente.ID)
+      }
+
+      $("#form_cliente_IdsiteMobilize").val(data.ID_Site_Mobilize)
+
+      if(data.Operadora != '') {
+          $("#form_cliente_operadora")
+            .append(`<option value="${data.Operadora.ID}">${data.Operadora.display_value}</option>`)
+            .val(data.Operadora.ID)
+       }  
+
+      $("#form_cliente_Idsharing").val(data.ID_Site_Sharing)
+
+      if(data.Etapa != '') {      
+        $("#form_cliente_etapa")
+          .append(`<option value="${data.Etapa.ID}">${data.Etapa.display_value}</option>`)
+          .val(data.Etapa.ID)
+      }
+
+      $("#form_cliente_idSiteOperadora").val(data.ID_Site_Operadora)
+
+      if(data.TipoSiteCandidato != '' && data.TipoSiteCandidatoID != '') {
+        $("#form_cliente_edit_tipoSite")
+          .append(`<option value="${data.TipoSiteCandidatoID}">${data.TipoSiteCandidato}</option>`)
+          .val(data.TipoSiteCandidatoID)
+      }  
+
+      var date = document.getElementById('form_cliente_dataAcionamento')
+      date.valueAsDate = new Date(data.Data_de_Acionamento.replaceAll('-','/'))
+
+      $("#form_cliente_dataAcionamento_view")
+        .val(new Date(data.Data_de_Acionamento.replaceAll('-','/')).toLocaleDateString('pt-br'))
+
+      $("#form_cliente_projeto").val(data.Projeto)
+
+      $("#form_cliente_subProjeto").val(data.Sub_Projeto)
+
+      $("#form_cliente_targetAluguel").val(maskCurrency(data.Target_do_Aluguel))
+
+      if(data.UF != '') {
+        $("#form_site_uf")
+          .append(`<option value="${data.UF.ID}">${data.UF.display_value}</option>`)
+          .val(data.UF.ID)
+      }
+
+      if(data.Municipio2 != '') {    
+        $("#form_site_municipio")
+          .append(`<option value="${data.Municipio2.ID}">${data.Municipio2.display_value}</option>`)
+          .val(data.Municipio2.ID)
+      }
+
+      $("#form_cliente_regional").val(data.regional)
+
+      $("#form_cliente_raioBusca").val(data.RAIO_DE_BUSCA_M)
+
+      $("#form_cliente_opcao").val(data.Opcao)
+
+      $("#form_cliente_alturaPrevista").val(data.Altura_Prevista_M)
+
+      $("#form_cliente_latitude").val(data.Latitude)
+
+      $("#form_cliente_longitude").val(data.Longitude)
+
+      if(data.Contato != '') {
+        $("#form_cliente_coordenadorCliente")
+          .append(`<option value="${data.Contato.ID}">${data.Contato.display_value}</option>`)
+          .val(data.Contato.ID)
+      }
+
+      if(data.Coordenador_Mobilize != '') {
+        $("#form_cliente_coordenadorMobilize")
+          .append(`<option value="${data.Coordenador_Mobilize.ID}">${data.Coordenador_Mobilize.display_value}</option>`)
+          .val(data.Coordenador_Mobilize.ID)
+      }
+      
+      escolhalatlong(data.Opcao, 1)
+      habilitarAlturaSite("form_cliente_site", 1);
+      $("#modalAdicionarSite").modal("show");
+  })
+}
 
 // EXCLUSÕES //
 function excluirSite(obj) {
@@ -1521,7 +1699,7 @@ function editSite() {
               Sub_Projeto: form_cliente_subProjeto,
               Contato: form_cliente_coordenadorClienteValue,
               Opcao: form_cliente_opcao,
-            },
+            }
           };
         $('#btnEditarSite').prop('disabled', true)
           var config = {
@@ -1539,9 +1717,7 @@ function editSite() {
                 type: "success",
                 showConfirmButton: false,
               });
-              setTimeout(() => {
-                document.location.reload(true);
-              }, 2000);
+              setTimeout(() => document.location.reload(true), 2000);
             } else {
               var v_erro = "";
               $.each(response.error, function (key, val) {
@@ -1552,7 +1728,7 @@ function editSite() {
                 type: "error",
                 showConfirmButton: true,
               });
-        $('#btnEditarSite').prop('disabled', false)
+            $('#btnEditarSite').prop('disabled', false)
             }
           });
         });

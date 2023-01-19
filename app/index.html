@@ -29,6 +29,7 @@
             <input type="hidden" value="" id="dadosurlzoho" />
             <input type="hidden" value="" id="useremailzoho" />
             <input type="hidden" value="" id="candidatoID" />
+            <input type="hidden" value="" id="siteID" />
             <div class="card">
                <div class="card-body">
                   <div class="row">
@@ -513,7 +514,7 @@
             <div class="modal-content">
                <div class="modal-header">
                   <h5 class="modal-title add-task-title" id="modal_title_candidato">Novo Candidato</h5>
-                  <button type="button" class="btn-close" aria-label="Close" onclick="closeModal()"></button>
+                  <button type="button" class="btn-close" aria-label="Close" onclick="closeModalCandidato()"></button>
                </div>
                <div class="modal-body">
                   <form id="form_candidato" role="form">
@@ -1080,11 +1081,11 @@
          <div class="modal-dialog modal-lg">
             <div class="modal-content">
                <div class="modal-header">
-                  <h5 class="modal-title add-task-title">Adicionar Novo Site</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="resetForm('NewtaskForm')" aria-label="Close"></button>
+                  <h5 class="modal-title add-task-title" id="titleFormSite">Adicionar Novo Site</h5>
+                  <button type="button" class="btn-close" onclick="closeModalSite()" aria-label="Close"></button>
                </div>
                <div class="modal-body">
-                  <form id="NewtaskForm" role="form">
+                  <form id="form_add_site" role="form">
                      <div class="row">
                         <div class="col-lg-6">
                            <label class="col-form-label">Cliente<span class="text-danger">*</span></label>
@@ -1135,6 +1136,7 @@
                            <label class="col-form-label">Data de Acionamento<span
                               class="text-danger">*</span></label>
                            <input id="form_cliente_dataAcionamento" name="taskbudget" type="date" tabindex="1906" placeholder="Informe a Data de Acionamento" class="form-control" required>
+                           <input id="form_cliente_dataAcionamento_view" name="taskbudget" type="text" tabindex="1907" style="display: none;" class="form-control">
                         </div>
                         <div class="col-lg-6">
                            <label class="col-form-label">Projeto<span class="text-danger">*</span></label>
@@ -1163,7 +1165,7 @@
                      <div class="row">
                         <div class="col-lg-6">
                            <label class="col-form-label">UF<span class="text-danger">*</span></label>
-                           <select class="form-select validate" id="form_site_uf" onchange="getMunicipios('form_site_municipio', this.value, 1, true),getRegional('form_cliente_regional', this.id)" tabindex="1910" required>
+                           <select class="form-select validate" id="form_site_uf" onchange="getMunicipios('form_site_municipio', this.value, null,1, true),getRegional('form_cliente_regional', this.id)" tabindex="1910" required>
                               <option value="" selected>Selecione...</option>
                            </select>
                         </div>
@@ -1302,16 +1304,14 @@
                                  <label class="col-form-label">Segundo LAT <span class="text-danger">*</span></label>
                                  <input id="form_cliente_segLat" maxlength="8" name="taskbudget" type="text"
                                     placeholder="Informe o segundo Longitudinal" class="form-control"
-                                    tabindex="1923" onkeyup="this.value = this.value.replace(/^\.|[^-?\d\.]|\.(?=.*\.)|^0+(?=\d)/g, '')
-">
+                                    tabindex="1923" onkeyup="this.value = this.value.replace(/^\.|[^-?\d\.]|\.(?=.*\.)|^0+(?=\d)/g, '')">
                                  <small id="emailHelp" class="form-text text-muted">Ex: 47.667</small>
                               </div>
                               <div class="col-lg-6">
                                  <label class="col-form-label">Segundo LONG<span class="text-danger">*</span></label>
                                  <input id="form_cliente_segLong" name="taskbudget" maxlength="8" type="text"
                                     placeholder="Informe o segundo Longitudinal" class="form-control"
-                                    tabindex="1927" onkeyup="this.value = this.value.replace(/^\.|[^-?\d\.]|\.(?=.*\.)|^0+(?=\d)/g, '')
-">
+                                    tabindex="1927" onkeyup="this.value = this.value.replace(/^\.|[^-?\d\.]|\.(?=.*\.)|^0+(?=\d)/g, '')">
                                  <small id="emailHelp" class="form-text text-muted">Ex: 41.8793</small>
                               </div>
                            </div>
@@ -1359,7 +1359,7 @@
                         </div>
                         <div class="row"></div>
                         <div class="col-lg-6">
-                           <div class="mt-3">
+                           <div class="mt-3" id="anexos">
                               <label for="formFile" class="form-label">Anexo</label>
                               <input id="form_cliente_anexo" name="form_cliente_anexo" tabindex="1931" value="4194304"
                                  accept=".gif,.png, .pdf, .doc , .csv, .xlsx, .xls, .jpg, .jpeg, .docx"
@@ -1367,8 +1367,11 @@
                            </div>
                         </div>
                      </div>
-                     <div class="col-lg-10 pt-3">
-                        <button type="button" class="btn btn-primary" id="addNewSite" onclick="addSite()">Criar Site</button>
+                     <div class="rowCenterItems">
+                        <div class="col-lg-6">
+                           <button type="button" class="btn btn-primary" id="addNewSite" onclick="addEditSite()">Criar Site</button>
+                           <button type="button" class="btn btn-primary" style="display: none;"  id="btnEditarSite" onclick="disabledEnabledFieldsSite(false)">Editar Site</button>
+                        </div>
                      </div>
                   </form>
                </div>
@@ -1472,7 +1475,7 @@
                      <div class="row">
                         <div class="col-lg-6">
                            <label class="col-form-label">UF<span class="text-danger"></span></label>
-                           <select class="form-select validate" id="form_editar_site_uf" onchange="getMunicipios('form_editar_site_municipio', this.value, 1, true),getRegional('editar_cliente_regional', this.id)" required>
+                           <select class="form-select validate" id="form_editar_site_uf" onchange="getMunicipios('form_editar_site_municipio', this.value,null, 1, true),getRegional('editar_cliente_regional', this.id)" required>
                               <option value="" selected>Selecione...</option>
                            </select>
                         </div>
@@ -1667,7 +1670,7 @@
                            <label for="formFile" class="form-label">Anexo</label>
                            <input id="form_site_anexo_editar" name="form_cliente_anexo" value="4194304" accept=".gif,.png, .pdf, .doc , .csv, .xlsx, .xls, .jpg, .jpeg, .docx" class="form-control" type="file">
                         </div>
-                        <div class="col-lg-6" style="  display: flex;align-items: end; justify-content: center;">
+                        <div class="col-lg-6" style="display: flex;align-items: end; justify-content: center;">
                            <a id="downloadFile" class="btn btn-primary" download>Baixar anexo</a>
                         </div>
                      </div>
@@ -2398,7 +2401,7 @@
                  reverseButtons: true
              }).then((result) => {
                  if (result.dismiss === Swal.DismissReason.cancel) {
-                     closeModal()
+                     closeModalCandidato()
                      return
                  }
              })
@@ -2663,7 +2666,7 @@
             })
          }
 
-         function closeModal() {
+         function closeModalCandidato() {
             desabilitarCampoCandidato(false, true)
 
             $('#candidatoID').val('')
@@ -2676,6 +2679,16 @@
             $('#btnNovoProprietario').css('display', 'block')
             $('#btnAddContact').css('display', 'block').prop('disabled', false)
             $('#addCandidato').text('Cadastrar')
+         }
+
+         function closeModalSite() {
+            disabledEnabledFieldsSite(false, true)
+
+            $('#modalAdicionarSite').modal('hide')
+            $('#siteID').val('')
+            $('#titleFormSite').text("Adicionar Novo Site")
+            $('#addNewSite').text('Criar Site')
+            resetForm("form_add_site")
          }
 
          function createEditCandidato() {
@@ -2884,11 +2897,11 @@
                return
             }
 
+            // 'Tipo_Site': candidatoTipoSite,
             var formData = {
                'data': {
                      'Sigla_do_Candidato': candidatoSigla,
                      'Site': candidatoSite,
-                     'Tipo_Site': candidatoTipoSite,
                      'Valor_do_Aluguel': candidatoAluguel,
                      'Tipo_de_Negocia_o': candidatoTipoDeNegociacao,
                      'Proprietario': candidatoProprietario,
@@ -3062,235 +3075,259 @@
                   });
          }
 
-         function addSite() {
-            ZOHO.CREATOR.init()
-               .then(function(data) {
-                     var queryParams = ZOHO.CREATOR.UTIL.getQueryParams();
-                     var paramsID = queryParams.idconta
+         function addEditSite() {
+            var form_cliente_siteValue = $('#form_cliente_site').find(':selected').val()
+            var form_cliente_operadoraValue = $('#form_cliente_operadora').find(':selected').val()
+            var form_cliente_coordenadorClienteValue = $('#form_cliente_coordenadorCliente').find(':selected').val()
+            var form_cliente_coordenadorMobilizeValue =  $('#form_cliente_coordenadorMobilize').find(':selected').val()
+            var form_cliente_etapaValue = $('#form_cliente_etapa').find(':selected').val()
+            var form_cliente_regionalValue =  $('#form_cliente_regional').find(':selected').val()
+            var form_cliente_alturaPrevistaValue = $('#form_cliente_alturaPrevista').find(':selected').val()
+            var form_cliente_raioBuscaValue = $('#form_cliente_raioBusca').find(':selected').val()
+            var form_cliente_opcaoValue = $('#form_cliente_opcao').find(':selected').val()
 
-                     var form_cliente_site = document.getElementById("form_cliente_site");
-                     var form_cliente_siteValue = form_cliente_site.options[form_cliente_site.selectedIndex].value;
+            var form_cliente_pontoCardealLat = document.getElementById("form_cliente_pontoCardealLat");
+            if (form_cliente_pontoCardealLat != null) {
+               var form_cliente_pontoCardealLatValue = form_cliente_pontoCardealLat.options[form_cliente_pontoCardealLat.selectedIndex].value;
+            }
 
-                     var form_cliente_operadora = document.getElementById("form_cliente_operadora");
-                     var form_cliente_operadoraValue = form_cliente_operadora.options[form_cliente_operadora.selectedIndex].value;
+            var form_cliente_pontoCardealLong = document.getElementById("form_cliente_pontoCardealLong");
+            if (form_cliente_pontoCardealLong != null) {
+               var form_cliente_pontoCardealLongValue = form_cliente_pontoCardealLong.options[form_cliente_pontoCardealLong.selectedIndex].value;
+            }
 
-                     var form_cliente_coordenadorCliente = document.getElementById("form_cliente_coordenadorCliente");
-                     var form_cliente_coordenadorClienteValue = form_cliente_coordenadorCliente.options[form_cliente_coordenadorCliente.selectedIndex].value;
+            var form_cliente_IdsiteMobilize = document.getElementById("form_cliente_IdsiteMobilize").value;
 
-                     var form_cliente_coordenadorMobilize = document.getElementById("form_cliente_coordenadorMobilize");
-                     var form_cliente_coordenadorMobilizeValue = form_cliente_coordenadorMobilize.options[form_cliente_coordenadorMobilize.selectedIndex].value;
+            var form_cliente_Idsharing = document.getElementById("form_cliente_Idsharing").value;
 
-                     var form_cliente_etapa = document.getElementById("form_cliente_etapa");
-                     var form_cliente_etapaValue = form_cliente_etapa.options[form_cliente_etapa.selectedIndex].value;
+            var form_cliente_idSiteOperadora = document.getElementById("form_cliente_idSiteOperadora").value;
 
-                     var form_cliente_regional = document.getElementById("form_cliente_regional");
-                     var form_cliente_regionalValue = form_cliente_regional.options[form_cliente_regional.selectedIndex].value;
+            var form_cliente_projeto = document.getElementById("form_cliente_projeto").value;
 
-                     var form_cliente_alturaPrevista = document.getElementById("form_cliente_alturaPrevista");
-                     var form_cliente_alturaPrevistaValue = form_cliente_alturaPrevista.options[form_cliente_alturaPrevista.selectedIndex].value;
+            var form_cliente_subProjeto = document.getElementById("form_cliente_subProjeto").value;
 
-                     var form_cliente_raioBusca = document.getElementById("form_cliente_raioBusca");
-                     var form_cliente_raioBuscaValue = form_cliente_raioBusca.options[form_cliente_raioBusca.selectedIndex].value;
+            var form_cliente_targetAluguel = document.getElementById("form_cliente_targetAluguel").value;
 
-                     var form_cliente_opcao = document.getElementById("form_cliente_opcao");
-                     var form_cliente_opcaoValue = form_cliente_opcao.options[form_cliente_opcao.selectedIndex].value;
+            var form_cliente_ufValue = $('#form_site_uf').find(':selected').val()
+            var form_cliente_municipioValue = $('#form_site_municipio').find(':selected').val()
 
-                     var form_cliente_pontoCardealLat = document.getElementById("form_cliente_pontoCardealLat");
-                     if (form_cliente_pontoCardealLat != null) {
-                        var form_cliente_pontoCardealLatValue = form_cliente_pontoCardealLat.options[form_cliente_pontoCardealLat.selectedIndex].value;
-                     }
+            var form_cliente_latitude = document.getElementById("form_cliente_latitude").value.replace(',', '.');
 
-                     var form_cliente_pontoCardealLong = document.getElementById("form_cliente_pontoCardealLong");
-                     if (form_cliente_pontoCardealLong != null) {
-                        var form_cliente_pontoCardealLongValue = form_cliente_pontoCardealLong.options[form_cliente_pontoCardealLong.selectedIndex].value;
-                     }
+            var form_cliente_longitude = document.getElementById("form_cliente_longitude").value.replace(',', '.');
 
-                     var form_cliente_IdsiteMobilize = document.getElementById("form_cliente_IdsiteMobilize").value;
+            if (document.querySelector('#lat_long').innerHTML == '') {
+               var form_cliente_grauLat = document.getElementById("form_cliente_grauLat").value;
 
-                     var form_cliente_Idsharing = document.getElementById("form_cliente_Idsharing").value;
+               var form_cliente_grauLong = document.getElementById("form_cliente_grauLong").value;
 
-                     var form_cliente_idSiteOperadora = document.getElementById("form_cliente_idSiteOperadora").value;
+               var form_cliente_minLat = document.getElementById("form_cliente_minLat").value;
 
-                     var form_cliente_projeto = document.getElementById("form_cliente_projeto").value;
+               var form_cliente_minLong = document.getElementById("form_cliente_minLong").value;
 
-                     var form_cliente_subProjeto = document.getElementById("form_cliente_subProjeto").value;
+               var form_cliente_segLat = document.getElementById("form_cliente_segLat").value;
 
-                     var form_cliente_targetAluguel = document.getElementById("form_cliente_targetAluguel").value;
+               var form_cliente_segLong = document.getElementById("form_cliente_segLong").value;
+            }
 
-                     var form_cliente_uf = document.getElementById("form_site_uf");
-                     var form_cliente_ufValue = form_cliente_uf.options[form_cliente_uf.selectedIndex].value;
-                     var form_cliente_municipio = document.getElementById("form_site_municipio");
-                     var form_cliente_municipioValue = form_cliente_municipio.options[form_cliente_municipio.selectedIndex].value;
+            var form_cliente_dataAcionamento = document.getElementById("form_cliente_dataAcionamento").value;
 
-                     var form_cliente_latitude = document.getElementById("form_cliente_latitude").value.replace(',', '.');
+            const meses = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            let dataInicioAnterior = new Date(form_cliente_dataAcionamento);
+            let dataInicioAFormatada = (adicionaZero(dataInicioAnterior.getDate().toString()) + "-" + meses[(dataInicioAnterior.getMonth())] + "-" + dataInicioAnterior.getFullYear());
 
-                     var form_cliente_longitude = document.getElementById("form_cliente_longitude").value.replace(',', '.');
+            var valorFinal2 = form_cliente_targetAluguel.replace('R$', '').replaceAll('.', '').replace(',', '.').trim()
 
-                     if (document.querySelector('#lat_long').innerHTML == '') {
-                        var form_cliente_grauLat = document.getElementById("form_cliente_grauLat").value;
+            var opcaoCliente = $('#form_cliente_site').find(':selected').text()
+            if (opcaoCliente == "Selecione..") {
+               mostrarErro("form_cliente_site", "Cliente não selecionado")
+               return
+            }
+            if (form_cliente_IdsiteMobilize == "") {
+               mostrarErro("form_cliente_IdsiteMobilize", "ID Mobilize não informado")
+               return
+            }
+            var opcaoOperadora = $('#form_cliente_operadora').find(':selected').text()
+            if (opcaoOperadora == "Selecione..") {
+               mostrarErro("form_cliente_operadora", "Operadora não selecionada")
+               return
+            }
+            if (form_cliente_Idsharing == "") {
+               mostrarErro("form_cliente_Idsharing", "ID Site Sharing não informada")
+               return
+            }
+            if (form_cliente_idSiteOperadora == "") {
+               mostrarErro("form_cliente_idSiteOperadora", "ID Site Operadora não informada")
+               return
+            }
+            if (form_cliente_projeto == "") {
+               mostrarErro("form_cliente_projeto", "Projeto não informado")
+               return
+            }
+            if (form_cliente_projeto == "") {
+               mostrarErro("form_cliente_projeto", "Projeto não informado")
+               return
+            }
+            var opcaoUFTexto = $('#form_site_uf').find(':selected').text()
+            if (opcaoUFTexto == "Selecione..") {
+               mostrarErro("form_site_uf", "UF não selecionada")
+               return
+            }
+            var opcaoMunicipioTexto = $('#form_site_municipio').find(':selected').text()
+            if (opcaoMunicipioTexto == "Selecione..") {
+               mostrarErro("form_site_municipio", "Municipio não selecionada")
+               return
+            }
+            var opcaoRaioBusca = $('#form_cliente_raioBusca').find(':selected').text()
+            if (opcaoRaioBusca == "Selecione..") {
+               mostrarErro("form_cliente_raioBusca", "Raio de Busca não selecionada")
+               return
+            }
+            var opcaoPontoNominal = form_cliente_opcao.options[form_cliente_opcao.selectedIndex].text
+            if (opcaoPontoNominal == "Selecione..") {
+               mostrarErro("form_cliente_opcao", "Tipo de ponto nominal não selecionada")
+               return
+            }
+            if (opcaoPontoNominal == "Decimal" && opcaoPontoNominal != "Selecione..") {
+               if (form_cliente_latitude == "") {
+                  mostrarErro("form_cliente_latitude", "Latitude não informada")
+                  return
+               } else if (form_cliente_longitude == "") {
+                  mostrarErro("form_cliente_longitude", "Longitude não informada")
+                  return
+               }
+            }
+            if (opcaoPontoNominal == "UTM" && opcaoPontoNominal != "Selecione..") {
+               var pontoCardealLAT = form_cliente_pontoCardealLat.options[form_cliente_pontoCardealLat.selectedIndex].text
+               var pontoCardealLONG = form_cliente_pontoCardealLong.options[form_cliente_pontoCardealLong.selectedIndex].text
+               var grauLat = document.getElementById("form_cliente_grauLat").value
+               var grauLong = document.getElementById("form_cliente_grauLong").value
+               var minLat = document.getElementById("form_cliente_minLat").value
+               var minLong = document.getElementById("form_cliente_minLong").value
+               var segLat = document.getElementById("form_cliente_segLat").value
+               var segLong = document.getElementById("form_cliente_segLong").value
 
-                        var form_cliente_grauLong = document.getElementById("form_cliente_grauLong").value;
+               if (grauLat == "") {
+                  mostrarErro("form_cliente_grauLat", "Grau LAT não informada")
+                  return
+               } else if (minLat == "") {
+                  mostrarErro("form_cliente_minLat", "Minuto LAT não informada")
+                  return
+               } else if (segLat == "") {
+                  mostrarErro("form_cliente_segLat", "Segundos LAT não informada")
+                  return
+               } else if (pontoCardealLAT == "Selecione..") {
+                  mostrarErro("form_cliente_pontoCardealLat", "Ponto Cardeal LAT não selecionada")
+                  return
+               } else if (grauLong == "") {
+                  mostrarErro("form_cliente_grauLong", "Grau LONG não informada")
+                  return
+               } else if (minLong == "") {
+                  mostrarErro("form_cliente_minLong", "Minuto LONG não informada")
+                  return
+               } else if (segLong == "") {
+                  mostrarErro("form_cliente_segLong", "Segundos LONG não informada")
+                  return
+               } else if (pontoCardealLONG == "Selecione..") {
+                  mostrarErro("form_cliente_pontoCardealLong", "Ponto Cardeal LONG não selecionada")
+                  return
+               }
+            }
 
-                        var form_cliente_minLat = document.getElementById("form_cliente_minLat").value;
+            console.log(dataInicioAFormatada)
 
-                        var form_cliente_minLong = document.getElementById("form_cliente_minLong").value;
+            var formData = {
+               "data": {
+                  'Projeto': form_cliente_projeto,
+                  'UF': form_cliente_ufValue,
+                  'Municipio2': form_cliente_municipioValue,
+                  'Etapa': form_cliente_etapaValue,
+                  'ID_Site_Mobilize': form_cliente_IdsiteMobilize,
+                  'Data_de_Acionamento': dataInicioAFormatada,
+                  'Longitude': form_cliente_longitude,
+                  'Latitude': form_cliente_latitude,
+                  'Operadora': form_cliente_operadoraValue,
+                  'ID_Site_Operadora': form_cliente_idSiteOperadora,
+                  'ID_Site_Sharing': form_cliente_Idsharing,
+                  'cliente': form_cliente_siteValue,
+                  'regional': form_cliente_regionalValue,
+                  'Altura_Prevista_M': form_cliente_alturaPrevistaValue,
+                  'RAIO_DE_BUSCA_M': form_cliente_raioBuscaValue,
+                  'Target_do_Aluguel': valorFinal2,
+                  'Opcao': form_cliente_opcaoValue,
+                  'GrauLAT': form_cliente_grauLat,
+                  'GrauLONG': form_cliente_grauLong,
+                  'MinutoLAT': form_cliente_minLat,
+                  'MinutoLONG': form_cliente_minLong,
+                  'SegundosLAT': form_cliente_segLat,
+                  'SegundosLONG': form_cliente_segLong,
+                  'PontoCardealLAT': form_cliente_pontoCardealLatValue,
+                  'PontoCardealLONG': form_cliente_pontoCardealLongValue,
+                  'Coordenador_Mobilize': form_cliente_coordenadorMobilizeValue,
+                  'Sub_Projeto': form_cliente_subProjeto,
+                  'Contato': form_cliente_coordenadorClienteValue
+               }
+            }
 
-                        var form_cliente_segLat = document.getElementById("form_cliente_segLat").value;
+            var fileObject = document.getElementById("form_cliente_anexo").files[0];
+            $('#addNewSite').prop('disabled', true)
+            var userEmail = $('#useremailzoho').val()
+            var siteID = $('#siteID').val()
 
-                        var form_cliente_segLong = document.getElementById("form_cliente_segLong").value;
-                     }
-
-                     var form_cliente_dataAcionamento = document.getElementById("form_cliente_dataAcionamento").value;
-
-                     const meses = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-                     let dataInicioAnterior = new Date(form_cliente_dataAcionamento);
-                     let dataInicioAFormatada = (adicionaZero(dataInicioAnterior.getDate().toString()) + "-" + meses[(dataInicioAnterior.getMonth())] + "-" + dataInicioAnterior.getFullYear());
-
-                     var valorFinal2 = form_cliente_targetAluguel.replace('R$', '').replaceAll('.', '').replace(',', '.').trim()
-
-                     var opcaoCliente = $('#form_cliente_site').find(':selected').text()
-                     if (opcaoCliente == "Selecione..") {
-                        mostrarErro("form_cliente_site", "Cliente não selecionado")
-                        return
-                     }
-                     if (form_cliente_IdsiteMobilize == "") {
-                        mostrarErro("form_cliente_IdsiteMobilize", "ID Mobilize não informado")
-                        return
-                     }
-                     var opcaoOperadora = $('#form_cliente_operadora').find(':selected').text()
-                     if (opcaoOperadora == "Selecione..") {
-                        mostrarErro("form_cliente_operadora", "Operadora não selecionada")
-                        return
-                     }
-                     if (form_cliente_Idsharing == "") {
-                        mostrarErro("form_cliente_Idsharing", "ID Site Sharing não informada")
-                        return
-                     }
-                     if (form_cliente_idSiteOperadora == "") {
-                        mostrarErro("form_cliente_idSiteOperadora", "ID Site Operadora não informada")
-                        return
-                     }
-                     if (form_cliente_projeto == "") {
-                        mostrarErro("form_cliente_projeto", "Projeto não informado")
-                        return
-                     }
-                     if (form_cliente_projeto == "") {
-                        mostrarErro("form_cliente_projeto", "Projeto não informado")
-                        return
-                     }
-                     var opcaoUFTexto = $('#form_site_uf').find(':selected').text()
-                     if (opcaoUFTexto == "Selecione..") {
-                        mostrarErro("form_site_uf", "UF não selecionada")
-                        return
-                     }
-                     var opcaoMunicipioTexto = $('#form_site_municipio').find(':selected').text()
-                     if (opcaoMunicipioTexto == "Selecione..") {
-                        mostrarErro("form_site_municipio", "Municipio não selecionada")
-                        return
-                     }
-                     var opcaoRaioBusca = $('#form_cliente_raioBusca').find(':selected').text()
-                     if (opcaoRaioBusca == "Selecione..") {
-                        mostrarErro("form_cliente_raioBusca", "Raio de Busca não selecionada")
-                        return
-                     }
-                     var opcaoPontoNominal = form_cliente_opcao.options[form_cliente_opcao.selectedIndex].text
-                     if (opcaoPontoNominal == "Selecione..") {
-                        mostrarErro("form_cliente_opcao", "Tipo de ponto nominal não selecionada")
-                        return
-                     }
-                     if (opcaoPontoNominal == "Decimal" && opcaoPontoNominal != "Selecione..") {
-                        if (form_cliente_latitude == "") {
-                           mostrarErro("form_cliente_latitude", "Latitude não informada")
-                           return
-                        } else if (form_cliente_longitude == "") {
-                           mostrarErro("form_cliente_longitude", "Longitude não informada")
-                           return
+            if (siteID != '') {
+               Swal.fire({
+                  title: 'Deseja atualizar este SITE?',
+                  icon: 'question',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Sim',
+                  cancelButtonText: 'Não',
+                  reverseButtons: true
+               }).then((result) => {
+                  if (result.isConfirmed) {
+                        var configEdit = {
+                           appName: "mobilize",
+                           reportName: "widget_sites_full",
+                           id: siteID,
+                           data: formData
                         }
-                     }
-                     if (opcaoPontoNominal == "UTM" && opcaoPontoNominal != "Selecione..") {
-                        var pontoCardealLAT = form_cliente_pontoCardealLat.options[form_cliente_pontoCardealLat.selectedIndex].text
-                        var pontoCardealLONG = form_cliente_pontoCardealLong.options[form_cliente_pontoCardealLong.selectedIndex].text
-                        var grauLat = document.getElementById("form_cliente_grauLat").value
-                        var grauLong = document.getElementById("form_cliente_grauLong").value
-                        var minLat = document.getElementById("form_cliente_minLat").value
-                        var minLong = document.getElementById("form_cliente_minLong").value
-                        var segLat = document.getElementById("form_cliente_segLat").value
-                        var segLong = document.getElementById("form_cliente_segLong").value
+                        ZOHO.CREATOR.API.updateRecord(configEdit).then(function(response) {
+                           if (response.code != 3000) {
+                              v_erro = "Error - "
+                              $.each(response.error, function(key, val) {
+                                    v_erro = v_erro + val + ". ";
+                              });
+                              Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'Não foi possível atualizar o registro. Tente novamente mais. - Error: ' + v_erro
+                              })
+                              $('#addNewSite').prop('disabled', false)
+                              return
+                           }
+                           addAnexoCandidato(siteID, '', 'form_cliente_anexo')
+                           Swal.fire({
+                              icon: 'success',
+                              title: 'Site atualizado com sucesso.'
+                           })
+                           $('#addNewSite').prop('disabled', false)
+                           setTimeout(() => document.location.reload(true), 1000)
+                        });
 
-                        if (grauLat == "") {
-                           mostrarErro("form_cliente_grauLat", "Grau LAT não informada")
-                           return
-                        } else if (minLat == "") {
-                           mostrarErro("form_cliente_minLat", "Minuto LAT não informada")
-                           return
-                        } else if (segLat == "") {
-                           mostrarErro("form_cliente_segLat", "Segundos LAT não informada")
-                           return
-                        } else if (pontoCardealLAT == "Selecione..") {
-                           mostrarErro("form_cliente_pontoCardealLat", "Ponto Cardeal LAT não selecionada")
-                           return
-                        } else if (grauLong == "") {
-                           mostrarErro("form_cliente_grauLong", "Grau LONG não informada")
-                           return
-                        } else if (minLong == "") {
-                           mostrarErro("form_cliente_minLong", "Minuto LONG não informada")
-                           return
-                        } else if (segLong == "") {
-                           mostrarErro("form_cliente_segLong", "Segundos LONG não informada")
-                           return
-                        } else if (pontoCardealLONG == "Selecione..") {
-                           mostrarErro("form_cliente_pontoCardealLong", "Ponto Cardeal LONG não selecionada")
-                           return
-                        }
-                     }
-
-                     console.log(dataInicioAFormatada)
-
-                     var formData = {
-                        "data": {
-                           'Projeto': form_cliente_projeto,
-                           'UF': form_cliente_ufValue,
-                           'Municipio2': form_cliente_municipioValue,
-                           'Etapa': form_cliente_etapaValue,
-                           'ID_Site_Mobilize': form_cliente_IdsiteMobilize,
-                           'Data_de_Acionamento': dataInicioAFormatada,
-                           'Longitude': form_cliente_longitude,
-                           'Latitude': form_cliente_latitude,
-                           'Operadora': form_cliente_operadoraValue,
-                           'ID_Site_Operadora': form_cliente_idSiteOperadora,
-                           'ID_Site_Sharing': form_cliente_Idsharing,
-                           'cliente': form_cliente_siteValue,
-                           'regional': form_cliente_regionalValue,
-                           'Altura_Prevista_M': form_cliente_alturaPrevistaValue,
-                           'RAIO_DE_BUSCA_M': form_cliente_raioBuscaValue,
-                           'Target_do_Aluguel': valorFinal2,
-                           'Opcao': form_cliente_opcaoValue,
-                           'GrauLAT': form_cliente_grauLat,
-                           'GrauLONG': form_cliente_grauLong,
-                           'MinutoLAT': form_cliente_minLat,
-                           'MinutoLONG': form_cliente_minLong,
-                           'SegundosLAT': form_cliente_segLat,
-                           'SegundosLONG': form_cliente_segLong,
-                           'PontoCardealLAT': form_cliente_pontoCardealLatValue,
-                           'PontoCardealLONG': form_cliente_pontoCardealLongValue,
-                           'Coordenador_Mobilize': form_cliente_coordenadorMobilizeValue,
-                           'Sub_Projeto': form_cliente_subProjeto,
-                           'Contato': form_cliente_coordenadorClienteValue
-                        }
-                     }
-                     var fileObject = document.getElementById("form_cliente_anexo").files[0];
-                     var config = {
-                        appName: "mobilize",
-                        formName: "Site",
-                        data: formData
-                     }
+                        return
+                  }
+                  $('#addNewSite').prop('disabled', false)
+               })
 
 
-                     $('#addNewSite').prop('disabled', true)
-                     var userEmail = $('#useremailzoho').val()
-
-                     ZOHO.CREATOR.API.addRecord(config).then(function(response) {
-                     if (response.code != 3000) {
+            } else {
+               var config = {
+                  appName: "mobilize",
+                  formName: "Site",
+                  data: formData
+               }
+               ZOHO.CREATOR.API.addRecord(config).then(function(response) {
+                  if (response.code != 3000) {
                         var v_erro = "";
                         $.each(response.error, function(key, val) {
                            v_erro = v_erro + val + ". ";
@@ -3300,21 +3337,23 @@
                            type: "error",
                            showConfirmButton: true
                         });
+                        $('#addNewSite').prop('disabled', false)
                         return
-                     }
+                  }
 
-                     const siteID = response.data.ID
-                     addAnexoCandidato(siteID, '', 'form_cliente_anexo')
-                     Swal.fire({
+                  const siteID = response.data.ID
+                  addAnexoCandidato(siteID, '', 'form_cliente_anexo')
+                  Swal.fire({
                         icon: 'success',
                         title: 'Site cadastrado com sucesso.'
-                     })
-                     $('#addNewSite').prop('disabled', false)
-                     setTimeout(() => document.location.reload(true), 1000)
                   })
-               });
+                  $('#addNewSite').prop('disabled', false)
+                  setTimeout(() => document.location.reload(true), 1000)
+               })
+            }
          }
       </script>
+      <script src="js/functions/dateFormat.js"></script>
       <script src="js/functions/getSite.js"></script>
       <script src="js/functions/getusuario.js"></script>
       <script src="js/functions/getAtividades.js"></script>
