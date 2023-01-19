@@ -1622,8 +1622,11 @@
              }
          };
          
-         function addRelatorioCritico(siteId, candidatoId) {
-         
+         function addRelatorioCritico(relatorioId,siteId) {
+            if(relatorioId.length > 0) {
+               window.open('https://creatorapp.zoho.com'+$('#dadosurlzoho').val()+'Relatorio_critico/record-edit/Relat_rio_Critico_Report/'+relatorioId, '_blank');
+               return
+            }
              console.log("IS clicked")
              Swal.fire({
                      title: 'Deseja incluir um relatório crítico?',
@@ -1637,7 +1640,7 @@
                      reverseButtons: true
                  }).then((result) => {
                      if (result.isConfirmed) {            
-                         window.open('https://creatorapp.zoho.com'+$('#dadosurlzoho').val()+'#Form:Relatorio_critico?Candidato='+candidatoId + '&Site=' + siteId, '_blank');
+                         window.open('https://creatorapp.zoho.com'+$('#dadosurlzoho').val()+'#Form:Relatorio_critico?Site=' + siteId, '_blank');
                      }
              })
          };

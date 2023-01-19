@@ -49,7 +49,8 @@ function getApizohoSites() {
           uf: data.UF != "" ? data.UF.display_value : "",
           //municipio: data.Municipio2.display_value,
           municipio: data.Municipio2.length != "" ? data.Municipio2.display_value : "",
-          candidatos: data.Candidato.lenght > 0
+          candidatos: data.Candidato.lenght > 0,
+          relatorioId: data.Relatorio_Critico.length > 0 ? data.Relatorio_Critico[0].ID : ""
         });
       });
 
@@ -148,6 +149,11 @@ function getApizohoSites() {
                                         <span class="visually-hidden">Button</span>                
                                     </button>
                                     &nbsp;&nbsp;
+                                    <button title="Relatório Crítico" onClick="addRelatorioCritico('${row.relatorioId}','${row.id}')" class="btn_view_site btn btn-outline-secondary btn-sm edit" >
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+                                          <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                      </svg>
+                                   </button>
                                 </div>
                             `;
                 },
@@ -414,11 +420,7 @@ function viewCandidatosPorSite(n) {
             data.Protocolo_ou_CUOS.length > 0
               ? data.Protocolo_ou_CUOS[0].ID
               : "",
-          siteId: data.Site.ID,
-          relatorioCriticoId:
-            data.Relatorio_critico.length != ""
-              ? data.Relatorio_critico.ID
-              : "",
+          siteId: data.Site.ID
         });
       });
 
@@ -540,8 +542,6 @@ function viewCandidatosPorSite(n) {
                 orderable: true,
                 defaultContent: "",
                 render: function (data, type, row) {
-                  var disabledButton =
-                    row.relatorioCriticoId.length > 0 ? "disabled" : "";
                   return `
                           <button onClick="alterarProprietario('${row.id}', '${row.proprietarioid}')" class="btn_view_site btn btn-outline-secondary btn-sm edit" title="Proprietário">
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -571,11 +571,6 @@ function viewCandidatosPorSite(n) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart-line-fill" viewBox="0 0 16 16">
                           <path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z"/>
                         </svg>
-                      </button>
-                      <button  title="Relatório Crítico" data-bs-target=".modalConfirmacao" onClick="addRelatorioCritico('${row.siteId}', '${row.id}')" ${disabledButton} class="btn_view_site btn btn-outline-secondary btn-sm edit" >
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
-                              <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                          </svg>
                       </button>
                       <button  title="SAR" disabled onClick="abrirSAR('${row.id}')" class="btn_view_site btn btn-outline-secondary btn-sm edit" >
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
